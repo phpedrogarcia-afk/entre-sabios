@@ -79,3 +79,29 @@ Onde:
 - Frases rejeitadas por muitos usuários no mesmo contexto aparecem menos.
 - Frases muito curtidas no mesmo contexto aparecem mais.
 - O sistema continua diverso, evitando bolhas e repetição excessiva.
+
+## Trajetória emocional já aplicada no front-end
+
+O algoritmo local passou a considerar uma camada chamada trajetória emocional:
+
+- Intensidade `moderada` ou `intensa`: estratégia de catarse. O sistema favorece frases mais profundas, validadoras ou confrontadoras, porque o usuário provavelmente precisa primeiro se sentir compreendido.
+- Intensidade `fraca`: estratégia de transcendência. O sistema favorece frases com saída, ação consciente, aceitação, presente, esperança ou autoconhecimento.
+
+Há regras específicas para:
+
+- `confusão` intensa: caos como desconstrução.
+- `culpa`: erro humano, finitude e reparação.
+- `solidão` intensa: solidão como potência, não só falta.
+- `falta_de_proposito`: criação de sentido e liberdade.
+
+O botão `Outra perspectiva` também aplica um pequeno sinal local de rejeição silenciosa quando o usuário pula a frase em menos de 5 segundos. Isso não é coletivo ainda; apenas ajusta a preferência naquele navegador.
+
+## Próxima etapa técnica
+
+Para transformar isso em aprendizado coletivo real:
+
+1. Criar uma API simples em Flask ou FastAPI.
+2. Enviar eventos de feedback para o servidor.
+3. Agregar pesos por `contextKey = sentimentos + intensidade`.
+4. Retornar ao front-end pesos globais por frase.
+5. Somar esses pesos ao `finalScore` local.

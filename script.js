@@ -1337,6 +1337,7 @@ let history = []; // lista de { quote, author, reflection, advice, tags }
 let historyIndex = -1;
 let currentShareText = '';
 let currentStory = null;
+let currentStoryShownAt = 0;
 let currentShareStyle = 'sage';
 
 let selectedFeelingIds = new Set();
@@ -2469,6 +2470,97 @@ function getAuthorAffinity(authorName, feelingIds) {
   }, 0);
 }
 
+const trajectoryImpactRules = [
+  {
+    feelings: ['confusão'], intensities: ['intensa'],
+    themes: ['caos', 'criação', 'mistério', 'desconstrução', 'verdade'],
+    authors: ['Nietzsche', 'Clarice Lispector'],
+    tones: ['confrontador', 'poético'],
+    label: 'confusão como desconstrução',
+  },
+  {
+    feelings: ['culpa'], intensities: ['fraca', 'moderada', 'intensa'],
+    themes: ['finitude', 'erro', 'responsabilidade', 'reparação', 'liberdade'],
+    authors: ['Dostoiévski', 'Kierkegaard'],
+    tones: ['confrontador', 'contemplativo'],
+    label: 'culpa como responsabilidade humana',
+  },
+  {
+    feelings: ['solidão'], intensities: ['intensa'],
+    themes: ['solidão', 'silêncio', 'potência', 'autenticidade', 'liberdade'],
+    authors: ['Emily Dickinson', 'Charles Bukowski', 'Fernando Pessoa'],
+    tones: ['poético', 'confrontador'],
+    label: 'solidão como potência',
+  },
+  {
+    feelings: ['falta_de_proposito'], intensities: ['moderada', 'intensa'],
+    themes: ['absurdo', 'sentido', 'criação', 'liberdade', 'ação consciente'],
+    authors: ['Albert Camus', 'Jean-Paul Sartre', 'Nietzsche', 'Viktor Frankl'],
+    tones: ['confrontador', 'contemplativo', 'direto'],
+    label: 'propósito como criação de sentido',
+  },
+];
+
+function getTrajectoryStrategy(state) {
+  if (state.intensity === 'fraca') return 'transcendência';
+  return 'catarse';
+}
+
+function scoreTrajectoryForState(author, state) {
+  let score = 0;
+  const reasons = [];
+  const toneFamily = getToneFamily(author.tom);
+  const authorThemes = new Set(author.temas || []);
+  const strategy = getTrajectoryStrategy(state);
+
+  trajectoryImpactRules.forEach((rule) => {
+    const appliesToFeeling = rule.feelings.some((feeling) => state.feelings.includes(feeling));
+    const appliesToIntensity = rule.intensities.includes(state.intensity);
+    if (!appliesToFeeling || !appliesToIntensity) return;
+
+    let ruleScore = 0;
+    if (rule.authors.includes(author.author) || rule.authors.includes(author.displayAuthor)) ruleScore += 2.5;
+    if (rule.themes.some((theme) => authorThemes.has(normalizeTheme(theme)))) ruleScore += 2;
+    if (rule.tones.includes(toneFamily)) ruleScore += 1;
+
+    if (ruleScore > 0) {
+      score += ruleScore;
+      reasons.push(`trajetória: ${rule.label}`);
+    }
+  });
+
+  if (strategy === 'catarse') {
+    if (author.profundidade >= 4) {
+      score += 1;
+      reasons.push('catarse: profundidade');
+    }
+    if (['confrontador', 'poético', 'acolhedor'].includes(toneFamily)) {
+      score += 0.75;
+      reasons.push('catarse: validação emocional');
+    }
+  } else {
+    const transitionThemes = ['ação_consciente', 'autoconhecimento', 'esperança', 'aceitação', 'presente', 'sentido'];
+    if (transitionThemes.some((theme) => authorThemes.has(theme))) {
+      score += 1.5;
+      reasons.push('transcendência: movimento possível');
+    }
+    if (['acolhedor', 'contemplativo', 'direto'].includes(toneFamily)) {
+      score += 0.75;
+      reasons.push('transcendência: tom de saída');
+    }
+    if (
+      state.primaryFeeling === 'falta_de_proposito'
+      && ['Schopenhauer', 'Emil Cioran'].includes(author.author)
+      && ['confrontador', 'cruel_lucido'].includes(author.tom)
+    ) {
+      score -= 1.5;
+      reasons.push('transcendência: reduz pessimismo');
+    }
+  }
+
+  return { score, reasons };
+}
+
 function scoreContentForState(author, state) {
   let score = 0;
   const reasons = [];
@@ -2499,6 +2591,10 @@ function scoreContentForState(author, state) {
     score -= 3;
     reasons.push('penalidade emocional');
   }
+
+  const trajectory = scoreTrajectoryForState(author, state);
+  score += trajectory.score;
+  reasons.push(...trajectory.reasons);
 
   const affinity = getAuthorAffinity(author.author, state.feelings);
   const preference = (preferenceProfile.authors[author.author] || 0)
@@ -2814,6 +2910,7 @@ function buildStoryAttribution(story) {
 
 function renderStory(story) {
   currentStory = story;
+  currentStoryShownAt = Date.now();
   quoteTextEl.classList.remove('invitation');
   likeBtn.disabled = false;
   dislikeBtn.disabled = false;
@@ -2893,6 +2990,11 @@ function newPhrase() {
     reflectionTextEl.textContent = 'Selecione pelo menos 1 sentimento.';
     showSelectionHint();
     return false;
+  }
+
+  if (currentStory && currentStoryShownAt && Date.now() - currentStoryShownAt < 5000) {
+    applyStoryPreference(currentStory, -0.5);
+    savePreferenceProfile();
   }
 
   const selectedThemes = getSelectedThemes();
