@@ -740,10 +740,63 @@ body {
 .share-preview {
   display: block;
   width: 100%;
-  aspect-ratio: 1.91 / 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border: 1px solid var(--stroke);
-  border-radius: 6px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 16px 34px rgba(42, 35, 26, 0.08);
+}
+
+.share-style-picker {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.share-style-option {
+  height: 42px;
+  border: 1px solid rgba(42, 35, 26, 0.13);
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
+  transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.share-style-option::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 12px auto 0;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 35, 26, 0.22);
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.share-style-option.active {
+  border-color: rgba(79, 125, 93, 0.78);
+  box-shadow: 0 0 0 3px rgba(79, 125, 93, 0.13), inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+  transform: translateY(-1px);
+}
+
+.share-style-option.cream {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(177, 193, 126, 0.18), transparent 34%),
+    linear-gradient(145deg, #f7efd9, #ece2bf);
+}
+
+.share-style-option.sage {
+  background:
+    radial-gradient(circle at 72% 28%, rgba(255, 255, 231, 0.45), transparent 35%),
+    linear-gradient(145deg, #dfe7c5, #aebd7a);
+}
+
+.share-style-option.blue {
+  background:
+    radial-gradient(circle at 72% 24%, rgba(240, 249, 238, 0.48), transparent 34%),
+    linear-gradient(145deg, #dbe8df, #a5bfc1);
 }
 
 .full {

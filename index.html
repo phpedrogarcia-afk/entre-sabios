@@ -166,11 +166,17 @@
         <div class="share-block">
           <div class="share-title">COMPARTILHAR</div>
           <img
+            id="sharePreview"
             class="share-preview"
             src="assets/entre-sabios-social.png"
             alt="Imagem do Entre Sábios que acompanhará o compartilhamento"
           />
-          <button id="whatsShareBtn" class="full" type="button">WhatsApp</button>
+          <div class="share-style-picker" aria-label="Escolha o estilo da imagem de compartilhamento">
+            <button class="share-style-option cream" type="button" data-share-style="cream" aria-label="Fundo creme"></button>
+            <button class="share-style-option sage active" type="button" data-share-style="sage" aria-label="Fundo verde" aria-pressed="true"></button>
+            <button class="share-style-option blue" type="button" data-share-style="blue" aria-label="Fundo azul"></button>
+          </div>
+          <button id="whatsShareBtn" class="full" type="button">Compartilhar imagem</button>
           <button id="copyShareBtn" class="full" type="button">Copiar Mensagem</button>
         </div>
 
