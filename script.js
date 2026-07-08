@@ -1594,7 +1594,10 @@ function applyStoryPreference(story, delta) {
 }
 
 function setStoryFeedback(value) {
-  if (!currentStory) return;
+  if (!currentStory) {
+    preferenceNoteEl.textContent = 'Gere uma reflexão primeiro para marcar gostei ou não gostei.';
+    return;
+  }
 
   const key = currentStory.key;
   const previous = preferenceProfile.storyFeedback[key] || 0;
@@ -1631,7 +1634,10 @@ function updateFavoriteUi() {
 }
 
 function toggleFavorite() {
-  if (!currentStory) return;
+  if (!currentStory) {
+    preferenceNoteEl.textContent = 'Gere uma reflexão primeiro para favoritar.';
+    return;
+  }
   const index = favoriteStories.findIndex((story) => story.key === currentStory.key);
 
   if (index >= 0) {

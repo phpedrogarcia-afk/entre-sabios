@@ -470,21 +470,22 @@ body {
 .quote-action {
   position: absolute;
   z-index: 2;
-  width: 30px;
-  height: 30px;
+  width: 42px;
+  height: 42px;
   padding: 0;
-  border: 0;
+  border: 1px solid rgba(42, 35, 26, 0.14);
   border-radius: 50%;
-  color: rgba(42, 35, 26, 0.42);
-  background: transparent;
+  color: rgba(42, 35, 26, 0.72);
+  background: rgba(255, 255, 255, 0.7);
   cursor: pointer;
-  line-height: 30px;
-  transition: color 160ms ease, background 160ms ease, transform 120ms ease;
+  line-height: 42px;
+  box-shadow: 0 8px 22px rgba(42, 35, 26, 0.08);
+  transition: color 160ms ease, background 160ms ease, transform 120ms ease, box-shadow 160ms ease;
 }
 
 .quote-action svg {
-  width: 17px;
-  height: 17px;
+  width: 22px;
+  height: 22px;
   display: block;
   margin: auto;
   fill: none;
@@ -504,8 +505,9 @@ body {
 
 .quote-action:hover,
 .quote-action:focus-visible {
-  color: rgba(42, 35, 26, 0.82);
-  background: rgba(255, 255, 255, 0.64);
+  color: rgba(42, 35, 26, 0.94);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 26px rgba(42, 35, 26, 0.12);
 }
 
 .quote-action:active {
@@ -513,24 +515,24 @@ body {
 }
 
 .quote-action:disabled {
-  opacity: 0.42;
+  opacity: 0.9;
   pointer-events: none;
 }
 
 .quote-dislike {
-  left: 2px;
-  bottom: 6px;
+  left: 8px;
+  bottom: 10px;
 }
 
 .quote-like {
-  right: 2px;
-  bottom: 6px;
+  right: 8px;
+  bottom: 10px;
 }
 
 .quote-favorite {
-  top: 0;
-  right: 2px;
-  font-size: 22px;
+  top: 8px;
+  right: 8px;
+  font-size: 26px;
 }
 
 .quote-action.active-like {
