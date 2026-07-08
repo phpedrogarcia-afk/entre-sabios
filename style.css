@@ -473,15 +473,14 @@ body {
   width: 42px;
   height: 42px;
   padding: 0;
-  border: 1px solid rgba(79, 125, 93, 0.14);
+  border: 0;
   border-radius: 50%;
-  color: rgba(42, 35, 26, 0.52);
-  background: rgba(226, 238, 210, 0.28);
+  color: rgba(42, 35, 26, 0.5);
+  background: transparent;
   cursor: pointer;
   line-height: 42px;
-  box-shadow: 0 6px 16px rgba(42, 35, 26, 0.04);
-  backdrop-filter: blur(2px);
-  transition: color 160ms ease, background 160ms ease, transform 120ms ease, box-shadow 160ms ease;
+  box-shadow: none;
+  transition: color 160ms ease, transform 120ms ease;
 }
 
 .quote-action svg {
@@ -507,8 +506,8 @@ body {
 .quote-action:hover,
 .quote-action:focus-visible {
   color: rgba(42, 35, 26, 0.82);
-  background: rgba(226, 238, 210, 0.48);
-  box-shadow: 0 8px 20px rgba(42, 35, 26, 0.07);
+  background: transparent;
+  box-shadow: none;
 }
 
 .quote-action:active {
@@ -538,12 +537,12 @@ body {
 
 .quote-action.active-like {
   color: #4f7d5d;
-  background: rgba(218, 235, 211, 0.58);
+  background: transparent;
 }
 
 .quote-action.active-dislike {
   color: #4f7d5d;
-  background: rgba(218, 235, 211, 0.58);
+  background: transparent;
 }
 
 .quote-action.active-like svg,
@@ -553,7 +552,7 @@ body {
 
 .quote-action.active-favorite {
   color: #8f6f35;
-  background: rgba(239, 226, 193, 0.42);
+  background: transparent;
 }
 
 .quote.long-quote {
