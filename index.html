@@ -1,0 +1,210 @@
+﻿﻿<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9591SHYV5M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9591SHYV5M');
+    </script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7691321285448824"
+      crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Entre Sábios</title>
+    <meta name="description" content="Reflexões filosóficas para compreender sentimentos e viver com mais sabedoria." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Entre Sábios" />
+    <meta property="og:title" content="Entre Sábios" />
+    <meta property="og:description" content="Reflexões para a vida, inspiradas em grandes pensadores." />
+    <meta property="og:image" content="assets/entre-sabios-social.png" />
+    <meta property="og:image:width" content="1717" />
+    <meta property="og:image:height" content="916" />
+    <meta property="og:image:alt" content="Entre Sábios: dois pensadores conversam serenamente diante das montanhas." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="image_src" href="assets/entre-sabios-social.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Entre Sábios, página inicial">
+        <div class="brand-icon" aria-hidden="true"></div>
+        <div class="brand-text">
+          <div class="brand-title">ENTRE SÁBIOS</div>
+          <div class="brand-subtitle">Reflexões para a vida</div>
+        </div>
+      </a>
+      <div class="live-info" aria-label="Informações do site">
+        <span><strong id="visitorCount">—</strong> visitantes</span>
+        <button id="aboutBtn" class="about-trigger" type="button">Sobre</button>
+      </div>
+    </header>
+
+    <div class="leaf-layer" aria-hidden="true">
+      <span class="falling-leaf leaf-1"></span>
+      <span class="falling-leaf leaf-2"></span>
+      <span class="falling-leaf leaf-3"></span>
+      <span class="falling-leaf leaf-4"></span>
+      <span class="falling-leaf leaf-5"></span>
+      <span class="falling-leaf leaf-6"></span>
+      <span class="falling-leaf leaf-7"></span>
+      <span class="falling-leaf leaf-8"></span>
+      <span class="falling-leaf leaf-9"></span>
+      <span class="falling-leaf leaf-10"></span>
+    </div>
+
+    <div class="daily-strip" aria-label="Frase do dia">
+      <div class="daily-track">
+        <span class="daily-label">FRASE DO DIA</span>
+        <span id="dailyQuoteText">A sabedoria começa quando prestamos atenção ao momento presente.</span>
+        <span class="daily-separator" aria-hidden="true">✦</span>
+        <span class="daily-label">FRASE DO DIA</span>
+        <span id="dailyQuoteTextClone" aria-hidden="true">A sabedoria começa quando prestamos atenção ao momento presente.</span>
+      </div>
+    </div>
+
+    <main class="shell" aria-label="Entre Sábios">
+      <!-- COLUNA ESQUERDA -->
+      <aside class="col-left">
+        <div class="section-title">COMO VOCÊ ESTÁ SE SENTINDO?</div>
+        <div class="section-subtitle">Selecione um ou mais. O primeiro será o sentimento principal.</div>
+
+        <div class="feelings-grid" id="feelingsGrid" aria-label="Sentimentos">
+          <!-- Itens gerados via JS -->
+        </div>
+
+        <div class="audience intensity-control">
+          <div class="audience-title">INTENSIDADE DO SENTIMENTO</div>
+          <div class="audience-options" role="radiogroup" aria-label="Intensidade do sentimento">
+            <label class="radio">
+              <input type="radio" name="intensity" value="fraca" />
+              <span>Fraca</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="intensity" value="moderada" checked />
+              <span>Moderada</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="intensity" value="intensa" />
+              <span>Intensa</span>
+            </label>
+          </div>
+        </div>
+
+        <button id="generateBtn" class="primary">ENCONTRAR UMA REFLEXÃO</button>
+        <div id="selectionHint" class="selection-hint" role="alert" aria-live="assertive"></div>
+
+        <div class="tip">
+          <div class="tip-box">
+            Quanto mais sinceramente você escolher seus sentimentos, mais significativa será sua reflexão.
+          </div>
+        </div>
+      </aside>
+
+      <!-- COLUNA CENTRAL -->
+      <section class="col-center">
+        <div class="center-fixed">Encontre a palavra certa para o momento que você está vivendo.</div>
+
+        <div class="center-top">
+          <button id="backBtn" class="ghost" type="button" aria-label="Voltar">← Voltar</button>
+          <button id="favoritesBtn" class="ghost favorite-library" type="button" aria-label="Abrir frases favoritas">
+            ♡ Favoritas <span id="favoritesCount">0</span>
+          </button>
+          <button id="newBtn" class="ghost" type="button" aria-label="Consultar outra perspectiva">↻ Outra perspectiva</button>
+        </div>
+
+        <div class="center-card" role="region" aria-label="Reflexão">
+          <div class="quote-stage">
+            <button id="dislikeBtn" class="quote-action quote-dislike" type="button" aria-label="Não gostei desta frase" aria-pressed="false" title="Não gostei" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v11m0-11H4.8A1.8 1.8 0 0 0 3 4.8v7.4A1.8 1.8 0 0 0 4.8 14H7m0-11h8.3a2 2 0 0 1 1.9 1.4l2.3 7A2 2 0 0 1 17.6 14H14l.8 3.2a3 3 0 0 1-2.9 3.8L7 14"/></svg>
+            </button>
+            <button id="favoriteBtn" class="quote-action quote-favorite" type="button" aria-label="Adicionar às favoritas" aria-pressed="false" title="Favoritar" disabled>☆</button>
+            <div class="quote invitation" id="quoteText">Como você está se sentindo hoje? Escolha um ou mais sentimentos e gere uma reflexão para este momento.</div>
+            <button id="likeBtn" class="quote-action quote-like" type="button" aria-label="Gostei desta frase" aria-pressed="false" title="Gostei" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 21V10m0 11H4.8A1.8 1.8 0 0 1 3 19.2v-7.4A1.8 1.8 0 0 1 4.8 10H7m0 11h8.3a2 2 0 0 0 1.9-1.4l2.3-7A2 2 0 0 0 17.6 10H14l.8-3.2A3 3 0 0 0 11.9 3L7 10"/></svg>
+            </button>
+          </div>
+          <div class="quote-author" id="quoteAuthor">Sua reflexão começa com uma escolha sincera.</div>
+
+          <div class="divider" aria-hidden="true"></div>
+
+          <div class="block">
+            <div class="block-title" id="explanationTitle">O QUE ESSA FRASE QUER DIZER</div>
+            <div class="block-text" id="reflectionText">Selecione seus sentimentos, escolha a intensidade e clique em “ENCONTRAR UMA REFLEXÃO”.</div>
+          </div>
+
+          <div class="block philosophy-block">
+            <div class="block-title">CONHEÇA O PENSADOR</div>
+            <div class="block-text" id="philosophyText">A cada reflexão, você conhecerá uma ideia do autor escolhido.</div>
+          </div>
+
+          <div class="block">
+            <div class="block-title">CONSELHO</div>
+            <div class="block-text small" id="adviceText">—</div>
+            <div class="book-rec" aria-live="polite">
+              <div class="book-rec-label">LIVRO RECOMENDADO</div>
+              <div class="book-rec-title" id="bookText">—</div>
+              <div class="book-rec-why"><strong>Por que este livro?</strong> <span id="bookReason">A recomendação aparecerá junto da reflexão.</span></div>
+            </div>
+          </div>
+
+          <div class="tags" id="tagsRow" aria-label="Etiquetas"></div>
+
+          <div id="preferenceNote" class="preference-note" role="status" aria-live="polite"></div>
+        </div>
+
+        <canvas id="decorCanvas" class="decor" width="600" height="360" aria-hidden="true"></canvas>
+      </section>
+
+      <!-- COLUNA DIREITA -->
+      <aside class="col-right">
+        <div class="share-block">
+          <div class="share-title">COMPARTILHAR</div>
+          <img
+            class="share-preview"
+            src="assets/entre-sabios-social.png"
+            alt="Imagem do Entre Sábios que acompanhará o compartilhamento"
+          />
+          <button id="whatsShareBtn" class="full" type="button">WhatsApp</button>
+          <button id="copyShareBtn" class="full" type="button">Copiar Mensagem</button>
+        </div>
+
+        <div class="footer-note">&nbsp;</div>
+      </aside>
+    </main>
+
+    <dialog id="favoritesDialog" class="favorites-dialog" aria-labelledby="favoritesTitle">
+      <div class="favorites-head">
+        <div>
+          <div class="share-title" id="favoritesTitle">FRASES FAVORITAS</div>
+          <div class="section-subtitle">Sua pequena coleção de sabedoria.</div>
+        </div>
+        <button id="closeFavoritesBtn" class="ghost" type="button" aria-label="Fechar favoritas">Fechar</button>
+      </div>
+      <div id="favoritesList" class="favorites-list"></div>
+    </dialog>
+
+    <dialog id="aboutDialog" class="favorites-dialog about-dialog" aria-labelledby="aboutTitle">
+      <div class="favorites-head">
+        <div>
+          <div class="share-title" id="aboutTitle">SOBRE O ENTRE SÁBIOS</div>
+          <div class="section-subtitle">Um espaço para sentir, pensar e respirar.</div>
+        </div>
+        <button id="closeAboutBtn" class="ghost" type="button" aria-label="Fechar sobre o site">Fechar</button>
+      </div>
+      <div class="about-content">
+        <p>Entre Sábios nasceu para aproximar filosofia e vida cotidiana de um jeito simples e humano.</p>
+        <p>Você escolhe o que está sentindo e encontra palavras de pensadores e escritores que podem ajudar a compreender esse momento com mais calma, coragem e curiosidade.</p>
+        <p>Não se trata de oferecer respostas prontas, mas de abrir boas perguntas — sobre o mundo e sobre nós mesmos.</p>
+        <p class="about-contact">Contato: <a href="mailto:ph.pedrocontato@gmail.com">ph.pedrocontato@gmail.com</a></p>
+      </div>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
