@@ -3126,10 +3126,6 @@ downloadShareBtn.addEventListener('click', async () => {
 });
 
 whatsShareBtn.addEventListener('click', async () => {
-  const text = currentShareText || `${quoteTextEl.textContent}\n${quoteAuthorEl.textContent}`;
-  const pageUrl = location.protocol === 'http:' || location.protocol === 'https:' ? location.href : '';
-  const shareText = pageUrl ? `${text}\n\n${pageUrl}` : text;
-
   whatsShareBtn.disabled = true;
   whatsShareBtn.textContent = 'Gerando...';
 
@@ -3139,20 +3135,19 @@ whatsShareBtn.addEventListener('click', async () => {
     if (navigator.share && navigator.canShare?.({ files: [image.file] })) {
       await navigator.share({
         title: 'Entre Sábios',
-        text: shareText,
         files: [image.file],
       });
-      setShareStatus('Imagem compartilhada.');
+      setShareStatus('Imagem enviada para o compartilhamento do celular.');
       return;
     }
 
     downloadBlob(image.blob, image.filename);
-    setShareStatus('Este navegador não envia imagem direto. Baixei a imagem para você anexar.');
+    setShareStatus('Este navegador não envia imagem direto. Baixei a imagem para publicar no Status ou Stories.');
   } catch (error) {
     if (error?.name !== 'AbortError') setShareStatus('Não consegui compartilhar a imagem neste navegador.');
   } finally {
     whatsShareBtn.disabled = false;
-    whatsShareBtn.textContent = 'Compartilhar imagem';
+    whatsShareBtn.textContent = 'Status / Stories';
   }
 });
 
