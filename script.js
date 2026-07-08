@@ -2104,7 +2104,7 @@ const curatedContentDb = [
     sentimentos: ['tristeza', 'confusão'], intensidade: ['moderada'], temas: ['desencanto', 'tempo', 'lucidez'], tom: 'contemplativo', profundidade: 5,
     conselho: 'Nem todo aprendizado muda a verdade inicial; às vezes ele apenas ensina a carregá-la com menos ilusão.',
     explicacao: 'A frase condensa o desencanto cioraniano: amadurecer pode ser menos descobrir novidades e mais confirmar, com dor, certas intuições antigas.',
-    livro: 'Do Inconveniente de Ter Nascido', quoteType: 'exact', source: 'Atribuição comum a Cioran',
+    livro: 'Do Inconveniente de Ter Nascido', quoteType: 'inspired', source: 'Atribuição comum a Cioran',
   },
   {
     id: 'curated-31', autor: 'Emil Cioran', frase: 'A consciência é o tédio de existir que descobriu a palavra.',
@@ -2181,7 +2181,7 @@ const curatedContentDb = [
     sentimentos: ['confusão', 'solidão'], intensidade: ['fraca', 'moderada'], temas: ['intensidade', 'normalidade', 'indiretas'], tom: 'confrontador', profundidade: 3,
     conselho: 'Não confunda sensibilidade intensa com defeito; às vezes a vida muito polida é apenas vida pouco sentida.',
     explicacao: 'Bukowski provoca a ideia de normalidade: uma existência sem descontrole algum pode esconder excesso de repressão ou falta de risco.',
-    livro: 'Pedaços de um Caderno Manchado de Vinho', quoteType: 'exact', source: 'Atribuição comum a Charles Bukowski',
+    livro: 'Pedaços de um Caderno Manchado de Vinho', quoteType: 'inspired', source: 'Atribuição comum a Charles Bukowski',
   },
   {
     id: 'curated-42', autor: 'Charles Bukowski', frase: 'O problema com o mundo é que as pessoas inteligentes estão cheias de dúvidas, enquanto as estúpidas estão cheias de certeza.',
@@ -2800,6 +2800,18 @@ function ensureSelectionMin() {
   return selectedFeelingIds.size >= 1;
 }
 
+function buildStoryAttribution(story) {
+  const displayAuthor = story.displayAuthor || story.author || '';
+  const quoteType = story.quoteType || 'inspired';
+
+  if (!displayAuthor || displayAuthor === 'Reflexão contemporânea' || quoteType === 'unknown' || quoteType === 'anonymous') {
+    return 'Reflexão contemporânea';
+  }
+
+  if (quoteType === 'exact') return displayAuthor;
+  return `Ideia inspirada em ${displayAuthor}`;
+}
+
 function renderStory(story) {
   currentStory = story;
   quoteTextEl.classList.remove('invitation');
@@ -2812,13 +2824,7 @@ function renderStory(story) {
   explanationTitleEl.textContent = isLongText
     ? 'O QUE ESTE TEXTO QUER DIZER'
     : 'O QUE ESSA FRASE QUER DIZER';
-  const isExactQuote = story.quoteType === 'exact';
-  const displayAuthor = story.displayAuthor || story.author;
-  story.attribution = story.author === 'Reflexão contemporânea'
-    ? 'Reflexão contemporânea'
-    : isExactQuote
-      ? displayAuthor
-      : `Ideia inspirada em ${displayAuthor}`;
+  story.attribution = buildStoryAttribution(story);
   quoteAuthorEl.textContent = `— ${story.attribution}${story.source ? ` · ${story.source}` : ''}`;
   reflectionTextEl.textContent = story.reflection;
   philosophyTextEl.textContent = story.philosophy;
