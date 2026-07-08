@@ -3106,7 +3106,7 @@ shareStyleButtons.forEach((button) => {
 downloadShareBtn.addEventListener('click', async () => {
   try {
     downloadShareBtn.disabled = true;
-    downloadShareBtn.textContent = 'Gerando...';
+    downloadShareBtn.textContent = '…';
     const image = await createShareImage();
     downloadBlob(image.blob, image.filename);
     setShareStatus('Imagem baixada. Agora é só anexar no WhatsApp ou Instagram.');
@@ -3114,7 +3114,7 @@ downloadShareBtn.addEventListener('click', async () => {
     setShareStatus('Não consegui gerar a imagem neste navegador.');
   } finally {
     downloadShareBtn.disabled = false;
-    downloadShareBtn.textContent = 'Baixar imagem';
+    downloadShareBtn.textContent = '↓';
   }
 });
 

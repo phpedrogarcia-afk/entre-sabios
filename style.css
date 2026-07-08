@@ -756,9 +756,15 @@ body {
 }
 
 .share-style-option {
+  display: block;
+  width: 100%;
   height: 42px;
+  min-height: 42px;
+  padding: 0;
   border: 1px solid rgba(42, 35, 26, 0.13);
   border-radius: 14px;
+  appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
   transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
@@ -788,6 +794,18 @@ body {
     linear-gradient(145deg, #dbe8df, #a5bfc1);
 }
 
+.share-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46px;
+  gap: 8px;
+  align-items: stretch;
+  margin-top: 10px;
+}
+
+.share-actions .full {
+  margin-top: 0;
+}
+
 .full {
   width: 100%;
   margin-top: 10px;
@@ -804,10 +822,27 @@ body {
   transform: translateY(1px);
 }
 
-.secondary-share {
-  margin-top: 8px;
+.download-icon-btn {
+  display: inline-flex;
+  width: 46px;
+  min-width: 46px;
+  height: 100%;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 14px;
+  border: 1px solid rgba(42, 35, 26, 0.12);
   background: rgba(255, 255, 255, 0.28);
   color: rgba(42, 35, 26, 0.78);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.download-icon-btn:active {
+  transform: translateY(1px);
 }
 
 .share-status {
