@@ -1354,7 +1354,6 @@ const backBtn = document.getElementById('backBtn');
 const newBtn = document.getElementById('newBtn');
 const whatsShareBtn = document.getElementById('whatsShareBtn');
 const copyShareBtn = document.getElementById('copyShareBtn');
-const sharePreviewEl = document.getElementById('sharePreview');
 const shareStyleButtons = Array.from(document.querySelectorAll('[data-share-style]'));
 
 const quoteTextEl = document.getElementById('quoteText');
@@ -2926,12 +2925,12 @@ function drawShareCard({ width = 1080, height = 1350 } = {}) {
   ctx.fillStyle = theme.page;
   ctx.fillRect(0, 0, width, height);
 
-  const margin = 58 * scale;
+  const margin = 0;
   const cardX = margin;
   const cardY = margin;
   const cardW = width - margin * 2;
   const cardH = height - margin * 2;
-  const radius = 46 * scale;
+  const radius = 0;
 
   ctx.save();
   ctx.shadowColor = 'rgba(42, 35, 26, 0.18)';
@@ -3029,10 +3028,7 @@ function updateShareStyleButtons() {
 }
 
 function updateShareCardPreview() {
-  if (!sharePreviewEl) return;
-  const preview = drawShareCard({ width: 540, height: 675 });
-  sharePreviewEl.src = preview.toDataURL('image/png');
-  sharePreviewEl.alt = `Prévia do cartão de compartilhamento no estilo ${shareCardThemes[currentShareStyle]?.name || 'Verde'}`;
+  // A prévia foi removida para manter o painel de compartilhamento mais limpo.
 }
 
 // =========================
