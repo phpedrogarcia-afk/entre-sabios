@@ -1353,7 +1353,6 @@ const generateBtn = document.getElementById('generateBtn');
 const backBtn = document.getElementById('backBtn');
 const newBtn = document.getElementById('newBtn');
 const whatsShareBtn = document.getElementById('whatsShareBtn');
-const downloadShareBtn = document.getElementById('downloadShareBtn');
 const copyShareBtn = document.getElementById('copyShareBtn');
 const shareStatusEl = document.getElementById('shareStatus');
 const shareStyleButtons = Array.from(document.querySelectorAll('[data-share-style]'));
@@ -1383,7 +1382,6 @@ const closeAboutBtn = document.getElementById('closeAboutBtn');
 const dailyQuoteTextEl = document.getElementById('dailyQuoteText');
 const dailyQuoteTextCloneEl = document.getElementById('dailyQuoteTextClone');
 const visitorCountEl = document.getElementById('visitorCount');
-const downloadIconMarkup = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v2.2A1.8 1.8 0 0 0 6.8 21h10.4a1.8 1.8 0 0 0 1.8-1.8V17"/></svg>';
 
 const intensityRadioEls = Array.from(document.querySelectorAll('input[name="intensity"]'));
 
@@ -3108,21 +3106,6 @@ shareStyleButtons.forEach((button) => {
     updateShareCardPreview();
     setShareStatus('');
   });
-});
-
-downloadShareBtn.addEventListener('click', async () => {
-  try {
-    downloadShareBtn.disabled = true;
-    downloadShareBtn.textContent = '…';
-    const image = await createShareImage();
-    downloadBlob(image.blob, image.filename);
-    setShareStatus('Imagem baixada. Agora é só anexar no WhatsApp ou Instagram.');
-  } catch {
-    setShareStatus('Não consegui gerar a imagem neste navegador.');
-  } finally {
-    downloadShareBtn.disabled = false;
-    downloadShareBtn.innerHTML = downloadIconMarkup;
-  }
 });
 
 whatsShareBtn.addEventListener('click', async () => {
