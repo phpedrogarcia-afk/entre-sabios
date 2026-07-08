@@ -513,7 +513,7 @@ body {
 }
 
 .quote-action:disabled {
-  opacity: 0;
+  opacity: 0.42;
   pointer-events: none;
 }
 
@@ -839,6 +839,17 @@ body {
   font-weight: 900;
   line-height: 1;
   cursor: pointer;
+}
+
+.download-icon-btn svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .download-icon-btn:active {

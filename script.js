@@ -1383,6 +1383,7 @@ const closeAboutBtn = document.getElementById('closeAboutBtn');
 const dailyQuoteTextEl = document.getElementById('dailyQuoteText');
 const dailyQuoteTextCloneEl = document.getElementById('dailyQuoteTextClone');
 const visitorCountEl = document.getElementById('visitorCount');
+const downloadIconMarkup = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v2.2A1.8 1.8 0 0 0 6.8 21h10.4a1.8 1.8 0 0 0 1.8-1.8V17"/></svg>';
 
 const intensityRadioEls = Array.from(document.querySelectorAll('input[name="intensity"]'));
 
@@ -3114,7 +3115,7 @@ downloadShareBtn.addEventListener('click', async () => {
     setShareStatus('Não consegui gerar a imagem neste navegador.');
   } finally {
     downloadShareBtn.disabled = false;
-    downloadShareBtn.textContent = '↓';
+    downloadShareBtn.innerHTML = downloadIconMarkup;
   }
 });
 
