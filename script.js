@@ -1353,7 +1353,9 @@ const generateBtn = document.getElementById('generateBtn');
 const backBtn = document.getElementById('backBtn');
 const newBtn = document.getElementById('newBtn');
 const whatsShareBtn = document.getElementById('whatsShareBtn');
+const downloadShareBtn = document.getElementById('downloadShareBtn');
 const copyShareBtn = document.getElementById('copyShareBtn');
+const shareStatusEl = document.getElementById('shareStatus');
 const shareStyleButtons = Array.from(document.querySelectorAll('[data-share-style]'));
 
 const quoteTextEl = document.getElementById('quoteText');
@@ -3019,6 +3021,21 @@ function downloadBlob(blob, filename) {
   window.setTimeout(() => URL.revokeObjectURL(url), 1200);
 }
 
+async function createShareImage() {
+  const imageCanvas = drawShareCard();
+  const imageBlob = await canvasToBlob(imageCanvas);
+  if (!imageBlob) throw new Error('Não foi possível gerar a imagem.');
+  return {
+    blob: imageBlob,
+    file: new File([imageBlob], `entre-sabios-${currentShareStyle}.png`, { type: 'image/png' }),
+    filename: `entre-sabios-${currentShareStyle}.png`,
+  };
+}
+
+function setShareStatus(message = '') {
+  if (shareStatusEl) shareStatusEl.textContent = message;
+}
+
 function updateShareStyleButtons() {
   shareStyleButtons.forEach((button) => {
     const active = button.dataset.shareStyle === currentShareStyle;
@@ -3074,6 +3091,7 @@ copyShareBtn.addEventListener('click', async () => {
   const text = currentShareText || `${quoteTextEl.textContent}\n${quoteAuthorEl.textContent}`;
   if (!text || !navigator.clipboard) return;
   await navigator.clipboard.writeText(text);
+  setShareStatus('Mensagem copiada.');
 });
 
 shareStyleButtons.forEach((button) => {
@@ -3081,33 +3099,54 @@ shareStyleButtons.forEach((button) => {
     currentShareStyle = button.dataset.shareStyle || 'sage';
     updateShareStyleButtons();
     updateShareCardPreview();
+    setShareStatus('');
   });
+});
+
+downloadShareBtn.addEventListener('click', async () => {
+  try {
+    downloadShareBtn.disabled = true;
+    downloadShareBtn.textContent = 'Gerando...';
+    const image = await createShareImage();
+    downloadBlob(image.blob, image.filename);
+    setShareStatus('Imagem baixada. Agora é só anexar no WhatsApp ou Instagram.');
+  } catch {
+    setShareStatus('Não consegui gerar a imagem neste navegador.');
+  } finally {
+    downloadShareBtn.disabled = false;
+    downloadShareBtn.textContent = 'Baixar imagem';
+  }
 });
 
 whatsShareBtn.addEventListener('click', async () => {
   const text = currentShareText || `${quoteTextEl.textContent}\n${quoteAuthorEl.textContent}`;
   const pageUrl = location.protocol === 'http:' || location.protocol === 'https:' ? location.href : '';
   const shareText = pageUrl ? `${text}\n\n${pageUrl}` : text;
-  const imageCanvas = drawShareCard();
-  const imageBlob = await canvasToBlob(imageCanvas);
-  const imageFile = new File([imageBlob], `entre-sabios-${currentShareStyle}.png`, { type: 'image/png' });
+
+  whatsShareBtn.disabled = true;
+  whatsShareBtn.textContent = 'Gerando...';
 
   try {
-    if (navigator.share && navigator.canShare?.({ files: [imageFile] })) {
+    const image = await createShareImage();
+
+    if (navigator.share && navigator.canShare?.({ files: [image.file] })) {
       await navigator.share({
         title: 'Entre Sábios',
         text: shareText,
-        files: [imageFile],
+        files: [image.file],
       });
+      setShareStatus('Imagem compartilhada.');
       return;
     }
-  } catch (error) {
-    if (error?.name === 'AbortError') return;
-  }
 
-  downloadBlob(imageBlob, `entre-sabios-${currentShareStyle}.png`);
-  const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
-  window.open(shareUrl, '_blank', 'noopener,noreferrer');
+    downloadBlob(image.blob, image.filename);
+    setShareStatus('Este navegador não envia imagem direto. Baixei a imagem para você anexar.');
+  } catch (error) {
+    if (error?.name !== 'AbortError') setShareStatus('Não consegui compartilhar a imagem neste navegador.');
+  } finally {
+    whatsShareBtn.disabled = false;
+    whatsShareBtn.textContent = 'Compartilhar imagem';
+  }
 });
 
 function makeTag(t) {
