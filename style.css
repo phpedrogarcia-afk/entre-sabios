@@ -851,6 +851,31 @@ body {
   transform: translateY(1px);
 }
 
+.share-link-action {
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px 8px;
+  border: 0;
+  background: transparent;
+  color: rgba(42, 35, 26, 0.58);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+}
+
+.share-link-action:hover,
+.share-link-action:focus-visible {
+  color: rgba(42, 35, 26, 0.86);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.share-link-action:active {
+  transform: translateY(1px);
+}
+
 .share-status {
   min-height: 16px;
   margin-top: 8px;

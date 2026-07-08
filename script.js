@@ -1353,6 +1353,7 @@ const generateBtn = document.getElementById('generateBtn');
 const backBtn = document.getElementById('backBtn');
 const newBtn = document.getElementById('newBtn');
 const whatsShareBtn = document.getElementById('whatsShareBtn');
+const sendWithLinkBtn = document.getElementById('sendWithLinkBtn');
 const copyShareBtn = document.getElementById('copyShareBtn');
 const shareStatusEl = document.getElementById('shareStatus');
 const shareStyleButtons = Array.from(document.querySelectorAll('[data-share-style]'));
@@ -3041,6 +3042,14 @@ function setShareStatus(message = '') {
   if (shareStatusEl) shareStatusEl.textContent = message;
 }
 
+function buildShareTextWithLink() {
+  const text = currentShareText || `${quoteTextEl.textContent}\n${quoteAuthorEl.textContent}`;
+  const pageUrl = location.protocol === 'http:' || location.protocol === 'https:' ? location.origin + location.pathname : '';
+  return pageUrl
+    ? `${text}\n\nEntre Sábios\n${pageUrl}`
+    : `${text}\n\nEntre Sábios`;
+}
+
 function updateShareStyleButtons() {
   shareStyleButtons.forEach((button) => {
     const active = button.dataset.shareStyle === currentShareStyle;
@@ -3131,6 +3140,46 @@ whatsShareBtn.addEventListener('click', async () => {
   } finally {
     whatsShareBtn.disabled = false;
     whatsShareBtn.textContent = 'Status / Stories';
+  }
+});
+
+sendWithLinkBtn.addEventListener('click', async () => {
+  sendWithLinkBtn.disabled = true;
+  sendWithLinkBtn.textContent = 'Gerando...';
+
+  try {
+    const image = await createShareImage();
+    const shareText = buildShareTextWithLink();
+
+    if (navigator.share && navigator.canShare?.({ files: [image.file] })) {
+      await navigator.share({
+        title: 'Entre Sábios',
+        text: shareText,
+        files: [image.file],
+      });
+      setShareStatus('Imagem, frase e link enviados para o compartilhamento.');
+      return;
+    }
+
+    if (navigator.share) {
+      await navigator.share({
+        title: 'Entre Sábios',
+        text: shareText,
+        url: location.protocol === 'http:' || location.protocol === 'https:' ? location.origin + location.pathname : undefined,
+      });
+      setShareStatus('Frase e link enviados. A imagem foi baixada para anexar se quiser.');
+      downloadBlob(image.blob, image.filename);
+      return;
+    }
+
+    downloadBlob(image.blob, image.filename);
+    if (navigator.clipboard) await navigator.clipboard.writeText(shareText);
+    setShareStatus('Imagem baixada e texto com link copiado.');
+  } catch (error) {
+    if (error?.name !== 'AbortError') setShareStatus('Não consegui enviar com link neste navegador.');
+  } finally {
+    sendWithLinkBtn.disabled = false;
+    sendWithLinkBtn.textContent = '↗ Enviar com link';
   }
 });
 
