@@ -24,8 +24,18 @@
   <meta property="og:image" content="https://www.entresabios.com/assets/entre-sabios-social.png" />
   <meta property="og:image:alt" content="Entre Sábios: reflexões filosóficas para momentos da vida." />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="../../style.css?v=20260710-5" />
-  <link rel="stylesheet" href="../../seo.css?v=20260710-1" />
+  <script>
+    (function applySavedTheme() {
+      try {
+        var theme = localStorage.getItem('entreSabiosTheme');
+        if (theme === 'night') document.documentElement.dataset.theme = 'night';
+      } catch (error) {
+        document.documentElement.dataset.theme = 'day';
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../../style.css?v=20260710-7" />
+  <link rel="stylesheet" href="../../seo.css?v=20260711-1" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Ansiedade segundo a filosofia: quando a mente tenta viver antes do tempo","description":"A ansiedade costuma transformar possibilidades em ameaças. No Entre Sábios, ela é tratada como um convite para observar a mente, separar fatos de antecipações e recuperar presença.","url":"https://www.entresabios.com/sentimentos/ansiedade/","isPartOf":{"@type":"WebSite","name":"Entre Sábios","url":"https://www.entresabios.com"}}</script>
 </head>
 <body class="seo-page">

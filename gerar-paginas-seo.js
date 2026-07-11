@@ -3,9 +3,9 @@ const path = require('path');
 const vm = require('vm');
 
 const SITE_URL = 'https://www.entresabios.com';
-const LASTMOD = '2026-07-10';
-const SCRIPT_VERSION = '20260710-9';
-const STYLE_VERSION = '20260710-5';
+const LASTMOD = '2026-07-11';
+const SCRIPT_VERSION = '20260710-10';
+const STYLE_VERSION = '20260710-7';
 const SOCIAL_IMAGE = `${SITE_URL}/assets/entre-sabios-social.png`;
 
 const ROOT = __dirname;
@@ -234,7 +234,8 @@ function humanTheme(theme) {
     luto: 'luto',
     saudade: 'saudade',
     esperanca: 'esperança',
-    coragem: 'coragem',
+    inseguranca: 'insegurança',
+    insegurança: 'insegurança',
     raiva: 'raiva',
     culpa: 'culpa',
     tristeza: 'tristeza',
@@ -283,10 +284,10 @@ const feelingCopy = {
     intro: 'Conhecer-se não é criar uma imagem perfeita, mas olhar com precisão para pensamentos, desejos, medos e contradições.',
     explanation: 'O Entre Sábios aproxima autoconhecimento de responsabilidade interior. A pergunta não é “como pareço?”, mas “o que realmente está se movendo em mim, e que resposta isso pede?”.',
   },
-  coragem: {
-    h1: 'Coragem na filosofia: agir sem esperar que o medo desapareça',
-    intro: 'Coragem é uma forma de presença diante do risco, da mudança e da responsabilidade.',
-    explanation: 'Os pensadores tratam a coragem como prática. Ela nasce em escolhas concretas: assumir um passo, sustentar um limite, dizer a verdade possível e continuar quando a vida exige firmeza.',
+  insegurança: {
+    h1: 'Insegurança na filosofia: comparação, autoimagem e a busca por validação',
+    intro: 'Insegurança é a dúvida íntima sobre o próprio valor diante do olhar dos outros, do erro possível e da sensação de inadequação.',
+    explanation: 'Os pensadores ajudam a separar ameaça real de autoimagem ferida. A insegurança não pede heroísmo imediato; pede observar comparação, julgamento, aprovação externa e a ideia de eu que tenta sobreviver a qualquer custo.',
   },
   raiva: {
     h1: 'Raiva e filosofia: limites, dignidade e resposta consciente',
@@ -357,6 +358,16 @@ function pageShell({ title, description, canonical, ogType = 'website', body, st
   <meta property="og:image" content="${SOCIAL_IMAGE}" />
   <meta property="og:image:alt" content="Entre Sábios: reflexões filosóficas para momentos da vida." />
   <meta name="twitter:card" content="summary_large_image" />
+  <script>
+    (function applySavedTheme() {
+      try {
+        var theme = localStorage.getItem('entreSabiosTheme');
+        if (theme === 'night') document.documentElement.dataset.theme = 'night';
+      } catch (error) {
+        document.documentElement.dataset.theme = 'day';
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="${prefix}/style.css?v=${STYLE_VERSION}" />
   <link rel="stylesheet" href="${prefix}/seo.css?v=${LASTMOD.replaceAll('-', '')}-1" />
   ${structuredData ? jsonLd(structuredData) : ''}
@@ -485,7 +496,9 @@ function renderTalePages(data, urls) {
     const slug = slugify(tale.id || tale.titulo);
     const canonical = `${SITE_URL}/contos/${slug}/`;
     const themes = (tale.temas || []).map((label) => ({ label: humanTheme(label), slug: slugify(label) }));
-    const feelings = (tale.sentimentosRelacionados || []).map((id) => ({ label: feelingLabels.get(id) || titleCaseFromId(id), slug: slugify(id.replace(/_/g, '-')) }));
+    const feelings = (tale.sentimentosRelacionados || [])
+      .filter((id) => feelingLabels.has(id))
+      .map((id) => ({ label: feelingLabels.get(id) || titleCaseFromId(id), slug: slugify(id.replace(/_/g, '-')) }));
     const taleThemeSet = new Set([...(tale.temas || []), ...(tale.palavrasChave || []), ...(tale.sentimentosRelacionados || [])].map(normalizeTheme));
     const related = data.philosophicalTales
       .filter((other) => other.id !== tale.id)

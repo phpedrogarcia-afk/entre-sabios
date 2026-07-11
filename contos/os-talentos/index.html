@@ -24,8 +24,18 @@
   <meta property="og:image" content="https://www.entresabios.com/assets/entre-sabios-social.png" />
   <meta property="og:image:alt" content="Entre Sábios: reflexões filosóficas para momentos da vida." />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="../../style.css?v=20260710-5" />
-  <link rel="stylesheet" href="../../seo.css?v=20260710-1" />
+  <script>
+    (function applySavedTheme() {
+      try {
+        var theme = localStorage.getItem('entreSabiosTheme');
+        if (theme === 'night') document.documentElement.dataset.theme = 'night';
+      } catch (error) {
+        document.documentElement.dataset.theme = 'day';
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../../style.css?v=20260710-7" />
+  <link rel="stylesheet" href="../../seo.css?v=20260711-1" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Os Talentos","description":"Os Talentos: uma história de Evangelho de Mateus sobre potencial, responsabilidade, medo.","mainEntityOfPage":"https://www.entresabios.com/contos/os-talentos/","image":"https://www.entresabios.com/assets/entre-sabios-social.png","publisher":{"@type":"Organization","name":"Entre Sábios"}}</script>
 </head>
 <body class="seo-page">
@@ -73,7 +83,6 @@
     <h2>Sentimentos relacionados</h2>
     <div class="seo-pills"><a class="seo-pill" href="../../sentimentos/falta-de-proposito/">Falta de propósito</a>
 <a class="seo-pill" href="../../sentimentos/medo/">Medo</a>
-<a class="seo-pill" href="../../sentimentos/coragem/">Coragem</a>
 <a class="seo-pill" href="../../sentimentos/culpa/">Culpa</a></div>
   </section>
   <section>

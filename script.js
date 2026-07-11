@@ -563,6 +563,7 @@ whatsShareBtn.addEventListener('click', async () => {
 // =========================
 
 (function init() {
+  if (typeof initThemeToggle === 'function') initThemeToggle();
   initFeelings();
   initIntensity();
   initDailyQuote();

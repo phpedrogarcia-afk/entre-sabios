@@ -68,5 +68,11 @@ data.textThemeKeywords = {
   clareza: ['clareza', 'verdade', 'compreender'],
   sentido: ['sentido', 'propósito', 'porquê'],
   'ação consciente': ['agir', 'ação', 'próximo passo'],
+  insegurança: ['insegurança', 'inseguro', 'insegura', 'inadequação'],
+  comparação: ['comparação', 'comparar', 'comparando'],
+  autoimagem: ['autoimagem', 'imagem de si', 'imagem'],
+  aprovação: ['aprovação', 'validar', 'validação', 'aplauso'],
+  julgamento: ['julgamento', 'julgar', 'julgado', 'julgada'],
+  rejeição: ['rejeição', 'rejeitado', 'rejeitada'],
 };
 })(typeof window !== 'undefined' ? window : globalThis);

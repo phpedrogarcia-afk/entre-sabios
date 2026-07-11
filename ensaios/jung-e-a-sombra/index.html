@@ -24,8 +24,18 @@
   <meta property="og:image" content="https://www.entresabios.com/assets/entre-sabios-social.png" />
   <meta property="og:image:alt" content="Entre Sábios: reflexões filosóficas para momentos da vida." />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="../../style.css?v=20260710-5" />
-  <link rel="stylesheet" href="../../seo.css?v=20260710-1" />
+  <script>
+    (function applySavedTheme() {
+      try {
+        var theme = localStorage.getItem('entreSabiosTheme');
+        if (theme === 'night') document.documentElement.dataset.theme = 'night';
+      } catch (error) {
+        document.documentElement.dataset.theme = 'day';
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../../style.css?v=20260710-7" />
+  <link rel="stylesheet" href="../../seo.css?v=20260711-1" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Aquilo que você condena também mora em você?","description":"Um ensaio editorial sobre Carl Jung, sombra, projeção, culpa, raiva, persona e autoconhecimento sem autoengano.","mainEntityOfPage":"https://www.entresabios.com/ensaios/jung-e-a-sombra/","image":"https://www.entresabios.com/assets/ensaios/jung-e-a-sombra.svg","publisher":{"@type":"Organization","name":"Entre Sábios"}}</script>
 </head>
 <body class="seo-page">

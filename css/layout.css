@@ -18,6 +18,19 @@
   white-space: nowrap;
 }
 
+html[data-theme="night"] .daily-strip {
+  background: rgba(31, 50, 39, 0.48);
+  color: rgba(241, 234, 216, 0.78);
+}
+
+html[data-theme="night"] .daily-label {
+  color: rgba(199, 217, 180, 0.62);
+}
+
+html[data-theme="night"] .daily-separator {
+  color: rgba(205, 181, 121, 0.58);
+}
+
 .daily-track {
   width: max-content;
   display: flex;

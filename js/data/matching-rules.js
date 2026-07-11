@@ -32,6 +32,20 @@ data.trajectoryImpactRules = [
     tones: ['confrontador', 'contemplativo', 'direto'],
     label: 'propósito como criação de sentido',
   },
+  {
+    feelings: ['insegurança'], intensities: ['fraca', 'moderada'],
+    themes: ['comparação', 'autoimagem', 'aprovação', 'identidade', 'julgamento', 'observação'],
+    authors: ['Jiddu Krishnamurti', 'Krishnamurti', 'Nisargadatta Maharaj', 'Clarice Lispector', 'Fernando Pessoa', 'Marco Aurélio', 'Epicteto'],
+    tones: ['contemplativo', 'analítico', 'acolhedor'],
+    label: 'insegurança como investigação da autoimagem',
+  },
+  {
+    feelings: ['insegurança'], intensities: ['intensa'],
+    themes: ['inadequação', 'rejeição', 'autojulgamento', 'acolhimento', 'identidade', 'autocompaixão'],
+    authors: ['Clarice Lispector', 'Nisargadatta Maharaj', 'Carl Jung', 'Chögyam Trungpa', 'Jiddu Krishnamurti'],
+    tones: ['acolhedor', 'contemplativo', 'poético'],
+    label: 'insegurança intensa como dissolução da autoimagem',
+  },
 ];
 
 data.quoteExplanationRules = [

@@ -225,10 +225,46 @@ body.seo-page {
 
 .essay-card,
 .essay-empty {
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--stroke);
   border-radius: var(--radius-lg);
   padding: 18px;
   background: rgba(255, 255, 255, 0.42);
+  isolation: isolate;
+}
+
+.essay-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.74) 0%, rgba(255, 255, 255, 0.58) 48%, rgba(255, 255, 255, 0.18) 100%),
+    radial-gradient(circle at 86% 20%, rgba(164, 184, 134, 0.16), transparent 34%),
+    radial-gradient(circle at 78% 88%, rgba(122, 151, 128, 0.14), transparent 42%),
+    url("data:image/svg+xml,%3Csvg width='360' height='220' viewBox='0 0 360 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%235f7b5f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' opacity='.5'%3E%3Cpath d='M276 212 C282 160 294 112 320 62'/%3E%3Cpath d='M293 132 C314 126 328 114 337 98 C314 99 300 110 293 132Z' fill='%235f7b5f' opacity='.2'/%3E%3Cpath d='M285 166 C306 160 320 149 328 132 C306 134 292 145 285 166Z' fill='%235f7b5f' opacity='.18'/%3E%3Cpath d='M306 96 C326 91 339 80 346 65 C326 66 313 77 306 96Z' fill='%235f7b5f' opacity='.16'/%3E%3Cpath d='M54 48 C72 33 91 32 110 45' opacity='.28'/%3E%3Cpath d='M103 45 C119 32 136 34 151 45' opacity='.24'/%3E%3Cpath d='M16 206 C50 170 89 151 131 145 C91 175 54 195 16 206Z' fill='%235f7b5f' opacity='.08' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: center, right top, right bottom, right center;
+  background-size: cover, 70% 80%, 72% 75%, min(360px, 72%) auto;
+  opacity: 0.56;
+  filter: saturate(0.82);
+}
+
+.essay-card:nth-child(3n + 2)::before {
+  background-position: center, right 12% top 8%, right 2% bottom 4%, right 8% center;
+  opacity: 0.5;
+}
+
+.essay-card:nth-child(3n)::before {
+  background-position: center, right 4% top 12%, right 8% bottom 0, right -4% center;
+  opacity: 0.48;
+}
+
+.essay-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .essay-kicker {
@@ -322,5 +358,11 @@ body.seo-page {
 
   .essay-body p {
     font-size: 18px;
+  }
+
+  .essay-card::before {
+    background-position: center, right -18px top 4px, right -20px bottom -8px, right -28px center;
+    background-size: cover, 76% 72%, 78% 70%, min(310px, 82%) auto;
+    opacity: 0.42;
   }
 }

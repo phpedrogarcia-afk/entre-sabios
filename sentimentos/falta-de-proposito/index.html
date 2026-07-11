@@ -24,8 +24,18 @@
   <meta property="og:image" content="https://www.entresabios.com/assets/entre-sabios-social.png" />
   <meta property="og:image:alt" content="Entre Sábios: reflexões filosóficas para momentos da vida." />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="../../style.css?v=20260710-5" />
-  <link rel="stylesheet" href="../../seo.css?v=20260710-1" />
+  <script>
+    (function applySavedTheme() {
+      try {
+        var theme = localStorage.getItem('entreSabiosTheme');
+        if (theme === 'night') document.documentElement.dataset.theme = 'night';
+      } catch (error) {
+        document.documentElement.dataset.theme = 'day';
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../../style.css?v=20260710-7" />
+  <link rel="stylesheet" href="../../seo.css?v=20260711-1" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Falta de propósito: quando a vida pede sentido e direção","description":"A falta de propósito aparece quando a pessoa continua andando, mas já não sabe por que caminho vale a pena seguir.","url":"https://www.entresabios.com/sentimentos/falta-de-proposito/","isPartOf":{"@type":"WebSite","name":"Entre Sábios","url":"https://www.entresabios.com"}}</script>
 </head>
 <body class="seo-page">

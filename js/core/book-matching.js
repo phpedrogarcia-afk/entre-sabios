@@ -29,11 +29,11 @@ function getTargetBookFunctions(story) {
     return ['validacao', 'dissolucao', 'acao'];
   }
 
-  if (feelings.some((feeling) => ['ansiedade', 'confusao', 'confusão', 'medo'].includes(feeling))) {
+  if (feelings.some((feeling) => ['ansiedade', 'confusao', 'confusão', 'medo', 'insegurança'].includes(feeling))) {
     return ['dissolucao', 'validacao', 'acao'];
   }
 
-  if (feelings.some((feeling) => ['falta_de_proposito', 'coragem'].includes(feeling))) {
+  if (feelings.some((feeling) => ['falta_de_proposito'].includes(feeling))) {
     return ['acao', 'dissolucao', 'validacao'];
   }
 

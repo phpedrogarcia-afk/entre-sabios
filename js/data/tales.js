@@ -34,7 +34,7 @@ data.philosophicalTales = [
     origem: 'Platão, A República',
     tradicao: 'Filosofia grega',
     tempoLeitura: 4,
-    sentimentosRelacionados: ['autoconhecimento', 'confusão', 'medo'],
+    sentimentosRelacionados: ['autoconhecimento', 'confusão', 'medo', 'insegurança'],
     temas: ['verdade', 'aparência', 'consciência', 'liberdade', 'autoengano'],
     palavrasChave: ['autoconhecimento', 'ilusão', 'clareza', 'sombra', 'verdade'],
     texto: [
@@ -58,7 +58,7 @@ data.philosophicalTales = [
     origem: 'Mitologia grega',
     tradicao: 'Tradição clássica',
     tempoLeitura: 3,
-    sentimentosRelacionados: ['amor', 'solidão', 'raiva', 'autoconhecimento'],
+    sentimentosRelacionados: ['amor', 'solidão', 'raiva', 'autoconhecimento', 'insegurança'],
     temas: ['vaidade', 'orgulho', 'imagem', 'aprovação', 'vazio'],
     palavrasChave: ['narciso', 'orgulho', 'vaidade', 'aprovação', 'espelho'],
     texto: [
@@ -395,7 +395,7 @@ data.philosophicalTales = [
     origem: 'Paradoxo clássico grego',
     tradicao: 'Filosofia da identidade',
     tempoLeitura: 3,
-    sentimentosRelacionados: ['autoconhecimento', 'confusão', 'saudade', 'luto'],
+    sentimentosRelacionados: ['autoconhecimento', 'confusão', 'saudade', 'luto', 'insegurança'],
     temas: ['identidade', 'mudança', 'tempo', 'memória', 'continuidade'],
     palavrasChave: ['identidade', 'mudança', 'teseu', 'tempo', 'memória'],
     texto: [
@@ -646,7 +646,7 @@ data.philosophicalTales = [
     origem: 'Rumi, Masnavi',
     tradicao: 'Sufismo',
     tempoLeitura: 3,
-    sentimentosRelacionados: ['confusão', 'raiva', 'autoconhecimento'],
+    sentimentosRelacionados: ['confusão', 'raiva', 'autoconhecimento', 'insegurança'],
     temas: ['verdade', 'perspectiva', 'limite', 'humildade', 'diálogo'],
     palavrasChave: ['elefante', 'escuro', 'perspectiva', 'verdade', 'parte'],
     texto: [
@@ -782,7 +782,7 @@ data.philosophicalTales = [
     origem: 'Machado de Assis',
     tradicao: 'Literatura brasileira',
     tempoLeitura: 3,
-    sentimentosRelacionados: ['autoconhecimento', 'solidão', 'confusão'],
+    sentimentosRelacionados: ['autoconhecimento', 'solidão', 'confusão', 'insegurança'],
     temas: ['identidade', 'papel social', 'aparência', 'ego', 'máscara'],
     palavrasChave: ['espelho', 'machado', 'identidade', 'máscara', 'aparência'],
     texto: [
@@ -863,7 +863,7 @@ data.philosophicalTales = [
     origem: 'Carl Gustav Jung',
     tradicao: 'Psicologia analítica',
     tempoLeitura: 3,
-    sentimentosRelacionados: ['autoconhecimento', 'raiva', 'culpa', 'confusão'],
+    sentimentosRelacionados: ['autoconhecimento', 'raiva', 'culpa', 'confusão', 'insegurança'],
     temas: ['autoconhecimento', 'sombra', 'projeção', 'integração', 'verdade interior'],
     palavrasChave: ['sombra', 'jung', 'projeção', 'culpa', 'raiva'],
     texto: [

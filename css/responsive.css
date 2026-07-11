@@ -236,6 +236,14 @@
   }
 }
 
+@media (max-width: 720px) {
+  html[data-theme="night"] .center-card {
+    background:
+      linear-gradient(rgba(19, 31, 27, 0.72), rgba(22, 36, 30, 0.76)),
+      url("../assets/quote-landscape.png") center 65% / cover no-repeat;
+  }
+}
+
 @media (max-width: 380px) {
   .topbar {
     height: 60px;

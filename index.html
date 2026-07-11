@@ -32,7 +32,17 @@
     <meta property="og:image:alt" content="Entre Sábios: dois pensadores conversam serenamente diante das montanhas." />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="image_src" href="https://www.entresabios.com/assets/entre-sabios-social.png" />
-    <link rel="stylesheet" href="style.css?v=20260710-5" />
+    <script>
+      (function applySavedTheme() {
+        try {
+          var theme = localStorage.getItem('entreSabiosTheme');
+          if (theme === 'night') document.documentElement.dataset.theme = 'night';
+        } catch (error) {
+          document.documentElement.dataset.theme = 'day';
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="style.css?v=20260710-7" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -55,6 +65,7 @@
       </a>
       <div class="live-info" aria-label="Informações do site">
         <p class="online-counter">Presentes agora: <span id="contador-online">0</span></p>
+        <button id="themeToggleBtn" class="theme-toggle" type="button" aria-label="Ativar Floresta Noturna" title="Ativar Floresta Noturna">☾</button>
         <a class="about-trigger essays-trigger" href="ensaios/">Ensaios</a>
         <button id="aboutBtn" class="about-trigger" type="button">Sobre</button>
       </div>
@@ -387,6 +398,7 @@
     <script src="js/ui/daily-ui.js?v=20260710-1"></script>
     <script src="js/ui/reflection-ui.js?v=20260710-1"></script>
     <script src="js/ui/effects-ui.js?v=20260710-1"></script>
-    <script src="script.js?v=20260710-9"></script>
+    <script src="js/ui/theme-ui.js?v=20260710-1"></script>
+    <script src="script.js?v=20260710-10"></script>
   </body>
 </html>

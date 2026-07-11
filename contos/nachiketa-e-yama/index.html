@@ -24,8 +24,18 @@
   <meta property="og:image" content="https://www.entresabios.com/assets/entre-sabios-social.png" />
   <meta property="og:image:alt" content="Entre Sábios: reflexões filosóficas para momentos da vida." />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="../../style.css?v=20260710-5" />
-  <link rel="stylesheet" href="../../seo.css?v=20260710-1" />
+  <script>
+    (function applySavedTheme() {
+      try {
+        var theme = localStorage.getItem('entreSabiosTheme');
+        if (theme === 'night') document.documentElement.dataset.theme = 'night';
+      } catch (error) {
+        document.documentElement.dataset.theme = 'day';
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../../style.css?v=20260710-7" />
+  <link rel="stylesheet" href="../../seo.css?v=20260711-1" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Nachiketa e Yama","description":"Nachiketa e Yama: uma história de Katha Upanishad sobre propósito, morte, escolha.","mainEntityOfPage":"https://www.entresabios.com/contos/nachiketa-e-yama/","image":"https://www.entresabios.com/assets/entre-sabios-social.png","publisher":{"@type":"Organization","name":"Entre Sábios"}}</script>
 </head>
 <body class="seo-page">
@@ -72,7 +82,6 @@
   <section>
     <h2>Sentimentos relacionados</h2>
     <div class="seo-pills"><a class="seo-pill" href="../../sentimentos/falta-de-proposito/">Falta de propósito</a>
-<a class="seo-pill" href="../../sentimentos/coragem/">Coragem</a>
 <a class="seo-pill" href="../../sentimentos/medo/">Medo</a>
 <a class="seo-pill" href="../../sentimentos/autoconhecimento/">Autoconhecimento</a></div>
   </section>

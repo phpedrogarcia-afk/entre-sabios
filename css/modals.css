@@ -230,3 +230,45 @@
 .favorites-dialog[open] {
   animation: dialogEnter 160ms ease-out;
 }
+
+/* Floresta Noturna: modais com leitura quente e discreta. */
+html[data-theme="night"] .favorites-dialog {
+  background: #14231d;
+  color: var(--ink);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.42);
+}
+
+html[data-theme="night"] .favorites-dialog::backdrop {
+  background: rgba(4, 9, 7, 0.58);
+  backdrop-filter: blur(4px);
+}
+
+html[data-theme="night"] .favorite-item,
+html[data-theme="night"] .tale-text,
+html[data-theme="night"] .tale-question {
+  border-color: var(--night-border);
+  background: rgba(24, 39, 32, 0.72);
+  color: var(--night-text-reading);
+}
+
+html[data-theme="night"] .about-content,
+html[data-theme="night"] .tale-lesson div,
+html[data-theme="night"] .tale-question div {
+  color: var(--night-text-reading);
+}
+
+html[data-theme="night"] .tale-refresh-btn {
+  color: rgba(241, 234, 216, 0.72);
+}
+
+html[data-theme="night"] .tale-refresh-btn:hover,
+html[data-theme="night"] .tale-refresh-btn:focus-visible {
+  color: var(--night-text-primary);
+  background: rgba(190, 211, 178, 0.1);
+  outline: none;
+}
+
+html[data-theme="night"] .tale-lesson {
+  background: rgba(45, 69, 53, 0.42);
+  border-color: var(--night-border);
+}
