@@ -1,0 +1,1132 @@
+// Acervo lote 03. Extraído de curatedContentDb na Fase 2.
+(function initEntreSabiosQuoteBatch(root) {
+  const data = root.EntreSabiosData = root.EntreSabiosData || {};
+  const batches = data.quoteBatches = data.quoteBatches || {};
+
+  batches.batch03 = [
+// Acervo lote 03 - curadoria confirmada
+  {
+    "id": "batch03-quote-001",
+    "autor": "Carl Jung",
+    "frase": "Aquilo que você se recusa a reconhecer em si não desaparece; apenas aprende a falar por outros caminhos.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Carl Jung",
+    "sentimentos": [
+      "autoconhecimento",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "sombra",
+      "inconsciente",
+      "autoengano"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 5,
+    "conselho": "Observe uma reação exagerada e pergunte que parte sua ela tenta revelar.",
+    "explicacao": "A frase trabalha a sombra como conteúdo psíquico que retorna quando é negado.",
+    "livro": "O Eu e o Inconsciente"
+  },
+  {
+    "id": "batch03-quote-002",
+    "autor": "Carl Jung",
+    "frase": "A máscara protege, mas também sufoca quando esquecemos que ela foi feita para ser retirada.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada no conceito de persona em Jung",
+    "sentimentos": [
+      "confusão",
+      "indiretas"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "persona",
+      "máscara",
+      "autenticidade"
+    ],
+    "tom": "introspectivo",
+    "profundidade": 4,
+    "conselho": "Pergunte onde você está performando tanto que já não consegue descansar.",
+    "explicacao": "A persona é útil socialmente, mas empobrece quando substitui a identidade inteira.",
+    "livro": "Tipos Psicológicos"
+  },
+  {
+    "id": "batch03-quote-003",
+    "autor": "Carl Jung",
+    "frase": "Nem toda queda é regressão; algumas descidas são necessárias para encontrar o que foi enterrado vivo.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Carl Jung",
+    "sentimentos": [
+      "tristeza",
+      "autoconhecimento"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "descida",
+      "inconsciente",
+      "cura"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 5,
+    "conselho": "Não trate todo momento difícil como retrocesso; investigue o que ele está trazendo à superfície.",
+    "explicacao": "A descida ao inconsciente é vista como etapa de integração, não simples fracasso.",
+    "livro": "Memórias, Sonhos, Reflexões"
+  },
+  {
+    "id": "batch03-quote-004",
+    "autor": "Carl Jung",
+    "frase": "O julgamento que mais nos irrita no outro às vezes toca uma porta que mantemos trancada em nós.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Carl Jung",
+    "sentimentos": [
+      "raiva",
+      "autoconhecimento"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "projeção",
+      "raiva",
+      "sombra"
+    ],
+    "tom": "confrontador",
+    "profundidade": 5,
+    "conselho": "Antes de condenar, investigue se há projeção misturada à sua percepção.",
+    "explicacao": "A frase usa o conceito de projeção para transformar irritação em autoconhecimento.",
+    "livro": "Aion"
+  },
+  {
+    "id": "batch03-quote-005",
+    "autor": "Carl Jung",
+    "frase": "Tornar-se inteiro não é virar luz; é parar de fingir que não existe noite.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Jung",
+    "sentimentos": [
+      "culpa",
+      "autoconhecimento"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "integração",
+      "sombra",
+      "inteireza"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Integre uma parte difícil sem deixá-la comandar suas escolhas.",
+    "explicacao": "A individuação não elimina a sombra; ela amplia a consciência sobre ela.",
+    "livro": "O Homem e Seus Símbolos"
+  },
+  {
+    "id": "batch03-quote-006",
+    "autor": "Viktor Frankl",
+    "frase": "Quando a vida não oferece explicação, ainda pode exigir uma resposta digna.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Viktor Frankl",
+    "sentimentos": [
+      "falta_de_proposito",
+      "coragem"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "sentido",
+      "resposta",
+      "dignidade"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 5,
+    "conselho": "Escolha uma resposta pequena que preserve seus valores mesmo sem entender tudo.",
+    "explicacao": "Frankl desloca o foco da explicação total para a responsabilidade diante da situação.",
+    "livro": "Em Busca de Sentido"
+  },
+  {
+    "id": "batch03-quote-007",
+    "autor": "Viktor Frankl",
+    "frase": "O sentido nem sempre aparece como claridade; às vezes aparece como a próxima responsabilidade que não podemos abandonar.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Viktor Frankl",
+    "sentimentos": [
+      "falta_de_proposito",
+      "esperança"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "sentido",
+      "responsabilidade",
+      "continuidade"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 5,
+    "conselho": "Procure a responsabilidade mais concreta diante de você, não uma revelação grandiosa.",
+    "explicacao": "A frase evita a ideia mágica de propósito e o aproxima de uma tarefa real.",
+    "livro": "Em Busca de Sentido"
+  },
+  {
+    "id": "batch03-quote-008",
+    "autor": "Viktor Frankl",
+    "frase": "Há sofrimentos que não escolhemos; a resposta a eles, porém, ainda pode carregar nossa assinatura.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada na logoterapia",
+    "sentimentos": [
+      "tristeza",
+      "coragem"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "sofrimento",
+      "liberdade interior",
+      "resposta"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 5,
+    "conselho": "Separe a dor inevitável da atitude que ainda está em suas mãos.",
+    "explicacao": "A liberdade interior é apresentada sem negar a realidade do sofrimento.",
+    "livro": "Em Busca de Sentido"
+  },
+  {
+    "id": "batch03-quote-009",
+    "autor": "Viktor Frankl",
+    "frase": "A esperança madura não nega o abismo; apenas se recusa a chamar o abismo de última palavra.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Viktor Frankl",
+    "sentimentos": [
+      "esperança",
+      "luto"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "esperança",
+      "abismo",
+      "resiliência"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 5,
+    "conselho": "Reconheça o abismo sem entregar a ele o direito de concluir sua história.",
+    "explicacao": "A esperança aparece como resistência lúcida, não como negação do real.",
+    "livro": "A Vontade de Sentido"
+  },
+  {
+    "id": "batch03-quote-010",
+    "autor": "Viktor Frankl",
+    "frase": "Quem ainda pode amar, criar ou responder por algo não está reduzido ao que sofreu.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Viktor Frankl",
+    "sentimentos": [
+      "luto",
+      "falta_de_proposito"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "amor",
+      "criação",
+      "sentido"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Procure uma forma de amor, criação ou responsabilidade que ainda esteja viva.",
+    "explicacao": "Frankl aponta caminhos de sentido sem minimizar dor ou perda.",
+    "livro": "Em Busca de Sentido"
+  },
+  {
+    "id": "batch03-quote-011",
+    "autor": "Thich Nhat Hanh",
+    "frase": "Respirar não resolve toda dor, mas devolve você ao único lugar onde ainda pode cuidar dela.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Thich Nhat Hanh",
+    "sentimentos": [
+      "ansiedade",
+      "tristeza"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "respiração",
+      "presença",
+      "cuidado"
+    ],
+    "tom": "acolhedor_dissolvente",
+    "profundidade": 4,
+    "conselho": "Faça três respirações conscientes antes de decidir o próximo gesto.",
+    "explicacao": "A presença não é vendida como cura mágica, mas como chão para cuidar da dor.",
+    "livro": "A Arte de Viver"
+  },
+  {
+    "id": "batch03-quote-012",
+    "autor": "Thich Nhat Hanh",
+    "frase": "A raiva é uma criança ferida dentro de casa; gritar com ela só aumenta o incêndio.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Thich Nhat Hanh",
+    "sentimentos": [
+      "raiva",
+      "culpa"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "raiva",
+      "cuidado",
+      "acolhimento"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 4,
+    "conselho": "Aproxime-se da raiva como sinal de ferida antes de escolher uma resposta.",
+    "explicacao": "A raiva é tratada como energia a ser cuidada, não reprimida nem descarregada.",
+    "livro": "A Raiva"
+  },
+  {
+    "id": "batch03-quote-013",
+    "autor": "Thich Nhat Hanh",
+    "frase": "A ausência não apaga completamente alguém; ela muda a forma como a presença continua.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Thich Nhat Hanh",
+    "sentimentos": [
+      "luto",
+      "saudade"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "luto",
+      "continuação",
+      "interser"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 5,
+    "conselho": "Procure onde a pessoa amada continua em gestos, valores e memórias vivas.",
+    "explicacao": "A ideia de interser oferece consolo sem negar a dor da ausência.",
+    "livro": "Sem Morte, Sem Medo"
+  },
+  {
+    "id": "batch03-quote-014",
+    "autor": "Thich Nhat Hanh",
+    "frase": "Muitas dores pedem menos explicação e mais presença ao lado delas.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Thich Nhat Hanh",
+    "sentimentos": [
+      "tristeza",
+      "confusão"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "presença",
+      "dor",
+      "atenção"
+    ],
+    "tom": "acolhedor_dissolvente",
+    "profundidade": 4,
+    "conselho": "Fique com a sensação por alguns instantes sem construir uma tese sobre ela.",
+    "explicacao": "O cuidado começa na presença antes de tentar organizar tudo intelectualmente.",
+    "livro": "O Milagre da Atenção Plena"
+  },
+  {
+    "id": "batch03-quote-015",
+    "autor": "Thich Nhat Hanh",
+    "frase": "Quem caminha com pressa demais pisa até nos sinais que poderiam salvá-lo.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Thich Nhat Hanh",
+    "sentimentos": [
+      "ansiedade",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "pressa",
+      "atenção",
+      "presença"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 4,
+    "conselho": "Diminua o ritmo antes de concluir que não existe saída.",
+    "explicacao": "A pressa é apresentada como perda de percepção, não apenas excesso de tarefas.",
+    "livro": "Paz a Cada Passo"
+  },
+  {
+    "id": "batch03-quote-016",
+    "autor": "Pema Chödrön",
+    "frase": "O chão que some também revela quanto da nossa segurança dependia de fingir estabilidade.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Pema Chödrön",
+    "sentimentos": [
+      "medo",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "impermanência",
+      "insegurança",
+      "verdade"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Quando tudo parecer instável, observe o que era apego à certeza e o que é necessidade real.",
+    "explicacao": "Pema trabalha a insegurança como lugar de honestidade, não como fracasso.",
+    "livro": "Quando Tudo se Desfaz"
+  },
+  {
+    "id": "batch03-quote-017",
+    "autor": "Pema Chödrön",
+    "frase": "Fugir da dor muitas vezes a transforma em perseguição; sentar-se com ela pode devolver tamanho às coisas.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Pema Chödrön",
+    "sentimentos": [
+      "tristeza",
+      "ansiedade"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "dor",
+      "fuga",
+      "presença"
+    ],
+    "tom": "acolhedor_dissolvente",
+    "profundidade": 4,
+    "conselho": "Sente-se com a sensação por um minuto, sem alimentá-la nem expulsá-la.",
+    "explicacao": "A frase incentiva contato gradual com a dor para reduzir a perseguição mental.",
+    "livro": "Quando Tudo se Desfaz"
+  },
+  {
+    "id": "batch03-quote-018",
+    "autor": "Pema Chödrön",
+    "frase": "A coragem não é endurecer; é permanecer sensível sem se abandonar.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Pema Chödrön",
+    "sentimentos": [
+      "coragem",
+      "amor"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "coragem",
+      "sensibilidade",
+      "presença"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Proteja seus limites sem transformar seu coração em pedra.",
+    "explicacao": "A coragem é apresentada como abertura cuidadosa, não rigidez.",
+    "livro": "Os Lugares que nos Assustam"
+  },
+  {
+    "id": "batch03-quote-019",
+    "autor": "Pema Chödrön",
+    "frase": "O colapso da ilusão pode doer mais que a realidade; era a fantasia que sustentava parte do peso.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Pema Chödrön",
+    "sentimentos": [
+      "luto",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "ilusão",
+      "perda",
+      "realidade"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Pergunte se você está sofrendo pelo fato ou pela fantasia que caiu junto com ele.",
+    "explicacao": "A frase separa dor real e dor pela perda de uma narrativa sustentadora.",
+    "livro": "Quando Tudo se Desfaz"
+  },
+  {
+    "id": "batch03-quote-020",
+    "autor": "Pema Chödrön",
+    "frase": "A mente quer uma saída limpa, mas a vida às vezes nos cura no meio da bagunça.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Pema Chödrön",
+    "sentimentos": [
+      "confusão",
+      "esperança"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "bagunça",
+      "cura",
+      "presença"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Não espere clareza perfeita para praticar cuidado hoje.",
+    "explicacao": "A esperança surge dentro da imperfeição, sem promessa de solução limpa.",
+    "livro": "Comece Onde Você Está"
+  },
+  {
+    "id": "batch03-quote-021",
+    "autor": "Alan Watts",
+    "frase": "A vida escapa quando tentamos segurá-la como prova de que estamos vivos.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Alan Watts",
+    "sentimentos": [
+      "ansiedade",
+      "falta_de_proposito"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "controle",
+      "fluxo",
+      "vida"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 4,
+    "conselho": "Experimente viver uma pequena ação sem transformá-la em avaliação sobre sua vida inteira.",
+    "explicacao": "Watts critica o excesso de autocontrole que impede participação no fluxo da experiência.",
+    "livro": "A Sabedoria da Insegurança"
+  },
+  {
+    "id": "batch03-quote-022",
+    "autor": "Alan Watts",
+    "frase": "A segurança absoluta é uma fantasia que cobra caro: pede a vida em troca da sensação de controle.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Alan Watts",
+    "sentimentos": [
+      "medo",
+      "ansiedade"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "segurança",
+      "controle",
+      "insegurança"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Identifique uma tentativa de controle que está custando mais vida do que protegendo.",
+    "explicacao": "A insegurança é tratada como condição inevitável da vida, não como defeito pessoal.",
+    "livro": "A Sabedoria da Insegurança"
+  },
+  {
+    "id": "batch03-quote-023",
+    "autor": "Alan Watts",
+    "frase": "Quem tenta observar a própria vida de fora esquece que também está dentro da dança.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Alan Watts",
+    "sentimentos": [
+      "confusão",
+      "autoconhecimento"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "participação",
+      "dança",
+      "consciência"
+    ],
+    "tom": "acolhedor_dissolvente",
+    "profundidade": 4,
+    "conselho": "Pare de analisar por alguns instantes e participe de um gesto simples.",
+    "explicacao": "Watts desmonta a separação rígida entre observador e experiência.",
+    "livro": "O Livro do Tabu"
+  },
+  {
+    "id": "batch03-quote-024",
+    "autor": "Alan Watts",
+    "frase": "Às vezes o problema não é a falta de caminho, mas a exigência de que o caminho pareça uma linha reta.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Alan Watts",
+    "sentimentos": [
+      "falta_de_proposito",
+      "esperança"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "caminho",
+      "fluxo",
+      "incerteza"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Permita que o próximo passo não explique ainda a estrada inteira.",
+    "explicacao": "A frase abre esperança sem impor narrativa linear de sucesso.",
+    "livro": "O Caminho do Zen"
+  },
+  {
+    "id": "batch03-quote-025",
+    "autor": "Alan Watts",
+    "frase": "Pensar demais sobre a água não ensina o corpo a nadar.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Alan Watts",
+    "sentimentos": [
+      "confusão",
+      "coragem"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "ação",
+      "experiência",
+      "mente"
+    ],
+    "tom": "confrontador",
+    "profundidade": 3,
+    "conselho": "Troque uma análise repetida por uma experiência pequena e direta.",
+    "explicacao": "A frase critica a intelectualização que substitui a experiência.",
+    "livro": "A Sabedoria da Insegurança"
+  },
+  {
+    "id": "batch03-quote-026",
+    "autor": "Lao-Tsé",
+    "frase": "A água não vence a pedra por arrogância; vence porque não abandona sua natureza.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada no Tao Te Ching",
+    "sentimentos": [
+      "coragem",
+      "esperança"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "água",
+      "suavidade",
+      "persistência"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 4,
+    "conselho": "Procure uma forma suave de persistir sem virar dureza.",
+    "explicacao": "A imagem taoista valoriza flexibilidade e constância.",
+    "livro": "Tao Te Ching"
+  },
+  {
+    "id": "batch03-quote-027",
+    "autor": "Lao-Tsé",
+    "frase": "Forçar demais uma porta pode fazer esquecer que talvez ela abra para dentro.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada no Tao Te Ching",
+    "sentimentos": [
+      "ansiedade",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "não-forçar",
+      "direção",
+      "simplicidade"
+    ],
+    "tom": "acolhedor_dissolvente",
+    "profundidade": 4,
+    "conselho": "Antes de aumentar o esforço, mude a forma de se aproximar do problema.",
+    "explicacao": "O não-forçar taoista é usado como inteligência de ação.",
+    "livro": "Tao Te Ching"
+  },
+  {
+    "id": "batch03-quote-028",
+    "autor": "Lao-Tsé",
+    "frase": "O excesso de controle transforma até o cuidado em prisão.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Lao-Tsé",
+    "sentimentos": [
+      "amor",
+      "ansiedade"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "controle",
+      "cuidado",
+      "liberdade"
+    ],
+    "tom": "confrontador",
+    "profundidade": 4,
+    "conselho": "Pergunte se seu cuidado ainda permite liberdade ou se virou medo disfarçado.",
+    "explicacao": "A frase desloca cuidado para o risco de posse e controle.",
+    "livro": "Tao Te Ching"
+  },
+  {
+    "id": "batch03-quote-029",
+    "autor": "Lao-Tsé",
+    "frase": "Quem precisa provar força o tempo inteiro talvez ainda não tenha conhecido a própria firmeza.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Lao-Tsé",
+    "sentimentos": [
+      "indiretas",
+      "raiva"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "força",
+      "vaidade",
+      "firmeza"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 4,
+    "conselho": "Observe se sua necessidade de provar algo está enfraquecendo sua presença real.",
+    "explicacao": "Indireta sutil sobre força performática versus força silenciosa.",
+    "livro": "Tao Te Ching"
+  },
+  {
+    "id": "batch03-quote-030",
+    "autor": "Lao-Tsé",
+    "frase": "A simplicidade assusta quem aprendeu a se esconder dentro do excesso.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Lao-Tsé",
+    "sentimentos": [
+      "confusão",
+      "falta_de_proposito"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "simplicidade",
+      "excesso",
+      "clareza"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 4,
+    "conselho": "Retire um excesso antes de procurar uma nova solução.",
+    "explicacao": "A frase usa a simplicidade taoista como desmascaramento do ruído.",
+    "livro": "Tao Te Ching"
+  },
+  {
+    "id": "batch03-quote-031",
+    "autor": "Buda / Dhammapada",
+    "frase": "A mente que alimenta ressentimento bebe veneno e chama isso de memória.",
+    "quoteType": "inspired",
+    "source": "Síntese editorial inspirada no Dhammapada",
+    "sentimentos": [
+      "raiva",
+      "culpa"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "ressentimento",
+      "mente",
+      "libertação"
+    ],
+    "tom": "confrontador",
+    "profundidade": 4,
+    "conselho": "Diferencie lembrar de reviver; uma coisa informa, a outra aprisiona.",
+    "explicacao": "A frase resume ensinamentos budistas sobre mente, ódio e sofrimento.",
+    "livro": "Dhammapada"
+  },
+  {
+    "id": "batch03-quote-032",
+    "autor": "Buda / Dhammapada",
+    "frase": "Nenhuma chama externa queima tanto quanto uma mente que se tornou inimiga de si mesma.",
+    "quoteType": "inspired",
+    "source": "Síntese editorial inspirada no Dhammapada",
+    "sentimentos": [
+      "culpa",
+      "tristeza"
+    ],
+    "intensidade": [
+      "intensa"
+    ],
+    "temas": [
+      "mente",
+      "sofrimento",
+      "autocompaixão"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 5,
+    "conselho": "Reduza uma frase interna cruel antes de tentar resolver a vida inteira.",
+    "explicacao": "A mente aparece como fonte de sofrimento quando treinada na hostilidade contra si.",
+    "livro": "Dhammapada"
+  },
+  {
+    "id": "batch03-quote-033",
+    "autor": "Buda / Dhammapada",
+    "frase": "A paz não nasce de vencer todas as lutas, mas de parar de transformar tudo em luta.",
+    "quoteType": "inspired",
+    "source": "Síntese editorial inspirada no Dhammapada",
+    "sentimentos": [
+      "raiva",
+      "ansiedade"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "paz",
+      "luta",
+      "desapego"
+    ],
+    "tom": "acolhedor_dissolvente",
+    "profundidade": 4,
+    "conselho": "Escolha uma batalha que não precisa ser travada hoje.",
+    "explicacao": "A frase evita passividade, mas questiona a compulsão de lutar contra tudo.",
+    "livro": "Dhammapada"
+  },
+  {
+    "id": "batch03-quote-034",
+    "autor": "Buda / Dhammapada",
+    "frase": "O apego chama de amor aquilo que, muitas vezes, é medo de perder o controle.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada no budismo",
+    "sentimentos": [
+      "amor",
+      "medo"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "apego",
+      "amor",
+      "controle"
+    ],
+    "tom": "confrontador",
+    "profundidade": 5,
+    "conselho": "Pergunte se você quer amar melhor ou apenas garantir que nada mude.",
+    "explicacao": "A frase diferencia amor e apego sem demonizar vínculo.",
+    "livro": "Dhammapada"
+  },
+  {
+    "id": "batch03-quote-035",
+    "autor": "Buda / Dhammapada",
+    "frase": "Tudo muda; sofrer começa quando exigimos que a mudança peça desculpas.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada no budismo",
+    "sentimentos": [
+      "luto",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "impermanência",
+      "mudança",
+      "aceitação"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Reconheça a mudança sem exigir que ela seja justa para ser real.",
+    "explicacao": "A impermanência é apresentada com sobriedade, não como frase decorativa.",
+    "livro": "Dhammapada"
+  },
+  {
+    "id": "batch03-quote-036",
+    "autor": "Marco Aurélio",
+    "frase": "O dia já é curto demais para entregá-lo inteiro ao julgamento de quem mal conhece a própria vida.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Meditações",
+    "sentimentos": [
+      "indiretas",
+      "raiva"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "opinião alheia",
+      "tempo",
+      "autonomia"
+    ],
+    "tom": "confrontador",
+    "profundidade": 4,
+    "conselho": "Retome uma hora, uma decisão ou um limite que você entregou ao olhar alheio.",
+    "explicacao": "Marco Aurélio ajuda a recolocar a opinião dos outros no tamanho certo.",
+    "livro": "Meditações"
+  },
+  {
+    "id": "batch03-quote-037",
+    "autor": "Marco Aurélio",
+    "frase": "Você pode não dominar o acontecimento, mas ainda responde pela qualidade da alma que leva até ele.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Marco Aurélio",
+    "sentimentos": [
+      "coragem",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "virtude",
+      "resposta",
+      "controle"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 5,
+    "conselho": "Pergunte qual resposta preserva sua integridade neste acontecimento específico.",
+    "explicacao": "A frase traduz a ética estoica da resposta interior.",
+    "livro": "Meditações"
+  },
+  {
+    "id": "batch03-quote-038",
+    "autor": "Marco Aurélio",
+    "frase": "Não ajas como se fosses viver dez mil anos; enquanto vives, enquanto podes, torna-te bom.",
+    "quoteType": "exact",
+    "source": "Meditações, IV, 17 (tradução editorial)",
+    "sentimentos": [
+      "ansiedade",
+      "medo"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "ansiedade",
+      "antecipação",
+      "presença"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 4,
+    "conselho": "Volte ao fato presente antes de sofrer pela hipótese inteira.",
+    "explicacao": "O estoicismo separa acontecimento real de imaginação antecipatória.",
+    "livro": "Meditações, IV, 17"
+  },
+  {
+    "id": "batch03-quote-039",
+    "autor": "Marco Aurélio",
+    "frase": "A irritação revela menos sobre o mundo do que sobre o ponto exato onde sua mente perdeu governo.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Marco Aurélio",
+    "sentimentos": [
+      "raiva",
+      "autoconhecimento"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "irritação",
+      "governo de si",
+      "disciplina"
+    ],
+    "tom": "confrontador",
+    "profundidade": 4,
+    "conselho": "Use a irritação como mapa do lugar onde você precisa retomar presença.",
+    "explicacao": "A raiva é transformada em diagnóstico da relação da mente com o acontecimento.",
+    "livro": "Meditações"
+  },
+  {
+    "id": "batch03-quote-040",
+    "autor": "Marco Aurélio",
+    "frase": "Viver bem não exige uma vida grandiosa; exige não trair o que há de justo no próximo gesto.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Marco Aurélio",
+    "sentimentos": [
+      "falta_de_proposito",
+      "esperança"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "virtude",
+      "gesto",
+      "propósito"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Faça o próximo gesto justo sem exigir que ele resolva o sentido inteiro da vida.",
+    "explicacao": "O propósito é reduzido a uma prática ética concreta e possível.",
+    "livro": "Meditações"
+  },
+  {
+    "id": "batch03-text-001",
+    "autor": "Carl Jung",
+    "titulo": "A sombra educada",
+    "texto": "A parte negada de uma pessoa raramente aparece com chifres. Ela costuma vir bem vestida: uma ironia elegante, uma crítica excessiva, uma certeza moral que não admite espelho.\n\nO problema da sombra não é existir. O problema é agir em nosso nome enquanto juramos que ela pertence apenas aos outros.\n\n**Aquilo que não reconhecemos em nós começa a governar pelas frestas.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado em Carl Jung",
+    "sentimentos": [
+      "autoconhecimento",
+      "raiva"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "sombra",
+      "projeção",
+      "autoengano"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 5,
+    "conselho": "Procure a sombra menos no monstro evidente e mais na reação que parece justificável demais.",
+    "explicacao": "Texto sobre sombra e projeção com tom clínico, sem moralismo.",
+    "livro": "O Eu e o Inconsciente",
+    "contentType": "text"
+  },
+  {
+    "id": "batch03-text-002",
+    "autor": "Viktor Frankl",
+    "titulo": "A resposta que resta",
+    "texto": "Há momentos em que procurar o motivo da dor apenas aumenta o quarto onde ela mora. A pergunta 'por quê?' gira, volta, morde a própria cauda.\n\nEntão talvez reste outra pergunta, menos bonita e mais exigente: o que essa dor ainda não conseguiu destruir em mim?\n\n**Sentido não é sempre explicação. Às vezes é a maneira como respondemos quando a explicação falha.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado em Viktor Frankl",
+    "sentimentos": [
+      "luto",
+      "falta_de_proposito",
+      "coragem"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "sentido",
+      "sofrimento",
+      "resposta"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 5,
+    "conselho": "Quando não houver explicação, procure a resposta mais digna que ainda é possível.",
+    "explicacao": "Texto frankliano sobre sentido como resposta responsável ao sofrimento.",
+    "livro": "Em Busca de Sentido",
+    "contentType": "text"
+  },
+  {
+    "id": "batch03-text-003",
+    "autor": "Thich Nhat Hanh",
+    "titulo": "A raiva no colo",
+    "texto": "A raiva chega dizendo que precisa destruir alguma coisa. Quase sempre, porém, ela está tentando mostrar uma ferida que não teve linguagem.\n\nSe você a obedece imediatamente, ela vira incêndio. Se você a reprime, ela vira fumaça dentro do peito.\n\n**Talvez o primeiro gesto não seja atacar nem engolir, mas segurar a raiva no colo até descobrir o que ela protege.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado em Thich Nhat Hanh",
+    "sentimentos": [
+      "raiva",
+      "culpa"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "raiva",
+      "ferida",
+      "presença"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 5,
+    "conselho": "Antes de agir, cuide da energia da raiva como quem cuida de uma criança assustada.",
+    "explicacao": "Texto sobre acolher a raiva sem obedecer cegamente a ela.",
+    "livro": "A Raiva",
+    "contentType": "text"
+  },
+  {
+    "id": "batch03-text-004",
+    "autor": "Alan Watts",
+    "titulo": "A vida como prova",
+    "texto": "A mente ansiosa quer viver e, ao mesmo tempo, fiscalizar se está vivendo direito. Quer espontaneidade com relatório, liberdade com garantia, presença com recibo.\n\nNesse esforço, a experiência vira objeto de auditoria. A pessoa não dança; ela observa a própria dança tentando decidir se parece viva o bastante.\n\n**A vida escapa quando precisa provar, a cada instante, que está acontecendo.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado em Alan Watts",
+    "sentimentos": [
+      "ansiedade",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "controle",
+      "experiência",
+      "presença"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 5,
+    "conselho": "Faça algo simples sem medir imediatamente o significado da experiência.",
+    "explicacao": "Texto sobre o excesso de autoconsciência que interrompe a experiência direta.",
+    "livro": "A Sabedoria da Insegurança",
+    "contentType": "text"
+  },
+  {
+    "id": "batch03-text-005",
+    "autor": "Marco Aurélio",
+    "titulo": "O governo do próximo gesto",
+    "texto": "O mundo não consulta nossa disposição antes de acontecer. Ele chega: notícia, perda, atraso, ofensa, doença, mudança. E a mente, querendo soberania total, sofre como se cada fato fosse uma humilhação pessoal.\n\nMas talvez o governo humano seja menor e mais sério: não mandar no acontecimento, e sim no próximo gesto.\n\n**A dignidade começa onde termina a fantasia de controle absoluto.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado em Marco Aurélio",
+    "sentimentos": [
+      "raiva",
+      "confusão",
+      "coragem"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "controle",
+      "dignidade",
+      "resposta"
+    ],
+    "tom": "confrontador",
+    "profundidade": 5,
+    "conselho": "Quando não puder governar o fato, governe o próximo gesto com mais precisão.",
+    "explicacao": "Texto estoico sobre controle interno e resposta ética.",
+    "livro": "Meditações",
+    "contentType": "text"
+  },
+  ];
+})(typeof window !== 'undefined' ? window : globalThis);

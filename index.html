@@ -15,20 +15,34 @@
       crossorigin="anonymous"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Entre Sábios</title>
-    <meta name="description" content="Reflexões filosóficas para compreender sentimentos e viver com mais sabedoria." />
+    <title>Entre Sábios — Reflexões filosóficas para os momentos da vida</title>
+    <meta name="description" content="Escolha o que está sentindo e encontre frases, reflexões e conselhos inspirados nos grandes filósofos, escritores e pensadores da humanidade." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://www.entresabios.com/" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.entresabios.com/" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Entre Sábios" />
-    <meta property="og:title" content="Entre Sábios" />
-    <meta property="og:description" content="Reflexões para a vida, inspiradas em grandes pensadores." />
-    <meta property="og:image" content="assets/entre-sabios-social.png" />
+    <meta property="og:title" content="Entre Sábios — Reflexões filosóficas para os momentos da vida" />
+    <meta property="og:description" content="Escolha o que está sentindo e encontre frases, reflexões e conselhos inspirados nos grandes filósofos, escritores e pensadores da humanidade." />
+    <meta property="og:image" content="https://www.entresabios.com/assets/entre-sabios-social.png" />
     <meta property="og:image:width" content="1717" />
     <meta property="og:image:height" content="916" />
     <meta property="og:image:alt" content="Entre Sábios: dois pensadores conversam serenamente diante das montanhas." />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="image_src" href="assets/entre-sabios-social.png" />
-    <link rel="stylesheet" href="style.css?v=20260708-10" />
+    <link rel="image_src" href="https://www.entresabios.com/assets/entre-sabios-social.png" />
+    <link rel="stylesheet" href="style.css?v=20260710-5" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Entre Sábios",
+        "url": "https://www.entresabios.com/",
+        "description": "Escolha o que está sentindo e encontre frases, reflexões e conselhos inspirados nos grandes filósofos, escritores e pensadores da humanidade.",
+        "inLanguage": "pt-BR"
+      }
+    </script>
   </head>
   <body>
     <header class="topbar">
@@ -40,7 +54,8 @@
         </div>
       </a>
       <div class="live-info" aria-label="Informações do site">
-        <span><strong id="visitorCount">—</strong> visitantes</span>
+        <p class="online-counter">Presentes agora: <span id="contador-online">0</span></p>
+        <a class="about-trigger essays-trigger" href="ensaios/">Ensaios</a>
         <button id="aboutBtn" class="about-trigger" type="button">Sobre</button>
       </div>
     </header>
@@ -108,7 +123,7 @@
 
       <!-- COLUNA CENTRAL -->
       <section class="col-center">
-        <div class="center-fixed">Encontre a palavra certa para o momento que você está vivendo.</div>
+        <h1 class="center-fixed">Encontre uma reflexão filosófica para o momento que você está vivendo.</h1>
 
         <div class="center-top">
           <button id="backBtn" class="ghost" type="button" aria-label="Voltar">← Voltar</button>
@@ -184,7 +199,14 @@
               </span>
             </div>
           </div>
-          <button id="copyShareBtn" class="full" type="button">Copiar Mensagem</button>
+
+          <section class="tales-block" aria-labelledby="talesTitle">
+            <div class="share-title" id="talesTitle">📖 CONTOS FILOSÓFICOS</div>
+            <p class="tales-intro">Histórias que atravessaram séculos e ainda falam sobre nós.</p>
+            <button id="openTaleBtn" class="full" type="button">Ler um conto</button>
+            <div id="taleHint" class="share-status" role="status" aria-live="polite"></div>
+          </section>
+
           <div id="shareStatus" class="share-status" role="status" aria-live="polite"></div>
         </div>
 
@@ -219,6 +241,152 @@
       </div>
     </dialog>
 
-    <script src="script.js?v=20260708-8"></script>
+    <dialog id="taleDialog" class="favorites-dialog tale-dialog" aria-labelledby="taleDialogTitle">
+      <div class="favorites-head">
+        <div>
+          <div class="share-title" id="taleDialogTitle">CONTOS FILOSÓFICOS</div>
+          <div class="tale-title-row">
+            <div class="section-subtitle" id="taleTitle">—</div>
+            <button id="nextTaleBtn" class="tale-refresh-btn" type="button" aria-label="Carregar outro conto" title="Carregar outro conto">↻</button>
+          </div>
+        </div>
+        <button id="closeTaleTopBtn" class="ghost" type="button" aria-label="Fechar conto">Fechar</button>
+      </div>
+      <div class="tale-content">
+        <div id="taleCycleNotice" class="tale-cycle-notice" role="status" aria-live="polite"></div>
+        <div class="tale-meta">
+          <span id="taleOrigin">Origem: —</span>
+          <span id="taleReadingTime">📖 Leitura de aproximadamente — minutos.</span>
+        </div>
+        <article id="taleText" class="tale-text"></article>
+        <section class="tale-lesson">
+          <h3>O que esse conto nos ensina?</h3>
+          <div id="taleLesson"></div>
+        </section>
+        <section class="tale-lesson tale-relation">
+          <h3>Por que este conto apareceu para você?</h3>
+          <div id="taleRelation"></div>
+        </section>
+        <section class="tale-lesson tale-question">
+          <h3>Pergunta para reflexão</h3>
+          <div id="taleQuestion"></div>
+        </section>
+        <button id="closeTaleBtn" class="full" type="button">Fechar</button>
+      </div>
+    </dialog>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+      import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
+      import {
+        getDatabase,
+        ref,
+        push,
+        set,
+        onDisconnect,
+        onValue,
+        serverTimestamp,
+      } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDQ9YnhiH2XfXDRsFZ3z60KXotA1hSmNIE",
+        authDomain: "entre-sabios.firebaseapp.com",
+        databaseURL: "https://entre-sabios-default-rtdb.firebaseio.com",
+        projectId: "entre-sabios",
+        storageBucket: "entre-sabios.firebasestorage.app",
+        messagingSenderId: "824380836905",
+        appId: "1:824380836905:web:2eaa7e9e5b19464f952038",
+        measurementId: "G-J6LZP45KPH",
+      };
+
+      const app = initializeApp(firebaseConfig);
+
+      isSupported()
+        .then((supported) => {
+          if (supported) getAnalytics(app);
+        })
+        .catch(() => {
+          // Analytics pode não inicializar em alguns contextos locais; o contador segue funcionando.
+        });
+
+      const onlineCounterEl = document.getElementById("contador-online");
+      const database = getDatabase(app);
+      const connectedRef = ref(database, ".info/connected");
+      const presenceRef = ref(database, "presence");
+      const presenceSessionId = sessionStorage.getItem("entreSabiosPresenceId") || crypto.randomUUID();
+      sessionStorage.setItem("entreSabiosPresenceId", presenceSessionId);
+      const currentUserPresenceRef = ref(database, `presence/${presenceSessionId}`);
+
+      onValue(connectedRef, (snapshot) => {
+        if (snapshot.val() !== true) return;
+
+        onDisconnect(currentUserPresenceRef)
+          .remove()
+          .then(() => set(currentUserPresenceRef, {
+            online: true,
+            startedAt: serverTimestamp(),
+            lastSeenAt: serverTimestamp(),
+          }))
+          .catch((error) => {
+            console.warn("Firebase Presence bloqueado:", error);
+            if (onlineCounterEl) {
+              onlineCounterEl.innerText = "—";
+              onlineCounterEl.title = "Permissão do Firebase bloqueada para presence.";
+            }
+          });
+      });
+
+      onValue(presenceRef, (snapshot) => {
+        const usersOnline = snapshot.val() || {};
+        const totalOnline = Object.keys(usersOnline).length;
+        if (onlineCounterEl) {
+          onlineCounterEl.innerText = totalOnline;
+          onlineCounterEl.title = "";
+        }
+      }, (error) => {
+        console.warn("Não foi possível ler usuários online:", error);
+        if (onlineCounterEl) {
+          onlineCounterEl.innerText = "—";
+          onlineCounterEl.title = "Permissão do Firebase bloqueada para presence.";
+        }
+      });
+
+      window.addEventListener("pagehide", () => {
+        set(currentUserPresenceRef, null).catch(() => {});
+      });
+    </script>
+    <script src="js/data/catalogs.js?v=20260710-1"></script>
+    <script src="js/data/authors.js?v=20260710-1"></script>
+    <script src="js/data/books.js?v=20260710-1"></script>
+    <script src="js/data/share-themes.js?v=20260710-1"></script>
+    <script src="js/data/tales.js?v=20260710-1"></script>
+    <script src="js/data/metadata.js?v=20260710-1"></script>
+    <script src="js/data/quotes/base.js?v=20260710-1"></script>
+    <script src="js/data/quotes/batch-01.js?v=20260710-1"></script>
+    <script src="js/data/quotes/batch-02.js?v=20260710-1"></script>
+    <script src="js/data/quotes/batch-03.js?v=20260710-1"></script>
+    <script src="js/data/quotes/batch-04.js?v=20260710-1"></script>
+    <script src="js/data/quotes/batch-05.js?v=20260710-1"></script>
+    <script src="js/data/quotes/batch-06.js?v=20260710-1"></script>
+    <script src="js/data/quotes/batch-07.js?v=20260710-1"></script>
+    <script src="js/data/quotes/batch-08.js?v=20260710-1"></script>
+    <script src="js/data/quotes/index.js?v=20260710-1"></script>
+    <script src="js/data/perspectives.js?v=20260710-1"></script>
+    <script src="js/data/matching-rules.js?v=20260710-1"></script>
+    <script src="js/core/normalization.js?v=20260710-1"></script>
+    <script src="js/core/emotional-state.js?v=20260710-1"></script>
+    <script src="js/core/content-normalizer.js?v=20260710-1"></script>
+    <script src="js/core/matching.js?v=20260710-1"></script>
+    <script src="js/core/book-matching.js?v=20260710-1"></script>
+    <script src="js/features/feedback.js?v=20260710-1"></script>
+    <script src="js/features/favorites.js?v=20260710-1"></script>
+    <script src="js/features/sharing.js?v=20260710-1"></script>
+    <script src="js/features/tales.js?v=20260710-1"></script>
+    <script src="js/features/visitors.js?v=20260710-1"></script>
+    <script src="js/ui/feelings-ui.js?v=20260710-1"></script>
+    <script src="js/ui/daily-ui.js?v=20260710-1"></script>
+    <script src="js/ui/reflection-ui.js?v=20260710-1"></script>
+    <script src="js/ui/effects-ui.js?v=20260710-1"></script>
+    <script src="script.js?v=20260710-9"></script>
   </body>
 </html>

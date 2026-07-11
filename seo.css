@@ -1,0 +1,326 @@
+body.seo-page {
+  min-height: 100%;
+  overflow: auto;
+  line-height: 1.7;
+}
+
+.seo-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  backdrop-filter: blur(16px);
+  background: rgba(251, 247, 238, 0.82);
+}
+
+.seo-home-link {
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.seo-home-link:hover,
+.seo-home-link:focus-visible {
+  border-color: var(--stroke-strong);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.seo-container {
+  width: min(880px, calc(100% - 32px));
+  margin: 34px auto 72px;
+}
+
+.seo-card {
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: clamp(24px, 5vw, 54px);
+}
+
+.seo-breadcrumb {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.seo-breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.seo-breadcrumb a:hover,
+.seo-breadcrumb a:focus-visible {
+  color: var(--ink);
+  border-bottom-color: var(--stroke-strong);
+}
+
+.seo-card h1 {
+  margin: 0 0 18px;
+  max-width: 760px;
+  font-family: var(--font);
+  font-size: clamp(34px, 6vw, 58px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.seo-card h2 {
+  margin: 38px 0 12px;
+  font-size: 13px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.seo-lead {
+  margin: 0 0 26px;
+  color: rgba(42, 35, 26, 0.76);
+  font-family: var(--font);
+  font-size: clamp(20px, 3.5vw, 27px);
+  line-height: 1.42;
+}
+
+.seo-card p {
+  color: rgba(42, 35, 26, 0.78);
+  font-size: 17px;
+}
+
+.seo-meta {
+  display: grid;
+  gap: 8px;
+  margin: 24px 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.seo-article section p {
+  font-family: var(--font);
+  font-size: 20px;
+  line-height: 1.72;
+}
+
+.seo-card blockquote {
+  margin: 16px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.seo-card blockquote p {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 21px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.seo-card blockquote footer {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.seo-pills,
+.seo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.seo-pill,
+.seo-tags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.48);
+  color: var(--ink);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.seo-pill:hover,
+.seo-pill:focus-visible {
+  border-color: var(--stroke-strong);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.seo-question {
+  border-left: 3px solid var(--stroke-strong);
+  padding-left: 16px;
+  color: var(--ink) !important;
+  font-style: italic;
+}
+
+.seo-cta {
+  margin-top: 42px;
+  padding: 24px;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(190, 213, 181, 0.28), transparent 44%),
+    rgba(255, 255, 255, 0.45);
+}
+
+.seo-cta h2 {
+  margin-top: 0;
+}
+
+.seo-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 46px;
+  margin-top: 8px;
+  padding: 12px 18px;
+  border: 1px solid var(--stroke-strong);
+  border-radius: 999px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.72);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.seo-button:hover,
+.seo-button:focus-visible {
+  background: #fff;
+}
+
+.essay-section-label {
+  margin: 0 0 10px;
+  color: rgba(42, 35, 26, 0.58);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.essay-editorial-note {
+  max-width: 620px;
+  margin: 22px 0 0;
+  padding-left: 16px;
+  border-left: 3px solid var(--stroke);
+  color: rgba(42, 35, 26, 0.72);
+  font-family: var(--font);
+  font-size: 19px;
+}
+
+.essays-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.essay-card,
+.essay-empty {
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.essay-kicker {
+  margin-bottom: 8px;
+  color: rgba(42, 35, 26, 0.58);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.essay-card h2 {
+  margin: 0 0 8px;
+  font-family: var(--font);
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-transform: none;
+}
+
+.essay-card h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.essay-card h2 a:hover,
+.essay-card h2 a:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.essay-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.essay-hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 30px 0;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.essay-body p {
+  font-family: var(--font);
+  font-size: 20px;
+  line-height: 1.78;
+}
+
+.essay-sources {
+  margin: 0;
+  padding-left: 20px;
+  color: rgba(42, 35, 26, 0.72);
+  line-height: 1.65;
+}
+
+@media (max-width: 720px) {
+  .seo-container {
+    width: min(100% - 20px, 880px);
+    margin-top: 16px;
+    margin-bottom: 44px;
+  }
+
+  .seo-card {
+    padding: 22px 18px;
+  }
+
+  .seo-topbar {
+    height: auto;
+    min-height: 64px;
+    gap: 12px;
+  }
+
+  .seo-home-link {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .seo-card p,
+  .seo-article section p {
+    font-size: 17px;
+  }
+
+  .essay-body p {
+    font-size: 18px;
+  }
+}
