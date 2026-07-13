@@ -1,0 +1,11 @@
+{
+  "name": "entre-sabios",
+  "private": true,
+  "version": "2.1.0",
+  "type": "module",
+  "scripts": {
+    "build:content": "node scripts/build-content.mjs",
+    "test": "node scripts/build-content.mjs && node --test tests/*.test.mjs",
+    "serve": "node scripts/serve.mjs"
+  }
+}

@@ -11,7 +11,8 @@ function initFeelings() {
 
     const input = document.createElement('input');
     input.type = 'checkbox';
-    input.value = f.id;
+    const feelingId = normalizeTheme(f.id);
+    input.value = feelingId;
 
     const text = document.createElement('span');
     text.textContent = f.label;
@@ -19,12 +20,16 @@ function initFeelings() {
     card.appendChild(input);
     card.appendChild(text);
 
-    card.addEventListener('click', (e) => {
-      e.preventDefault();
-      const checked = !input.checked;
-      input.checked = checked;
-      if (checked) selectedFeelingIds.add(f.id);
-      else selectedFeelingIds.delete(f.id);
+    input.addEventListener('change', () => {
+      if (input.checked) {
+        selectedFeelingIds.add(feelingId);
+        if (!primaryFeelingId) primaryFeelingId = feelingId;
+      } else {
+        selectedFeelingIds.delete(feelingId);
+        if (primaryFeelingId === feelingId) primaryFeelingId = getSelectedFeelingIds()[0] || null;
+      }
+      lastSelectionSignature = null;
+      runtimeSelector?.clear();
       syncSelectedCards();
     });
 
@@ -36,7 +41,9 @@ function initFeelings() {
 
 function syncSelectedCards() {
   const cards = Array.from(feelingsGridEl.querySelectorAll('.feeling'));
-  const primaryFeeling = getSelectedFeelingIds()[0];
+  const selectedIds = getSelectedFeelingIds();
+  if (!selectedIds.includes(primaryFeelingId)) primaryFeelingId = selectedIds[0] || null;
+  const primaryFeeling = primaryFeelingId;
   cards.forEach((card) => {
     const input = card.querySelector('input');
     const id = input.value;
@@ -45,11 +52,47 @@ function syncSelectedCards() {
     card.classList.toggle('primary-feeling', id === primaryFeeling);
   });
 
+  renderPrimaryFeelingControl();
+
   generateBtn.classList.toggle('has-selection', selectedFeelingIds.size > 0);
   if (selectedFeelingIds.size > 0) {
     selectionHintEl.textContent = '';
     if (taleHintEl) taleHintEl.textContent = '';
   }
+}
+
+function setPrimaryFeeling(feelingId) {
+  if (!selectedFeelingIds.has(feelingId)) return;
+  primaryFeelingId = feelingId;
+  lastSelectionSignature = null;
+  runtimeSelector?.clear();
+  syncSelectedCards();
+  if (currentStory) {
+    currentStory.selectedFeelingIds = getSelectedFeelingIds();
+    currentStory.emotionalState = interpretEmotionalState();
+    updateBookRecommendation(currentStory);
+    preferenceNoteEl.textContent = `Próximas escolhas serão guiadas por ${getFeelingLabel(feelingId)}.`;
+  }
+}
+
+function getFeelingLabel(feelingId) {
+  return feelingsCatalog.find((feeling) => normalizeTheme(feeling.id) === feelingId)?.label || feelingId;
+}
+
+function renderPrimaryFeelingControl() {
+  const selectedIds = getSelectedFeelingIds();
+  primaryFeelingControlEl.hidden = selectedIds.length === 0;
+  primaryFeelingLabelEl.textContent = primaryFeelingId ? getFeelingLabel(primaryFeelingId) : '—';
+  secondaryFeelingActionsEl.innerHTML = '';
+  selectedIds.filter((id) => id !== primaryFeelingId).forEach((id) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'focus-feeling-btn';
+    button.textContent = `${getFeelingLabel(id)} · Focar nisto`;
+    button.setAttribute('aria-label', `Definir ${getFeelingLabel(id)} como sentimento principal`);
+    button.addEventListener('click', () => setPrimaryFeeling(id));
+    secondaryFeelingActionsEl.appendChild(button);
+  });
 }
 
 function showSelectionHint(message = 'Escolha pelo menos um sentimento antes de gerar sua reflexão.') {
@@ -64,6 +107,18 @@ function initIntensity() {
   intensityRadioEls.forEach((r) => {
     r.addEventListener('change', () => {
       currentIntensity = r.value;
+      lastSelectionSignature = null;
+      runtimeSelector?.clear();
+    });
+  });
+}
+
+function initGenderPreference() {
+  genderRadioEls.forEach((radio) => {
+    radio.addEventListener('change', () => {
+      currentGenderPreference = radio.value;
+      lastSelectionSignature = null;
+      runtimeSelector?.clear();
     });
   });
 }

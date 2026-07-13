@@ -42,7 +42,96 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20260710-7" />
+    <link rel="stylesheet" href="style.css?v=20260712-10" />
+    <style id="tale-mobile-scroll-fix">
+      /* Correção crítica inline: prevalece mesmo quando o servidor retém CSS antigo. */
+      #taleDialog.tale-dialog {
+        box-sizing: border-box !important;
+        height: min(680px, calc(100vh - 32px)) !important;
+        max-height: calc(100vh - 32px) !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        overscroll-behavior: contain !important;
+      }
+
+      #taleDialog.tale-dialog[open] {
+        display: block !important;
+      }
+
+      #taleDialog .favorites-head {
+        position: sticky;
+        top: -18px;
+        z-index: 3;
+        margin: -18px -18px 0;
+        padding: 18px 18px 14px;
+        background: var(--bg);
+      }
+
+      #taleDialog .tale-content {
+        display: block !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        flex: none !important;
+      }
+
+      html[data-theme="night"] #taleDialog .tale-meta,
+      html[data-theme="night"] #taleDialog .tale-cycle-notice {
+        color: var(--night-text-primary, #f6efdc) !important;
+      }
+
+      html[data-theme="night"] .book-rec-label {
+        color: var(--night-gold, #d8bd75) !important;
+      }
+
+      @media (max-width: 720px) {
+        html.tale-modal-open,
+        html.tale-modal-open body {
+          overflow: auto !important;
+          overscroll-behavior: auto !important;
+        }
+
+        #taleDialog.tale-dialog {
+          position: fixed !important;
+          inset: 12px auto auto 12px !important;
+          box-sizing: border-box !important;
+          width: calc(100vw - 24px) !important;
+          min-width: 0 !important;
+          max-width: calc(100vw - 24px) !important;
+          height: calc(100vh - 24px) !important;
+          max-height: calc(100vh - 24px) !important;
+          margin: 0 !important;
+          overflow-x: hidden !important;
+          overflow-y: scroll !important;
+          overscroll-behavior: contain !important;
+          -webkit-overflow-scrolling: touch;
+          touch-action: auto !important;
+        }
+
+        #taleDialog.tale-dialog[open] {
+          display: block !important;
+        }
+
+        #taleDialog .favorites-head {
+          position: sticky;
+          top: -14px;
+          z-index: 3;
+          flex-wrap: nowrap;
+          margin: -14px -14px 0;
+          padding: 14px 14px 12px;
+          background: var(--bg);
+        }
+
+        #taleDialog .tale-content {
+          display: block !important;
+          height: auto !important;
+          min-height: 0 !important;
+          max-height: none !important;
+          overflow: visible !important;
+          touch-action: auto !important;
+        }
+      }
+    </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -98,10 +187,14 @@
       <!-- COLUNA ESQUERDA -->
       <aside class="col-left">
         <div class="section-title">COMO VOCÊ ESTÁ SE SENTINDO?</div>
-        <div class="section-subtitle">Selecione um ou mais. O primeiro será o sentimento principal.</div>
+        <div class="section-subtitle">Selecione um ou mais e escolha qual deve orientar a reflexão.</div>
 
         <div class="feelings-grid" id="feelingsGrid" aria-label="Sentimentos">
           <!-- Itens gerados via JS -->
+        </div>
+        <div id="primaryFeelingControl" class="primary-feeling-control" hidden>
+          <div>Sentimento principal: <strong id="primaryFeelingLabel">—</strong></div>
+          <div id="secondaryFeelingActions" class="secondary-feeling-actions" aria-label="Alterar sentimento principal"></div>
         </div>
 
         <div class="audience intensity-control">
@@ -122,7 +215,18 @@
           </div>
         </div>
 
-        <button id="generateBtn" class="primary">ENCONTRAR UMA REFLEXÃO</button>
+        <div class="audience gender-control">
+          <div class="audience-title">PREFERÊNCIA DE AUTORIA</div>
+          <div class="audience-options" role="radiogroup" aria-label="Preferência de gênero da autoria">
+            <label class="radio"><input type="radio" name="genderPreference" value="any" checked /><span>Qualquer</span></label>
+            <label class="radio"><input type="radio" name="genderPreference" value="female" /><span>Feminina</span></label>
+            <label class="radio"><input type="radio" name="genderPreference" value="male" /><span>Masculina</span></label>
+            <label class="radio"><input type="radio" name="genderPreference" value="neutral" /><span>Editorial</span></label>
+          </div>
+        </div>
+
+        <button id="generateBtn" class="primary" disabled>ENCONTRAR UMA REFLEXÃO</button>
+        <div id="contentLoadStatus" class="content-load-status" role="status" aria-live="polite">Carregando o acervo de reflexões…</div>
         <div id="selectionHint" class="selection-hint" role="alert" aria-live="assertive"></div>
 
         <div class="tip">
@@ -366,39 +470,26 @@
         set(currentUserPresenceRef, null).catch(() => {});
       });
     </script>
-    <script src="js/data/catalogs.js?v=20260710-1"></script>
-    <script src="js/data/authors.js?v=20260710-1"></script>
+    <script src="js/data/catalogs.js?v=20260713-1"></script>
     <script src="js/data/books.js?v=20260710-1"></script>
     <script src="js/data/share-themes.js?v=20260710-1"></script>
     <script src="js/data/tales.js?v=20260710-1"></script>
-    <script src="js/data/metadata.js?v=20260710-1"></script>
-    <script src="js/data/quotes/base.js?v=20260710-1"></script>
-    <script src="js/data/quotes/batch-01.js?v=20260710-1"></script>
-    <script src="js/data/quotes/batch-02.js?v=20260710-1"></script>
-    <script src="js/data/quotes/batch-03.js?v=20260710-1"></script>
-    <script src="js/data/quotes/batch-04.js?v=20260710-1"></script>
-    <script src="js/data/quotes/batch-05.js?v=20260710-1"></script>
-    <script src="js/data/quotes/batch-06.js?v=20260710-1"></script>
-    <script src="js/data/quotes/batch-07.js?v=20260710-1"></script>
-    <script src="js/data/quotes/batch-08.js?v=20260710-1"></script>
-    <script src="js/data/quotes/index.js?v=20260710-1"></script>
-    <script src="js/data/perspectives.js?v=20260710-1"></script>
-    <script src="js/data/matching-rules.js?v=20260710-1"></script>
+    <script src="js/data/emotional-taxonomy.js?v=20260712-10"></script>
     <script src="js/core/normalization.js?v=20260710-1"></script>
-    <script src="js/core/emotional-state.js?v=20260710-1"></script>
-    <script src="js/core/content-normalizer.js?v=20260710-1"></script>
-    <script src="js/core/matching.js?v=20260710-1"></script>
-    <script src="js/core/book-matching.js?v=20260710-1"></script>
+    <script src="js/core/runtime-engine.js?v=definitiva-2.1"></script>
+    <script src="js/core/runtime-loader.js?v=definitiva-2.1"></script>
+    <script src="js/core/emotional-state.js?v=20260713-1"></script>
+    <script src="js/core/matching.js?v=20260713-1"></script>
+    <script src="js/core/book-matching.js?v=20260712-10"></script>
     <script src="js/features/feedback.js?v=20260710-1"></script>
     <script src="js/features/favorites.js?v=20260710-1"></script>
     <script src="js/features/sharing.js?v=20260710-1"></script>
-    <script src="js/features/tales.js?v=20260710-1"></script>
-    <script src="js/features/visitors.js?v=20260710-1"></script>
-    <script src="js/ui/feelings-ui.js?v=20260710-1"></script>
-    <script src="js/ui/daily-ui.js?v=20260710-1"></script>
-    <script src="js/ui/reflection-ui.js?v=20260710-1"></script>
+    <script src="js/features/tales.js?v=20260712-10"></script>
+    <script src="js/ui/feelings-ui.js?v=20260713-1"></script>
+    <script src="js/ui/daily-ui.js?v=20260712-1"></script>
+    <script src="js/ui/reflection-ui.js?v=20260713-1"></script>
     <script src="js/ui/effects-ui.js?v=20260710-1"></script>
     <script src="js/ui/theme-ui.js?v=20260710-1"></script>
-    <script src="script.js?v=20260710-10"></script>
+    <script src="script.js?v=20260713-1"></script>
   </body>
 </html>

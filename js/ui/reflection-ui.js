@@ -18,8 +18,8 @@ function updateBookRecommendation(story) {
     choque: 'desconstrução',
   };
   const authorContext = recommendation.sameAuthor
-    ? `A reflexão nasce próxima de ${story.displayAuthor || story.author}, mas a indicação foi filtrada pela função clínica da leitura.`
-    : `Esta obra foi escolhida para funcionar como ${functionLabels[book.bookFunction] || 'travessia'}, não apenas como eco do sentimento.`;
+    ? `A reflexão nasce próxima de ${story.displayAuthor || story.author}, e a indicação também foi filtrada pela função editorial da leitura.`
+    : `Esta obra foi escolhida para funcionar como ${functionLabels[book.bookFunction] || 'travessia editorial'}, não apenas como eco do sentimento.`;
   const themeContext = commonThemes.length
     ? ` Ela desenvolve especialmente ${commonThemes.slice(0, 3).map((theme) => theme.replace(/_/g, ' ')).join(', ')}.`
     : ` Ela amplia o assunto predominante e oferece continuidade ao conselho apresentado.`;
@@ -40,15 +40,7 @@ function ensureSelectionMin() {
 }
 
 function buildStoryAttribution(story) {
-  const displayAuthor = story.displayAuthor || story.author || '';
-  const quoteType = story.quoteType || 'inspired';
-
-  if (!displayAuthor || displayAuthor === 'Reflexão contemporânea' || quoteType === 'unknown' || quoteType === 'anonymous') {
-    return 'Reflexão contemporânea';
-  }
-
-  if (quoteType === 'exact') return displayAuthor;
-  return `Ideia inspirada em ${displayAuthor}`;
+  return story.displayAuthor || 'Entre Sábios';
 }
 
 function renderStory(story) {
@@ -65,7 +57,7 @@ function renderStory(story) {
     ? 'O QUE ESTE TEXTO QUER DIZER'
     : 'O QUE ESSA FRASE QUER DIZER';
   story.attribution = buildStoryAttribution(story);
-  quoteAuthorEl.textContent = `— ${story.attribution}${story.source ? ` · ${story.source}` : ''}`;
+  quoteAuthorEl.textContent = `— ${story.attribution}`;
   reflectionTextEl.textContent = story.reflection;
   philosophyTextEl.textContent = story.philosophy;
   adviceTextEl.textContent = story.advice;
@@ -79,16 +71,8 @@ function renderStory(story) {
     tagsRowEl.appendChild(el);
   });
 
-  currentShareText = `${story.quote}\n— ${story.attribution}${story.source ? ` · ${story.source}` : ''}`;
   updateFeedbackButtons();
   preferenceNoteEl.textContent = '';
   updateFavoriteUi();
   updateShareCardPreview();
-}
-
-function makeTag(t) {
-  const el = document.createElement('div');
-  el.className = 'tag';
-  el.textContent = t;
-  return el;
 }

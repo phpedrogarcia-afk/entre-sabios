@@ -4,33 +4,42 @@
 
 function interpretEmotionalState() {
   const feelings = getSelectedFeelingIds();
-  const primaryFeeling = feelings[0] || null;
-  const secondaryFeelings = feelings.slice(1);
-  const themes = new Set(getSelectedThemes().map(normalizeTheme));
+  const primaryFeeling = feelings.includes(primaryFeelingId) ? primaryFeelingId : (feelings[0] || null);
+  const secondaryFeelings = feelings.filter((feeling) => feeling !== primaryFeeling);
+  const taxonomy = emotionalTaxonomy[primaryFeeling] || { families: {} };
+  const rootThemeDefinitions = Object.entries(taxonomy.families || {}).flatMap(([family, definition]) =>
+    definition.themes.map((theme) => ({
+      theme: normalizeTheme(theme), family, weight: definition.weight, specificity: definition.specificity,
+    }))
+  );
+  const secondaryThemes = feelingsCatalog
+    .filter((feeling) => secondaryFeelings.includes(normalizeTheme(feeling.id)))
+    .flatMap((feeling) => feeling.themes || [])
+    .map(normalizeTheme);
+  const combinationThemes = [];
 
   combinationRules.forEach((rule) => {
-    if (rule.feelings.every((feeling) => feelings.includes(feeling))) {
-      rule.themes.forEach((theme) => themes.add(normalizeTheme(theme)));
+    if (rule.feelings.every((feeling) => feelings.includes(normalizeTheme(feeling)))) {
+      rule.themes.forEach((theme) => combinationThemes.push(normalizeTheme(theme)));
     }
   });
 
-  const intensity = intensityProfiles[currentIntensity] || intensityProfiles.moderada;
-  intensity.themes.forEach((theme) => themes.add(normalizeTheme(theme)));
+  const intensityProfile = intensityProfiles[currentIntensity] || intensityProfiles.moderada;
 
   return {
     feelings,
     primaryFeeling,
     secondaryFeelings,
+    rootThemeDefinitions,
+    secondaryThemes: Array.from(new Set(secondaryThemes)),
+    combinationThemes: Array.from(new Set(combinationThemes)),
+    intensityThemes: intensityProfile.themes.map(normalizeTheme),
     intensity: currentIntensity,
-    psychologicalThemes: Array.from(themes),
-    suitableTones: intensity.suitableTones,
+    suitableTones: intensityProfile.suitableTones.map(normalizeTheme),
+    genderPreference: currentGenderPreference,
   };
 }
 
 function getSelectedFeelingIds() {
-  return Array.from(selectedFeelingIds);
-}
-
-function getSelectionKey() {
-  return getSelectedFeelingIds().sort().join('|') || 'sem_sentimento';
+  return Array.from(selectedFeelingIds).map(normalizeTheme);
 }

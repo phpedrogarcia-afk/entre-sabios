@@ -3,16 +3,11 @@
 // Implementação baseada na especificação (layout minimalista)
 // =========================
 
-const feelingsCatalog = window.EntreSabiosData.feelingsCatalog;
+let feelingsCatalog = [];
 const intensityProfiles = window.EntreSabiosData.intensityProfiles;
 const combinationRules = window.EntreSabiosData.combinationRules;
-const authorsDb = window.EntreSabiosData.authorsDb;
-const authorQuoteVariants = window.EntreSabiosData.authorQuoteVariants;
-const clarityRewrites = window.EntreSabiosData.clarityRewrites;
-const authorTextVariants = window.EntreSabiosData.authorTextVariants;
-const supplementalTextVariants = window.EntreSabiosData.supplementalTextVariants;
+const emotionalTaxonomy = window.EntreSabiosData.emotionalTaxonomy;
 const thinkerProfiles = window.EntreSabiosData.thinkerProfiles;
-const feelingAuthorAffinity = window.EntreSabiosData.feelingAuthorAffinity;
 const bookCatalog = window.EntreSabiosData.bookCatalog;
 const additionalBookCatalog = window.EntreSabiosData.additionalBookCatalog;
 const bookClinicalRules = window.EntreSabiosData.bookClinicalRules;
@@ -94,7 +89,7 @@ function enrichBookMetadata(book, index) {
     title: book.title,
     author: book.author,
     themes: tags,
-    feelings: book.feelings || inferredFeelings,
+    feelings: (book.feelings || inferredFeelings).map(normalizeTheme),
     intensities: book.intensities || ['fraca', 'moderada', 'intensa'],
     level: book.level || 'intermediário',
     depth: book.depth || 4,
@@ -123,20 +118,24 @@ const normalizedBookCatalog = [...bookCatalog, ...additionalBookCatalog]
 
 let history = []; // lista de { quote, author, reflection, advice, tags }
 let historyIndex = -1;
-let currentShareText = '';
 let currentStory = null;
 let currentStoryShownAt = 0;
 let currentShareStyle = 'sage';
 
 let selectedFeelingIds = new Set();
+let primaryFeelingId = null;
 let currentIntensity = 'moderada';
-const usedStoryKeysBySelection = new Map();
+let currentGenderPreference = 'any';
+let runtimeSelector = null;
+let lastSelectionSignature = null;
+let runtimeContents = [];
 
 const preferenceProfile = loadPreferenceProfile();
 const favoriteStories = loadFavoriteStories();
 const viewedStoryKeys = new Set(loadViewedStoryKeys());
 let recentAuthorNames = loadRecentAuthorNames();
 let generatedContentCount = loadGeneratedContentCount();
+let contextualContentHistory = loadContextualContentHistory();
 let viewedTaleKeys = loadViewedTaleKeys();
 let recentTaleKeys = loadRecentTaleKeys();
 let contosJaVistos = [];
@@ -146,11 +145,13 @@ let contosJaVistos = [];
 // =========================
 
 const feelingsGridEl = document.getElementById('feelingsGrid');
+const primaryFeelingControlEl = document.getElementById('primaryFeelingControl');
+const primaryFeelingLabelEl = document.getElementById('primaryFeelingLabel');
+const secondaryFeelingActionsEl = document.getElementById('secondaryFeelingActions');
 const generateBtn = document.getElementById('generateBtn');
 const backBtn = document.getElementById('backBtn');
 const newBtn = document.getElementById('newBtn');
 const whatsShareBtn = document.getElementById('whatsShareBtn');
-const copyShareBtn = document.getElementById('copyShareBtn');
 const shareStatusEl = document.getElementById('shareStatus');
 const shareStyleButtons = Array.from(document.querySelectorAll('[data-share-style]'));
 
@@ -178,7 +179,6 @@ const aboutDialog = document.getElementById('aboutDialog');
 const closeAboutBtn = document.getElementById('closeAboutBtn');
 const dailyQuoteTextEl = document.getElementById('dailyQuoteText');
 const dailyQuoteTextCloneEl = document.getElementById('dailyQuoteTextClone');
-const visitorCountEl = document.getElementById('visitorCount');
 const openTaleBtn = document.getElementById('openTaleBtn');
 const taleHintEl = document.getElementById('taleHint');
 const taleDialog = document.getElementById('taleDialog');
@@ -195,6 +195,8 @@ const closeTaleBtn = document.getElementById('closeTaleBtn');
 const closeTaleTopBtn = document.getElementById('closeTaleTopBtn');
 
 const intensityRadioEls = Array.from(document.querySelectorAll('input[name="intensity"]'));
+const genderRadioEls = Array.from(document.querySelectorAll('input[name="genderPreference"]'));
+const contentLoadStatusEl = document.getElementById('contentLoadStatus');
 
 const decorCanvas = document.getElementById('decorCanvas');
 
@@ -276,6 +278,23 @@ function saveGeneratedContentCount() {
   }
 }
 
+function loadContextualContentHistory() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('entreSabiosHistoricoContextual') || '[]');
+    return Array.isArray(saved) ? saved.slice(-120) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveContextualContentHistory() {
+  try {
+    localStorage.setItem('entreSabiosHistoricoContextual', JSON.stringify(contextualContentHistory.slice(-120)));
+  } catch {
+    // O histórico contextual é opcional e não impede a seleção.
+  }
+}
+
 const dailyQuotes = window.EntreSabiosData.dailyQuotes;
 
 // =========================
@@ -286,102 +305,80 @@ const dailyQuotes = window.EntreSabiosData.dailyQuotes;
 function getSelectedThemes() {
   const themes = new Set();
   for (const f of feelingsCatalog) {
-    if (selectedFeelingIds.has(f.id)) {
+    if (selectedFeelingIds.has(normalizeTheme(f.id))) {
+      // Compatibilidade com catálogos antigos que ainda possuem acentos em IDs.
       (f.themes || []).forEach((t) => themes.add(normalizeTheme(t)));
     }
   }
   return Array.from(themes);
 }
 
-const verifiedQuoteMetadata = window.EntreSabiosData.verifiedQuoteMetadata;
-const authorToneProfiles = window.EntreSabiosData.authorToneProfiles;
-const toneFamilies = window.EntreSabiosData.toneFamilies;
-
-function getToneFamily(tone) {
-  return toneFamilies[tone] || tone;
-}
-
-const textThemeKeywords = window.EntreSabiosData.textThemeKeywords;
-
-const curatedContentDb = window.EntreSabiosData.curatedContentDb;
-
-function makePerspective(id, autor, tradicao, frase, sentimentos, intensidade, temas, tom, conselho, explicacao, livro) {
-  return { id, autor, tradicao, frase, sentimentos, intensidade, temas, tom, profundidade: 5, conselho, explicacao, livro };
-}
-
-const perspectiveContentDb = window.EntreSabiosData.createPerspectiveContentDb(makePerspective);
-
-const curatedNormalized = normalizeCuratedContent();
-const perspectiveNormalized = normalizePerspectiveContent();
-const curatedKeys = new Set([...curatedNormalized, ...perspectiveNormalized].map((item) => normalizeContentKey(item.quote)));
-const authorsDbNormalized = [
-  ...curatedNormalized,
-  ...perspectiveNormalized,
-  ...normalizeAuthorTagsDb().filter((item) => !curatedKeys.has(normalizeContentKey(item.quote))),
-];
-
-const trajectoryImpactRules = window.EntreSabiosData.trajectoryImpactRules;
-
 const authorBookAliases = window.EntreSabiosData.authorBookAliases;
+const functionCopy = {
+  recognition: 'A frase reconhece a experiência sem exigir que ela seja resolvida imediatamente.',
+  clarification: 'A frase esclarece uma diferença ou mecanismo que pode estar atuando neste momento.',
+  inquiry: 'A frase abre uma pergunta para observar a experiência com mais precisão.',
+  grounding: 'A frase aproxima a atenção do presente e do que pode ser percebido agora.',
+  reframing: 'A frase oferece outro ângulo para compreender o que está sendo vivido.',
+  confrontation: 'A frase expõe uma contradição com lucidez, sem substituir a escolha pessoal.',
+  action: 'A frase aponta um gesto possível depois que a experiência foi reconhecida.',
+  contemplation: 'A frase sustenta uma imagem ou tensão aberta para contemplação.',
+};
 
-const quoteExplanationRules = window.EntreSabiosData.quoteExplanationRules;
-
-function buildQuoteExplanation(author, selectedFeelingLabels) {
-  const normalizedQuote = normalizeTheme(author.quote).replace(/_/g, ' ');
-  const rule = quoteExplanationRules.find(({ terms }) => terms.every((term) => normalizedQuote.includes(normalizeTheme(term).replace(/_/g, ' '))));
-  const meaning = rule?.meaning || `A frase usa a imagem de “${author.quote.split(/[.;:!?]/)[0].toLowerCase()}” para convidar você a observar sua experiência com mais consciência, antes de reagir automaticamente.`;
-  const feelingContext = selectedFeelingLabels.length
-    ? ` Diante de ${selectedFeelingLabels.join(', ').toLowerCase()}, isso significa criar uma pausa e perceber qual escolha respeita melhor o que você está vivendo.`
-    : '';
-  return `${meaning}${feelingContext}`;
-}
-
-function buildReflectionFromAuthor(author, selectedThemes, selectedFeelingLabels) {
-  // As templates pedem os sentimentos (labels) do usuário.
-  const feelingsLabels = selectedFeelingLabels;
-
-  // Conselho curto: 3 linhas.
-  const reflection = author.curatedExplanation || buildQuoteExplanation(author, feelingsLabels);
-  const advice = author.curatedAdvice || author.adviceTemplate(feelingsLabels);
-
-  const rawTags = Array.from(new Set([
-    ...author._tagsN,
-    ...selectedThemes,
-  ]));
-  const tags = rawTags.map((t) => t.replace(/_/g, ' '));
+function buildRuntimeStory(selection, selectedThemes) {
+  const content = selection.content;
+  const rawTags = Array.from(new Set([...(content.themes || []), ...selectedThemes]));
+  const tags = rawTags.map((tag) => tag.replace(/_/g, ' '));
+  const longTypes = new Set(['citacao_longa', 'microtexto', 'reflexao_curta']);
+  const inspiration = content.inspirationSource || content.author;
+  const philosophy = thinkerProfiles[inspiration]
+    || 'Esta reflexão pertence ao acervo editorial Entre Sábios e foi selecionada por sua relação explícita com o sentimento escolhido.';
+  const reflection = functionCopy[content.editorialFunction] || functionCopy.contemplation;
+  const advice = content.secondaryFunction
+    ? `${functionCopy[content.secondaryFunction] || 'Permita que a reflexão permaneça como uma pergunta aberta.'}`
+    : 'Permita que a reflexão acompanhe este momento antes de procurar uma resposta definitiva.';
   return {
-    key: getStoryKey(author),
-    quote: author.quote,
-    author: author.author,
-    contentType: author.contentType || 'quote',
-    displayAuthor: author.displayAuthor || author.author,
-    quoteType: author.quoteType || 'inspired',
-    source: author.source || '',
-    curatedBook: author.curatedBook || '',
-    philosophy: author.philosophy || thinkerProfiles[author.displayAuthor] || thinkerProfiles[author.author] || 'Este pensador convida você a transformar sentimentos em perguntas e escolhas mais conscientes.',
+    key: content.id,
+    quote: content.finalText,
+    author: content.author,
+    inspirationSource: content.inspirationSource,
+    contentType: longTypes.has(content.displayType) ? 'text' : 'quote',
+    displayType: content.displayType,
+    displayAuthor: content.displayedAuthor,
+    quoteType: content.attributionType,
+    source: '',
+    philosophy,
     reflection,
     advice,
-    sentimentos: author.sentimentos,
-    intensidade: author.intensidade,
-    temas: author.temas,
-    tom: author.tom,
-    profundidade: author.profundidade,
+    sentimentos: content.associations.map((association) => association.feeling),
+    intensidade: content.suitableIntensities,
+    temas: content.themes,
+    tom: content.tone,
+    profundidade: content.displayType === 'microtexto' ? 5 : 4,
     conselho: advice,
     explicacao: reflection,
     livro: '',
-    compatibilityScore: author._selectionScore ?? 0,
-    selectionReasons: author._selectionReasons || [],
-    emotionalState: author._emotionalState || interpretEmotionalState(),
+    compatibilityScore: null,
+    selectionReasons: [selection.reason],
+    selectionDimensions: { level: selection.level, reason: selection.reason, contextSignals: selection.contextSignals },
+    relevanceTier: 6 - selection.level,
+    matchConfidence: selection.level <= 2 ? 'high' : selection.level <= 4 ? 'medium' : 'low',
+    coverageStatus: selection.fallback ? 'fallback' : 'covered',
+    fallbackReason: selection.fallback ? 'general_content' : '',
+    emotionalState: selection.state,
     rawTags,
     selectedThemes,
     selectedFeelingIds: getSelectedFeelingIds(),
     book: null,
-    tags: [currentIntensity, author.tom, ...tags].slice(0, 8).map((x) => prettifyTag(x)),
+    tags: [currentIntensity, content.tone, ...tags].slice(0, 8).map((tag) => prettifyTag(tag)),
   };
 }
 
 function getSelectedFeelingLabels() {
-  return feelingsCatalog.filter((f) => selectedFeelingIds.has(f.id)).map((f) => f.label);
+  const state = interpretEmotionalState();
+  return [state.primaryFeeling, ...state.secondaryFeelings]
+    .map((id) => feelingsCatalog.find((feeling) => normalizeTheme(feeling.id) === id)?.label)
+    .filter(Boolean);
 }
 
 function generateReflection({ keepHistory = true } = {}) {
@@ -392,10 +389,12 @@ function generateReflection({ keepHistory = true } = {}) {
   }
 
   const selectedThemes = getSelectedThemes();
-  const selectedFeelingLabels = getSelectedFeelingLabels();
-
-  const best = pickBestAuthorByThemes(selectedThemes);
-  const story = buildReflectionFromAuthor(best, selectedThemes, selectedFeelingLabels);
+  const selection = pickRuntimeContent();
+  if (!selection) {
+    reflectionTextEl.textContent = 'Ainda não há uma correspondência editorial segura para esta combinação.';
+    return false;
+  }
+  const story = buildRuntimeStory(selection, selectedThemes);
 
   if (!keepHistory) {
     history = [];
@@ -436,16 +435,17 @@ function newPhrase() {
   if (currentStory && currentStoryShownAt && Date.now() - currentStoryShownAt < 5000) {
     applyStoryPreference(currentStory, -0.5);
     savePreferenceProfile();
+    recordEditorialSignal('immediateRegeneration', currentStory.emotionalState || interpretEmotionalState(), {
+      contentId: currentStory.key,
+      relevanceTier: currentStory.relevanceTier,
+    });
   }
 
   const selectedThemes = getSelectedThemes();
-  const selectedFeelingLabels = getSelectedFeelingLabels();
+  const selection = pickRuntimeContent();
+  if (!selection) return false;
 
-  const excludeAuthors = currentStory ? [currentStory.author] : [];
-  const best = pickBestAuthorByThemes(selectedThemes, getSelectedFeelingIds(), { excludeAuthors });
-  if (!best) return false;
-
-  const story = buildReflectionFromAuthor(best, selectedThemes, selectedFeelingLabels);
+  const story = buildRuntimeStory(selection, selectedThemes);
 
   history = history.slice(0, historyIndex + 1);
   history.push(story);
@@ -509,15 +509,7 @@ closeTaleTopBtn.addEventListener('click', closePhilosophicalTale);
 taleDialog.addEventListener('click', (event) => {
   if (event.target === taleDialog) closePhilosophicalTale();
 });
-
-if (copyShareBtn) {
-  copyShareBtn.addEventListener('click', async () => {
-    const text = currentShareText || `${quoteTextEl.textContent}\n${quoteAuthorEl.textContent}`;
-    if (!text || !navigator.clipboard) return;
-    await navigator.clipboard.writeText(text);
-    setShareStatus('Mensagem copiada.');
-  });
-}
+taleDialog.addEventListener('close', unlockTalePageScroll);
 
 shareStyleButtons.forEach((button) => {
   button.addEventListener('click', () => {
@@ -562,13 +554,36 @@ whatsShareBtn.addEventListener('click', async () => {
 // Bootstrap
 // =========================
 
-(function init() {
+async function init() {
+  generateBtn.disabled = true;
+  newBtn.disabled = true;
+  contentLoadStatusEl.textContent = 'Carregando o acervo de reflexões…';
+
+  try {
+    const runtime = await window.EntreSabiosRuntimeLoader.loadRuntimeContent();
+    feelingsCatalog = runtime.feelings;
+    runtimeContents = runtime.contents;
+    runtimeSelector = window.EntreSabiosRuntimeEngine.createSelector({
+      version: runtime.contentVersion,
+      contents: runtimeContents,
+      storage: window.localStorage,
+    });
+    contentLoadStatusEl.textContent = '';
+    generateBtn.disabled = false;
+    newBtn.disabled = false;
+  } catch (error) {
+    console.error('[Entre Sábios] Não foi possível carregar o acervo:', error);
+    contentLoadStatusEl.textContent = 'As reflexões estão temporariamente indisponíveis. Tente atualizar a página em instantes.';
+    reflectionTextEl.textContent = 'Não foi possível carregar o acervo agora.';
+    return;
+  }
+
   if (typeof initThemeToggle === 'function') initThemeToggle();
   initFeelings();
   initIntensity();
+  initGenderPreference();
   initDailyQuote();
   drawDecor();
-  updateVisitorCount();
 
   // Placeholder de conteúdo
   reflectionTextEl.textContent = 'Selecione seus sentimentos, escolha a intensidade e clique em “ENCONTRAR UMA REFLEXÃO”.';
@@ -580,5 +595,6 @@ whatsShareBtn.addEventListener('click', async () => {
   updateFavoriteUi();
   updateShareStyleButtons();
   updateShareCardPreview();
+}
 
-})();
+init();
