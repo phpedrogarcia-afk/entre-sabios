@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const html = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
 const script = fs.readFileSync(path.join(rootDir, 'script.js'), 'utf8');
+const landscapeScrollCss = fs.readFileSync(path.join(rootDir, 'css', 'landscape-scroll-fix.css'), 'utf8');
 
 test('HTML carrega runtime e não carrega bancos editoriais legados', () => {
   assert.match(html, /runtime-engine\.js/);
@@ -26,4 +27,12 @@ test('interface possui estado de carregamento e preferência de gênero', () => 
   assert.match(html, /id="contentLoadStatus"/);
   assert.match(html, /name="genderPreference"/);
   assert.match(html, /id="generateBtn"[^>]*disabled/);
+});
+
+test('smartphone horizontal mantém a página principal rolável', () => {
+  assert.match(html, /css\/landscape-scroll-fix\.css\?v=/);
+  assert.match(landscapeScrollCss, /orientation:\s*landscape/);
+  assert.match(landscapeScrollCss, /touch-action:\s*pan-y pinch-zoom/);
+  assert.match(landscapeScrollCss, /\.shell\s*\{[\s\S]*?height:\s*auto !important/);
+  assert.match(landscapeScrollCss, /\.col-left,[\s\S]*?overflow:\s*visible !important/);
 });
