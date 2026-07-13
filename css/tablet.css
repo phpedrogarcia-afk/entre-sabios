@@ -1,0 +1,140 @@
+/* Ajustes para tablets: leitura confortável em retrato e alvos de toque amplos. */
+@media (min-width: 600px) and (max-width: 1366px) and (hover: none) and (pointer: coarse) {
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+  }
+
+  .about-trigger,
+  .ghost,
+  .full,
+  .share-action,
+  .tales-button {
+    min-height: 44px;
+  }
+}
+
+/* O breakpoint geral terminava em 900px e deixava tablets de 10" em retrato
+   presos no layout desktop de três colunas. */
+@media (orientation: portrait) and (min-width: 721px) and (max-width: 1100px) {
+  html,
+  body {
+    height: auto !important;
+    min-height: 100% !important;
+  }
+
+  html {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    touch-action: pan-y pinch-zoom;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: auto;
+    min-height: 68px;
+    background: rgba(251, 247, 238, 0.94);
+    backdrop-filter: blur(8px);
+  }
+
+  html[data-theme="night"] .topbar {
+    background: rgba(12, 22, 18, 0.94);
+  }
+
+  .shell {
+    width: 100%;
+    height: auto !important;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) !important;
+    overflow: visible;
+  }
+
+  .col-left,
+  .col-center,
+  .col-right {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow: visible;
+    border-inline: 0;
+  }
+
+  .col-left,
+  .col-right {
+    padding-inline: max(24px, env(safe-area-inset-left));
+  }
+
+  .col-center {
+    padding: 18px max(24px, env(safe-area-inset-right)) 28px max(24px, env(safe-area-inset-left));
+    border-top: 1px solid var(--stroke);
+    border-bottom: 1px solid var(--stroke);
+  }
+
+  .feelings-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .feeling,
+  .radio,
+  .primary {
+    min-height: 46px;
+  }
+
+  .center-top {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .center-top #newBtn {
+    grid-column: 1 / -1;
+  }
+
+  .favorite-library {
+    margin-left: 0;
+  }
+
+  .center-card {
+    flex: none;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .quote-stage {
+    min-height: 320px;
+  }
+
+  .block-text,
+  .block-text.small,
+  .philosophy-block .block-text,
+  .book-rec {
+    max-height: none;
+  }
+
+  .favorites-dialog,
+  .tale-dialog {
+    width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+    max-height: calc(100dvh - 32px);
+  }
+
+  .tale-dialog {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tale-content {
+    max-height: none;
+    overflow: visible;
+  }
+}

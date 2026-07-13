@@ -8,6 +8,7 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const html = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
 const script = fs.readFileSync(path.join(rootDir, 'script.js'), 'utf8');
 const landscapeScrollCss = fs.readFileSync(path.join(rootDir, 'css', 'landscape-scroll-fix.css'), 'utf8');
+const tabletCss = fs.readFileSync(path.join(rootDir, 'css', 'tablet.css'), 'utf8');
 
 test('HTML carrega runtime e não carrega bancos editoriais legados', () => {
   assert.match(html, /runtime-engine\.js/);
@@ -35,4 +36,19 @@ test('smartphone horizontal mantém a página principal rolável', () => {
   assert.match(landscapeScrollCss, /touch-action:\s*pan-y pinch-zoom/);
   assert.match(landscapeScrollCss, /\.shell\s*\{[\s\S]*?height:\s*auto !important/);
   assert.match(landscapeScrollCss, /\.col-left,[\s\S]*?overflow:\s*visible !important/);
+});
+
+test('modo claro é o padrão e a preferência noturna explícita continua disponível', () => {
+  assert.match(html, /initialTheme\s*=\s*theme\s*===\s*'night'\s*\?\s*'night'\s*:\s*'day'/);
+  assert.match(html, /colorScheme\s*=\s*initialTheme\s*===\s*'night'\s*\?\s*'dark'\s*:\s*'light'/);
+  assert.match(script, /initThemeToggle\(\)/);
+});
+
+test('tablet em retrato recebe layout rolável de uma coluna', () => {
+  assert.match(html, /css\/tablet\.css\?v=/);
+  assert.match(tabletCss, /orientation:\s*portrait/);
+  assert.match(tabletCss, /max-width:\s*1100px/);
+  assert.match(tabletCss, /grid-template-columns:\s*minmax\(0, 1fr\) !important/);
+  assert.match(tabletCss, /overflow-y:\s*visible !important/);
+  assert.match(tabletCss, /\.tale-dialog\s*\{[\s\S]*?overflow-y:\s*auto/);
 });
