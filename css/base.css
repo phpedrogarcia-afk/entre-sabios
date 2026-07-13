@@ -1,0 +1,292 @@
+/* Variáveis, base, topo inicial, folhas e marca.
+   Extraído de style.css na Fase 6 sem alterar regras visuais. */
+
+:root {
+  --bg: #fbf7ee;
+  --ink: #2a231a;
+  --muted: rgba(42, 35, 26, 0.65);
+  --paper: #ffffff;
+  --card: rgba(255, 255, 255, 0.72);
+  --stroke: rgba(42, 35, 26, 0.12);
+  --stroke-strong: rgba(42, 35, 26, 0.18);
+  --shadow: 0 18px 55px rgba(0, 0, 0, 0.06);
+
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 12px;
+
+  --font: ui-serif, Georgia, "Times New Roman", Times, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+html[data-theme="night"] {
+  --bg: #101b17;
+  --ink: #f1ead8;
+  --muted: rgba(241, 234, 216, 0.72);
+  --paper: #182822;
+  --card: rgba(27, 43, 36, 0.82);
+  --stroke: rgba(190, 211, 178, 0.16);
+  --stroke-strong: rgba(201, 218, 187, 0.28);
+  --shadow: 0 22px 65px rgba(0, 0, 0, 0.28);
+
+  --night-text-primary: #f6efdc;
+  --night-text-reading: rgba(241, 234, 216, 0.84);
+  --night-text-muted: rgba(241, 234, 216, 0.66);
+  --night-text-shadow: rgba(241, 234, 216, 0.42);
+  --night-surface: rgba(24, 39, 32, 0.58);
+  --night-surface-lit: rgba(65, 94, 70, 0.38);
+  --night-border: rgba(190, 211, 178, 0.18);
+  --night-border-lit: rgba(205, 224, 191, 0.42);
+  --night-accent: #9fbe94;
+  --night-accent-lit: #c7d9b4;
+  --night-gold: #d8bd75;
+  --night-moon-shadow: 0 0 0 1px rgba(205, 224, 191, 0.1), 0 10px 26px rgba(0, 0, 0, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden; /* Sem rolagem */
+  background:
+    radial-gradient(circle at 8% 18%, rgba(190, 213, 181, 0.34), transparent 28%),
+    radial-gradient(circle at 92% 76%, rgba(205, 220, 184, 0.3), transparent 30%),
+    linear-gradient(135deg, #f5f5e9 0%, #fbf7ee 48%, #f0f4e6 100%);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+html[data-theme="night"] body {
+  background:
+    radial-gradient(circle at 14% 12%, rgba(119, 149, 128, 0.14), transparent 30%),
+    radial-gradient(circle at 82% 78%, rgba(83, 116, 91, 0.16), transparent 34%),
+    linear-gradient(160deg, #0e1718 0%, #101d17 46%, #18261c 100%);
+  color: var(--ink);
+}
+
+.topbar {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--stroke);
+  justify-content: space-between;
+}
+
+html[data-theme="night"] .topbar {
+  background: rgba(12, 22, 18, 0.46);
+}
+
+.live-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.online-counter {
+  margin: 0;
+}
+
+.online-counter span {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.theme-toggle {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: 700 15px/1 var(--font-sans);
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease, transform 120ms ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--ink);
+  border-color: var(--stroke-strong);
+  background: rgba(255, 255, 255, 0.22);
+  outline: none;
+}
+
+.theme-toggle:active {
+  transform: translateY(1px);
+}
+
+html[data-theme="night"] .theme-toggle {
+  background: rgba(201, 218, 187, 0.06);
+  color: var(--night-text-reading);
+}
+
+html[data-theme="night"] .theme-toggle:hover,
+html[data-theme="night"] .theme-toggle:focus-visible {
+  background: rgba(154, 183, 146, 0.14);
+  color: var(--night-text-primary);
+}
+
+.live-info time {
+  min-width: 58px;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.leaf-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.leaf-layer::before,
+.leaf-layer::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(151, 181, 139, 0.2), rgba(151, 181, 139, 0) 68%);
+  filter: blur(8px);
+}
+
+.leaf-layer::before {
+  top: 6%;
+  left: -130px;
+}
+
+.leaf-layer::after {
+  right: -130px;
+  bottom: 4%;
+}
+
+html[data-theme="night"] .leaf-layer::before,
+html[data-theme="night"] .leaf-layer::after {
+  background: radial-gradient(circle, rgba(151, 181, 139, 0.11), rgba(151, 181, 139, 0) 70%);
+  filter: blur(14px);
+}
+
+.topbar,
+.daily-strip,
+.shell {
+  position: relative;
+  z-index: 1;
+}
+
+.falling-leaf {
+  --leaf-size: 86px;
+  position: absolute;
+  top: var(--leaf-y);
+  left: var(--leaf-x);
+  width: var(--leaf-size);
+  height: var(--leaf-size);
+  opacity: 0.24;
+  background-image: url("../assets/falling-leaves.png");
+  background-repeat: no-repeat;
+  background-size: 400% 300%;
+  transform: rotate(var(--leaf-rotation));
+}
+
+html[data-theme="night"] .falling-leaf {
+  opacity: 0.14;
+  filter: saturate(0.8) brightness(0.58) sepia(0.12);
+}
+
+.leaf-1 { --leaf-x: 2%; --leaf-y: 14%; --leaf-rotation: -18deg; background-position: 0 0; }
+.leaf-2 { --leaf-x: 17%; --leaf-y: 75%; --leaf-rotation: 34deg; background-position: 33.333% 0; }
+.leaf-3 { --leaf-x: 38%; --leaf-y: 7%; --leaf-rotation: 12deg; background-position: 66.666% 50%; opacity: 0.16; }
+.leaf-4 { --leaf-x: 70%; --leaf-y: 78%; --leaf-rotation: -32deg; background-position: 100% 0; opacity: 0.18; }
+.leaf-5 { --leaf-x: 84%; --leaf-y: 17%; --leaf-rotation: 26deg; background-position: 0 100%; }
+.leaf-6 { --leaf-x: 93%; --leaf-y: 58%; --leaf-rotation: -12deg; background-position: 100% 100%; }
+.leaf-7 { --leaf-x: 10%; --leaf-y: 48%; --leaf-rotation: 46deg; --leaf-size: 62px; background-position: 66.666% 0; opacity: 0.19; }
+.leaf-8 { --leaf-x: 31%; --leaf-y: 35%; --leaf-rotation: -38deg; --leaf-size: 58px; background-position: 33.333% 50%; opacity: 0.15; }
+.leaf-9 { --leaf-x: 61%; --leaf-y: 43%; --leaf-rotation: 18deg; --leaf-size: 66px; background-position: 66.666% 100%; opacity: 0.17; }
+.leaf-10 { --leaf-x: 77%; --leaf-y: 56%; --leaf-rotation: -48deg; --leaf-size: 56px; background-position: 100% 50%; opacity: 0.2; }
+
+@media (max-width: 720px) {
+  .leaf-2,
+  .leaf-4,
+  .leaf-6,
+  .leaf-8,
+  .leaf-10 {
+    display: none;
+  }
+}
+
+.about-trigger {
+  padding: 2px 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.about-trigger:hover,
+.about-trigger:focus-visible {
+  color: var(--ink);
+  border-bottom-color: var(--stroke-strong);
+}
+
+html[data-theme="night"] .about-trigger:hover,
+html[data-theme="night"] .about-trigger:focus-visible {
+  background: transparent;
+}
+
+html[data-theme="night"] .live-info,
+html[data-theme="night"] .brand-subtitle,
+html[data-theme="night"] .about-trigger {
+  color: var(--night-text-reading);
+}
+
+html[data-theme="night"] .online-counter span,
+html[data-theme="night"] .live-info time,
+html[data-theme="night"] .brand-title {
+  color: rgba(246, 239, 220, 0.9);
+}
+
+.brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border: 1px solid var(--stroke);
+  border-radius: 50%;
+  background: url("../assets/entre-sabios-social.png") 23% center / 240% auto no-repeat;
+  font-size: 0;
+}
+
+.brand-title {
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  font-size: 13px;
+}
+
+.brand-subtitle {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}

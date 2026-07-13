@@ -1,0 +1,9 @@
+ACERVO_LOTE_*.json
+assets/caixa-de-sabedoria-social*.png
+arquivo_do_projeto/
+backups/
+*.bak
+*.tmp
+*.log
+.DS_Store
+Thumbs.db

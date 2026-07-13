@@ -1,0 +1,285 @@
+/* Media queries e ajustes responsivos.
+   Extraído de style.css na Fase 6 sem alterar regras visuais. */
+
+@media (max-width: 720px) {
+  html,
+  body {
+    height: auto;
+    min-height: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    min-width: 0;
+    gap: 10px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    background: rgba(251, 247, 238, 0.94);
+    backdrop-filter: blur(8px);
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand-title {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .live-info {
+    flex: 0 0 auto;
+  }
+
+  .shell {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .daily-track {
+    animation-duration: 22s;
+  }
+
+  .col-left,
+  .col-center,
+  .col-right {
+    width: 100%;
+    min-width: 0;
+    overflow: visible;
+    border: 0;
+  }
+
+  .col-left,
+  .col-right {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+
+  .col-center {
+    min-height: 0;
+    padding: 12px max(16px, env(safe-area-inset-right)) 22px max(16px, env(safe-area-inset-left));
+    border-top: 1px solid var(--stroke);
+    border-bottom: 1px solid var(--stroke);
+    scroll-margin-top: 68px;
+  }
+
+  .feelings-grid,
+  .feeling {
+    min-width: 0;
+  }
+
+  .feeling {
+    min-height: 46px;
+    padding-inline: 6px;
+    overflow-wrap: anywhere;
+  }
+
+  .radio {
+    min-height: 44px;
+    padding: 8px 4px;
+  }
+
+  .radio input {
+    width: 18px;
+    height: 18px;
+  }
+
+  .primary {
+    min-height: 50px;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    white-space: normal;
+  }
+
+  .center-top {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .center-top .ghost {
+    min-height: 44px;
+    min-width: 0;
+    padding-inline: 8px;
+    white-space: normal;
+  }
+
+  .center-top #newBtn {
+    grid-column: 1 / -1;
+  }
+
+  .favorite-library {
+    margin-left: 0;
+  }
+
+  .center-card {
+    overflow: visible;
+    background:
+      radial-gradient(circle at 50% 20%, rgba(252, 250, 241, 0.66), rgba(239, 245, 226, 0.42) 52%, rgba(232, 240, 217, 0.58) 100%),
+      url("../assets/quote-landscape.png") center 65% / cover no-repeat;
+  }
+
+  .quote-stage {
+    min-height: 280px;
+  }
+
+  .quote {
+    padding-inline: 34px;
+    font-size: clamp(21px, 7vw, 28px);
+  }
+
+  .quote-action {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+  }
+
+  .quote-dislike {
+    left: -6px;
+  }
+
+  .quote-like,
+  .quote-favorite {
+    right: -6px;
+  }
+
+  .block-text,
+  .block-text.small,
+  .philosophy-block .block-text,
+  .book-rec {
+    max-height: none;
+  }
+
+  .col-right {
+    min-height: 0;
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .full {
+    min-height: 48px;
+  }
+
+  .favorites-dialog {
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    max-height: calc(100vh - 20px);
+    max-height: calc(100dvh - 20px);
+    padding: 16px;
+  }
+
+  .tale-dialog {
+    position: fixed;
+    inset: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+    width: auto;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 14px;
+  }
+
+  .tale-dialog .favorites-head {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tale-dialog .favorites-head > div {
+    flex: 1 1 220px;
+    min-width: 0;
+  }
+
+  .tale-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  #taleTitle,
+  .tale-meta span,
+  .tale-text,
+  .tale-lesson {
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .tale-content {
+    padding-right: 2px;
+  }
+
+  .tale-meta {
+    margin-bottom: 12px;
+  }
+
+  .tale-text {
+    font-size: 16px;
+    line-height: 1.68;
+  }
+
+  .tale-lesson {
+    margin-top: 10px;
+    padding: 12px;
+  }
+
+  .favorites-list {
+    max-height: calc(100dvh - 170px);
+  }
+}
+
+@media (max-width: 720px) {
+  html[data-theme="night"] .center-card {
+    background:
+      linear-gradient(rgba(19, 31, 27, 0.72), rgba(22, 36, 30, 0.76)),
+      url("../assets/quote-landscape.png") center 65% / cover no-repeat;
+  }
+}
+
+@media (max-width: 380px) {
+  .topbar {
+    height: 60px;
+  }
+
+  .brand-icon {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+
+  .brand-title {
+    font-size: 11px;
+  }
+
+  .live-info > span {
+    display: none;
+  }
+
+  .col-center {
+    scroll-margin-top: 60px;
+  }
+
+  .feelings-grid {
+    gap: 7px;
+  }
+
+  .center-fixed {
+    font-size: 16px;
+  }
+
+  .quote-stage {
+    min-height: 250px;
+  }
+
+  .quote {
+    padding-inline: 28px;
+  }
+}

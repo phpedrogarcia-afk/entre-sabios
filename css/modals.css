@@ -1,0 +1,274 @@
+/* Modais de favoritas, sobre e contos filosóficos.
+   Extraído de style.css na Fase 6 sem alterar regras visuais. */
+
+.favorites-dialog {
+  width: min(560px, calc(100% - 28px));
+  max-height: min(680px, calc(100vh - 40px));
+  max-height: min(680px, calc(100dvh - 40px));
+  padding: 18px;
+  border: 1px solid var(--stroke-strong);
+  border-radius: 20px;
+  color: var(--ink);
+  background: var(--bg);
+  box-shadow: 0 24px 80px rgba(42, 35, 26, 0.18);
+  overflow: hidden;
+}
+
+.favorites-dialog::backdrop {
+  background: rgba(42, 35, 26, 0.24);
+  backdrop-filter: blur(3px);
+}
+
+.favorites-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.favorites-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+  overflow: auto;
+  max-height: calc(100vh - 180px);
+}
+
+.favorite-item {
+  padding: 13px;
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.favorite-item-quote {
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.favorite-item-meta {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.favorite-item-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.empty-favorites {
+  padding: 28px 12px;
+  color: var(--muted);
+  text-align: center;
+  font-family: var(--font);
+}
+
+.about-content {
+  padding: 8px 2px 0;
+  color: rgba(42, 35, 26, 0.82);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.about-content p {
+  margin: 12px 0;
+}
+
+.about-contact {
+  padding-top: 12px;
+  border-top: 1px solid var(--stroke);
+  font-family: var(--font-sans);
+  font-size: 12px;
+}
+
+.about-contact a {
+  color: var(--ink);
+  text-underline-offset: 3px;
+}
+
+.tale-dialog {
+  width: min(680px, calc(100% - 28px));
+  max-width: calc(100vw - 28px);
+  max-width: calc(100svw - 28px);
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  flex-direction: column;
+}
+
+.tale-dialog:not([open]) {
+  display: none;
+}
+
+.tale-dialog[open] {
+  display: flex;
+}
+
+.tale-title-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tale-refresh-btn {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(42, 35, 26, 0.52);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 140ms ease, background 140ms ease, transform 140ms ease;
+}
+
+.tale-refresh-btn:hover {
+  color: rgba(42, 35, 26, 0.78);
+  background: rgba(42, 35, 26, 0.055);
+}
+
+.tale-refresh-btn:active {
+  transform: rotate(24deg) scale(0.96);
+}
+
+.tale-content {
+  padding: 10px 2px 0;
+  overflow: auto;
+  min-height: 0;
+  padding-right: 4px;
+}
+
+.tale-cycle-notice {
+  min-height: 16px;
+  margin-bottom: 6px;
+  color: rgba(42, 35, 26, 0.58);
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+.tale-meta {
+  display: grid;
+  gap: 4px;
+  margin: 4px 0 16px;
+  color: rgba(42, 35, 26, 0.58);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.tale-text {
+  max-height: none;
+  overflow: visible;
+  padding: 14px;
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.38);
+  color: rgba(42, 35, 26, 0.86);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.72;
+}
+
+.tale-text p,
+.tale-lesson p {
+  margin: 0 0 13px;
+}
+
+.tale-text p:last-child,
+.tale-lesson p:last-child {
+  margin-bottom: 0;
+}
+
+.tale-lesson {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(239, 245, 226, 0.42);
+  border: 1px solid rgba(42, 35, 26, 0.09);
+}
+
+.tale-lesson h3 {
+  margin: 0 0 9px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tale-lesson div {
+  color: rgba(42, 35, 26, 0.76);
+  font-family: var(--font);
+  font-size: 15.5px;
+  line-height: 1.62;
+}
+
+.tale-question {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.tale-question div {
+  font-size: 17px;
+  color: rgba(42, 35, 26, 0.86);
+}
+
+@keyframes dialogEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.favorites-dialog[open] {
+  animation: dialogEnter 160ms ease-out;
+}
+
+/* Floresta Noturna: modais com leitura quente e discreta. */
+html[data-theme="night"] .favorites-dialog {
+  background: #14231d;
+  color: var(--ink);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.42);
+}
+
+html[data-theme="night"] .favorites-dialog::backdrop {
+  background: rgba(4, 9, 7, 0.58);
+  backdrop-filter: blur(4px);
+}
+
+html[data-theme="night"] .favorite-item,
+html[data-theme="night"] .tale-text,
+html[data-theme="night"] .tale-question {
+  border-color: var(--night-border);
+  background: rgba(24, 39, 32, 0.72);
+  color: var(--night-text-reading);
+}
+
+html[data-theme="night"] .about-content,
+html[data-theme="night"] .tale-lesson div,
+html[data-theme="night"] .tale-question div {
+  color: var(--night-text-reading);
+}
+
+html[data-theme="night"] .tale-refresh-btn {
+  color: rgba(241, 234, 216, 0.72);
+}
+
+html[data-theme="night"] .tale-refresh-btn:hover,
+html[data-theme="night"] .tale-refresh-btn:focus-visible {
+  color: var(--night-text-primary);
+  background: rgba(190, 211, 178, 0.1);
+  outline: none;
+}
+
+html[data-theme="night"] .tale-lesson {
+  background: rgba(45, 69, 53, 0.42);
+  border-color: var(--night-border);
+}

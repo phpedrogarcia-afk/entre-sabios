@@ -1,0 +1,1113 @@
+// Acervo lote 04. Extraído de curatedContentDb na Fase 2.
+(function initEntreSabiosQuoteBatch(root) {
+  const data = root.EntreSabiosData = root.EntreSabiosData || {};
+  const batches = data.quoteBatches = data.quoteBatches || {};
+
+  batches.batch04 = [
+// Acervo lote 04 - curadoria confirmada
+  {
+    "id": "batch04-quote-001",
+    "autor": "Emily Dickinson",
+    "frase": "A ausência tem uma educação severa: ensina o corpo a procurar quem já não entra pela porta.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Emily Dickinson",
+    "sentimentos": [
+      "luto",
+      "saudade"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "ausência",
+      "corpo",
+      "memória"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 5,
+    "conselho": "Não se cobre por procurar presença onde ainda há amor aprendendo nova forma.",
+    "explicacao": "A frase dá corpo à ausência sem usar consolo fácil.",
+    "livro": "Poemas"
+  },
+  {
+    "id": "batch04-quote-002",
+    "autor": "Emily Dickinson",
+    "frase": "A esperança não precisa gritar; às vezes ela sobrevive como um pássaro miúdo no lugar mais frio.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Emily Dickinson",
+    "sentimentos": [
+      "esperança",
+      "tristeza"
+    ],
+    "intensidade": [
+      "fraca"
+    ],
+    "temas": [
+      "esperança",
+      "fragilidade",
+      "resistência"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 3,
+    "conselho": "Procure o menor sinal de vida, sem exigir que ele resolva tudo.",
+    "explicacao": "A esperança aparece pequena e resistente, não eufórica.",
+    "livro": "Poemas"
+  },
+  {
+    "id": "batch04-quote-003",
+    "autor": "Emily Dickinson",
+    "frase": "Há dores que não fazem barulho porque já atravessaram a fase de pedir licença.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Emily Dickinson",
+    "sentimentos": [
+      "tristeza",
+      "luto"
+    ],
+    "intensidade": [
+      "intensa"
+    ],
+    "temas": [
+      "dor silenciosa",
+      "luto",
+      "interioridade"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 5,
+    "conselho": "Respeite a dor silenciosa como dor real, mesmo quando ninguém a percebe.",
+    "explicacao": "A imagem valoriza sofrimentos que não se exibem.",
+    "livro": "Poemas"
+  },
+  {
+    "id": "batch04-quote-004",
+    "autor": "Emily Dickinson",
+    "frase": "O coração guarda calendários que o mundo esquece de consultar.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Emily Dickinson",
+    "sentimentos": [
+      "saudade",
+      "luto"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "memória",
+      "tempo",
+      "aniversário da dor"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 4,
+    "conselho": "Honre datas internas mesmo quando ninguém mais lembra delas.",
+    "explicacao": "A frase reconhece a temporalidade íntima do luto.",
+    "livro": "Poemas"
+  },
+  {
+    "id": "batch04-quote-005",
+    "autor": "Emily Dickinson",
+    "frase": "A alma que sobrevive a uma perda não volta intacta; volta com outra gramática.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Emily Dickinson",
+    "sentimentos": [
+      "luto",
+      "autoconhecimento"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "perda",
+      "transformação",
+      "linguagem"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 5,
+    "conselho": "Não espere voltar ao mesmo; aprenda a ler a nova forma da sua vida.",
+    "explicacao": "A perda é tratada como mudança estrutural, não fase simples.",
+    "livro": "Poemas"
+  },
+  {
+    "id": "batch04-quote-006",
+    "autor": "Rumi",
+    "frase": "A ferida não é bela por doer; ela importa porque mostra onde a vida ainda pede passagem.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada no Masnavi, Livro I",
+    "sentimentos": [
+      "tristeza",
+      "esperança"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "ferida",
+      "abertura",
+      "vida"
+    ],
+    "tom": "erotico_devocional",
+    "profundidade": 5,
+    "conselho": "Observe a ferida sem romantizá-la; veja que necessidade ela revela.",
+    "explicacao": "Mantém a imagem espiritual sem transformar dor em ornamento.",
+    "livro": "Masnavi, Livro I"
+  },
+  {
+    "id": "batch04-quote-007",
+    "autor": "Rumi",
+    "frase": "O amor que só quer possuir ainda não aprendeu a reconhecer o sagrado sem trancá-lo.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Rumi",
+    "sentimentos": [
+      "amor",
+      "medo"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "amor",
+      "posse",
+      "liberdade"
+    ],
+    "tom": "confrontador",
+    "profundidade": 5,
+    "conselho": "Pergunte onde seu amor está virando controle em nome da segurança.",
+    "explicacao": "A frase diferencia amor devocional de posse ansiosa.",
+    "livro": "Masnavi"
+  },
+  {
+    "id": "batch04-quote-008",
+    "autor": "Rumi",
+    "frase": "Nem toda noite é castigo; algumas apenas apagam o excesso para que uma estrela tenha autoridade.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada no Masnavi, Livro III",
+    "sentimentos": [
+      "esperança",
+      "confusão"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "noite",
+      "estrela",
+      "orientação"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Procure o ponto pequeno de orientação sem negar a escuridão ao redor.",
+    "explicacao": "A esperança aparece como sinal mínimo dentro do escuro.",
+    "livro": "Masnavi, Livro III"
+  },
+  {
+    "id": "batch04-quote-009",
+    "autor": "Rumi",
+    "frase": "A saudade é o amor tentando conversar com uma distância que não responde.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada no Divã de Shams de Tabriz",
+    "sentimentos": [
+      "saudade",
+      "amor"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "saudade",
+      "distância",
+      "vínculo"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 4,
+    "conselho": "Permita que a saudade diga o tamanho do vínculo sem exigir resposta imediata.",
+    "explicacao": "A saudade é tratada como movimento do amor, não fraqueza.",
+    "livro": "Divã de Shams de Tabriz"
+  },
+  {
+    "id": "batch04-quote-010",
+    "autor": "Rumi",
+    "frase": "Quem foge do próprio vazio acaba levando esse vazio para todos os encontros.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Rumi",
+    "sentimentos": [
+      "solidão",
+      "amor"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "vazio",
+      "encontro",
+      "fuga"
+    ],
+    "tom": "confrontador",
+    "profundidade": 4,
+    "conselho": "Cuide do vazio antes de pedir que alguém o resolva por você.",
+    "explicacao": "A frase confronta dependência afetiva sem cinismo.",
+    "livro": "Masnavi"
+  },
+  {
+    "id": "batch04-quote-011",
+    "autor": "Khalil Gibran",
+    "frase": "Amar não é fechar a mão sobre alguém; é suportar que o outro continue tendo céu próprio.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Khalil Gibran",
+    "sentimentos": [
+      "amor",
+      "confusão"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "amor",
+      "liberdade",
+      "alteridade"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Veja se seu amor amplia ou estreita o espaço do outro.",
+    "explicacao": "Gibran ajuda a pensar amor como vínculo sem posse.",
+    "livro": "O Profeta"
+  },
+  {
+    "id": "batch04-quote-012",
+    "autor": "Khalil Gibran",
+    "frase": "A tristeza cava em nós o espaço que a alegria, um dia, talvez consiga habitar sem superficialidade.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Khalil Gibran",
+    "sentimentos": [
+      "tristeza",
+      "esperança"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "tristeza",
+      "alegria",
+      "profundidade"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 5,
+    "conselho": "Não chame de vazio todo espaço que a dor abriu em você.",
+    "explicacao": "A tristeza aparece como ampliação interna, não punição.",
+    "livro": "O Profeta"
+  },
+  {
+    "id": "batch04-quote-013",
+    "autor": "Khalil Gibran",
+    "frase": "O adeus não destrói tudo; às vezes apenas revela o que era presença e o que era costume.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Khalil Gibran",
+    "sentimentos": [
+      "luto",
+      "saudade"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "adeus",
+      "presença",
+      "costume"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 4,
+    "conselho": "Diferencie o vínculo vivo do hábito que a ausência desorganizou.",
+    "explicacao": "A frase trabalha a dor do adeus com discernimento.",
+    "livro": "O Profeta"
+  },
+  {
+    "id": "batch04-quote-014",
+    "autor": "Khalil Gibran",
+    "frase": "A generosidade que espera plateia ainda está negociando com a vaidade.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Khalil Gibran",
+    "sentimentos": [
+      "indiretas",
+      "raiva"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "generosidade",
+      "vaidade",
+      "hipocrisia"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 4,
+    "conselho": "Observe se o gesto busca ajudar ou apenas ser visto ajudando.",
+    "explicacao": "Indireta social sobre bondade performática.",
+    "livro": "O Profeta"
+  },
+  {
+    "id": "batch04-quote-015",
+    "autor": "Khalil Gibran",
+    "frase": "A dor não pede que você a adore; pede apenas que não finja que ela é pequena.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Khalil Gibran",
+    "sentimentos": [
+      "tristeza",
+      "luto"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "dor",
+      "dignidade",
+      "verdade"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 4,
+    "conselho": "Reconheça a dor no tamanho real, sem transformá-la em identidade total.",
+    "explicacao": "A frase valida sofrimento sem cultuá-lo.",
+    "livro": "O Profeta"
+  },
+  {
+    "id": "batch04-quote-016",
+    "autor": "Mary Oliver",
+    "frase": "O mundo não exige que você brilhe o tempo inteiro; às vezes pede apenas que repare na luz.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Mary Oliver",
+    "sentimentos": [
+      "tristeza",
+      "esperança"
+    ],
+    "intensidade": [
+      "fraca"
+    ],
+    "temas": [
+      "atenção",
+      "natureza",
+      "luz"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 3,
+    "conselho": "Observe um detalhe vivo ao seu redor antes de concluir que tudo está morto.",
+    "explicacao": "Mary Oliver inspira uma atenção simples, mas não simplória.",
+    "livro": "Devotions"
+  },
+  {
+    "id": "batch04-quote-017",
+    "autor": "Mary Oliver",
+    "frase": "A natureza não consola explicando; consola lembrando que a vida continua fazendo formas.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Mary Oliver",
+    "sentimentos": [
+      "luto",
+      "esperança"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "natureza",
+      "continuidade",
+      "forma"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 4,
+    "conselho": "Procure uma forma viva no mundo sem exigir que ela explique sua dor.",
+    "explicacao": "A natureza oferece presença, não resposta total.",
+    "livro": "Devotions"
+  },
+  {
+    "id": "batch04-quote-018",
+    "autor": "Mary Oliver",
+    "frase": "A atenção é uma forma de amor que não precisa possuir o que contempla.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Mary Oliver",
+    "sentimentos": [
+      "amor",
+      "autoconhecimento"
+    ],
+    "intensidade": [
+      "fraca"
+    ],
+    "temas": [
+      "atenção",
+      "amor",
+      "contemplação"
+    ],
+    "tom": "acolhedor_dissolvente",
+    "profundidade": 3,
+    "conselho": "Pratique olhar algo ou alguém sem imediatamente usar, julgar ou segurar.",
+    "explicacao": "A frase aproxima amor de atenção livre de posse.",
+    "livro": "Upstream"
+  },
+  {
+    "id": "batch04-quote-019",
+    "autor": "Mary Oliver",
+    "frase": "Há manhãs em que sobreviver já é uma forma discreta de responder ao mundo.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Mary Oliver",
+    "sentimentos": [
+      "tristeza",
+      "coragem"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "sobrevivência",
+      "manhã",
+      "coragem"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Reconheça o valor de continuar em dias em que isso não parece bonito.",
+    "explicacao": "A coragem é tratada de modo quieto e cotidiano.",
+    "livro": "Devotions"
+  },
+  {
+    "id": "batch04-quote-020",
+    "autor": "Mary Oliver",
+    "frase": "A pergunta certa talvez não seja o que fazer da vida inteira, mas o que fazer deste dia sem traí-lo.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Mary Oliver",
+    "sentimentos": [
+      "falta_de_proposito",
+      "esperança"
+    ],
+    "intensidade": [
+      "fraca"
+    ],
+    "temas": [
+      "dia",
+      "propósito",
+      "presença"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 3,
+    "conselho": "Escolha uma fidelidade pequena para hoje, em vez de resolver a vida inteira.",
+    "explicacao": "O propósito é trazido para uma escala humana e sensível.",
+    "livro": "Devotions"
+  },
+  {
+    "id": "batch04-quote-021",
+    "autor": "C. S. Lewis",
+    "frase": "O luto não é apenas saudade; é descobrir que o mundo continua sem pedir permissão à nossa perda.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em C. S. Lewis",
+    "sentimentos": [
+      "luto",
+      "raiva"
+    ],
+    "intensidade": [
+      "intensa"
+    ],
+    "temas": [
+      "luto",
+      "mundo",
+      "absurdo"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Permita a raiva diante da continuidade do mundo sem usá-la contra você.",
+    "explicacao": "A frase toca a brutalidade do luto sem suavizar.",
+    "livro": "A Anatomia de uma Dor"
+  },
+  {
+    "id": "batch04-quote-022",
+    "autor": "C. S. Lewis",
+    "frase": "A fé que nunca atravessou perda talvez ainda não saiba se é chão ou decoração.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em C. S. Lewis",
+    "sentimentos": [
+      "luto",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "fé",
+      "perda",
+      "prova"
+    ],
+    "tom": "confrontador",
+    "profundidade": 5,
+    "conselho": "Não force certeza espiritual; observe honestamente o que permanece de pé.",
+    "explicacao": "Lewis permite uma fé atravessada pela dúvida.",
+    "livro": "A Anatomia de uma Dor"
+  },
+  {
+    "id": "batch04-quote-023",
+    "autor": "C. S. Lewis",
+    "frase": "Amar é aceitar que uma parte da própria paz ficará exposta ao destino de outro ser.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em C. S. Lewis",
+    "sentimentos": [
+      "amor",
+      "medo"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "amor",
+      "vulnerabilidade",
+      "risco"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 5,
+    "conselho": "Não chame de fraqueza o medo que nasce de se importar profundamente.",
+    "explicacao": "O amor é descrito como vulnerabilidade real.",
+    "livro": "Os Quatro Amores"
+  },
+  {
+    "id": "batch04-quote-024",
+    "autor": "C. S. Lewis",
+    "frase": "A dor torna o cotidiano indecente: a chaleira ferve, a rua segue, e alguém falta para sempre.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em A Anatomia de uma Dor",
+    "sentimentos": [
+      "luto",
+      "saudade"
+    ],
+    "intensidade": [
+      "intensa"
+    ],
+    "temas": [
+      "cotidiano",
+      "ausência",
+      "luto"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Reconheça o choque entre rotina e perda sem exigir coerência emocional imediata.",
+    "explicacao": "A frase mostra o escândalo do cotidiano após a perda.",
+    "livro": "A Anatomia de uma Dor"
+  },
+  {
+    "id": "batch04-quote-025",
+    "autor": "C. S. Lewis",
+    "frase": "A saudade não prova que você ficou preso; prova que algo real deixou marca.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em C. S. Lewis",
+    "sentimentos": [
+      "saudade",
+      "luto"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "saudade",
+      "marca",
+      "realidade"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Não trate a saudade como atraso; ela também testemunha o valor do vínculo.",
+    "explicacao": "A saudade é validada sem virar prisão.",
+    "livro": "A Anatomia de uma Dor"
+  },
+  {
+    "id": "batch04-quote-026",
+    "autor": "Joan Didion",
+    "frase": "O luto reorganiza a casa de modo cruel: tudo permanece no lugar, menos o mundo.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Joan Didion",
+    "sentimentos": [
+      "luto",
+      "confusão"
+    ],
+    "intensidade": [
+      "intensa"
+    ],
+    "temas": [
+      "luto",
+      "casa",
+      "desorientação"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Aceite que a desorientação faz parte do luto; o mundo conhecido perdeu eixo.",
+    "explicacao": "Didion inspira um retrato seco da desorganização do luto.",
+    "livro": "O Ano do Pensamento Mágico"
+  },
+  {
+    "id": "batch04-quote-027",
+    "autor": "Joan Didion",
+    "frase": "A mente enlutada negocia com impossíveis porque aceitar o definitivo seria aceitar a própria queda.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Joan Didion",
+    "sentimentos": [
+      "luto",
+      "confusão"
+    ],
+    "intensidade": [
+      "intensa"
+    ],
+    "temas": [
+      "pensamento mágico",
+      "negação",
+      "perda"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 5,
+    "conselho": "Observe suas negociações internas sem vergonha; elas tentam amortecer o impossível.",
+    "explicacao": "A frase trabalha o pensamento mágico do luto com compaixão.",
+    "livro": "O Ano do Pensamento Mágico"
+  },
+  {
+    "id": "batch04-quote-028",
+    "autor": "Joan Didion",
+    "frase": "Há perdas que dividem o tempo em antes e depois, mesmo quando o calendário finge continuidade.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Joan Didion",
+    "sentimentos": [
+      "luto",
+      "saudade"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "tempo",
+      "ruptura",
+      "calendário"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 5,
+    "conselho": "Reconheça a divisão interna do tempo sem esperar que os outros a percebam.",
+    "explicacao": "A perda altera a percepção temporal, não apenas o humor.",
+    "livro": "O Ano do Pensamento Mágico"
+  },
+  {
+    "id": "batch04-quote-029",
+    "autor": "Joan Didion",
+    "frase": "A memória pode ser uma forma de presença e também uma sala onde a ausência aprende a respirar.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Joan Didion",
+    "sentimentos": [
+      "saudade",
+      "luto"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "memória",
+      "presença",
+      "ausência"
+    ],
+    "tom": "contemplativo",
+    "profundidade": 4,
+    "conselho": "Visite a memória com cuidado, sem exigir que ela substitua quem se foi.",
+    "explicacao": "A memória acolhe e também revela ausência.",
+    "livro": "Noites Azuis"
+  },
+  {
+    "id": "batch04-quote-030",
+    "autor": "Joan Didion",
+    "frase": "O sofrimento não fica mais nobre porque conseguimos descrevê-lo; fica apenas menos sozinho.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Joan Didion",
+    "sentimentos": [
+      "tristeza",
+      "autoconhecimento"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "linguagem",
+      "sofrimento",
+      "solidão"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 4,
+    "conselho": "Nomeie a dor para acompanhá-la melhor, não para torná-la bonita.",
+    "explicacao": "A linguagem é cuidado, não decoração do sofrimento.",
+    "livro": "Noites Azuis"
+  },
+  {
+    "id": "batch04-quote-031",
+    "autor": "Mia Couto",
+    "frase": "A saudade é uma casa sem telhado: entra chuva, entra céu, e mesmo assim alguém continua morando ali.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Raiz de Orvalho e Outros Poemas",
+    "sentimentos": [
+      "saudade",
+      "luto"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "saudade",
+      "casa",
+      "permanência"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 4,
+    "conselho": "Permita que a saudade seja abrigo imperfeito, não só ruína.",
+    "explicacao": "A imagem mistura precariedade e permanência afetiva.",
+    "livro": "Raiz de Orvalho e Outros Poemas"
+  },
+  {
+    "id": "batch04-quote-032",
+    "autor": "Mia Couto",
+    "frase": "Há silêncios que não são falta de palavra; são palavras que perderam o corpo.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Raiz de Orvalho e Outros Poemas",
+    "sentimentos": [
+      "luto",
+      "tristeza"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "silêncio",
+      "palavra",
+      "ausência"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 5,
+    "conselho": "Escute o silêncio como forma de luto, não como vazio sem sentido.",
+    "explicacao": "A frase dá linguagem poética ao silêncio da perda.",
+    "livro": "Raiz de Orvalho e Outros Poemas"
+  },
+  {
+    "id": "batch04-quote-033",
+    "autor": "Mia Couto",
+    "frase": "Quem parte deixa pegadas dentro da gente; o difícil é aprender a caminhar sem pisá-las com culpa.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em O Fio das Missangas",
+    "sentimentos": [
+      "luto",
+      "culpa"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "partida",
+      "culpa",
+      "continuidade"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 4,
+    "conselho": "Continue vivendo sem transformar cada passo em traição à memória.",
+    "explicacao": "A frase acolhe a culpa comum de seguir após perdas.",
+    "livro": "O Fio das Missangas"
+  },
+  {
+    "id": "batch04-quote-034",
+    "autor": "Mia Couto",
+    "frase": "A esperança às vezes nasce torta, mas ainda assim empurra a terra.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Raiz de Orvalho e Outros Poemas",
+    "sentimentos": [
+      "esperança",
+      "tristeza"
+    ],
+    "intensidade": [
+      "fraca"
+    ],
+    "temas": [
+      "esperança",
+      "terra",
+      "nascimento"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 3,
+    "conselho": "Não despreze uma esperança pequena só porque ela não veio bonita.",
+    "explicacao": "A esperança surge frágil, orgânica e imperfeita.",
+    "livro": "Raiz de Orvalho e Outros Poemas"
+  },
+  {
+    "id": "batch04-quote-035",
+    "autor": "Mia Couto",
+    "frase": "Algumas pessoas não conversam: fazem ruído para impedir que a verdade encontre cadeira.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em O Fio das Missangas",
+    "sentimentos": [
+      "indiretas",
+      "raiva"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "ruído",
+      "verdade",
+      "hipocrisia"
+    ],
+    "tom": "confrontador",
+    "profundidade": 4,
+    "conselho": "Não confunda barulho com diálogo quando a verdade não tem espaço para sentar.",
+    "explicacao": "Indireta social com imagem poética e crítica.",
+    "livro": "O Fio das Missangas"
+  },
+  {
+    "id": "batch04-quote-036",
+    "autor": "Machado de Assis",
+    "frase": "A vaidade tem excelente memória para elogios e uma amnésia conveniente para seus próprios motivos.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Machado de Assis",
+    "sentimentos": [
+      "indiretas",
+      "raiva"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "vaidade",
+      "autoengano",
+      "ironia"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Observe a memória seletiva de quem só recorda o que favorece sua imagem.",
+    "explicacao": "Machado inspira uma indireta psicológica e social.",
+    "livro": "Memórias Póstumas de Brás Cubas"
+  },
+  {
+    "id": "batch04-quote-037",
+    "autor": "Machado de Assis",
+    "frase": "Há sinceridades que só aparecem quando já não oferecem risco ao interesse.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Machado de Assis",
+    "sentimentos": [
+      "indiretas",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "sinceridade",
+      "interesse",
+      "hipocrisia"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Desconfie da verdade que só chega quando já não custa nada.",
+    "explicacao": "A frase carrega ironia machadiana sobre interesse e moral.",
+    "livro": "Dom Casmurro"
+  },
+  {
+    "id": "batch04-quote-038",
+    "autor": "Machado de Assis",
+    "frase": "O ciúme costuma escrever romances inteiros com meia linha de realidade.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Machado de Assis",
+    "sentimentos": [
+      "amor",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "ciúme",
+      "imaginação",
+      "dúvida"
+    ],
+    "tom": "confrontador",
+    "profundidade": 5,
+    "conselho": "Separe fato de narrativa antes de obedecer ao ciúme.",
+    "explicacao": "A frase dialoga com o imaginário de Dom Casmurro sem atribuir citação literal.",
+    "livro": "Dom Casmurro"
+  },
+  {
+    "id": "batch04-quote-039",
+    "autor": "Machado de Assis",
+    "frase": "A ironia é, às vezes, a última elegância de quem já viu demais para fingir inocência.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Machado de Assis",
+    "sentimentos": [
+      "autoconhecimento",
+      "indiretas"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "ironia",
+      "lucidez",
+      "desencanto"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 4,
+    "conselho": "Use a ironia para revelar, não para esconder sua própria ferida.",
+    "explicacao": "A ironia aparece como defesa e lucidez, com ambiguidade.",
+    "livro": "Memórias Póstumas de Brás Cubas"
+  },
+  {
+    "id": "batch04-quote-040",
+    "autor": "Machado de Assis",
+    "frase": "Nem todo silêncio é mistério; às vezes é apenas cálculo esperando ocasião.",
+    "quoteType": "inspired",
+    "source": "Leitura editorial inspirada em Machado de Assis",
+    "sentimentos": [
+      "indiretas",
+      "confusão"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "silêncio",
+      "cálculo",
+      "relações"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 4,
+    "conselho": "Leia o silêncio também pelo que ele ganha enquanto permanece calado.",
+    "explicacao": "Indireta machadiana sobre estratégia social.",
+    "livro": "Quincas Borba"
+  },
+  {
+    "id": "batch04-text-001",
+    "autor": "Joan Didion",
+    "titulo": "A casa depois da perda",
+    "texto": "O luto não começa apenas quando alguém parte. Ele começa quando o mundo continua com uma indiferença obscena: a água ferve, a luz acende, uma mensagem chega, alguém ri na rua.\n\nTudo parece igual, e justamente por isso tudo ficou intolerável.\n\n**A casa permanece de pé, mas a realidade mudou de endereço.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado em Joan Didion",
+    "sentimentos": [
+      "luto",
+      "confusão"
+    ],
+    "intensidade": [
+      "intensa"
+    ],
+    "temas": [
+      "luto",
+      "casa",
+      "realidade"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Não estranhe a estranheza: o cotidiano pode parecer ofensivo depois de uma perda.",
+    "explicacao": "Texto seco e psicológico sobre a desorganização do mundo no luto.",
+    "livro": "O Ano do Pensamento Mágico",
+    "contentType": "text"
+  },
+  {
+    "id": "batch04-text-002",
+    "autor": "C. S. Lewis",
+    "titulo": "O escândalo do cotidiano",
+    "texto": "A dor tem uma crueldade particular: ela não interrompe o funcionamento do mundo. O pão continua na mesa. O telefone toca. As pessoas perguntam coisas pequenas.\n\nE é aí que a perda se torna quase absurda. Como pode tudo seguir, se alguém essencial deixou de seguir conosco?\n\n**O luto é também a revolta contra a normalidade das coisas.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado em A Anatomia de uma Dor",
+    "sentimentos": [
+      "luto",
+      "raiva"
+    ],
+    "intensidade": [
+      "intensa"
+    ],
+    "temas": [
+      "luto",
+      "cotidiano",
+      "revolta"
+    ],
+    "tom": "clinico_compassivo",
+    "profundidade": 5,
+    "conselho": "Permita a revolta sem transformá-la em culpa por ainda estar vivo.",
+    "explicacao": "Texto sobre a colisão entre perda íntima e continuidade externa.",
+    "livro": "A Anatomia de uma Dor",
+    "contentType": "text"
+  },
+  {
+    "id": "batch04-text-003",
+    "autor": "Mary Oliver",
+    "titulo": "A luz pequena",
+    "texto": "Há dias em que a pessoa não consegue acreditar em grandes respostas. Tudo que é grande parece falso, barulhento, distante demais.\n\nNesses dias, talvez a salvação venha sem nome: uma folha insistindo em existir, um pássaro atravessando o fio, a luz tocando a parede sem pedir aplauso.\n\n**Nem toda esperança vem como promessa. Algumas vêm como atenção.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado em Mary Oliver",
+    "sentimentos": [
+      "tristeza",
+      "esperança"
+    ],
+    "intensidade": [
+      "fraca",
+      "moderada"
+    ],
+    "temas": [
+      "atenção",
+      "natureza",
+      "esperança"
+    ],
+    "tom": "acolhedor",
+    "profundidade": 5,
+    "conselho": "Procure um detalhe vivo; deixe que ele exista sem exigir que resolva tudo.",
+    "explicacao": "Texto de esperança pequena, sensorial e não motivacional.",
+    "livro": "Devotions",
+    "contentType": "text"
+  },
+  {
+    "id": "batch04-text-004",
+    "autor": "Machado de Assis",
+    "titulo": "A sinceridade conveniente",
+    "texto": "Há pessoas que só descobrem a própria honestidade quando a verdade já não lhes custa nada. Antes disso, chamam silêncio de prudência, cálculo de paciência e interesse de sensatez.\n\nDepois, quando o perigo passa, aparecem com a consciência limpa e a memória bem penteada.\n\n**A moral tardia costuma chegar vestida com a roupa elegante da conveniência.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado em Machado de Assis",
+    "sentimentos": [
+      "indiretas",
+      "raiva"
+    ],
+    "intensidade": [
+      "moderada"
+    ],
+    "temas": [
+      "hipocrisia",
+      "conveniência",
+      "moral"
+    ],
+    "tom": "cruel_lucido",
+    "profundidade": 5,
+    "conselho": "Observe quem só diz a verdade quando ela já não ameaça seus interesses.",
+    "explicacao": "Texto de ironia social, com crítica à moral performática.",
+    "livro": "Memórias Póstumas de Brás Cubas",
+    "contentType": "text"
+  },
+  {
+    "id": "batch04-text-005",
+    "autor": "Rumi",
+    "titulo": "A distância que responde",
+    "texto": "A saudade parece uma conversa mal educada: você fala, ela não responde. Você chama, ela devolve silêncio. Você procura sinais em lugares que não prometeram nada.\n\nMas talvez a saudade não exista para trazer de volta. Talvez exista para provar que algo atravessou você de verdade.\n\n**Nem toda ausência é vazio; algumas são a forma que o amor assume quando já não encontra corpo.**",
+    "quoteType": "inspired",
+    "source": "Microensaio editorial inspirado no Divã de Shams de Tabriz",
+    "sentimentos": [
+      "saudade",
+      "amor",
+      "luto"
+    ],
+    "intensidade": [
+      "moderada",
+      "intensa"
+    ],
+    "temas": [
+      "saudade",
+      "ausência",
+      "amor"
+    ],
+    "tom": "poetico_melancolico",
+    "profundidade": 5,
+    "conselho": "Deixe a saudade testemunhar o amor sem exigir que ela desfaça a distância.",
+    "explicacao": "Texto devocional e melancólico sobre saudade como permanência do vínculo.",
+    "livro": "Divã de Shams de Tabriz",
+    "contentType": "text"
+  },
+  ];
+})(typeof window !== 'undefined' ? window : globalThis);

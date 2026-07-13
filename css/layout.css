@@ -1,0 +1,89 @@
+/* Estrutura de colunas, shell e faixa diária.
+   Extraído de style.css na Fase 6 sem alterar regras visuais. */
+
+.shell {
+  height: calc(100vh - 100px);
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* 25 / 50 / 25 */
+}
+
+.daily-strip {
+  height: 32px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--stroke);
+  background: rgba(239, 226, 193, 0.34);
+  color: rgba(42, 35, 26, 0.72);
+  white-space: nowrap;
+}
+
+html[data-theme="night"] .daily-strip {
+  background: rgba(31, 50, 39, 0.48);
+  color: rgba(241, 234, 216, 0.78);
+}
+
+html[data-theme="night"] .daily-label {
+  color: rgba(199, 217, 180, 0.62);
+}
+
+html[data-theme="night"] .daily-separator {
+  color: rgba(205, 181, 121, 0.58);
+}
+
+.daily-track {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding-left: 100%;
+  font-family: var(--font);
+  font-size: 13px;
+  animation: daily-scroll 28s linear infinite;
+}
+
+.daily-label {
+  color: rgba(42, 35, 26, 0.5);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.daily-separator {
+  color: rgba(143, 111, 53, 0.62);
+}
+
+@keyframes daily-scroll {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.col-left,
+.col-center,
+.col-right {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.col-left {
+  padding: 14px 14px 12px;
+  border-right: 1px solid var(--stroke);
+}
+
+.col-center {
+  position: relative;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.col-right {
+  padding: 14px 14px 12px;
+  border-left: 1px solid var(--stroke);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

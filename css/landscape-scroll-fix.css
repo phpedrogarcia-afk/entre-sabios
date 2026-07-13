@@ -1,0 +1,51 @@
+/* Mantém a página inicial rolável em smartphones usados na horizontal.
+   Esta regra é carregada por último para neutralizar o layout fixo de desktop. */
+@media (orientation: landscape) and (hover: none) and (pointer: coarse),
+       (orientation: landscape) and (max-height: 600px) {
+  html {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior-y: auto !important;
+    touch-action: pan-y pinch-zoom !important;
+  }
+
+  body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    overscroll-behavior-y: auto !important;
+    touch-action: pan-y pinch-zoom !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .shell {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    overflow: visible !important;
+  }
+
+  .col-left,
+  .col-center,
+  .col-right {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .center-card {
+    flex: none !important;
+    min-height: 280px;
+    overflow: visible !important;
+  }
+
+  .quote-stage {
+    min-height: 250px;
+  }
+}

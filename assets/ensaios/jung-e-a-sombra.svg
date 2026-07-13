@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Figura e sombra em uma parede clara</title>
+  <desc id="desc">Ilustração minimalista de uma figura diante de uma parede clara, com uma sombra ampliada ao lado, sugerindo o conceito junguiano de sombra.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f5f0e6"/>
+      <stop offset="0.52" stop-color="#ebe3d4"/>
+      <stop offset="1" stop-color="#d7d0c0"/>
+    </linearGradient>
+    <radialGradient id="light" cx="36%" cy="35%" r="72%">
+      <stop offset="0" stop-color="#fffaf0" stop-opacity="0.86"/>
+      <stop offset="0.62" stop-color="#efe7d8" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#b8ad9c" stop-opacity="0.18"/>
+    </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <pattern id="grain" width="120" height="120" patternUnits="userSpaceOnUse">
+      <circle cx="16" cy="22" r="1.1" fill="#5f5b52" opacity="0.08"/>
+      <circle cx="78" cy="42" r="0.9" fill="#5f5b52" opacity="0.06"/>
+      <circle cx="45" cy="92" r="1" fill="#ffffff" opacity="0.12"/>
+      <path d="M8 111C36 97 62 100 96 84" fill="none" stroke="#6a655c" stroke-width="0.7" opacity="0.05"/>
+    </pattern>
+    <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#cfc6b5" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#7d7468" stop-opacity="0.20"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" rx="38" fill="url(#bg)"/>
+  <rect width="1200" height="675" rx="38" fill="url(#light)"/>
+  <rect width="1200" height="675" rx="38" fill="url(#grain)" opacity="0.48"/>
+
+  <path d="M0 501 C225 474 383 493 565 472 C785 447 958 470 1200 438 L1200 675 L0 675 Z" fill="url(#floor)"/>
+  <path d="M140 128 C290 86 472 83 645 119" fill="none" stroke="#716a5d" stroke-width="2" opacity="0.08"/>
+  <path d="M673 117 C826 89 990 103 1090 152" fill="none" stroke="#716a5d" stroke-width="2" opacity="0.05"/>
+
+  <g opacity="0.40" filter="url(#softShadow)">
+    <ellipse cx="650" cy="568" rx="132" ry="26" fill="#2e2c29"/>
+  </g>
+
+  <g transform="translate(640 205) skewX(-12)" opacity="0.34" filter="url(#softShadow)">
+    <path d="M102 71 C165 80 196 139 181 214 C169 275 123 318 85 341 C48 318 6 275 -4 214 C-17 140 31 72 102 71 Z" fill="#4f4a43"/>
+    <path d="M104 28 C139 28 165 54 165 88 C165 123 139 150 104 150 C70 150 44 123 44 88 C44 54 70 28 104 28 Z" fill="#4f4a43"/>
+    <path d="M46 333 C37 392 31 448 21 509" stroke="#4f4a43" stroke-width="30" stroke-linecap="round"/>
+    <path d="M121 335 C136 394 148 449 164 509" stroke="#4f4a43" stroke-width="30" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(469 225)">
+    <path d="M54 72 C88 73 112 101 110 143 C107 188 83 219 56 239 C29 218 7 188 4 143 C1 102 22 73 54 72 Z" fill="#8b8173" opacity="0.82"/>
+    <circle cx="56" cy="36" r="31" fill="#8b8173" opacity="0.82"/>
+    <path d="M31 232 C24 285 19 336 12 391" stroke="#8b8173" stroke-width="19" stroke-linecap="round" opacity="0.82"/>
+    <path d="M77 232 C88 287 98 338 110 391" stroke="#8b8173" stroke-width="19" stroke-linecap="round" opacity="0.82"/>
+    <path d="M13 129 C-24 163 -50 196 -70 232" stroke="#8b8173" stroke-width="16" stroke-linecap="round" opacity="0.58"/>
+    <path d="M98 128 C136 162 162 195 184 229" stroke="#8b8173" stroke-width="16" stroke-linecap="round" opacity="0.58"/>
+  </g>
+
+  <path d="M408 591 C505 575 598 577 718 592" fill="none" stroke="#726a5f" stroke-width="2" opacity="0.12"/>
+  <text x="80" y="560" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#504a42" opacity="0.32">a sombra não desaparece quando recebe outro nome</text>
+</svg>
