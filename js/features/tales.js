@@ -6,6 +6,14 @@ function normalizeTaleList(list = []) {
   return list.map(normalizeTheme);
 }
 
+function getStateEditorialThemes(state) {
+  return Array.from(new Set([
+    ...(state.rootThemeDefinitions || []).map((definition) => definition.theme),
+    ...(state.secondaryThemes || []),
+    ...(state.combinationThemes || []),
+  ].map(normalizeTheme)));
+}
+
 function getTaleParagraphHtml(paragraphs = []) {
   return paragraphs
     .map((paragraph) => `<p>${String(paragraph).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>`)
@@ -28,7 +36,7 @@ function getTaleQuestionFallback(tale) {
 
 function scoreTaleForState(tale, state) {
   let score = 0;
-  const selectedThemes = new Set((state.psychologicalThemes || []).map(normalizeTheme));
+  const selectedThemes = new Set(getStateEditorialThemes(state));
   const taleFeelings = normalizeTaleList(tale.sentimentosRelacionados);
   const taleThemes = normalizeTaleList(tale.temas);
   const taleKeywords = normalizeTaleList(tale.palavrasChave);
@@ -100,7 +108,7 @@ function getRankedTalesForState(state) {
 }
 
 function getNearbyThemeScore(tale, state) {
-  const selectedThemes = new Set((state.psychologicalThemes || []).map(normalizeTheme));
+  const selectedThemes = new Set(getStateEditorialThemes(state));
   const taleThemes = normalizeTaleList(tale.temas);
   const taleKeywords = normalizeTaleList(tale.palavrasChave);
   return [...taleThemes, ...taleKeywords].reduce((total, theme) => total + (selectedThemes.has(theme) ? 1 : 0), 0);
@@ -150,6 +158,8 @@ function pickBestTale({ gradualVariety = false } = {}) {
 function showTale({ gradualVariety = false } = {}) {
   const { tale, restartedJourney } = pickBestTale({ gradualVariety });
   renderTale(tale);
+  const taleContent = taleDialog?.querySelector('.tale-content');
+  if (taleContent) taleContent.scrollTop = 0;
   if (taleCycleNoticeEl) {
     taleCycleNoticeEl.textContent = restartedJourney
       ? 'Você já percorreu todos os contos disponíveis. Recomeçando a jornada.'
@@ -157,11 +167,37 @@ function showTale({ gradualVariety = false } = {}) {
   }
 }
 
+let talePageScrollY = 0;
+let talePageIsLocked = false;
+
+function lockTalePageScroll() {
+  if (talePageIsLocked) return;
+  talePageScrollY = window.scrollY;
+  talePageIsLocked = true;
+}
+
+function unlockTalePageScroll() {
+  if (!talePageIsLocked) return;
+  window.scrollTo(0, talePageScrollY);
+  talePageIsLocked = false;
+}
+
 function renderTale(tale) {
   if (!tale) return;
   taleTitleEl.textContent = tale.titulo;
   taleOriginEl.textContent = `Origem: ${tale.origem}`;
   taleReadingTimeEl.textContent = `📖 Leitura de aproximadamente ${tale.tempoLeitura} minutos.`;
+  if (tale.imagem?.src && taleImageFrameEl && taleImageEl) {
+    taleImageEl.src = tale.imagem.src;
+    taleImageEl.alt = tale.imagem.alt || '';
+    taleImageEl.width = tale.imagem.width || 1536;
+    taleImageEl.height = tale.imagem.height || 864;
+    taleImageFrameEl.hidden = false;
+  } else if (taleImageFrameEl && taleImageEl) {
+    taleImageFrameEl.hidden = true;
+    taleImageEl.removeAttribute('src');
+    taleImageEl.alt = '';
+  }
   taleTextEl.innerHTML = getTaleParagraphHtml(tale.texto);
   taleLessonEl.innerHTML = getTaleParagraphHtml(tale.explicacaoFilosofica);
   taleRelationEl.innerHTML = getTaleParagraphHtml(tale.relacaoSentimento || getTaleRelationFallback(tale));
@@ -179,11 +215,27 @@ function openPhilosophicalTale() {
 
   if (taleHintEl) taleHintEl.textContent = '';
   showTale({ gradualVariety: false });
-  if (typeof taleDialog.showModal === 'function') taleDialog.showModal();
-  else taleDialog.setAttribute('open', '');
+  lockTalePageScroll();
+  try {
+    if (typeof taleDialog.showModal === 'function') taleDialog.showModal();
+    else taleDialog.setAttribute('open', '');
+    taleDialog.scrollTop = 0;
+    const taleContent = taleDialog.querySelector('.tale-content');
+    if (taleContent) taleContent.scrollTop = 0;
+    requestAnimationFrame(() => {
+      taleDialog.scrollTop = 0;
+      if (taleContent) taleContent.scrollTop = 0;
+    });
+  } catch (error) {
+    unlockTalePageScroll();
+    throw error;
+  }
 }
 
 function closePhilosophicalTale() {
   if (taleDialog.open) taleDialog.close();
-  else taleDialog.removeAttribute('open');
+  else {
+    taleDialog.removeAttribute('open');
+    unlockTalePageScroll();
+  }
 }

@@ -19,19 +19,19 @@
     <meta name="description" content="Escolha o que está sentindo e encontre frases, reflexões e conselhos inspirados nos grandes filósofos, escritores e pensadores da humanidade." />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="googlebot" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="https://www.entresabios.com/" />
+    <link rel="canonical" href="https://entresabios.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.entresabios.com/" />
+    <meta property="og:url" content="https://entresabios.com/" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Entre Sábios" />
     <meta property="og:title" content="Entre Sábios — Reflexões filosóficas para os momentos da vida" />
     <meta property="og:description" content="Escolha o que está sentindo e encontre frases, reflexões e conselhos inspirados nos grandes filósofos, escritores e pensadores da humanidade." />
-    <meta property="og:image" content="https://www.entresabios.com/assets/entre-sabios-social.png" />
+    <meta property="og:image" content="https://entresabios.com/assets/entre-sabios-social.png" />
     <meta property="og:image:width" content="1717" />
     <meta property="og:image:height" content="916" />
     <meta property="og:image:alt" content="Entre Sábios: dois pensadores conversam serenamente diante das montanhas." />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="image_src" href="https://www.entresabios.com/assets/entre-sabios-social.png" />
+    <link rel="image_src" href="https://entresabios.com/assets/entre-sabios-social.png" />
     <script>
       (function applySavedTheme() {
         try {
@@ -45,7 +45,7 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20260712-10" />
+    <link rel="stylesheet" href="style.css?v=20260714-2" />
     <link rel="stylesheet" href="css/landscape-scroll-fix.css?v=20260713-1" />
     <link rel="stylesheet" href="css/tablet.css?v=20260713-1" />
     <style id="tale-mobile-scroll-fix">
@@ -142,7 +142,7 @@
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Entre Sábios",
-        "url": "https://www.entresabios.com/",
+        "url": "https://entresabios.com/",
         "description": "Escolha o que está sentindo e encontre frases, reflexões e conselhos inspirados nos grandes filósofos, escritores e pensadores da humanidade.",
         "inLanguage": "pt-BR"
       }
@@ -158,7 +158,7 @@
         </div>
       </a>
       <div class="live-info" aria-label="Informações do site">
-        <p class="online-counter">Presentes agora: <span id="contador-online">0</span></p>
+        <p class="online-counter">Presentes: <span id="contador-online">0</span></p>
         <button id="themeToggleBtn" class="theme-toggle" type="button" aria-label="Ativar Floresta Noturna" title="Ativar Floresta Noturna">☾</button>
         <a class="about-trigger essays-trigger" href="ensaios/">Ensaios</a>
         <button id="aboutBtn" class="about-trigger" type="button">Sobre</button>
@@ -220,16 +220,6 @@
           </div>
         </div>
 
-        <div class="audience gender-control">
-          <div class="audience-title">PREFERÊNCIA DE AUTORIA</div>
-          <div class="audience-options" role="radiogroup" aria-label="Preferência de gênero da autoria">
-            <label class="radio"><input type="radio" name="genderPreference" value="any" checked /><span>Qualquer</span></label>
-            <label class="radio"><input type="radio" name="genderPreference" value="female" /><span>Feminina</span></label>
-            <label class="radio"><input type="radio" name="genderPreference" value="male" /><span>Masculina</span></label>
-            <label class="radio"><input type="radio" name="genderPreference" value="neutral" /><span>Editorial</span></label>
-          </div>
-        </div>
-
         <button id="generateBtn" class="primary" disabled>ENCONTRAR UMA REFLEXÃO</button>
         <div id="contentLoadStatus" class="content-load-status" role="status" aria-live="polite">Carregando o acervo de reflexões…</div>
         <div id="selectionHint" class="selection-hint" role="alert" aria-live="assertive"></div>
@@ -255,6 +245,9 @@
 
         <div class="center-card" role="region" aria-label="Reflexão">
           <div class="quote-stage">
+            <button id="quoteShareBtn" class="quote-action quote-share" type="button" aria-label="Compartilhar esta reflexão" title="Compartilhar esta reflexão">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c2.8-5.6 7.3-8.4 14-8.4m-4.2-4.1L18.5 7.6l-4.7 4.1"/></svg>
+            </button>
             <button id="dislikeBtn" class="quote-action quote-dislike" type="button" aria-label="Não gostei desta frase" aria-pressed="false" title="Não gostei">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v11m0-11H4.8A1.8 1.8 0 0 0 3 4.8v7.4A1.8 1.8 0 0 0 4.8 14H7m0-11h8.3a2 2 0 0 1 1.9 1.4l2.3 7A2 2 0 0 1 17.6 14H14l.8 3.2a3 3 0 0 1-2.9 3.8L7 14"/></svg>
             </button>
@@ -319,6 +312,7 @@
               </span>
             </div>
           </div>
+          <p class="share-compatibility-note">O envio direto depende dos aplicativos disponíveis no dispositivo.</p>
 
           <section class="tales-block" aria-labelledby="talesTitle">
             <div class="share-title" id="talesTitle">📖 CONTOS FILOSÓFICOS</div>
@@ -378,6 +372,9 @@
           <span id="taleOrigin">Origem: —</span>
           <span id="taleReadingTime">📖 Leitura de aproximadamente — minutos.</span>
         </div>
+        <figure id="taleImageFrame" class="tale-image-frame" hidden>
+          <img id="taleImage" class="tale-image" alt="" width="1536" height="864" loading="lazy" decoding="async" />
+        </figure>
         <article id="taleText" class="tale-text"></article>
         <section class="tale-lesson">
           <h3>O que esse conto nos ensina?</h3>
@@ -478,23 +475,24 @@
     <script src="js/data/catalogs.js?v=20260713-1"></script>
     <script src="js/data/books.js?v=20260710-1"></script>
     <script src="js/data/share-themes.js?v=20260710-1"></script>
-    <script src="js/data/tales.js?v=20260710-1"></script>
+    <script src="js/data/tales.js?v=20260714-1"></script>
     <script src="js/data/emotional-taxonomy.js?v=20260712-10"></script>
     <script src="js/core/normalization.js?v=20260710-1"></script>
-    <script src="js/core/runtime-engine.js?v=definitiva-2.1"></script>
-    <script src="js/core/runtime-loader.js?v=definitiva-2.1"></script>
-    <script src="js/core/emotional-state.js?v=20260713-1"></script>
-    <script src="js/core/matching.js?v=20260713-1"></script>
+    <script src="js/core/runtime-engine.js?v=definitiva-2.1-behavior-1"></script>
+    <script src="data/entre_sabios_runtime.js?v=definitiva-2.1"></script>
+    <script src="js/core/runtime-loader.js?v=definitiva-2.1-local-1"></script>
+    <script src="js/core/emotional-state.js?v=20260713-4"></script>
+    <script src="js/core/matching.js?v=20260713-4"></script>
     <script src="js/core/book-matching.js?v=20260712-10"></script>
-    <script src="js/features/feedback.js?v=20260710-1"></script>
+    <script src="js/features/feedback.js?v=20260713-4"></script>
     <script src="js/features/favorites.js?v=20260710-1"></script>
-    <script src="js/features/sharing.js?v=20260710-1"></script>
-    <script src="js/features/tales.js?v=20260712-10"></script>
-    <script src="js/ui/feelings-ui.js?v=20260713-1"></script>
+    <script src="js/features/sharing.js?v=20260713-4"></script>
+    <script src="js/features/tales.js?v=20260714-1"></script>
+    <script src="js/ui/feelings-ui.js?v=20260713-4"></script>
     <script src="js/ui/daily-ui.js?v=20260712-1"></script>
     <script src="js/ui/reflection-ui.js?v=20260713-1"></script>
     <script src="js/ui/effects-ui.js?v=20260710-1"></script>
     <script src="js/ui/theme-ui.js?v=20260710-1"></script>
-    <script src="script.js?v=20260713-1"></script>
+    <script src="script.js?v=20260714-1"></script>
   </body>
 </html>

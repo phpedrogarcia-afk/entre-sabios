@@ -36,7 +36,6 @@ function interpretEmotionalState() {
     intensityThemes: intensityProfile.themes.map(normalizeTheme),
     intensity: currentIntensity,
     suitableTones: intensityProfile.suitableTones.map(normalizeTheme),
-    genderPreference: currentGenderPreference,
   };
 }
 

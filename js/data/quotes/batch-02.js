@@ -24,7 +24,7 @@
       "ausência",
       "identidade"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Não tente preencher imediatamente esse vazio; primeiro escute o que ele está revelando.",
     "explicacao": "Pessoa transforma a sensação de estranhamento em linguagem íntima, sem oferecer consolo fácil.",
@@ -56,6 +56,7 @@
   },
   {
     "id": "batch02-quote-003",
+    "editorialStatus": "quarantine",
     "autor": "Fernando Pessoa",
     "frase": "Nem toda solidão é abandono; às vezes é apenas a alma retirando-se da multidão para não se perder nela.",
     "quoteType": "inspired",
@@ -98,7 +99,7 @@
       "limite",
       "melancolia"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Não exija que toda clareza resolva; algumas clarezas apenas situam você melhor.",
     "explicacao": "A imagem evita a ideia de que compreender é sempre curar.",
@@ -123,7 +124,7 @@
       "caminho",
       "incerteza"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Dê alguns passos antes de exigir uma definição final sobre você.",
     "explicacao": "Pessoa ajuda a suportar a multiplicidade interna sem transformá-la em fracasso.",
@@ -173,14 +174,15 @@
       "presença",
       "transformação"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
-    "conselho": "Não trate a dor como inimiga automática; veja que presença ela ainda protege.",
+    "conselho": "Reconheça a dor sem exigir que ela desapareça nem que revele imediatamente um sentido.",
     "explicacao": "A dor é trabalhada como matéria de transformação, sem romantizar sofrimento.",
     "livro": "Elegias de Duíno"
   },
   {
     "id": "batch02-quote-008",
+    "editorialStatus": "quarantine",
     "autor": "Rainer Maria Rilke",
     "frase": "A solidão assusta porque devolve a cada pessoa a responsabilidade de escutar a própria vida.",
     "quoteType": "inspired",
@@ -205,6 +207,7 @@
   },
   {
     "id": "batch02-quote-009",
+    "editorialStatus": "quarantine",
     "autor": "Rainer Maria Rilke",
     "frase": "Nem tudo que se rompe termina; algumas coisas apenas deixam de caber na forma antiga.",
     "quoteType": "inspired",
@@ -246,7 +249,7 @@
       "amor",
       "medo"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Se amar assusta, investigue o que a proximidade ameaça revelar.",
     "explicacao": "O amor é apresentado como vulnerabilidade real, não como fantasia puramente confortável.",
@@ -270,7 +273,7 @@
       "alteridade",
       "cuidado"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Escute alguém hoje sem preparar sua defesa, conselho ou resposta.",
     "explicacao": "Weil entende a atenção como suspensão do ego diante da realidade do outro.",
@@ -295,7 +298,7 @@
       "atenção",
       "precisão"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Descreva a dor antes de justificá-la; precisão pode ser o primeiro cuidado.",
     "explicacao": "A frase evita consolo apressado e valoriza olhar a dor sem deformá-la.",
@@ -303,6 +306,7 @@
   },
   {
     "id": "batch02-quote-013",
+    "editorialStatus": "quarantine",
     "autor": "Simone Weil",
     "frase": "A compaixão que tem pressa de salvar às vezes ainda não aprendeu a ver.",
     "quoteType": "inspired",
@@ -328,6 +332,7 @@
   },
   {
     "id": "batch02-quote-014",
+    "editorialStatus": "quarantine",
     "autor": "Simone Weil",
     "frase": "O vazio não precisa ser imediatamente preenchido; às vezes ele é o único espaço onde a verdade ainda pode entrar.",
     "quoteType": "inspired",
@@ -352,6 +357,7 @@
   },
   {
     "id": "batch02-quote-015",
+    "editorialStatus": "quarantine",
     "autor": "Simone Weil",
     "frase": "Quando a alma para de se defender de tudo, ela começa a distinguir ferida de verdade.",
     "quoteType": "inspired",
@@ -394,7 +400,7 @@
       "lucidez",
       "desencanto"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Use o desencanto para agir com mais sobriedade, não para desistir de tudo.",
     "explicacao": "Schopenhauer serve como antídoto contra ingenuidade, mas não como licença para paralisia.",
@@ -402,6 +408,7 @@
   },
   {
     "id": "batch02-quote-017",
+    "editorialStatus": "quarantine",
     "autor": "Schopenhauer",
     "frase": "Grande parte do sofrimento nasce de desejar que a realidade peça licença ao nosso desejo.",
     "quoteType": "inspired",
@@ -426,6 +433,7 @@
   },
   {
     "id": "batch02-quote-018",
+    "editorialStatus": "quarantine",
     "autor": "Schopenhauer",
     "frase": "Há pessoas que chamam de pessimismo qualquer recusa em participar da mentira coletiva.",
     "quoteType": "inspired",
@@ -451,6 +459,7 @@
   },
   {
     "id": "batch02-quote-019",
+    "editorialStatus": "quarantine",
     "autor": "Schopenhauer",
     "frase": "A solidão pesa menos quando comparada ao preço de se dissolver em companhias falsas.",
     "quoteType": "inspired",
@@ -476,6 +485,7 @@
   },
   {
     "id": "batch02-quote-020",
+    "editorialStatus": "quarantine",
     "autor": "Schopenhauer",
     "frase": "A vaidade quer aplauso até para suas feridas; por isso confunde exposição com profundidade.",
     "quoteType": "inspired",
@@ -500,6 +510,7 @@
   },
   {
     "id": "batch02-quote-021",
+    "editorialStatus": "quarantine",
     "autor": "Blaise Pascal",
     "frase": "Muita agitação é apenas medo de ficar a sós com uma pergunta que não obedece.",
     "quoteType": "inspired",
@@ -541,7 +552,7 @@
       "razão",
       "intuição"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 4,
     "conselho": "Não descarte uma intuição; apenas peça que ela dialogue com os fatos.",
     "explicacao": "A frase preserva a tensão pascaliana entre razão e coração.",
@@ -549,6 +560,7 @@
   },
   {
     "id": "batch02-quote-023",
+    "editorialStatus": "quarantine",
     "autor": "Blaise Pascal",
     "frase": "O divertimento não cura o vazio; apenas o ensina a esperar em outra sala.",
     "quoteType": "inspired",
@@ -574,6 +586,7 @@
   },
   {
     "id": "batch02-quote-024",
+    "editorialStatus": "removed",
     "autor": "Blaise Pascal",
     "frase": "A miséria humana começa quando queremos ser deuses sem deixar de temer como crianças.",
     "quoteType": "inspired",
@@ -598,6 +611,7 @@
   },
   {
     "id": "batch02-quote-025",
+    "editorialStatus": "quarantine",
     "autor": "Blaise Pascal",
     "frase": "Quem não suporta o próprio quarto acaba procurando no mundo inteiro uma fuga de si.",
     "quoteType": "inspired",
@@ -631,8 +645,7 @@
       "confusão"
     ],
     "intensidade": [
-      "moderada",
-      "intensa"
+      "moderada"
     ],
     "temas": [
       "angústia",
@@ -647,6 +660,7 @@
   },
   {
     "id": "batch02-quote-027",
+    "editorialStatus": "quarantine",
     "autor": "Kierkegaard",
     "frase": "Desesperar-se não é apenas perder algo; é perder a relação honesta consigo mesmo.",
     "quoteType": "inspired",
@@ -671,6 +685,7 @@
   },
   {
     "id": "batch02-quote-028",
+    "editorialStatus": "quarantine",
     "autor": "Kierkegaard",
     "frase": "A multidão oferece alívio porque dilui a responsabilidade; por isso também empobrece a verdade.",
     "quoteType": "inspired",
@@ -695,6 +710,7 @@
   },
   {
     "id": "batch02-quote-029",
+    "editorialStatus": "quarantine",
     "autor": "Kierkegaard",
     "frase": "Quem evita decidir também decide: escolhe entregar a própria vida ao acaso e ao medo.",
     "quoteType": "inspired",
@@ -785,7 +801,7 @@
       "imperfeição",
       "liberdade"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "analítico",
     "profundidade": 4,
     "conselho": "Admita uma contradição sem usá-la como desculpa nem como condenação.",
     "explicacao": "A auto-observação revela ambiguidade humana, mas também reduz a tirania da imagem perfeita.",
@@ -798,7 +814,6 @@
     "quoteType": "inspired",
     "source": "Leitura editorial inspirada nos Ensaios",
     "sentimentos": [
-      "medo",
       "autoconhecimento"
     ],
     "intensidade": [
@@ -818,6 +833,7 @@
   },
   {
     "id": "batch02-quote-034",
+    "editorialStatus": "quarantine",
     "autor": "Michel de Montaigne",
     "frase": "A morte nos assusta menos quando deixamos de adiar a vida como se tivéssemos contrato com o amanhã.",
     "quoteType": "inspired",
@@ -847,7 +863,7 @@
     "quoteType": "inspired",
     "source": "Leitura editorial inspirada em Montaigne",
     "sentimentos": [
-      "indiretas",
+      "ansiedade",
       "autoconhecimento"
     ],
     "intensidade": [
@@ -859,7 +875,7 @@
       "liberdade",
       "autonomia"
     ],
-    "tom": "confrontador",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Perceba qual decisão sua está tentando caber no julgamento dos outros.",
     "explicacao": "A frase trabalha independência interior com sobriedade.",
@@ -892,6 +908,7 @@
   },
   {
     "id": "batch02-quote-037",
+    "editorialStatus": "quarantine",
     "autor": "Epicteto",
     "frase": "Uma ofensa só governa você quando encontra, dentro, um trono preparado para ela.",
     "quoteType": "inspired",
@@ -958,7 +975,7 @@
       "correção",
       "responsabilidade"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Transforme uma culpa em reparação concreta; descarte a parte que só repete punição.",
     "explicacao": "A frase diferencia responsabilidade ativa de autoacusação circular.",
@@ -971,8 +988,8 @@
     "quoteType": "inspired",
     "source": "Leitura editorial inspirada em Epicteto",
     "sentimentos": [
-      "solidão",
-      "indiretas"
+      "insegurança",
+      "autoconhecimento"
     ],
     "intensidade": [
       "moderada"
@@ -982,7 +999,7 @@
       "paz",
       "autonomia"
     ],
-    "tom": "confrontador",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Retome uma decisão que você entregou ao julgamento de pessoas instáveis.",
     "explicacao": "O estoicismo aparece como proteção da paz interior diante da opinião externa.",
@@ -1008,7 +1025,7 @@
       "identidade",
       "escuta interior"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Não resolva sua multiplicidade com pressa; escute o conflito antes de escolher um nome.",
     "explicacao": "Texto em tom pessoano sobre viver a própria fragmentação sem virar clichê de autodescoberta.",
@@ -1046,7 +1063,7 @@
     "id": "batch02-text-003",
     "autor": "Simone Weil",
     "titulo": "A atenção sem teatro",
-    "texto": "A dor do outro costuma despertar duas tentações: fugir ou salvar depressa. As duas podem ser formas elegantes de não ver.\n\nVer exige uma violência contra o próprio ego. Exige calar a frase pronta, suspender o conselho, suportar o desconforto de não ser protagonista da cena.\n\n**A atenção verdadeira não rouba o sofrimento do outro para transformá-lo em prova da nossa bondade.**",
+    "texto": "A dor do outro costuma despertar duas tentações: fugir ou salvar depressa. As duas podem ser formas elegantes de não ver.\n\nVer exige contrariar o impulso do próprio ego. Exige calar a frase pronta, suspender o conselho, suportar o desconforto de não ser protagonista da cena.\n\n**A atenção verdadeira não rouba o sofrimento do outro para transformá-lo em prova da nossa bondade.**",
     "quoteType": "inspired",
     "source": "Microensaio editorial inspirado em Simone Weil",
     "sentimentos": [
@@ -1061,7 +1078,7 @@
       "compaixão",
       "ego"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Antes de ajudar, veja. Antes de ver, silencie a necessidade de parecer bom.",
     "explicacao": "Texto alinhado à ética weiliana da atenção radical.",
@@ -1070,6 +1087,7 @@
   },
   {
     "id": "batch02-text-004",
+    "editorialStatus": "removed",
     "autor": "Schopenhauer",
     "titulo": "A companhia falsa",
     "texto": "A solidão tem má fama porque não sabe se vender. Ela chega sem música, sem plateia, sem a falsa gentileza dos ambientes onde todos fingem pertencer.\n\nA companhia falsa, ao contrário, parece calor no começo. Depois cobra o preço: uma risada que não era sua, uma opinião emprestada, uma versão menor de si para caber na mesa.\n\n**Às vezes estar só não é isolamento; é higiene moral.**",

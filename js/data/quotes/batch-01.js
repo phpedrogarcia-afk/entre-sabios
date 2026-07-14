@@ -16,15 +16,14 @@
       "confusão"
     ],
     "intensidade": [
-      "moderada",
-      "intensa"
+      "moderada"
     ],
     "temas": [
       "consciência",
       "culpa",
       "autojulgamento"
     ],
-    "tom": "confrontador",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Pergunte se sua culpa quer reparação real ou apenas punição repetida.",
     "explicacao": "A frase traduz a mente subterrânea de Dostoiévski: a culpa não examinada vira repetição, e repetição pode parecer moralidade quando é apenas sofrimento.",
@@ -32,6 +31,7 @@
   },
   {
     "id": "batch01-quote-002",
+    "editorialStatus": "quarantine",
     "autor": "Dostoiévski",
     "frase": "Há pessoas que preferem a própria ferida porque ela lhes dá uma identidade mais fácil que a cura.",
     "quoteType": "inspired",
@@ -57,6 +57,7 @@
   },
   {
     "id": "batch01-quote-003",
+    "editorialStatus": "quarantine",
     "autor": "Dostoiévski",
     "frase": "O orgulho ferido costuma chamar de justiça aquilo que é apenas desejo de vingança.",
     "quoteType": "inspired",
@@ -82,6 +83,7 @@
   },
   {
     "id": "batch01-quote-004",
+    "editorialStatus": "quarantine",
     "autor": "Dostoiévski",
     "frase": "Quem se acostuma a mentir para si mesmo perde o direito de se espantar quando a vida parece falsa.",
     "quoteType": "inspired",
@@ -106,6 +108,7 @@
   },
   {
     "id": "batch01-quote-005",
+    "editorialStatus": "quarantine",
     "autor": "Dostoiévski",
     "frase": "A solidão mais perigosa não é estar sem pessoas; é estar cercado por quem não alcança sua verdade.",
     "quoteType": "inspired",
@@ -131,6 +134,7 @@
   },
   {
     "id": "batch01-quote-006",
+    "editorialStatus": "quarantine",
     "autor": "Dostoiévski",
     "frase": "A dor não purifica ninguém automaticamente; ela apenas revela o que cada pessoa faz quando já não consegue fingir.",
     "quoteType": "inspired",
@@ -231,6 +235,7 @@
   },
   {
     "id": "batch01-quote-010",
+    "editorialStatus": "quarantine",
     "autor": "Nietzsche",
     "frase": "Aquilo que chamamos de virtude às vezes é apenas medo usando roupa limpa.",
     "quoteType": "inspired",
@@ -255,6 +260,7 @@
   },
   {
     "id": "batch01-quote-011",
+    "editorialStatus": "quarantine",
     "autor": "Nietzsche",
     "frase": "O ressentimento é a vingança de quem ainda não teve coragem de criar a própria vida.",
     "quoteType": "inspired",
@@ -305,6 +311,7 @@
   },
   {
     "id": "batch01-quote-013",
+    "editorialStatus": "quarantine",
     "autor": "Clarice Lispector",
     "frase": "Viver ultrapassa qualquer entendimento.",
     "quoteType": "exact",
@@ -330,7 +337,7 @@
   {
     "id": "batch01-quote-014",
     "autor": "Clarice Lispector",
-    "frase": "Eu só consigo alcançar a simplicidade através de muito trabalho.",
+    "frase": "Que ninguém se engane: só se consegue a simplicidade através de muito trabalho.",
     "quoteType": "exact",
     "source": "A Descoberta do Mundo — verificar edição antes de uso definitivo",
     "sentimentos": [
@@ -363,8 +370,7 @@
       "confusão"
     ],
     "intensidade": [
-      "moderada",
-      "intensa"
+      "moderada"
     ],
     "temas": [
       "mistério",
@@ -388,8 +394,7 @@
       "medo"
     ],
     "intensidade": [
-      "moderada",
-      "intensa"
+      "moderada"
     ],
     "temas": [
       "vulnerabilidade",
@@ -454,6 +459,7 @@
   },
   {
     "id": "batch01-quote-019",
+    "editorialStatus": "quarantine",
     "autor": "Emil Cioran",
     "frase": "A lucidez não cura automaticamente a vida; às vezes apenas impede que uma mentira continue servindo de consolo.",
     "quoteType": "inspired",
@@ -479,6 +485,7 @@
   },
   {
     "id": "batch01-quote-020",
+    "editorialStatus": "removed",
     "autor": "Emil Cioran",
     "frase": "Há cansaços que não vêm do esforço, mas de existir tempo demais sem uma ilusão convincente.",
     "quoteType": "inspired",
@@ -504,6 +511,7 @@
   },
   {
     "id": "batch01-quote-021",
+    "editorialStatus": "quarantine",
     "autor": "Emil Cioran",
     "frase": "A esperança é suportável quando não finge que o abismo deixou de existir.",
     "quoteType": "inspired",
@@ -528,6 +536,7 @@
   },
   {
     "id": "batch01-quote-022",
+    "editorialStatus": "removed",
     "autor": "Emil Cioran",
     "frase": "O desespero fica mais perigoso quando começa a se achar inteligente.",
     "quoteType": "inspired",
@@ -552,6 +561,7 @@
   },
   {
     "id": "batch01-quote-023",
+    "editorialStatus": "quarantine",
     "autor": "Emil Cioran",
     "frase": "Algumas verdades não libertam; apenas mudam o formato da prisão.",
     "quoteType": "inspired",
@@ -581,8 +591,8 @@
     "quoteType": "inspired",
     "source": "Leitura editorial inspirada em Cioran",
     "sentimentos": [
-      "raiva",
-      "solidão"
+      "autoconhecimento",
+      "confusão"
     ],
     "intensidade": [
       "fraca",
@@ -593,7 +603,7 @@
       "defesa",
       "desencanto"
     ],
-    "tom": "direto",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Observe se sua ironia protege sua lucidez ou apenas impede qualquer vínculo real.",
     "explicacao": "A frase trata a ironia como defesa refinada contra a vulnerabilidade.",
@@ -846,6 +856,7 @@
   },
   {
     "id": "batch01-quote-035",
+    "editorialStatus": "quarantine",
     "autor": "Albert Camus",
     "frase": "A esperança mais perigosa é a que usa o futuro para desprezar o presente.",
     "quoteType": "inspired",
@@ -896,6 +907,7 @@
   },
   {
     "id": "batch01-quote-037",
+    "editorialStatus": "quarantine",
     "autor": "Dostoiévski",
     "frase": "Às vezes o homem defende sua própria prisão apenas porque foi ele quem a construiu.",
     "quoteType": "inspired",
@@ -995,6 +1007,7 @@
   },
   {
     "id": "batch01-text-001",
+    "editorialStatus": "quarantine",
     "autor": "Dostoiévski",
     "titulo": "O subterrâneo da culpa",
     "texto": "A culpa raramente chega sozinha. Ela traz junto um juiz, uma testemunha e uma plateia inteira dentro da cabeça.\n\n**O problema é que nem todo julgamento interior busca justiça; muitos buscam apenas punição.**\n\nSe houve erro, repare. Se houve covardia, nomeie. Mas se a culpa só repete a mesma sentença todos os dias, talvez ela não queira corrigir você. Talvez queira possuir você.",
@@ -1057,8 +1070,7 @@
     "source": "Microensaio editorial inspirado em Clarice Lispector",
     "sentimentos": [
       "confusão",
-      "autoconhecimento",
-      "esperança"
+      "autoconhecimento"
     ],
     "intensidade": [
       "fraca",
@@ -1078,6 +1090,7 @@
   },
   {
     "id": "batch01-text-004",
+    "editorialStatus": "quarantine",
     "autor": "Emil Cioran",
     "titulo": "A lucidez também cansa",
     "texto": "Existe uma lucidez que ilumina. E existe uma lucidez que entra no quarto apenas para apagar a última vela.\n\n**Nem toda verdade encontrada no fundo do poço merece governar a casa inteira.**\n\nSe a sua inteligência só sabe provar que nada vale a pena, talvez ela esteja menos interessada na verdade do que em defender o cansaço.",

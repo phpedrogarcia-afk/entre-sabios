@@ -3,7 +3,9 @@
 // Implementação baseada na especificação (layout minimalista)
 // =========================
 
-let feelingsCatalog = [];
+let feelingsCatalog = Array.isArray(window.EntreSabiosData.feelingsCatalog)
+  ? window.EntreSabiosData.feelingsCatalog
+  : [];
 const intensityProfiles = window.EntreSabiosData.intensityProfiles;
 const combinationRules = window.EntreSabiosData.combinationRules;
 const emotionalTaxonomy = window.EntreSabiosData.emotionalTaxonomy;
@@ -125,7 +127,6 @@ let currentShareStyle = 'sage';
 let selectedFeelingIds = new Set();
 let primaryFeelingId = null;
 let currentIntensity = 'moderada';
-let currentGenderPreference = 'any';
 let runtimeSelector = null;
 let lastSelectionSignature = null;
 let runtimeContents = [];
@@ -133,7 +134,6 @@ let runtimeContents = [];
 const preferenceProfile = loadPreferenceProfile();
 const favoriteStories = loadFavoriteStories();
 const viewedStoryKeys = new Set(loadViewedStoryKeys());
-let recentAuthorNames = loadRecentAuthorNames();
 let generatedContentCount = loadGeneratedContentCount();
 let contextualContentHistory = loadContextualContentHistory();
 let viewedTaleKeys = loadViewedTaleKeys();
@@ -154,6 +154,7 @@ const newBtn = document.getElementById('newBtn');
 const whatsShareBtn = document.getElementById('whatsShareBtn');
 const shareStatusEl = document.getElementById('shareStatus');
 const shareStyleButtons = Array.from(document.querySelectorAll('[data-share-style]'));
+const quoteShareBtn = document.getElementById('quoteShareBtn');
 
 const quoteTextEl = document.getElementById('quoteText');
 const quoteAuthorEl = document.getElementById('quoteAuthor');
@@ -185,6 +186,8 @@ const taleDialog = document.getElementById('taleDialog');
 const taleTitleEl = document.getElementById('taleTitle');
 const taleOriginEl = document.getElementById('taleOrigin');
 const taleReadingTimeEl = document.getElementById('taleReadingTime');
+const taleImageFrameEl = document.getElementById('taleImageFrame');
+const taleImageEl = document.getElementById('taleImage');
 const taleTextEl = document.getElementById('taleText');
 const taleLessonEl = document.getElementById('taleLesson');
 const taleRelationEl = document.getElementById('taleRelation');
@@ -195,7 +198,6 @@ const closeTaleBtn = document.getElementById('closeTaleBtn');
 const closeTaleTopBtn = document.getElementById('closeTaleTopBtn');
 
 const intensityRadioEls = Array.from(document.querySelectorAll('input[name="intensity"]'));
-const genderRadioEls = Array.from(document.querySelectorAll('input[name="genderPreference"]'));
 const contentLoadStatusEl = document.getElementById('contentLoadStatus');
 
 const decorCanvas = document.getElementById('decorCanvas');
@@ -219,7 +221,6 @@ function loadViewedStoryKeys() {
 function saveViewedStoryKeys() {
   try {
     localStorage.setItem('caixaSabedoriaHistoricoVisto', JSON.stringify(Array.from(viewedStoryKeys).slice(-600)));
-    localStorage.setItem('caixaSabedoriaAutoresRecentes', JSON.stringify(recentAuthorNames.slice(-4)));
   } catch {
     // A rotação continua funcionando durante a sessão quando o armazenamento não está disponível.
   }
@@ -249,15 +250,6 @@ function saveViewedTaleKeys() {
     localStorage.setItem('entreSabiosContosRecentes', JSON.stringify(recentTaleKeys.slice(-6)));
   } catch {
     // Se o navegador bloquear armazenamento, a rotação continua funcionando apenas durante a sessão.
-  }
-}
-
-function loadRecentAuthorNames() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('caixaSabedoriaAutoresRecentes') || '[]');
-    return Array.isArray(saved) ? saved : [];
-  } catch {
-    return [];
   }
 }
 
@@ -520,30 +512,84 @@ shareStyleButtons.forEach((button) => {
   });
 });
 
-whatsShareBtn.addEventListener('click', async () => {
-  whatsShareBtn.disabled = true;
-  whatsShareBtn.textContent = 'Gerando...';
+quoteShareBtn.addEventListener('click', () => {
+  shareReflectionImage({
+    styleKey: getRandomShareStyle(),
+    triggerButton: quoteShareBtn,
+  });
+});
+
+function setImageShareBusy(isBusy, triggerButton) {
+  whatsShareBtn.disabled = isBusy;
+  quoteShareBtn.disabled = isBusy;
+  triggerButton?.setAttribute('aria-busy', String(isBusy));
+  if (triggerButton === whatsShareBtn) {
+    whatsShareBtn.textContent = isBusy ? 'Gerando...' : 'Status / Stories';
+  }
+}
+
+async function shareReflectionImage({ styleKey, triggerButton }) {
+  if (!currentStory) {
+    setShareStatus('Gere uma reflexão antes de compartilhar.');
+    return;
+  }
+
+  setImageShareBusy(true, triggerButton);
+  setShareStatus('Preparando a imagem…');
+  let image = null;
+  let imageDownloaded = false;
 
   try {
-    const image = await createShareImage();
+    image = await createShareImage({ styleKey });
 
-    if (navigator.share && navigator.canShare?.({ files: [image.file] })) {
+    if (canShareImageFile(image.file)) {
       await navigator.share({
         title: 'Entre Sábios',
         files: [image.file],
       });
-      setShareStatus('Imagem enviada para o compartilhamento do celular.');
+      setShareStatus('Imagem compartilhada pelas opções do dispositivo.');
       return;
     }
 
     downloadBlob(image.blob, image.filename);
-    setShareStatus('Este navegador não envia imagem direto. Baixei a imagem para publicar no Status ou Stories.');
+    imageDownloaded = true;
+
+    if (typeof navigator.share === 'function') {
+      await navigator.share({
+        title: 'Entre Sábios',
+        text: getShareMessage(),
+        url: 'https://entresabios.com/',
+      });
+      setShareStatus('A imagem foi baixada e a mensagem foi aberta para compartilhar. Anexe a imagem no aplicativo escolhido.');
+      return;
+    }
+
+    setShareStatus('Imagem baixada. Publique-a manualmente no Status, Stories ou aplicativo de sua escolha.');
   } catch (error) {
-    if (error?.name !== 'AbortError') setShareStatus('Não consegui compartilhar a imagem neste navegador.');
+    if (error?.name === 'AbortError') {
+      setShareStatus(imageDownloaded ? 'Compartilhamento cancelado. A imagem permanece baixada.' : 'Compartilhamento cancelado.');
+    } else if (image && !imageDownloaded) {
+      try {
+        downloadBlob(image.blob, image.filename);
+        setShareStatus('O envio direto falhou, mas a imagem foi baixada para compartilhamento manual.');
+      } catch {
+        setShareStatus('Não foi possível compartilhar nem baixar a imagem neste navegador.');
+      }
+    } else if (imageDownloaded) {
+      setShareStatus('A mensagem não pôde ser aberta, mas a imagem permanece baixada.');
+    } else {
+      setShareStatus('Não foi possível gerar a imagem neste navegador.');
+    }
   } finally {
-    whatsShareBtn.disabled = false;
-    whatsShareBtn.textContent = 'Status / Stories';
+    setImageShareBusy(false, triggerButton);
   }
+}
+
+whatsShareBtn.addEventListener('click', () => {
+  shareReflectionImage({
+    styleKey: currentShareStyle,
+    triggerButton: whatsShareBtn,
+  });
 });
 
 // =========================
@@ -558,6 +604,24 @@ async function init() {
   generateBtn.disabled = true;
   newBtn.disabled = true;
   contentLoadStatusEl.textContent = 'Carregando o acervo de reflexões…';
+
+  // Os seletores básicos não dependem do download do acervo runtime.
+  // Assim, continuam visíveis mesmo em conexão lenta ou quando o JSON falha.
+  if (typeof initThemeToggle === 'function') initThemeToggle();
+  initFeelings();
+  initIntensity();
+  initDailyQuote();
+  drawDecor();
+
+  reflectionTextEl.textContent = 'Selecione seus sentimentos, escolha a intensidade e clique em “ENCONTRAR UMA REFLEXÃO”.';
+  philosophyTextEl.textContent = 'A cada reflexão, você conhecerá uma ideia do autor escolhido.';
+  adviceTextEl.textContent = '—';
+  bookTextEl.textContent = '—';
+  bookReasonEl.textContent = 'A recomendação aparecerá junto da reflexão.';
+  updateFeedbackButtons();
+  updateFavoriteUi();
+  updateShareStyleButtons();
+  updateShareCardPreview();
 
   try {
     const runtime = await window.EntreSabiosRuntimeLoader.loadRuntimeContent();
@@ -577,24 +641,6 @@ async function init() {
     reflectionTextEl.textContent = 'Não foi possível carregar o acervo agora.';
     return;
   }
-
-  if (typeof initThemeToggle === 'function') initThemeToggle();
-  initFeelings();
-  initIntensity();
-  initGenderPreference();
-  initDailyQuote();
-  drawDecor();
-
-  // Placeholder de conteúdo
-  reflectionTextEl.textContent = 'Selecione seus sentimentos, escolha a intensidade e clique em “ENCONTRAR UMA REFLEXÃO”.';
-  philosophyTextEl.textContent = 'A cada reflexão, você conhecerá uma ideia do autor escolhido.';
-  adviceTextEl.textContent = '—';
-  bookTextEl.textContent = '—';
-  bookReasonEl.textContent = 'A recomendação aparecerá junto da reflexão.';
-  updateFeedbackButtons();
-  updateFavoriteUi();
-  updateShareStyleButtons();
-  updateShareCardPreview();
 }
 
 init();

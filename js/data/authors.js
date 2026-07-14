@@ -84,7 +84,7 @@ O resto pertence ao tempo.` ,
   {
     author: 'Epicteto',
     tags: ['sofrimento', 'controle emocional', 'aceitação', 'disciplina'],
-    quote: 'Não são as coisas que perturbam, mas as ideias que fazemos delas.',
+    quote: 'A liberdade começa quando distinguimos o acontecimento do julgamento que fazemos dele.',
     reflectionTemplate: (t) =>
       `Se ${t.join(', ')}, cuidado com a interpretação automática. A sabedoria começa quando você nota a história que a mente inventa. A partir daí, você escolhe uma leitura mais humana.` ,
     adviceTemplate: (t) =>
@@ -106,7 +106,7 @@ Recomece sem violência.` ,
   {
     author: 'Clarice Lispector',
     tags: ['amor', 'solidão', 'introspecção', 'esperança'],
-    quote: 'A vida só pode ser compreendida olhando-se para trás; mas só pode ser vivida olhando-se para frente.',
+    quote: 'Não se preocupe em entender tudo; viver ultrapassa qualquer explicação completa.',
     reflectionTemplate: (t) =>
       `Se você sente ${t.join(', ')}, há um convite à intimidade. Introspecção não é ficar preso; é encontrar verdade. Ao olhar para dentro com gentileza, você devolve ao coração um rumo possível.` ,
     adviceTemplate: (t) =>
@@ -139,7 +139,7 @@ O que vem, você atravessa.` ,
   {
     author: 'Viktor Frankl',
     tags: ['propósito', 'significado', 'sofrimento', 'esperança', 'responsabilidade', 'autocompaixão'],
-    quote: 'Quem tem um porquê enfrenta qualquer como.',
+    quote: 'Quando não podemos mudar uma situação, somos desafiados a mudar nossa maneira de responder a ela.',
     reflectionTemplate: (t) =>
       `Se ${t.join(', ')}, não é só peso — pode virar direção. Quando você encontra significado, o sofrimento muda de lugar dentro de você. O propósito não é grandioso: é decidido.` ,
     adviceTemplate: (t) =>

@@ -2,10 +2,7 @@
   const EXPECTED_VERSION = 'definitiva-2.1';
   const RUNTIME_URL = `data/entre_sabios_runtime.json?v=${encodeURIComponent(EXPECTED_VERSION)}`;
 
-  async function loadRuntimeContent() {
-    const response = await fetch(RUNTIME_URL, { cache: 'no-cache' });
-    if (!response.ok) throw new Error(`Falha HTTP ${response.status} ao carregar o acervo.`);
-    const runtime = await response.json();
+  function validateRuntimeContent(runtime) {
     if (runtime.schemaVersion !== '1.1.0') throw new Error(`Schema incompatível: ${runtime.schemaVersion}`);
     if (runtime.contentVersion !== EXPECTED_VERSION) throw new Error(`Versão incompatível: ${runtime.contentVersion}`);
     if (!Array.isArray(runtime.contents) || runtime.contents.length !== 283) throw new Error('Quantidade de conteúdos ativos incompatível.');
@@ -16,5 +13,14 @@
     return runtime;
   }
 
-  root.EntreSabiosRuntimeLoader = { EXPECTED_VERSION, RUNTIME_URL, loadRuntimeContent };
+  async function loadRuntimeContent() {
+    if (root.EntreSabiosEmbeddedRuntime) {
+      return validateRuntimeContent(root.EntreSabiosEmbeddedRuntime);
+    }
+    const response = await fetch(RUNTIME_URL, { cache: 'no-cache' });
+    if (!response.ok) throw new Error(`Falha HTTP ${response.status} ao carregar o acervo.`);
+    return validateRuntimeContent(await response.json());
+  }
+
+  root.EntreSabiosRuntimeLoader = { EXPECTED_VERSION, RUNTIME_URL, loadRuntimeContent, validateRuntimeContent };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -12,8 +12,7 @@
     "quoteType": "inspired",
     "source": "Síntese editorial inspirada na Ética a Nicômaco",
     "sentimentos": [
-      "autoconhecimento",
-      "culpa"
+      "autoconhecimento"
     ],
     "intensidade": [
       "moderada"
@@ -23,7 +22,7 @@
       "hábito",
       "caráter"
     ],
-    "tom": "confrontador",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Observe qual hábito revela seu caráter quando não há plateia.",
     "explicacao": "Aristóteles desloca a ética da intenção abstrata para a prática repetida.",
@@ -48,7 +47,7 @@
       "medida",
       "virtude"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "direto",
     "profundidade": 4,
     "conselho": "Antes de agir, pergunte se sua resposta é proporcional ao que aconteceu.",
     "explicacao": "A emoção não é negada; o foco está em direção, intensidade e ocasião.",
@@ -80,6 +79,7 @@
   },
   {
     "id": "batch05-quote-004",
+    "editorialStatus": "quarantine",
     "autor": "Aristóteles",
     "frase": "Quem busca prazer sem medida acaba obedecendo ao que deveria apenas visitar.",
     "quoteType": "inspired",
@@ -104,6 +104,7 @@
   },
   {
     "id": "batch05-quote-005",
+    "editorialStatus": "quarantine",
     "autor": "Aristóteles",
     "frase": "A amizade verdadeira não usa o outro como descanso da própria vaidade.",
     "quoteType": "inspired",
@@ -129,6 +130,7 @@
   },
   {
     "id": "batch05-quote-006",
+    "editorialStatus": "quarantine",
     "autor": "Platão",
     "frase": "A alma desordenada chama de liberdade o que às vezes é apenas tirania dos próprios impulsos.",
     "quoteType": "inspired",
@@ -153,6 +155,7 @@
   },
   {
     "id": "batch05-quote-007",
+    "editorialStatus": "quarantine",
     "autor": "Platão",
     "frase": "Sair da caverna dói porque a luz também humilha os olhos acostumados à sombra.",
     "quoteType": "inspired",
@@ -178,6 +181,7 @@
   },
   {
     "id": "batch05-quote-008",
+    "editorialStatus": "quarantine",
     "autor": "Platão",
     "frase": "Desejar o belo não é possuir o belo; é ser movido por uma falta que educa.",
     "quoteType": "inspired",
@@ -203,6 +207,7 @@
   },
   {
     "id": "batch05-quote-009",
+    "editorialStatus": "quarantine",
     "autor": "Platão",
     "frase": "Uma cidade interior sem governo transforma cada vontade pequena em soberana.",
     "quoteType": "inspired",
@@ -243,7 +248,7 @@
       "exame",
       "pensamento"
     ],
-    "tom": "cruel_lucido",
+    "tom": "analítico",
     "profundidade": 4,
     "conselho": "Questione uma certeza herdada antes de defendê-la como identidade.",
     "explicacao": "A frase serve como indireta contra certezas repetidas sem exame.",
@@ -251,6 +256,7 @@
   },
   {
     "id": "batch05-quote-011",
+    "editorialStatus": "quarantine",
     "autor": "Sócrates",
     "frase": "A ignorância mais perigosa é a que se veste de certeza e pede aplauso.",
     "quoteType": "inspired",
@@ -275,6 +281,7 @@
   },
   {
     "id": "batch05-quote-012",
+    "editorialStatus": "quarantine",
     "autor": "Sócrates",
     "frase": "Conhecer-se dói porque retira da alma o direito confortável de culpar apenas o mundo.",
     "quoteType": "inspired",
@@ -325,6 +332,7 @@
   },
   {
     "id": "batch05-quote-014",
+    "editorialStatus": "quarantine",
     "autor": "Sócrates",
     "frase": "A pergunta certa incomoda porque não ataca a resposta; ataca a pessoa que se escondia nela.",
     "quoteType": "inspired",
@@ -349,6 +357,7 @@
   },
   {
     "id": "batch05-quote-015",
+    "editorialStatus": "quarantine",
     "autor": "Sócrates",
     "frase": "Quem sabe que não sabe já perdeu a arrogância necessária para fingir sabedoria.",
     "quoteType": "inspired",
@@ -374,6 +383,7 @@
   },
   {
     "id": "batch05-quote-016",
+    "editorialStatus": "removed",
     "autor": "Sêneca",
     "frase": "Sofremos mais frequentemente na imaginação do que na realidade.",
     "quoteType": "exact",
@@ -399,6 +409,7 @@
   },
   {
     "id": "batch05-quote-017",
+    "editorialStatus": "quarantine",
     "autor": "Sêneca",
     "frase": "A ira sempre se apresenta como justiça urgente; depois deixa a alma limpando os destroços.",
     "quoteType": "inspired",
@@ -440,7 +451,7 @@
       "desperdício",
       "atenção"
     ],
-    "tom": "cruel_lucido",
+    "tom": "direto",
     "profundidade": 5,
     "conselho": "Recupere um pedaço do seu tempo de algo que não merece sua vida.",
     "explicacao": "Sêneca transforma finitude em critério de escolha.",
@@ -448,6 +459,7 @@
   },
   {
     "id": "batch05-quote-019",
+    "editorialStatus": "quarantine",
     "autor": "Sêneca",
     "frase": "Quem depende do aplauso vive em exílio dentro da opinião dos outros.",
     "quoteType": "inspired",
@@ -472,6 +484,7 @@
   },
   {
     "id": "batch05-quote-020",
+    "editorialStatus": "quarantine",
     "autor": "Sêneca",
     "frase": "A perda ensina de modo brutal que nada era nosso por contrato, apenas por cuidado temporário.",
     "quoteType": "inspired",
@@ -502,8 +515,7 @@
     "quoteType": "exact",
     "source": "Carta a Meneceu, 124-125 (tradução editorial)",
     "sentimentos": [
-      "medo",
-      "luto"
+      "medo"
     ],
     "intensidade": [
       "fraca",
@@ -522,6 +534,7 @@
   },
   {
     "id": "batch05-quote-022",
+    "editorialStatus": "removed",
     "autor": "Epicuro",
     "frase": "O prazer simples humilha a ansiedade que acreditava precisar de muito para descansar.",
     "quoteType": "inspired",
@@ -571,6 +584,7 @@
   },
   {
     "id": "batch05-quote-024",
+    "editorialStatus": "quarantine",
     "autor": "Epicuro",
     "frase": "Quem deseja sem medida se torna pobre mesmo cercado de abundância.",
     "quoteType": "inspired",
@@ -611,7 +625,7 @@
       "necessidade",
       "excesso"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "acolhedor",
     "profundidade": 3,
     "conselho": "Revise uma necessidade que talvez seja apenas excesso acostumado.",
     "explicacao": "A serenidade epicurista depende de distinguir necessidade real e desejo fabricado.",
@@ -619,6 +633,7 @@
   },
   {
     "id": "batch05-quote-026",
+    "editorialStatus": "quarantine",
     "autor": "Heráclito",
     "frase": "O rio não pede desculpas por mudar; nós é que sofremos querendo banhar o presente com a água de ontem.",
     "quoteType": "inspired",
@@ -659,14 +674,15 @@
       "tensão",
       "ordem"
     ],
-    "tom": "cruel_lucido",
+    "tom": "analítico",
     "profundidade": 5,
-    "conselho": "Pergunte que verdade o conflito revelou antes de tentar apagá-lo.",
+    "conselho": "Pergunte que necessidade ou tensão o conflito tornou visível antes de tentar encerrá-lo.",
     "explicacao": "A tensão é vista como parte da realidade, não simples defeito.",
     "livro": "Fragmentos, DK B53"
   },
   {
     "id": "batch05-quote-028",
+    "editorialStatus": "quarantine",
     "autor": "Heráclito",
     "frase": "Quem dorme acordado repete a vida dos outros como se fosse destino próprio.",
     "quoteType": "inspired",
@@ -691,6 +707,7 @@
   },
   {
     "id": "batch05-quote-029",
+    "editorialStatus": "quarantine",
     "autor": "Heráclito",
     "frase": "A mudança que você teme talvez seja apenas a vida recusando permanecer menor que si mesma.",
     "quoteType": "inspired",
@@ -716,6 +733,7 @@
   },
   {
     "id": "batch05-quote-030",
+    "editorialStatus": "quarantine",
     "autor": "Heráclito",
     "frase": "A verdade não precisa ser agradável para ser fogo; basta tocar o que estava adormecido.",
     "quoteType": "inspired",
@@ -765,6 +783,7 @@
   },
   {
     "id": "batch05-quote-032",
+    "editorialStatus": "quarantine",
     "autor": "Confúcio",
     "frase": "Respeito que só aparece diante de superiores é etiqueta, não caráter.",
     "quoteType": "inspired",
@@ -789,6 +808,7 @@
   },
   {
     "id": "batch05-quote-033",
+    "editorialStatus": "quarantine",
     "autor": "Confúcio",
     "frase": "Corrigir-se é mais difícil que aconselhar, por isso há tantos mestres sem disciplina.",
     "quoteType": "inspired",
@@ -862,6 +882,7 @@
   },
   {
     "id": "batch05-quote-036",
+    "editorialStatus": "quarantine",
     "autor": "Henry David Thoreau",
     "frase": "Uma vida simples pode ser insuportável para quem depende do excesso para não se ouvir.",
     "quoteType": "inspired",
@@ -886,6 +907,7 @@
   },
   {
     "id": "batch05-quote-037",
+    "editorialStatus": "quarantine",
     "autor": "Henry David Thoreau",
     "frase": "A maioria chama de necessidade aquilo que nunca teve coragem de questionar.",
     "quoteType": "inspired",
@@ -910,6 +932,7 @@
   },
   {
     "id": "batch05-quote-038",
+    "editorialStatus": "quarantine",
     "autor": "Henry David Thoreau",
     "frase": "Ir para a floresta não é fugir do mundo; às vezes é parar de fugir de si.",
     "quoteType": "inspired",
@@ -1003,9 +1026,9 @@
       "verdade",
       "autoengano"
     ],
-    "tom": "cruel_lucido",
+    "tom": "confrontador",
     "profundidade": 5,
-    "conselho": "Não fuja da pergunta que ameaça sua máscara mais confortável.",
+    "conselho": "Permaneça com a pergunta que desafia sua resposta mais confortável.",
     "explicacao": "Texto sobre o método socrático como desmontagem de autoengano.",
     "livro": "Górgias",
     "contentType": "text"
@@ -1029,7 +1052,7 @@
       "imaginação",
       "presente"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "direto",
     "profundidade": 5,
     "conselho": "Volte ao fato presente antes de negociar com a tragédia imaginada.",
     "explicacao": "Texto estoico sobre sofrimento antecipado.",
@@ -1056,7 +1079,7 @@
       "rio",
       "impermanência"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Reconheça o que mudou antes de exigir que a vida obedeça à memória.",
     "explicacao": "Texto sobre fluxo e resistência à mudança.",
@@ -1065,6 +1088,7 @@
   },
   {
     "id": "batch05-text-004",
+    "editorialStatus": "quarantine",
     "autor": "Epicuro",
     "titulo": "O excesso chamado necessidade",
     "texto": "O desejo é astuto: começa pedindo conforto, depois pede excesso, depois chama o excesso de necessidade.\n\nQuando percebemos, já estamos cansados demais para perguntar se aquilo alimenta a vida ou apenas mantém a fome funcionando.\n\n**A serenidade começa no dia em que uma pessoa para de obedecer a desejos que só sabem aumentar o vazio.**",
@@ -1091,6 +1115,7 @@
   },
   {
     "id": "batch05-text-005",
+    "editorialStatus": "quarantine",
     "autor": "Henry David Thoreau",
     "titulo": "A vida que não era sua",
     "texto": "Muita gente chama de destino aquilo que nunca examinou. Acorda, trabalha, compra, corre, responde, repete — e depois se assusta quando a alma pergunta em voz baixa: era isso mesmo?\n\nA pergunta não vem para destruir tudo. Vem para devolver propriedade.\n\n**Uma vida pode estar cheia de tarefas e ainda vazia de pertencimento.**",

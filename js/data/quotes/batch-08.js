@@ -25,7 +25,7 @@
       "vida",
       "presença"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 4,
     "conselho": "Permaneça alguns instantes com o que você sente antes de transformar tudo em explicação.",
     "explicacao": "Texto inspirado na tensão clariceana entre linguagem, mistério e experiência viva.",
@@ -53,7 +53,7 @@
       "cansaço",
       "identidade"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Reconheça o cansaço interior sem exigir dele uma performance de força.",
     "explicacao": "Texto pessoano sobre fragmentação e exaustão existencial.",
@@ -80,7 +80,7 @@
       "revolta",
       "dignidade"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Escolha um ato digno sem exigir que ele explique o universo inteiro.",
     "explicacao": "Texto camusiano sobre absurdo, revolta e ação sem garantia metafísica.",
@@ -108,7 +108,7 @@
       "queda",
       "ilusão"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "No desmoronamento, diferencie o que caiu do que finalmente ficou visível.",
     "explicacao": "Texto sobre insegurança, impermanência e verdade sem consolo barato.",
@@ -117,6 +117,7 @@
   },
   {
     "id": "batch08-text-005",
+    "editorialStatus": "quarantine",
     "autor": "Dostoiévski",
     "titulo": "O subterrâneo da própria desculpa",
     "texto": "Existe uma dor estranha em perceber que nem todo sofrimento veio de fora. Algumas partes foram cultivadas com cuidado sombrio: a mágoa repetida, a culpa preservada, a desculpa alimentada como se fosse companhia.\n\nÉ cruel admitir isso. Mas também há liberdade nessa crueldade: aquilo que participamos em manter, talvez possamos começar a desmontar.\n\n**A lucidez mais difícil é aquela que encontra nossa assinatura dentro da própria prisão.**",

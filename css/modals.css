@@ -96,9 +96,15 @@
   width: min(680px, calc(100% - 28px));
   max-width: calc(100vw - 28px);
   max-width: calc(100svw - 28px);
+  height: min(680px, calc(100vh - 32px));
+  height: min(680px, calc(100dvh - 32px));
   max-height: calc(100vh - 32px);
   max-height: calc(100dvh - 32px);
-  flex-direction: column;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tale-dialog:not([open]) {
@@ -106,7 +112,16 @@
 }
 
 .tale-dialog[open] {
-  display: flex;
+  display: block;
+}
+
+.tale-dialog .favorites-head {
+  position: sticky;
+  top: -18px;
+  z-index: 3;
+  margin: -18px -18px 0;
+  padding: 18px 18px 14px;
+  background: var(--bg);
 }
 
 .tale-title-row {
@@ -139,10 +154,14 @@
 }
 
 .tale-content {
+  display: block;
+  flex: none;
   padding: 10px 2px 0;
-  overflow: auto;
+  overflow: visible;
   min-height: 0;
+  max-height: none;
   padding-right: 4px;
+  touch-action: auto;
 }
 
 .tale-cycle-notice {
@@ -160,6 +179,27 @@
   color: rgba(42, 35, 26, 0.58);
   font-size: 11.5px;
   line-height: 1.4;
+}
+
+.tale-image-frame {
+  width: min(100%, 520px);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto 16px;
+  overflow: hidden;
+  border: 1px solid var(--stroke);
+  border-radius: 15px;
+  background: rgba(239, 235, 218, 0.42);
+}
+
+.tale-image-frame[hidden] {
+  display: none;
+}
+
+.tale-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .tale-text {
@@ -244,6 +284,7 @@ html[data-theme="night"] .favorites-dialog::backdrop {
 }
 
 html[data-theme="night"] .favorite-item,
+html[data-theme="night"] .tale-image-frame,
 html[data-theme="night"] .tale-text,
 html[data-theme="night"] .tale-question {
   border-color: var(--night-border);
@@ -259,6 +300,11 @@ html[data-theme="night"] .tale-question div {
 
 html[data-theme="night"] .tale-refresh-btn {
   color: rgba(241, 234, 216, 0.72);
+}
+
+html[data-theme="night"] .tale-meta,
+html[data-theme="night"] .tale-cycle-notice {
+  color: var(--night-text-primary);
 }
 
 html[data-theme="night"] .tale-refresh-btn:hover,

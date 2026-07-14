@@ -12,7 +12,7 @@ data.feelingsCatalog = [
   { id: 'solidão', label: 'Solidão', themes: ['solidão', 'introspecção', 'amor'] },
   { id: 'confusão', label: 'Confusão', themes: ['confusão', 'observação', 'sabedoria'] },
   { id: 'autoconhecimento', label: 'Autoconhecimento', themes: ['autoconhecimento', 'sabedoria', 'observação'] },
-  { id: 'insegurança', label: 'Insegurança', themes: ['insegurança', 'comparação', 'autoimagem', 'aprovação', 'identidade', 'medo de errar', 'julgamento', 'inadequação'] },
+  { id: 'inseguranca', label: 'Insegurança', themes: ['insegurança', 'comparação', 'autoimagem', 'aprovação externa', 'medo de errar', 'identidade', 'julgamento', 'inadequação'] },
   { id: 'raiva', label: 'Raiva', themes: ['raiva', 'limites', 'desapego', 'dignidade', 'indiretas'] },
   { id: 'culpa', label: 'Culpa', themes: ['culpa', 'responsabilidade', 'autocompaixão', 'reparação', 'aceitação'] },
   { id: 'luto', label: 'Luto', themes: ['luto', 'saudade', 'perda', 'aceitação', 'memória', 'amor'] },
@@ -203,7 +203,7 @@ data.feelingAuthorAffinity = {
     'Nisargadatta Maharaj': 10,
     'Chögyam Trungpa': 9,
   },
-  insegurança: {
+  inseguranca: {
     'Jiddu Krishnamurti': 10,
     Krishnamurti: 9,
     'Nisargadatta Maharaj': 10,

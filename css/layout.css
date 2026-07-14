@@ -60,6 +60,15 @@ html[data-theme="night"] .daily-separator {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .daily-track {
+    width: max-content;
+    padding-left: 14px;
+    animation: none;
+    transform: none;
+  }
+}
+
 .col-left,
 .col-center,
 .col-right {

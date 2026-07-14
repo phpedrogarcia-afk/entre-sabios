@@ -4,6 +4,42 @@ body.seo-page {
   line-height: 1.7;
 }
 
+html[data-theme="night"] body.essays-page {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 12% 22%, rgba(113, 145, 119, 0.13), transparent 32%),
+    radial-gradient(circle at 88% 72%, rgba(76, 108, 83, 0.15), transparent 36%),
+    linear-gradient(155deg, #0e1816 0%, #101c18 48%, #15231c 100%);
+}
+
+html[data-theme="night"] body.essays-page::before,
+html[data-theme="night"] body.essays-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+html[data-theme="night"] body.essays-page::before {
+  background: url("assets/essays-night-spring.svg") center / cover no-repeat;
+  opacity: 0.42;
+  filter: saturate(0.72) blur(0.15px);
+}
+
+html[data-theme="night"] body.essays-page::after {
+  background:
+    linear-gradient(90deg, rgba(10, 18, 15, 0.04), transparent 18% 82%, rgba(10, 18, 15, 0.08)),
+    radial-gradient(ellipse at center, transparent 42%, rgba(8, 15, 12, 0.16) 100%);
+}
+
+html[data-theme="night"] body.essays-page > .seo-topbar,
+html[data-theme="night"] body.essays-page > .seo-container {
+  position: relative;
+  z-index: 1;
+}
+
 .seo-topbar {
   position: sticky;
   top: 0;
@@ -45,6 +81,7 @@ body.seo-page {
 
 .seo-breadcrumb {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
   margin-bottom: 22px;
@@ -52,6 +89,12 @@ body.seo-page {
   font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.seo-breadcrumb [aria-current="page"] {
+  min-width: 0;
+  color: rgba(42, 35, 26, 0.72);
+  overflow-wrap: anywhere;
 }
 
 .seo-breadcrumb a {
@@ -101,6 +144,23 @@ body.seo-page {
   margin: 24px 0 12px;
   color: var(--muted);
   font-size: 14px;
+}
+
+.seo-tale-image {
+  width: min(100%, 680px);
+  aspect-ratio: 16 / 9;
+  margin: 22px auto 30px;
+  overflow: hidden;
+  border: 1px solid var(--stroke);
+  border-radius: 18px;
+  background: rgba(239, 235, 218, 0.42);
+}
+
+.seo-tale-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .seo-article section p {
@@ -208,6 +268,47 @@ body.seo-page {
   text-transform: uppercase;
 }
 
+.essay-back-link {
+  display: inline-flex;
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.essay-back-link:hover,
+.essay-back-link:focus-visible {
+  color: var(--ink);
+  text-decoration: underline;
+  outline: none;
+}
+
+html[data-theme="night"] .essay-back-link {
+  color: var(--night-text-primary);
+}
+
+html[data-theme="night"] .essays-index {
+  border-color: rgba(190, 211, 178, 0.16);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(120, 153, 125, 0.09), transparent 32%),
+    linear-gradient(145deg, rgba(22, 37, 31, 0.94), rgba(19, 32, 27, 0.9));
+}
+
+html[data-theme="night"] .essays-index > h1 {
+  color: var(--night-text-primary);
+  text-shadow: 0 1px 20px rgba(241, 234, 216, 0.06);
+}
+
+html[data-theme="night"] .essays-index > .seo-lead {
+  color: var(--night-text-reading);
+}
+
+html[data-theme="night"] .essays-index > .essay-section-label {
+  color: var(--night-text-muted);
+}
+
 .essay-editorial-note {
   max-width: 620px;
   margin: 22px 0 0;
@@ -216,6 +317,11 @@ body.seo-page {
   color: rgba(42, 35, 26, 0.72);
   font-family: var(--font);
   font-size: 19px;
+}
+
+html[data-theme="night"] .essays-index > .essay-editorial-note {
+  border-left-color: rgba(199, 217, 180, 0.3);
+  color: rgba(241, 234, 216, 0.75);
 }
 
 .essays-grid {
@@ -250,6 +356,44 @@ body.seo-page {
   background-size: cover, 70% 80%, 72% 75%, min(360px, 72%) auto;
   opacity: 0.56;
   filter: saturate(0.82);
+}
+
+html[data-theme="night"] .essay-card,
+html[data-theme="night"] .essay-empty {
+  border-color: rgba(190, 211, 178, 0.17);
+  background: rgba(22, 38, 31, 0.78);
+}
+
+html[data-theme="night"] .essay-card::before {
+  background:
+    linear-gradient(90deg, rgba(18, 31, 26, 0.97) 0%, rgba(19, 33, 27, 0.9) 54%, rgba(27, 47, 37, 0.58) 100%),
+    radial-gradient(circle at 88% 18%, rgba(199, 217, 180, 0.1), transparent 30%),
+    radial-gradient(circle at 82% 92%, rgba(216, 189, 117, 0.07), transparent 36%),
+    url("assets/essays-night-spring.svg");
+  background-repeat: no-repeat;
+  background-position: center, right top, right bottom, right 42% center;
+  background-size: cover, 68% 82%, 70% 76%, min(440px, 70%) auto;
+  opacity: 0.7;
+  filter: saturate(0.7);
+}
+
+html[data-theme="night"] .essay-card:nth-child(3n + 2)::before {
+  background-position: center, right 8% top 4%, right bottom, right 16% center;
+  opacity: 0.64;
+}
+
+html[data-theme="night"] .essay-card:nth-child(3n)::before {
+  background-position: center, right top 10%, right 8% bottom, right -4% center;
+  opacity: 0.62;
+}
+
+html[data-theme="night"] .essay-card p {
+  color: rgba(241, 234, 216, 0.78);
+}
+
+html[data-theme="night"] .essay-kicker,
+html[data-theme="night"] .essay-meta {
+  color: var(--night-text-muted);
 }
 
 .essay-card:nth-child(3n + 2)::before {
@@ -329,6 +473,39 @@ body.seo-page {
   line-height: 1.65;
 }
 
+/* Leitura dos ensaios no modo Floresta Noturna. */
+html[data-theme="night"] .essay-page > h1 {
+  color: var(--night-text-primary);
+}
+
+html[data-theme="night"] .essay-page > .seo-lead {
+  color: var(--night-text-primary);
+}
+
+html[data-theme="night"] .essay-page p,
+html[data-theme="night"] .essay-page .essay-body p {
+  color: var(--night-text-primary);
+}
+
+html[data-theme="night"] .essay-page .seo-meta,
+html[data-theme="night"] .essay-page .essay-sources,
+html[data-theme="night"] .essay-page .seo-breadcrumb {
+  color: var(--night-text-primary);
+}
+
+html[data-theme="night"] .seo-breadcrumb [aria-current="page"] {
+  color: var(--night-text-primary);
+}
+
+html[data-theme="night"] .essay-page .seo-question {
+  border-left-color: var(--night-border-lit);
+  color: var(--night-text-primary) !important;
+}
+
+html[data-theme="night"] .essay-page h2 {
+  color: var(--night-text-primary);
+}
+
 @media (max-width: 720px) {
   .seo-container {
     width: min(100% - 20px, 880px);
@@ -356,6 +533,11 @@ body.seo-page {
     font-size: 17px;
   }
 
+  .seo-tale-image {
+    margin: 18px auto 24px;
+    border-radius: 14px;
+  }
+
   .essay-body p {
     font-size: 18px;
   }
@@ -364,5 +546,19 @@ body.seo-page {
     background-position: center, right -18px top 4px, right -20px bottom -8px, right -28px center;
     background-size: cover, 76% 72%, 78% 70%, min(310px, 82%) auto;
     opacity: 0.42;
+  }
+
+  html[data-theme="night"] body.essays-page::before {
+    background-position: 58% center;
+    background-size: auto 100%;
+    opacity: 0.24;
+  }
+
+  html[data-theme="night"] .essay-card::before,
+  html[data-theme="night"] .essay-card:nth-child(3n + 2)::before,
+  html[data-theme="night"] .essay-card:nth-child(3n)::before {
+    background-position: center, right -12px top, right -18px bottom, right -72px center;
+    background-size: cover, 72% 76%, 74% 72%, min(380px, 88%) auto;
+    opacity: 0.48;
   }
 }

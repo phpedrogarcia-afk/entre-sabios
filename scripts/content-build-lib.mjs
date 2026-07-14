@@ -186,15 +186,22 @@ export function serializeRuntime(runtime) {
   return `${JSON.stringify(runtime)}\n`;
 }
 
+export function serializeRuntimeScript(runtime) {
+  return `(function exposeEntreSabiosRuntime(root) { root.EntreSabiosEmbeddedRuntime = ${JSON.stringify(runtime)}; })(typeof window !== 'undefined' ? window : globalThis);\n`;
+}
+
 export function buildFromFiles({ rootDir, write = true } = {}) {
   const masterPath = path.join(rootDir, 'entre_sabios_acervo_mestre_final.json');
   const runtimePath = path.join(rootDir, 'data', 'entre_sabios_runtime.json');
+  const runtimeScriptPath = path.join(rootDir, 'data', 'entre_sabios_runtime.js');
   const master = readJson(masterPath);
   const runtime = buildRuntime(master);
   const serialized = serializeRuntime(runtime);
+  const serializedScript = serializeRuntimeScript(runtime);
   if (write) {
     fs.mkdirSync(path.dirname(runtimePath), { recursive: true });
     fs.writeFileSync(runtimePath, serialized, 'utf8');
+    fs.writeFileSync(runtimeScriptPath, serializedScript, 'utf8');
   }
-  return { master, runtime, serialized, masterPath, runtimePath };
+  return { master, runtime, serialized, serializedScript, masterPath, runtimePath, runtimeScriptPath };
 }
