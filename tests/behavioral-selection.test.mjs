@@ -120,6 +120,108 @@ test('todos os pares ordenados preservam o principal nas três intensidades', ()
   assert.equal(scenarios, 546);
 });
 
+test('principal com dois secundários preserva a hierarquia em todas as ordens e intensidades', () => {
+  const feelings = runtime.feelings.map((item) => item.id);
+  let combinations = 0;
+  let orderedScenarios = 0;
+
+  for (const primaryFeeling of feelings) {
+    const secondaryOptions = feelings.filter((feeling) => feeling !== primaryFeeling);
+    for (let firstIndex = 0; firstIndex < secondaryOptions.length - 1; firstIndex += 1) {
+      for (let secondIndex = firstIndex + 1; secondIndex < secondaryOptions.length; secondIndex += 1) {
+        const firstSecondary = secondaryOptions[firstIndex];
+        const secondSecondary = secondaryOptions[secondIndex];
+        for (const intensity of ['fraca', 'moderada', 'intensa']) {
+          combinations += 1;
+          const forwardState = {
+            primaryFeeling,
+            secondaryFeelings: [firstSecondary, secondSecondary],
+            intensity,
+          };
+          const reverseState = {
+            primaryFeeling,
+            secondaryFeelings: [secondSecondary, firstSecondary],
+            intensity,
+          };
+          const forward = engine.rankEligibleContents(runtime.contents, forwardState, { firstResponse: true });
+          const reverse = engine.rankEligibleContents(runtime.contents, reverseState, { firstResponse: true });
+          orderedScenarios += 2;
+
+          assert.ok(forward.length > 0, `${primaryFeeling} sem candidato com ${firstSecondary}+${secondSecondary}`);
+          assert.ok(forward[0].level <= 2, `${primaryFeeling}+${firstSecondary}+${secondSecondary}:${intensity} saiu do principal`);
+          assert.ok(forward[0].content.associations.some((association) => association.feeling === primaryFeeling
+            && ['nucleo', 'contextual'].includes(association.placement)));
+          assert.deepEqual(
+            forward.map(({ content, level }) => [content.id, level]),
+            reverse.map(({ content, level }) => [content.id, level]),
+            `a ordem dos secundários alterou ${primaryFeeling}+${firstSecondary}+${secondSecondary}:${intensity}`,
+          );
+        }
+      }
+    }
+  }
+
+  assert.equal(combinations, 3276);
+  assert.equal(orderedScenarios, 6552);
+});
+
+test('dois secundários muito compatíveis não salvam conteúdo alheio ao principal', () => {
+  const contents = [
+    makeContent('primary-contextual', { feelings: [], secondaryFeelings: ['tristeza'] }),
+    makeContent('secondary-only', {
+      feelings: ['medo', 'inseguranca'],
+      secondaryFeelings: ['medo', 'inseguranca'],
+      text: 'Conteúdo com compatibilidade secundária elevada',
+    }),
+  ];
+  contents[0].associations[0].placement = 'contextual';
+  contents[1].themes = ['ameaça', 'dúvida', 'proteção'];
+  const state = {
+    primaryFeeling: 'tristeza',
+    secondaryFeelings: ['medo', 'inseguranca'],
+    secondaryThemes: ['ameaça', 'dúvida', 'proteção'],
+    suitableTones: ['contemplativo'],
+    intensity: 'moderada',
+  };
+  const ranked = engine.rankEligibleContents(contents, state, { firstResponse: false });
+  assert.equal(ranked[0].content.id, 'primary-contextual');
+  assert.equal(ranked[0].level, 2);
+  assert.equal(ranked.find(({ content }) => content.id === 'secondary-only').level, 3);
+});
+
+test('trocas, retorno, intensidade e Outra perspectiva mantêm o principal explícito', () => {
+  const storage = createMemoryStorage();
+  const selector = engine.createSelector({ version: 'two-secondary-transitions', contents: runtime.contents, storage });
+  const original = {
+    primaryFeeling: 'tristeza',
+    secondaryFeelings: ['inseguranca', 'medo'],
+    intensity: 'moderada',
+  };
+  const reordered = { ...original, secondaryFeelings: ['medo', 'inseguranca'] };
+  const changedPrimary = {
+    primaryFeeling: 'inseguranca',
+    secondaryFeelings: ['tristeza', 'medo'],
+    intensity: 'moderada',
+  };
+  const changedIntensity = { ...original, intensity: 'intensa' };
+  const originalSnapshot = structuredClone(original);
+
+  const transitions = [original, reordered, changedPrimary, changedIntensity, original];
+  for (const state of transitions) {
+    const result = selector.select(state, { firstResponse: true });
+    assert.ok(result.level <= 2);
+    assert.ok(result.content.associations.some((association) => association.feeling === state.primaryFeeling
+      && ['nucleo', 'contextual'].includes(association.placement)));
+  }
+
+  const perspectives = Array.from({ length: 20 }, () => selector.select(original, { firstResponse: false }));
+  assert.ok(perspectives.every((result) => result.level <= 2));
+  assert.ok(perspectives.every(({ content }) => content.associations.some((association) => association.feeling === 'tristeza'
+    && ['nucleo', 'contextual'].includes(association.placement))));
+  assert.deepEqual(original, originalSnapshot, 'o seletor alterou silenciosamente o estado emocional recebido');
+  assert.equal(selector.getRecentSelections().length, transitions.length + perspectives.length);
+});
+
 test('inverter tristeza e insegurança altera o centro sem apagar o histórico global', () => {
   const storage = createMemoryStorage();
   const selector = engine.createSelector({ version: 'primary-inversion', contents: runtime.contents, storage });
@@ -191,6 +293,81 @@ test('cadência flexível mantém 20% a 30% de formatos desenvolvidos quando há
   assert.ok(results.every((content) => content.associations.some((item) => item.feeling === 'tristeza' && item.placement === 'nucleo')));
 });
 
+test('um único formato desenvolvido percorre o ciclo sem repetição artificial', () => {
+  const contents = Array.from({ length: 8 }, (_, index) => makeContent(`single-developed-${index + 1}`));
+  const state = { primaryFeeling: 'tristeza', secondaryFeelings: [], intensity: 'moderada' };
+  const ranked = engine.rankEligibleContents(contents, state, { firstResponse: false });
+  const developedId = ranked.at(-1).content.id;
+  ranked.at(-1).content.displayType = 'microtexto';
+  const selector = engine.createSelector({ version: 'single-developed-cadence', contents });
+  const cycle = selectMany(selector, state, contents.length).map((result) => result.content);
+  const developedPositions = cycle
+    .map((content, index) => (DEVELOPED_FORMATS.has(content.displayType) ? index + 1 : null))
+    .filter(Boolean);
+
+  assert.equal(new Set(cycle.map((content) => content.id)).size, contents.length);
+  assert.deepEqual(developedPositions, [cycle.findIndex((content) => content.id === developedId) + 1]);
+});
+
+test('nove formatos desenvolvidos passam pelos filtros e o microtexto abstrato de luto permanece bloqueado', () => {
+  const developedContents = runtime.contents.filter((content) => DEVELOPED_FORMATS.has(content.displayType));
+  const reachable = new Set();
+  const bestLevelReachable = new Set();
+
+  for (const primaryFeeling of runtime.feelings.map((feeling) => feeling.id)) {
+    for (const intensity of ['fraca', 'moderada', 'intensa']) {
+      const state = { primaryFeeling, secondaryFeelings: [], intensity };
+      const selector = engine.createSelector({ version: `format-coverage-${primaryFeeling}-${intensity}`, contents: runtime.contents });
+      const inspection = selector.inspect(state, { firstResponse: false });
+      inspection.ranked.forEach(({ content }) => {
+        if (DEVELOPED_FORMATS.has(content.displayType)) reachable.add(content.id);
+      });
+      inspection.eligibleAtLevel.forEach(({ content }) => {
+        if (DEVELOPED_FORMATS.has(content.displayType)) bestLevelReachable.add(content.id);
+      });
+    }
+  }
+
+  assert.equal(developedContents.length, 10);
+  assert.equal(reachable.size, 9);
+  assert.deepEqual(
+    developedContents.filter((content) => !reachable.has(content.id)).map((content) => content.id),
+    ['curadoria-final-epicuro-luto-microtexto'],
+  );
+  const blockedGriefText = developedContents.find((content) => content.id === 'curadoria-final-epicuro-luto-microtexto');
+  assert.equal(engine.classifyEditorialEffects(blockedGriefText, {
+    primaryFeeling: 'luto',
+    secondaryFeelings: [],
+    intensity: 'moderada',
+  }, { firstResponse: false }).safe, false);
+  assert.deepEqual([...bestLevelReachable].sort(), [
+    'ANT-MICRO-PRO-001',
+    'ANT-MICRO-TRI-001',
+    'ES-INS-VERGONHA-001',
+    'curated-113',
+  ]);
+});
+
+test('cada formato desenvolvido no melhor nível aparece uma vez antes de reiniciar o ciclo real', () => {
+  let coveredScenarios = 0;
+  for (const primaryFeeling of runtime.feelings.map((feeling) => feeling.id)) {
+    for (const intensity of ['fraca', 'moderada', 'intensa']) {
+      const state = { primaryFeeling, secondaryFeelings: [], intensity };
+      const selector = engine.createSelector({ version: `real-format-cycle-${primaryFeeling}-${intensity}`, contents: runtime.contents });
+      const inspection = selector.inspect(state, { firstResponse: false });
+      const developedIds = inspection.eligibleAtLevel
+        .filter(({ content }) => DEVELOPED_FORMATS.has(content.displayType))
+        .map(({ content }) => content.id);
+      if (!developedIds.length) continue;
+      coveredScenarios += 1;
+      const cycle = selectMany(selector, state, inspection.eligibleAtLevel.length).map(({ content }) => content);
+      assert.equal(new Set(cycle.map((content) => content.id)).size, inspection.eligibleAtLevel.length);
+      assert.ok(developedIds.every((id) => cycle.some((content) => content.id === id)));
+    }
+  }
+  assert.equal(coveredScenarios, 12);
+});
+
 test('efeito editorial bloqueia crenças prejudiciais artificiais sem inserir casos no acervo', () => {
   const cases = [
     makeContent('incapacity', { text: 'Sua insegurança prova que você é incapaz.' }),
@@ -198,6 +375,13 @@ test('efeito editorial bloqueia crenças prejudiciais artificiais sem inserir ca
     makeContent('isolation', { feelings: ['solidao'], text: 'Afaste-se de todos; sozinho é sempre melhor.' }),
     makeContent('hopeless', { text: 'Não há esperança e nada pode mudar.' }),
     makeContent('grief-pressure', { feelings: ['luto'], text: 'Você precisa superar e seguir em frente agora.' }),
+    makeContent('sadness-identity', { text: 'A tristeza é quem você é: aceite essa identidade.' }),
+    makeContent('solitude-superiority', { feelings: ['solidao'], text: 'Sua solidão mostra que você é superior aos outros.' }),
+    makeContent('impulsivity', { feelings: ['raiva'], text: 'Aja agora sem pensar nas consequências.' }),
+    makeContent('increased-guilt', { feelings: ['culpa'], text: 'Você merece carregar esta culpa para sempre.' }),
+    makeContent('suffering-superiority', { text: 'Seu sofrimento torna você superior e mais profundo.' }),
+    makeContent('emotional-invalidation', { feelings: ['ansiedade'], text: 'Isso é exagero; você não deveria sentir assim.' }),
+    makeContent('forced-grief-meaning', { feelings: ['luto'], text: 'Isso aconteceu para ensinar; transforme a perda em uma lição.' }),
   ];
   const states = [
     { primaryFeeling: 'inseguranca', secondaryFeelings: [], intensity: 'intensa' },
@@ -205,12 +389,72 @@ test('efeito editorial bloqueia crenças prejudiciais artificiais sem inserir ca
     { primaryFeeling: 'solidao', secondaryFeelings: [], intensity: 'intensa' },
     { primaryFeeling: 'tristeza', secondaryFeelings: [], intensity: 'intensa' },
     { primaryFeeling: 'luto', secondaryFeelings: [], intensity: 'intensa' },
+    { primaryFeeling: 'tristeza', secondaryFeelings: [], intensity: 'intensa' },
+    { primaryFeeling: 'solidao', secondaryFeelings: [], intensity: 'intensa' },
+    { primaryFeeling: 'raiva', secondaryFeelings: [], intensity: 'intensa' },
+    { primaryFeeling: 'culpa', secondaryFeelings: [], intensity: 'intensa' },
+    { primaryFeeling: 'tristeza', secondaryFeelings: [], intensity: 'intensa' },
+    { primaryFeeling: 'ansiedade', secondaryFeelings: [], intensity: 'intensa' },
+    { primaryFeeling: 'luto', secondaryFeelings: [], intensity: 'intensa' },
   ];
   cases.forEach((content, index) => {
     const effects = engine.classifyEditorialEffects(content, states[index]);
     assert.equal(effects.safe, false, `${content.id} não foi bloqueado`);
     assert.ok(effects.tags.length > 0);
   });
+});
+
+test('primeira resposta intensa evita confronto e ação nos oito sentimentos revisados', () => {
+  const feelings = ['luto', 'tristeza', 'inseguranca', 'culpa', 'ansiedade', 'falta_de_proposito', 'raiva', 'solidao'];
+  for (const primaryFeeling of feelings) {
+    for (const editorialFunction of ['confrontation', 'action']) {
+      const content = makeContent(`${primaryFeeling}-${editorialFunction}`, {
+        feelings: [primaryFeeling],
+        editorialFunction,
+        tone: editorialFunction === 'confrontation' ? 'confrontador_lucido' : 'direto',
+      });
+      const effects = engine.classifyEditorialEffects(content, {
+        primaryFeeling,
+        secondaryFeelings: [],
+        intensity: 'intensa',
+      }, { firstResponse: true });
+      assert.equal(effects.safe, false, `${primaryFeeling}:${editorialFunction} passou na primeira resposta intensa`);
+    }
+  }
+});
+
+test('acervo real não contém os novos padrões prejudiciais e mantém duas pendências herdadas de luto', () => {
+  const feelings = new Set(['luto', 'tristeza', 'inseguranca', 'culpa', 'ansiedade', 'falta_de_proposito', 'raiva', 'solidao']);
+  const newUnsafeTags = new Set([
+    'encourages_impulsivity',
+    'forces_meaning_on_grief',
+    'increases_guilt',
+    'invalidates_emotion',
+    'turns_emotion_into_identity',
+  ]);
+  const newFindings = [];
+  const inheritedGriefPending = new Set();
+
+  for (const content of runtime.contents) {
+    for (const association of content.associations) {
+      if (!feelings.has(association.feeling)) continue;
+      for (const intensity of content.suitableIntensities) {
+        const effects = engine.classifyEditorialEffects(content, {
+          primaryFeeling: association.feeling,
+          secondaryFeelings: [],
+          intensity,
+        }, { firstResponse: false });
+        if (effects.tags.some((tag) => newUnsafeTags.has(tag))) newFindings.push(content.id);
+        if (association.feeling === 'luto' && !effects.safe) inheritedGriefPending.add(content.id);
+      }
+    }
+  }
+
+  assert.deepEqual([...new Set(newFindings)], []);
+  assert.deepEqual([...inheritedGriefPending].sort(), [
+    'batch05-quote-021',
+    'curadoria-final-epicuro-luto-microtexto',
+  ]);
 });
 
 test('conteúdos selecionáveis nos sentimentos vulneráveis passam pela camada de efeito', () => {

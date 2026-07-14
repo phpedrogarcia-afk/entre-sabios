@@ -96,7 +96,9 @@ function enrichBookMetadata(book, index) {
     level: book.level || 'intermediário',
     depth: book.depth || 4,
     subjects: book.subjects || tags.slice(0, 3),
-    description: book.description || `A obra desenvolve temas como ${tags.slice(0, 3).join(', ')} e amplia a reflexão para além da frase inicial.`,
+    description: book.description || '',
+    hasEditorialDescription: Boolean(book.description),
+    publicationEnabled: book.publicationEnabled !== false,
     link: book.link || `https://www.google.com/search?q=${encodeURIComponent(`${book.title} ${book.author} livro`)}`,
     isbn: book.isbn || '',
     relatedAuthors,
@@ -109,8 +111,9 @@ function enrichBookMetadata(book, index) {
   };
 }
 
-const normalizedBookCatalog = [...bookCatalog, ...additionalBookCatalog]
+const normalizedBookCatalog = [...additionalBookCatalog, ...bookCatalog]
   .map(enrichBookMetadata)
+  .filter((book) => book.publicationEnabled)
   .filter((book) => !['steve_jobs', 'coragem_o_prazer_de_viver_perigosamente'].includes(normalizeTheme(book.title)))
   .filter((book, index, catalog) => catalog.findIndex((candidate) => normalizeTheme(candidate.title) === normalizeTheme(book.title) && normalizeTheme(candidate.author) === normalizeTheme(book.author)) === index);
 
@@ -158,9 +161,16 @@ const quoteShareBtn = document.getElementById('quoteShareBtn');
 
 const quoteTextEl = document.getElementById('quoteText');
 const quoteAuthorEl = document.getElementById('quoteAuthor');
+const quoteSourceEl = document.getElementById('quoteSource');
+const explanationBlockEl = document.getElementById('explanationBlock');
 const reflectionTextEl = document.getElementById('reflectionText');
+const philosophyBlockEl = document.getElementById('philosophyBlock');
+const philosophyTitleEl = document.getElementById('philosophyTitle');
 const philosophyTextEl = document.getElementById('philosophyText');
+const adviceBlockEl = document.getElementById('adviceBlock');
+const adviceTitleEl = document.getElementById('adviceTitle');
 const adviceTextEl = document.getElementById('adviceText');
+const bookRecommendationEl = document.getElementById('bookRecommendation');
 const bookTextEl = document.getElementById('bookText');
 const bookReasonEl = document.getElementById('bookReason');
 const tagsRowEl = document.getElementById('tagsRow');
@@ -306,16 +316,25 @@ function getSelectedThemes() {
 }
 
 const authorBookAliases = window.EntreSabiosData.authorBookAliases;
-const functionCopy = {
-  recognition: 'A frase reconhece a experiência sem exigir que ela seja resolvida imediatamente.',
-  clarification: 'A frase esclarece uma diferença ou mecanismo que pode estar atuando neste momento.',
-  inquiry: 'A frase abre uma pergunta para observar a experiência com mais precisão.',
-  grounding: 'A frase aproxima a atenção do presente e do que pode ser percebido agora.',
-  reframing: 'A frase oferece outro ângulo para compreender o que está sendo vivido.',
-  confrontation: 'A frase expõe uma contradição com lucidez, sem substituir a escolha pessoal.',
-  action: 'A frase aponta um gesto possível depois que a experiência foi reconhecida.',
-  contemplation: 'A frase sustenta uma imagem ou tensão aberta para contemplação.',
-};
+function getSpecificEditorialExplanation(content) {
+  const entry = window.EntreSabiosData.editorialExplanations?.[content.id];
+  if (!entry || entry.finalText !== content.finalText) return '';
+  return String(entry.explanation || '').trim();
+}
+
+function getSpecificEditorialGuidance(content, state) {
+  const entry = window.EntreSabiosData.editorialGuidance?.[content.id];
+  if (!entry || entry.finalText !== content.finalText) return null;
+  const context = window.EntreSabiosData.editorialGuidanceContexts?.[content.id];
+  const primaryFeeling = normalizeTheme(state?.primaryFeeling);
+  const intensity = normalizeTheme(state?.intensity);
+  const allowedFeelings = (context?.feelings || []).map(normalizeTheme);
+  const allowedIntensities = (context?.intensities || []).map(normalizeTheme);
+  if (!allowedFeelings.includes(primaryFeeling) || !allowedIntensities.includes(intensity)) return null;
+  const guidance = String(entry.guidance || '').trim();
+  const label = String(entry.label || '').trim();
+  return guidance && label ? { guidance, label } : null;
+}
 
 function buildRuntimeStory(selection, selectedThemes) {
   const content = selection.content;
@@ -323,12 +342,22 @@ function buildRuntimeStory(selection, selectedThemes) {
   const tags = rawTags.map((tag) => tag.replace(/_/g, ' '));
   const longTypes = new Set(['citacao_longa', 'microtexto', 'reflexao_curta']);
   const inspiration = content.inspirationSource || content.author;
-  const philosophy = thinkerProfiles[inspiration]
-    || 'Esta reflexão pertence ao acervo editorial Entre Sábios e foi selecionada por sua relação explícita com o sentimento escolhido.';
-  const reflection = functionCopy[content.editorialFunction] || functionCopy.contemplation;
-  const advice = content.secondaryFunction
-    ? `${functionCopy[content.secondaryFunction] || 'Permita que a reflexão permaneça como uma pergunta aberta.'}`
-    : 'Permita que a reflexão acompanhe este momento antes de procurar uma resposta definitiva.';
+  const philosophy = String(thinkerProfiles[inspiration] || '').trim();
+  const traditionOrigins = new Set([
+    'Bardo Thodol',
+    'Bhagavad Gita',
+    'Buda — Sutta Nipata',
+    'Dhammapada',
+    'Katha Upanishad',
+    'Sabedoria suméria',
+  ]);
+  const source = content.source?.status !== 'not_applicable'
+    && String(content.source?.title || '').trim()
+    ? { title: String(content.source.title).trim(), status: content.source.status }
+    : null;
+  const reflection = getSpecificEditorialExplanation(content);
+  const editorialGuidance = getSpecificEditorialGuidance(content, selection.state);
+  const advice = editorialGuidance?.guidance || '';
   return {
     key: content.id,
     quote: content.finalText,
@@ -338,10 +367,12 @@ function buildRuntimeStory(selection, selectedThemes) {
     displayType: content.displayType,
     displayAuthor: content.displayedAuthor,
     quoteType: content.attributionType,
-    source: '',
+    source,
     philosophy,
+    philosophyLabel: traditionOrigins.has(inspiration) ? 'CONHEÇA A TRADIÇÃO' : 'CONHEÇA O PENSADOR',
     reflection,
     advice,
+    adviceLabel: editorialGuidance?.label || '',
     sentimentos: content.associations.map((association) => association.feeling),
     intensidade: content.suitableIntensities,
     temas: content.themes,

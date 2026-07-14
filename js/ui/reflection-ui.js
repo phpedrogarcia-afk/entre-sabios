@@ -4,27 +4,37 @@
 
 function updateBookRecommendation(story) {
   const recommendation = recommendBookForStory(story);
+  if (!recommendation?.book) {
+    story.book = null;
+    story.livro = '';
+    story.bookCompatibilityScore = null;
+    story.bookSelectionReasons = [];
+    bookRecommendationEl.hidden = true;
+    bookTextEl.textContent = '';
+    bookReasonEl.textContent = '';
+    return;
+  }
   const { book, score, reasons, commonThemes = [] } = recommendation;
   story.book = book;
   story.livro = book.title;
   story.bookCompatibilityScore = score;
   story.bookSelectionReasons = reasons;
 
+  bookRecommendationEl.hidden = false;
   bookTextEl.textContent = `${book.title}, de ${book.author}`;
-  const functionLabels = {
-    validacao: 'validação',
-    dissolucao: 'acolhimento',
-    acao: 'sustentação prática',
-    choque: 'desconstrução',
-  };
-  const authorContext = recommendation.sameAuthor
-    ? `A reflexão nasce próxima de ${story.displayAuthor || story.author}, e a indicação também foi filtrada pela função editorial da leitura.`
-    : `Esta obra foi escolhida para funcionar como ${functionLabels[book.bookFunction] || 'travessia editorial'}, não apenas como eco do sentimento.`;
-  const themeContext = commonThemes.length
-    ? ` Ela desenvolve especialmente ${commonThemes.slice(0, 3).map((theme) => theme.replace(/_/g, ' ')).join(', ')}.`
-    : ` Ela amplia o assunto predominante e oferece continuidade ao conselho apresentado.`;
-  const clinicalContext = book.clinicalNote ? ` ${book.clinicalNote}.` : '';
-  bookReasonEl.textContent = `${authorContext}${themeContext}${clinicalContext}`;
+  const connection = commonThemes.slice(0, 3).map(prettifyTag);
+  const connectionList = connection.length > 1
+    ? `${connection.slice(0, -1).join(', ')} e ${connection.at(-1)}`
+    : connection[0];
+  const connectionText = connection.length
+    ? connection.length === 1
+      ? `Ela aprofunda o tema ${connectionList}, que também sustenta esta reflexão.`
+      : `Ela aprofunda os temas ${connectionList}, que também sustentam esta reflexão.`
+    : `Ela aborda ${prettifyTag(story.emotionalState?.primaryFeeling || '')}, sentimento central desta reflexão.`;
+  const authorText = recommendation.sameAuthor
+    ? `A obra é do próprio autor associado ao conteúdo, mas foi indicada também por essa relação temática.`
+    : '';
+  bookReasonEl.textContent = [book.description, connectionText, authorText].filter(Boolean).join(' ');
 }
 
 function prettifyTag(s) {
@@ -40,7 +50,7 @@ function ensureSelectionMin() {
 }
 
 function buildStoryAttribution(story) {
-  return story.displayAuthor || 'Entre Sábios';
+  return String(story.displayAuthor || '').trim() || 'Autoria em revisão';
 }
 
 function renderStory(story) {
@@ -58,9 +68,20 @@ function renderStory(story) {
     : 'O QUE ESSA FRASE QUER DIZER';
   story.attribution = buildStoryAttribution(story);
   quoteAuthorEl.textContent = `— ${story.attribution}`;
-  reflectionTextEl.textContent = story.reflection;
-  philosophyTextEl.textContent = story.philosophy;
-  adviceTextEl.textContent = story.advice;
+  const sourceTitle = String(story.source?.title || '').trim();
+  quoteSourceEl.hidden = !sourceTitle;
+  quoteSourceEl.textContent = sourceTitle ? `Fonte: ${sourceTitle}` : '';
+  const hasSpecificExplanation = Boolean(String(story.reflection || '').trim());
+  explanationBlockEl.hidden = !hasSpecificExplanation;
+  reflectionTextEl.textContent = hasSpecificExplanation ? story.reflection : '';
+  const hasSpecificPhilosophy = Boolean(String(story.philosophy || '').trim());
+  philosophyBlockEl.hidden = !hasSpecificPhilosophy;
+  philosophyTitleEl.textContent = hasSpecificPhilosophy ? story.philosophyLabel : '';
+  philosophyTextEl.textContent = hasSpecificPhilosophy ? story.philosophy : '';
+  const hasSpecificAdvice = Boolean(String(story.advice || '').trim() && String(story.adviceLabel || '').trim());
+  adviceBlockEl.hidden = !hasSpecificAdvice;
+  adviceTitleEl.textContent = hasSpecificAdvice ? story.adviceLabel : '';
+  adviceTextEl.textContent = hasSpecificAdvice ? story.advice : '';
   updateBookRecommendation(story);
 
   tagsRowEl.innerHTML = '';

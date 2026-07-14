@@ -41,6 +41,8 @@ function evaluateBookCandidate(book, story) {
   const intensityFit = book.intensities.includes(state.intensity) ? 1 : 0;
   const preferenceScore = Math.max(-2, Math.min(2, preferenceProfile.books[book.title] || 0));
   const isExcluded = violatesBookAvoidance(book, state);
+  const hasSubstantiveRelation = primaryFeelingMatch || rootThemeMatches.length > 0 || contentThemeMatches.length > 0;
+  const isEligible = !isExcluded && book.hasEditorialDescription && hasSubstantiveRelation && intensityFit === 1;
   const reasons = [];
   if (sameAuthor) reasons.push('obra do autor da reflexão');
   else if (authorRelation) reasons.push('autoria ou tradição relacionada');
@@ -48,7 +50,7 @@ function evaluateBookCandidate(book, story) {
   if (rootThemeMatches.length) reasons.push(`${rootThemeMatches.length} tema(s) raiz`);
   if (contentThemeMatches.length) reasons.push(`${contentThemeMatches.length} tema(s) do conteúdo`);
   return {
-    book, isExcluded, sameAuthor, authorRelation,
+    book, isExcluded, isEligible, hasSubstantiveRelation, sameAuthor, authorRelation,
     primaryFeelingMatch, rootThemeMatches, contentThemeMatches,
     functionFit, intensityFit, preferenceScore, targetFunctions, reasons,
   };
@@ -56,25 +58,37 @@ function evaluateBookCandidate(book, story) {
 
 function compareBookCandidates(a, b) {
   const dimensions = [
-    [Number(b.sameAuthor), Number(a.sameAuthor)],
-    [Number(b.authorRelation), Number(a.authorRelation)],
     [Number(b.primaryFeelingMatch), Number(a.primaryFeelingMatch)],
     [b.rootThemeMatches.length, a.rootThemeMatches.length],
     [b.contentThemeMatches.length, a.contentThemeMatches.length],
     [b.functionFit, a.functionFit],
-    [b.intensityFit, a.intensityFit],
+    [Number(b.sameAuthor), Number(a.sameAuthor)],
+    [Number(b.authorRelation), Number(a.authorRelation)],
     [b.preferenceScore, a.preferenceScore],
   ];
   for (const [bv, av] of dimensions) if (bv !== av) return bv - av;
   return a.book.title.localeCompare(b.book.title);
 }
 
+function getRecentRecommendedBookTitles(limit = 4) {
+  return new Set(history
+    .slice(-limit)
+    .map((item) => normalizeTheme(item.book?.title || ''))
+    .filter(Boolean));
+}
+
 function recommendBookForStory(story) {
-  const ranked = normalizedBookCatalog.map((book) => evaluateBookCandidate(book, story)).filter((candidate) => !candidate.isExcluded).sort(compareBookCandidates);
-  const recommendation = ranked[0] || evaluateBookCandidate(normalizedBookCatalog[0], story);
+  const ranked = normalizedBookCatalog
+    .map((book) => evaluateBookCandidate(book, story))
+    .filter((candidate) => candidate.isEligible)
+    .sort(compareBookCandidates);
+  const recentTitles = getRecentRecommendedBookTitles();
+  const fresh = ranked.filter((candidate) => !recentTitles.has(normalizeTheme(candidate.book.title)));
+  const recommendation = fresh[0] || ranked[0];
+  if (!recommendation) return null;
   return {
     ...recommendation,
     score: null,
-    commonThemes: recommendation.contentThemeMatches,
+    commonThemes: Array.from(new Set([...recommendation.rootThemeMatches, ...recommendation.contentThemeMatches])),
   };
 }

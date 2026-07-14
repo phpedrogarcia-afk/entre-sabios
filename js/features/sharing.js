@@ -1,13 +1,26 @@
 // Compartilhamento e geração de imagem.
 // Extraído de script.js na Fase 4 da refatoração segura.
-// Não alterar comportamento nesta fase.
+
+function getShareSourceLabel(source) {
+  if (typeof source === 'string') return source.trim();
+  return String(source?.title || '').trim();
+}
+
+function formatShareAttribution(attribution, source) {
+  const cleanAttribution = String(attribution || '').trim() || 'Entre Sábios';
+  const cleanSource = getShareSourceLabel(source);
+  if (!cleanSource || cleanSource.localeCompare(cleanAttribution, 'pt-BR', { sensitivity: 'base' }) === 0) {
+    return cleanAttribution;
+  }
+  return `${cleanAttribution} · ${cleanSource}`;
+}
 
 function getSharePayload() {
   if (currentStory) {
     return {
       quote: currentStory.quote,
       attribution: currentStory.attribution || currentStory.displayAuthor || currentStory.author,
-      source: currentStory.source || '',
+      source: getShareSourceLabel(currentStory.source),
     };
   }
 
@@ -20,7 +33,7 @@ function getSharePayload() {
 
 function getShareMessage() {
   const payload = getSharePayload();
-  const attribution = `${payload.attribution}${payload.source ? ` · ${payload.source}` : ''}`;
+  const attribution = formatShareAttribution(payload.attribution, payload.source);
   return `“${payload.quote.replace(/[“”]/g, '').trim()}”\n— ${attribution}\n\nentresabios.com`;
 }
 
@@ -41,21 +54,38 @@ function roundedRectPath(ctx, x, y, width, height, radius) {
 }
 
 function wrapCanvasText(ctx, text, maxWidth) {
-  const words = String(text).replace(/\s+/g, ' ').trim().split(' ');
   const lines = [];
-  let currentLine = '';
+  const paragraphs = String(text).split(/\r?\n/);
 
-  words.forEach((word) => {
-    const testLine = currentLine ? `${currentLine} ${word}` : word;
-    if (ctx.measureText(testLine).width <= maxWidth || !currentLine) {
-      currentLine = testLine;
-    } else {
-      lines.push(currentLine);
-      currentLine = word;
-    }
+  paragraphs.forEach((paragraph, paragraphIndex) => {
+    const words = paragraph.replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
+    let currentLine = '';
+
+    words.forEach((word) => {
+      const parts = [];
+      let remainingWord = word;
+      while (remainingWord && ctx.measureText(remainingWord).width > maxWidth) {
+        let end = remainingWord.length - 1;
+        while (end > 1 && ctx.measureText(remainingWord.slice(0, end)).width > maxWidth) end -= 1;
+        parts.push(remainingWord.slice(0, end));
+        remainingWord = remainingWord.slice(end);
+      }
+      if (remainingWord) parts.push(remainingWord);
+
+      parts.forEach((part) => {
+        const testLine = currentLine ? `${currentLine} ${part}` : part;
+        if (ctx.measureText(testLine).width <= maxWidth) {
+          currentLine = testLine;
+        } else {
+          if (currentLine) lines.push(currentLine);
+          currentLine = part;
+        }
+      });
+    });
+
+    if (currentLine) lines.push(currentLine);
+    if (paragraphIndex < paragraphs.length - 1 && lines.at(-1) !== '') lines.push('');
   });
-
-  if (currentLine) lines.push(currentLine);
   return lines;
 }
 
@@ -136,7 +166,8 @@ function drawPaperNoise(ctx, width, height, alpha) {
 }
 
 function fitShareQuote(ctx, text, maxWidth, maxHeight, scale) {
-  let fontSize = 68 * scale;
+  const characterCount = String(text).trim().length;
+  let fontSize = (characterCount <= 80 ? 82 : characterCount <= 180 ? 72 : 68) * scale;
   const minimumFontSize = 28 * scale;
   let lines = [];
   let lineHeight = 0;
@@ -147,6 +178,23 @@ function fitShareQuote(ctx, text, maxWidth, maxHeight, scale) {
     lineHeight = fontSize * 1.33;
     if (lines.length * lineHeight <= maxHeight || fontSize <= minimumFontSize) break;
     fontSize -= 2 * scale;
+  } while (fontSize >= minimumFontSize);
+
+  return { fontSize, lines, lineHeight, blockHeight: lines.length * lineHeight };
+}
+
+function fitShareCredit(ctx, text, maxWidth, maxHeight, scale, quoteFont) {
+  let fontSize = Math.min(32 * scale, Math.max(25 * scale, quoteFont * 0.38));
+  const minimumFontSize = 22 * scale;
+  let lines = [];
+  let lineHeight = 0;
+
+  do {
+    ctx.font = `400 ${fontSize}px Georgia, "Times New Roman", serif`;
+    lines = wrapCanvasText(ctx, text, maxWidth);
+    lineHeight = fontSize * 1.35;
+    if (lines.length * lineHeight <= maxHeight || fontSize <= minimumFontSize) break;
+    fontSize -= 1 * scale;
   } while (fontSize >= minimumFontSize);
 
   return { fontSize, lines, lineHeight, blockHeight: lines.length * lineHeight };
@@ -223,15 +271,21 @@ function drawShareCard({ width = 1080, height = 1920, styleKey = currentShareSty
   });
 
   ctx.fillStyle = theme.muted;
-  const author = `— ${payload.attribution}${payload.source ? ` · ${payload.source}` : ''}`;
-  ctx.font = `400 ${Math.max(25 * scale, quoteFont * 0.38)}px Georgia, "Times New Roman", serif`;
-  wrapCanvasText(ctx, author, cardW * 0.7).slice(0, 2).forEach((line, index) => {
-    ctx.fillText(line, width / 2, quoteStartY + quoteBlockH + 74 * scale + index * 34 * scale);
+  const author = `— ${formatShareAttribution(payload.attribution, payload.source)}`;
+  const fittedCredit = fitShareCredit(ctx, author, cardW * 0.7, cardH * 0.12, scale, quoteFont);
+  const quoteBottomY = quoteStartY + Math.max(0, quoteLines.length - 1) * lineHeight + lineHeight / 2;
+  const creditStartY = quoteBottomY + 74 * scale + fittedCredit.lineHeight / 2;
+  ctx.font = `400 ${fittedCredit.fontSize}px Georgia, "Times New Roman", serif`;
+  fittedCredit.lines.forEach((line, index) => {
+    ctx.fillText(line, width / 2, creditStartY + index * fittedCredit.lineHeight);
   });
 
-  ctx.font = `700 ${18 * scale}px Arial, sans-serif`;
-  ctx.globalAlpha = 0.52;
-  ctx.fillText('entresabios.com', width / 2, cardY + cardH - 80 * scale);
+  ctx.font = `700 ${20 * scale}px Arial, sans-serif`;
+  ctx.globalAlpha = 0.58;
+  ctx.fillText('ENTRE SÁBIOS', width / 2, cardY + cardH - 108 * scale);
+  ctx.font = `600 ${16 * scale}px Arial, sans-serif`;
+  ctx.globalAlpha = 0.5;
+  ctx.fillText('entresabios.com', width / 2, cardY + cardH - 78 * scale);
   ctx.globalAlpha = 1;
 
   drawShareIcon(ctx, cardX + cardW - 92 * scale, cardY + cardH - 110 * scale, 42 * scale, theme);
