@@ -18,6 +18,17 @@ function getSharePayload() {
   };
 }
 
+function getShareMessage() {
+  const payload = getSharePayload();
+  const attribution = `${payload.attribution}${payload.source ? ` · ${payload.source}` : ''}`;
+  return `“${payload.quote.replace(/[“”]/g, '').trim()}”\n— ${attribution}\n\nentresabios.com`;
+}
+
+function getRandomShareStyle() {
+  const availableStyles = Object.keys(shareCardThemes);
+  return availableStyles[Math.floor(Math.random() * availableStyles.length)] || 'sage';
+}
+
 function roundedRectPath(ctx, x, y, width, height, radius) {
   const r = Math.min(radius, width / 2, height / 2);
   ctx.beginPath();
@@ -124,13 +135,31 @@ function drawPaperNoise(ctx, width, height, alpha) {
   ctx.restore();
 }
 
-function drawShareCard({ width = 1080, height = 1350 } = {}) {
+function fitShareQuote(ctx, text, maxWidth, maxHeight, scale) {
+  let fontSize = 68 * scale;
+  const minimumFontSize = 28 * scale;
+  let lines = [];
+  let lineHeight = 0;
+
+  do {
+    ctx.font = `500 ${fontSize}px Georgia, "Times New Roman", serif`;
+    lines = wrapCanvasText(ctx, text, maxWidth);
+    lineHeight = fontSize * 1.33;
+    if (lines.length * lineHeight <= maxHeight || fontSize <= minimumFontSize) break;
+    fontSize -= 2 * scale;
+  } while (fontSize >= minimumFontSize);
+
+  return { fontSize, lines, lineHeight, blockHeight: lines.length * lineHeight };
+}
+
+function drawShareCard({ width = 1080, height = 1920, styleKey = currentShareStyle } = {}) {
   const payload = getSharePayload();
-  const theme = shareCardThemes[currentShareStyle] || shareCardThemes.sage;
+  const theme = shareCardThemes[styleKey] || shareCardThemes.sage;
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('O navegador não oferece suporte à geração da imagem.');
   const scale = width / 1080;
 
   ctx.fillStyle = theme.page;
@@ -182,15 +211,12 @@ function drawShareCard({ width = 1080, height = 1350 } = {}) {
   ctx.fillStyle = theme.ink;
 
   const quote = `“${payload.quote.replace(/[“”]/g, '').trim()}”`;
-  let quoteFont = 62 * scale;
-  if (quote.length > 150) quoteFont = 48 * scale;
-  else if (quote.length > 105) quoteFont = 54 * scale;
-
-  ctx.font = `500 ${quoteFont}px Georgia, "Times New Roman", serif`;
-  const quoteLines = wrapCanvasText(ctx, quote, cardW * 0.72);
-  const lineHeight = quoteFont * 1.33;
-  const quoteBlockH = quoteLines.length * lineHeight;
-  const quoteStartY = height * 0.49 - quoteBlockH / 2 + lineHeight / 2;
+  const fittedQuote = fitShareQuote(ctx, quote, cardW * 0.74, cardH * 0.5, scale);
+  const quoteFont = fittedQuote.fontSize;
+  const quoteLines = fittedQuote.lines;
+  const lineHeight = fittedQuote.lineHeight;
+  const quoteBlockH = fittedQuote.blockHeight;
+  const quoteStartY = height * 0.48 - quoteBlockH / 2 + lineHeight / 2;
 
   quoteLines.forEach((line, index) => {
     ctx.fillText(line, width / 2, quoteStartY + index * lineHeight);
@@ -205,7 +231,7 @@ function drawShareCard({ width = 1080, height = 1350 } = {}) {
 
   ctx.font = `700 ${18 * scale}px Arial, sans-serif`;
   ctx.globalAlpha = 0.52;
-  ctx.fillText('ENTRE SÁBIOS', width / 2, cardY + cardH - 80 * scale);
+  ctx.fillText('entresabios.com', width / 2, cardY + cardH - 80 * scale);
   ctx.globalAlpha = 1;
 
   drawShareIcon(ctx, cardX + cardW - 92 * scale, cardY + cardH - 110 * scale, 42 * scale, theme);
@@ -230,15 +256,30 @@ function downloadBlob(blob, filename) {
   window.setTimeout(() => URL.revokeObjectURL(url), 1200);
 }
 
-async function createShareImage() {
-  const imageCanvas = drawShareCard();
+async function createShareImage({ styleKey = currentShareStyle } = {}) {
+  const resolvedStyleKey = shareCardThemes[styleKey] ? styleKey : 'sage';
+  const imageCanvas = drawShareCard({ styleKey: resolvedStyleKey });
   const imageBlob = await canvasToBlob(imageCanvas);
   if (!imageBlob) throw new Error('Não foi possível gerar a imagem.');
+  const filename = `entre-sabios-${resolvedStyleKey}-stories.png`;
+  const imageFile = typeof File === 'function'
+    ? new File([imageBlob], filename, { type: 'image/png' })
+    : null;
   return {
     blob: imageBlob,
-    file: new File([imageBlob], `entre-sabios-${currentShareStyle}.png`, { type: 'image/png' }),
-    filename: `entre-sabios-${currentShareStyle}.png`,
+    file: imageFile,
+    filename,
+    styleKey: resolvedStyleKey,
   };
+}
+
+function canShareImageFile(file) {
+  if (!file || typeof navigator.share !== 'function' || typeof navigator.canShare !== 'function') return false;
+  try {
+    return navigator.canShare({ files: [file] });
+  } catch {
+    return false;
+  }
 }
 
 function setShareStatus(message = '') {

@@ -275,7 +275,7 @@ html[data-theme="night"] .brand-title {
   flex: 0 0 34px;
   border: 1px solid var(--stroke);
   border-radius: 50%;
-  background: url("../assets/entre-sabios-social.png") 23% center / 240% auto no-repeat;
+  background: url("../assets/brand-icon.jpg") center / cover no-repeat;
   font-size: 0;
 }
 

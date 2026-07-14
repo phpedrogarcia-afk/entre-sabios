@@ -7,6 +7,7 @@ data.verifiedQuoteMetadata = {
   'Eu não devo ter medo. O medo é o assassino da mente.': {
     author: 'Frank Herbert',
     source: 'Duna · Litania contra o medo (trecho curto)',
+    editorialStatus: 'quarantine',
   },
   'Não são as coisas que perturbam, mas as ideias que fazemos delas.': {
     author: 'Epicteto',
@@ -38,10 +39,8 @@ data.verifiedQuoteMetadata = {
 data.authorToneProfiles = {
   acolhedor: ['Clarice Lispector', 'Rumi', 'Simone Weil', 'Maya Angelou', 'Viktor Frankl', 'Buda — Sutta Nipata'],
   direto: ['Marco Aurélio', 'Epicteto', 'Sêneca', 'Frank Herbert', 'Bhagavad Gita', 'Confúcio', 'Ptahhotep'],
-  confrontador: ['Nietzsche', 'Osho', 'Steve Jobs'],
+  confrontador: ['Nietzsche', 'Osho', 'Steve Jobs', 'Chögyam Trungpa'],
   analítico: ['Platão', 'Sócrates', 'Aristóteles', 'Carl Jung', 'Hannah Arendt', 'Heráclito'],
-  acolhedor_dissolvente: ['Nisargadatta Maharaj'],
-  cruel_lucido: ['Chögyam Trungpa'],
 };
 
 data.toneFamilies = {

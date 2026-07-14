@@ -1,0 +1,30 @@
+{
+  "validatedAt": "2026-07-14",
+  "url": "https://entresabios.com/",
+  "browser": "Google Chrome com extensão oficial Codex",
+  "status": "passed",
+  "checks": {
+    "feelingsVisible": 14,
+    "primaryAndSecondarySelection": true,
+    "primaryInversionChangesCenter": true,
+    "intensityActive": true,
+    "intenseGriefFirstResponseSupportive": true,
+    "griefRotationGenerated": 8,
+    "griefRotationUnique": 8,
+    "previousReflectionRestored": true,
+    "favoritesAddAndRemove": true,
+    "bookRecommendationVisible": true,
+    "manualShareStylePreserved": true,
+    "shareFallbackDownloadedImage": true,
+    "copyButtonAbsent": true,
+    "authorshipPreferenceAbsent": true,
+    "genderPreferenceAbsent": true,
+    "consoleWarnings": 0,
+    "consoleErrors": 0
+  },
+  "notes": [
+    "O compartilhamento direto não estava disponível no ambiente de teste; o fallback baixou a imagem e exibiu o aviso previsto.",
+    "O favorito criado durante o teste foi removido ao final, restaurando o contador para zero.",
+    "A sequência real de luto percorreu os oito núcleos elegíveis sem repetição precoce."
+  ]
+}

@@ -24,7 +24,7 @@
       "inconsciente",
       "autoengano"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "analítico",
     "profundidade": 5,
     "conselho": "Observe uma reação exagerada e pergunte que parte sua ela tenta revelar.",
     "explicacao": "A frase trabalha a sombra como conteúdo psíquico que retorna quando é negado.",
@@ -38,7 +38,7 @@
     "source": "Leitura editorial inspirada no conceito de persona em Jung",
     "sentimentos": [
       "confusão",
-      "indiretas"
+      "autoconhecimento"
     ],
     "intensidade": [
       "moderada"
@@ -48,7 +48,7 @@
       "máscara",
       "autenticidade"
     ],
-    "tom": "introspectivo",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Pergunte onde você está performando tanto que já não consegue descansar.",
     "explicacao": "A persona é útil socialmente, mas empobrece quando substitui a identidade inteira.",
@@ -56,6 +56,7 @@
   },
   {
     "id": "batch03-quote-003",
+    "editorialStatus": "quarantine",
     "autor": "Carl Jung",
     "frase": "Nem toda queda é regressão; algumas descidas são necessárias para encontrar o que foi enterrado vivo.",
     "quoteType": "inspired",
@@ -81,6 +82,7 @@
   },
   {
     "id": "batch03-quote-004",
+    "editorialStatus": "quarantine",
     "autor": "Carl Jung",
     "frase": "O julgamento que mais nos irrita no outro às vezes toca uma porta que mantemos trancada em nós.",
     "quoteType": "inspired",
@@ -122,7 +124,7 @@
       "sombra",
       "inteireza"
     ],
-    "tom": "cruel_lucido",
+    "tom": "analítico",
     "profundidade": 5,
     "conselho": "Integre uma parte difícil sem deixá-la comandar suas escolhas.",
     "explicacao": "A individuação não elimina a sombra; ela amplia a consciência sobre ela.",
@@ -155,6 +157,7 @@
   },
   {
     "id": "batch03-quote-007",
+    "editorialStatus": "quarantine",
     "autor": "Viktor Frankl",
     "frase": "O sentido nem sempre aparece como claridade; às vezes aparece como a próxima responsabilidade que não podemos abandonar.",
     "quoteType": "inspired",
@@ -204,6 +207,7 @@
   },
   {
     "id": "batch03-quote-009",
+    "editorialStatus": "quarantine",
     "autor": "Viktor Frankl",
     "frase": "A esperança madura não nega o abismo; apenas se recusa a chamar o abismo de última palavra.",
     "quoteType": "inspired",
@@ -229,6 +233,7 @@
   },
   {
     "id": "batch03-quote-010",
+    "editorialStatus": "quarantine",
     "autor": "Viktor Frankl",
     "frase": "Quem ainda pode amar, criar ou responder por algo não está reduzido ao que sofreu.",
     "quoteType": "inspired",
@@ -270,7 +275,7 @@
       "presença",
       "cuidado"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Faça três respirações conscientes antes de decidir o próximo gesto.",
     "explicacao": "A presença não é vendida como cura mágica, mas como chão para cuidar da dor.",
@@ -295,7 +300,7 @@
       "cuidado",
       "acolhimento"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Aproxime-se da raiva como sinal de ferida antes de escolher uma resposta.",
     "explicacao": "A raiva é tratada como energia a ser cuidada, não reprimida nem descarregada.",
@@ -303,6 +308,7 @@
   },
   {
     "id": "batch03-quote-013",
+    "editorialStatus": "quarantine",
     "autor": "Thich Nhat Hanh",
     "frase": "A ausência não apaga completamente alguém; ela muda a forma como a presença continua.",
     "quoteType": "inspired",
@@ -345,7 +351,7 @@
       "dor",
       "atenção"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Fique com a sensação por alguns instantes sem construir uma tese sobre ela.",
     "explicacao": "O cuidado começa na presença antes de tentar organizar tudo intelectualmente.",
@@ -353,6 +359,7 @@
   },
   {
     "id": "batch03-quote-015",
+    "editorialStatus": "quarantine",
     "autor": "Thich Nhat Hanh",
     "frase": "Quem caminha com pressa demais pisa até nos sinais que poderiam salvá-lo.",
     "quoteType": "inspired",
@@ -394,7 +401,7 @@
       "insegurança",
       "verdade"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Quando tudo parecer instável, observe o que era apego à certeza e o que é necessidade real.",
     "explicacao": "Pema trabalha a insegurança como lugar de honestidade, não como fracasso.",
@@ -418,7 +425,7 @@
       "fuga",
       "presença"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Sente-se com a sensação por um minuto, sem alimentá-la nem expulsá-la.",
     "explicacao": "A frase incentiva contato gradual com a dor para reduzir a perseguição mental.",
@@ -451,6 +458,7 @@
   },
   {
     "id": "batch03-quote-019",
+    "editorialStatus": "quarantine",
     "autor": "Pema Chödrön",
     "frase": "O colapso da ilusão pode doer mais que a realidade; era a fantasia que sustentava parte do peso.",
     "quoteType": "inspired",
@@ -476,6 +484,7 @@
   },
   {
     "id": "batch03-quote-020",
+    "editorialStatus": "quarantine",
     "autor": "Pema Chödrön",
     "frase": "A mente quer uma saída limpa, mas a vida às vezes nos cura no meio da bagunça.",
     "quoteType": "inspired",
@@ -501,6 +510,7 @@
   },
   {
     "id": "batch03-quote-021",
+    "editorialStatus": "quarantine",
     "autor": "Alan Watts",
     "frase": "A vida escapa quando tentamos segurá-la como prova de que estamos vivos.",
     "quoteType": "inspired",
@@ -542,7 +552,7 @@
       "controle",
       "insegurança"
     ],
-    "tom": "cruel_lucido",
+    "tom": "direto",
     "profundidade": 5,
     "conselho": "Identifique uma tentativa de controle que está custando mais vida do que protegendo.",
     "explicacao": "A insegurança é tratada como condição inevitável da vida, não como defeito pessoal.",
@@ -567,7 +577,7 @@
       "dança",
       "consciência"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Pare de analisar por alguns instantes e participe de um gesto simples.",
     "explicacao": "Watts desmonta a separação rígida entre observador e experiência.",
@@ -666,7 +676,7 @@
       "direção",
       "simplicidade"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Antes de aumentar o esforço, mude a forma de se aproximar do problema.",
     "explicacao": "O não-forçar taoista é usado como inteligência de ação.",
@@ -674,6 +684,7 @@
   },
   {
     "id": "batch03-quote-028",
+    "editorialStatus": "quarantine",
     "autor": "Lao-Tsé",
     "frase": "O excesso de controle transforma até o cuidado em prisão.",
     "quoteType": "inspired",
@@ -698,6 +709,7 @@
   },
   {
     "id": "batch03-quote-029",
+    "editorialStatus": "quarantine",
     "autor": "Lao-Tsé",
     "frase": "Quem precisa provar força o tempo inteiro talvez ainda não tenha conhecido a própria firmeza.",
     "quoteType": "inspired",
@@ -722,6 +734,7 @@
   },
   {
     "id": "batch03-quote-030",
+    "editorialStatus": "quarantine",
     "autor": "Lao-Tsé",
     "frase": "A simplicidade assusta quem aprendeu a se esconder dentro do excesso.",
     "quoteType": "inspired",
@@ -747,6 +760,7 @@
   },
   {
     "id": "batch03-quote-031",
+    "editorialStatus": "quarantine",
     "autor": "Buda / Dhammapada",
     "frase": "A mente que alimenta ressentimento bebe veneno e chama isso de memória.",
     "quoteType": "inspired",
@@ -788,7 +802,7 @@
       "sofrimento",
       "autocompaixão"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Reduza uma frase interna cruel antes de tentar resolver a vida inteira.",
     "explicacao": "A mente aparece como fonte de sofrimento quando treinada na hostilidade contra si.",
@@ -813,7 +827,7 @@
       "luta",
       "desapego"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Escolha uma batalha que não precisa ser travada hoje.",
     "explicacao": "A frase evita passividade, mas questiona a compulsão de lutar contra tudo.",
@@ -821,6 +835,7 @@
   },
   {
     "id": "batch03-quote-034",
+    "editorialStatus": "quarantine",
     "autor": "Buda / Dhammapada",
     "frase": "O apego chama de amor aquilo que, muitas vezes, é medo de perder o controle.",
     "quoteType": "inspired",
@@ -845,6 +860,7 @@
   },
   {
     "id": "batch03-quote-035",
+    "editorialStatus": "quarantine",
     "autor": "Buda / Dhammapada",
     "frase": "Tudo muda; sofrer começa quando exigimos que a mudança peça desculpas.",
     "quoteType": "inspired",
@@ -870,6 +886,7 @@
   },
   {
     "id": "batch03-quote-036",
+    "editorialStatus": "quarantine",
     "autor": "Marco Aurélio",
     "frase": "O dia já é curto demais para entregá-lo inteiro ao julgamento de quem mal conhece a própria vida.",
     "quoteType": "inspired",
@@ -944,6 +961,7 @@
   },
   {
     "id": "batch03-quote-039",
+    "editorialStatus": "quarantine",
     "autor": "Marco Aurélio",
     "frase": "A irritação revela menos sobre o mundo do que sobre o ponto exato onde sua mente perdeu governo.",
     "quoteType": "inspired",
@@ -986,7 +1004,7 @@
       "gesto",
       "propósito"
     ],
-    "tom": "acolhedor",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Faça o próximo gesto justo sem exigir que ele resolva o sentido inteiro da vida.",
     "explicacao": "O propósito é reduzido a uma prática ética concreta e possível.",
@@ -1012,10 +1030,10 @@
       "projeção",
       "autoengano"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "analítico",
     "profundidade": 5,
     "conselho": "Procure a sombra menos no monstro evidente e mais na reação que parece justificável demais.",
-    "explicacao": "Texto sobre sombra e projeção com tom clínico, sem moralismo.",
+    "explicacao": "Texto sobre sombra e projeção em tom analítico, sem moralismo.",
     "livro": "O Eu e o Inconsciente",
     "contentType": "text"
   },
@@ -1067,7 +1085,7 @@
       "ferida",
       "presença"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Antes de agir, cuide da energia da raiva como quem cuida de uma criança assustada.",
     "explicacao": "Texto sobre acolher a raiva sem obedecer cegamente a ela.",
@@ -1076,6 +1094,7 @@
   },
   {
     "id": "batch03-text-004",
+    "editorialStatus": "quarantine",
     "autor": "Alan Watts",
     "titulo": "A vida como prova",
     "texto": "A mente ansiosa quer viver e, ao mesmo tempo, fiscalizar se está vivendo direito. Quer espontaneidade com relatório, liberdade com garantia, presença com recibo.\n\nNesse esforço, a experiência vira objeto de auditoria. A pessoa não dança; ela observa a própria dança tentando decidir se parece viva o bastante.\n\n**A vida escapa quando precisa provar, a cada instante, que está acontecendo.**",

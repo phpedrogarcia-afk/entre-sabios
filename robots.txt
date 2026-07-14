@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.entresabios.com/sitemap.xml
+Sitemap: https://entresabios.com/sitemap.xml

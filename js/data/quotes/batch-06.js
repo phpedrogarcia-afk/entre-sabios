@@ -7,6 +7,7 @@
 // Acervo lote 06 - curadoria confirmada
   {
     "id": "batch06-quote-001",
+    "editorialStatus": "quarantine",
     "autor": "Jean-Paul Sartre",
     "frase": "A liberdade assusta porque retira da pessoa o conforto de chamar toda escolha de destino.",
     "quoteType": "inspired",
@@ -48,9 +49,9 @@
       "autoengano",
       "responsabilidade"
     ],
-    "tom": "cruel_lucido",
+    "tom": "analítico",
     "profundidade": 5,
-    "conselho": "Desconfie da justificativa que deixa você sempre inocente.",
+    "conselho": "Examine uma justificativa que talvez esteja evitando uma escolha difícil.",
     "explicacao": "A má-fé aparece como fuga elegante da liberdade.",
     "livro": "O Ser e o Nada"
   },
@@ -80,6 +81,7 @@
   },
   {
     "id": "batch06-quote-004",
+    "editorialStatus": "quarantine",
     "autor": "Jean-Paul Sartre",
     "frase": "O olhar do outro pode virar prisão quando esquecemos que ele também é apenas uma consciência tentando se justificar.",
     "quoteType": "inspired",
@@ -128,6 +130,7 @@
   },
   {
     "id": "batch06-quote-006",
+    "editorialStatus": "quarantine",
     "autor": "Hannah Arendt",
     "frase": "Pensar é perigoso para quem prefere obedecer sem deixar rastros na própria consciência.",
     "quoteType": "inspired",
@@ -152,6 +155,7 @@
   },
   {
     "id": "batch06-quote-007",
+    "editorialStatus": "quarantine",
     "autor": "Hannah Arendt",
     "frase": "O mal se torna banal quando a pessoa transforma consciência em procedimento.",
     "quoteType": "inspired",
@@ -193,7 +197,7 @@
       "passado",
       "futuro"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Considere o perdão como libertação do futuro, não como negação do dano.",
     "explicacao": "A ação do perdão abre possibilidade sem apagar responsabilidade.",
@@ -201,6 +205,7 @@
   },
   {
     "id": "batch06-quote-009",
+    "editorialStatus": "quarantine",
     "autor": "Hannah Arendt",
     "frase": "A solidão pode pensar; o isolamento apenas repete a voz do medo dentro de um quarto fechado.",
     "quoteType": "inspired",
@@ -315,7 +320,7 @@
       "resistência",
       "desgaste"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Escolha um cuidado que preserve sua energia sem culpa.",
     "explicacao": "O cuidado aparece como resistência, não indulgência superficial.",
@@ -347,6 +352,7 @@
   },
   {
     "id": "batch06-quote-015",
+    "editorialStatus": "quarantine",
     "autor": "Audre Lorde",
     "frase": "A palavra que você engole para manter a paz pode virar veneno quando a paz já era falsa.",
     "quoteType": "inspired",
@@ -397,6 +403,7 @@
   },
   {
     "id": "batch06-quote-017",
+    "editorialStatus": "quarantine",
     "autor": "Erich Fromm",
     "frase": "A dependência chama de amor aquilo que teme perder como anestesia.",
     "quoteType": "inspired",
@@ -438,7 +445,7 @@
       "obediência",
       "segurança"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Note onde a segurança prometida exige que você abdique de si.",
     "explicacao": "Fromm mostra que liberdade pode assustar quem aprendeu a obedecer.",
@@ -446,6 +453,7 @@
   },
   {
     "id": "batch06-quote-019",
+    "editorialStatus": "quarantine",
     "autor": "Erich Fromm",
     "frase": "Uma sociedade doente chama de ajustado quem aprendeu a adoecer sem atrapalhar.",
     "quoteType": "inspired",
@@ -512,7 +520,7 @@
       "identidade",
       "liberdade"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Observe uma emoção por alguns instantes sem justificá-la nem condená-la.",
     "explicacao": "Krishnamurti propõe observação direta antes da interferência do julgamento.",
@@ -536,7 +544,7 @@
       "fuga",
       "observação"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Pare por um momento e veja o medo sem correr para a explicação.",
     "explicacao": "A fuga psicológica é vista como continuidade do medo.",
@@ -549,8 +557,8 @@
     "quoteType": "inspired",
     "source": "Leitura editorial inspirada em Krishnamurti",
     "sentimentos": [
-      "tristeza",
-      "indiretas"
+      "insegurança",
+      "autoconhecimento"
     ],
     "intensidade": [
       "moderada"
@@ -560,7 +568,7 @@
       "medida",
       "liberdade"
     ],
-    "tom": "confrontador",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Note qual comparação está sequestrando sua percepção de si.",
     "explicacao": "A comparação é tratada como perda de contato direto com a própria vida.",
@@ -568,6 +576,7 @@
   },
   {
     "id": "batch06-quote-024",
+    "editorialStatus": "quarantine",
     "autor": "Jiddu Krishnamurti",
     "frase": "A verdade não se aproxima de uma mente ocupada em defender a própria imagem.",
     "quoteType": "inspired",
@@ -608,7 +617,7 @@
       "ideal",
       "observação"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Veja o estado atual sem compará-lo imediatamente com uma versão ideal.",
     "explicacao": "A mudança surge da percepção direta, não da violência do ideal.",
@@ -632,7 +641,7 @@
       "sentido",
       "ambiguidade"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Não confunda ausência de garantia com ausência absoluta de valor.",
     "explicacao": "A leveza kundereana é ambígua: liberdade e vertigem ao mesmo tempo.",
@@ -664,6 +673,7 @@
   },
   {
     "id": "batch06-quote-028",
+    "editorialStatus": "quarantine",
     "autor": "Milan Kundera",
     "frase": "A memória é uma editora impiedosa: corta o que contradiz a história que queremos contar.",
     "quoteType": "inspired",
@@ -704,7 +714,7 @@
       "relação",
       "ansiedade"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Antes de interpretar tudo, pergunte o que foi realmente dito e feito.",
     "explicacao": "A frase nomeia a ansiedade interpretativa que corrói vínculos.",
@@ -729,7 +739,7 @@
       "incompreensão",
       "solidão"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Não aceite toda imagem que fazem de você como se fosse sentença.",
     "explicacao": "A frase trabalha o sofrimento de ser reduzido por uma interpretação alheia.",
@@ -737,6 +747,7 @@
   },
   {
     "id": "batch06-quote-031",
+    "editorialStatus": "quarantine",
     "autor": "Oscar Wilde",
     "frase": "A moral pública costuma ser a máscara favorita de vícios que não suportam espelho.",
     "quoteType": "inspired",
@@ -761,6 +772,7 @@
   },
   {
     "id": "batch06-quote-032",
+    "editorialStatus": "quarantine",
     "autor": "Oscar Wilde",
     "frase": "A aparência engana menos que a vontade humana de ser enganada por ela.",
     "quoteType": "inspired",
@@ -785,6 +797,7 @@
   },
   {
     "id": "batch06-quote-033",
+    "editorialStatus": "quarantine",
     "autor": "Oscar Wilde",
     "frase": "Há pessoas tão ocupadas em parecer profundas que não lhes sobra silêncio para sê-lo.",
     "quoteType": "inspired",
@@ -810,6 +823,7 @@
   },
   {
     "id": "batch06-quote-034",
+    "editorialStatus": "quarantine",
     "autor": "Oscar Wilde",
     "frase": "O cinismo barato ri de tudo para esconder que já não sabe se comover sem se sentir fraco.",
     "quoteType": "inspired",
@@ -859,6 +873,7 @@
   },
   {
     "id": "batch06-quote-036",
+    "editorialStatus": "quarantine",
     "autor": "Nelson Rodrigues",
     "frase": "Toda unanimidade costuma esconder alguém que desistiu de pensar para continuar pertencendo.",
     "quoteType": "inspired",
@@ -883,6 +898,7 @@
   },
   {
     "id": "batch06-quote-037",
+    "editorialStatus": "quarantine",
     "autor": "Nelson Rodrigues",
     "frase": "A família também pode ser teatro: cada um decorando seu papel para que a verdade não estrague o jantar.",
     "quoteType": "inspired",
@@ -908,6 +924,7 @@
   },
   {
     "id": "batch06-quote-038",
+    "editorialStatus": "quarantine",
     "autor": "Nelson Rodrigues",
     "frase": "O desejo humano raramente é limpo; por isso tanta gente prefere julgá-lo nos outros.",
     "quoteType": "inspired",
@@ -932,6 +949,7 @@
   },
   {
     "id": "batch06-quote-039",
+    "editorialStatus": "quarantine",
     "autor": "Nelson Rodrigues",
     "frase": "Há virtudes que só sobrevivem porque nunca foram contrariadas.",
     "quoteType": "inspired",
@@ -981,6 +999,7 @@
   },
   {
     "id": "batch06-text-001",
+    "editorialStatus": "quarantine",
     "autor": "Jean-Paul Sartre",
     "titulo": "A desculpa bem vestida",
     "texto": "A pessoa pode passar anos chamando de circunstância aquilo que, no fundo, já virou escolha repetida.\n\nA má-fé raramente aparece como mentira grosseira. Ela prefere argumentos bons, frases adultas, justificativas que deixam tudo compreensível e ninguém responsável.\n\n**O perigo é quando a desculpa fica tão bem vestida que começa a parecer destino.**",
@@ -1052,7 +1071,7 @@
       "dependência",
       "cuidado"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Pergunte se seu amor está criando cuidado ou apagamento.",
     "explicacao": "Texto sobre amor como arte, disciplina e presença inteira.",
@@ -1078,7 +1097,7 @@
       "observação",
       "autoagressão"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Observe o estado presente sem atacá-lo com uma versão ideal de você.",
     "explicacao": "Texto sobre observação sem escolha e crítica à violência do ideal.",
@@ -1087,6 +1106,7 @@
   },
   {
     "id": "batch06-text-005",
+    "editorialStatus": "quarantine",
     "autor": "Nelson Rodrigues",
     "titulo": "O jantar da verdade",
     "texto": "Toda família conhece frases que não podem ser ditas. Elas ficam sentadas à mesa, entre o copo e o prato, educadas demais para gritar e vivas demais para morrer.\n\nPor fora, conversa-se sobre o tempo. Por dentro, cada um protege seu papel para que a verdade não estrague a sobremesa.\n\n**Há harmonias que só existem porque todo mundo concordou em mentir baixo.**",

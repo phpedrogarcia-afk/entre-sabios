@@ -37,6 +37,12 @@ data.philosophicalTales = [
     sentimentosRelacionados: ['autoconhecimento', 'confusão', 'medo', 'insegurança'],
     temas: ['verdade', 'aparência', 'consciência', 'liberdade', 'autoengano'],
     palavrasChave: ['autoconhecimento', 'ilusão', 'clareza', 'sombra', 'verdade'],
+    imagem: {
+      src: 'assets/contos/alegoria-da-caverna-piloto.webp',
+      alt: 'Silhuetas contemplam sombras no interior de uma caverna enquanto um caminho conduz à luz exterior.',
+      width: 1536,
+      height: 864,
+    },
     texto: [
       'Platão pede que imaginemos homens vivendo desde o nascimento no fundo de uma caverna. Eles não caminham livremente. Estão presos de tal modo que só conseguem olhar para a parede diante de si. Atrás deles há uma fogueira, e entre a fogueira e os prisioneiros passam pessoas carregando objetos. Tudo o que os prisioneiros veem são sombras projetadas na pedra.',
       'Como nunca conheceram outra coisa, chamam aquelas sombras de realidade. Observam suas formas, disputam seus nomes, tentam prever seus movimentos. Talvez alguns sejam admirados por reconhecer uma sombra antes dos outros. Dentro da caverna, essa habilidade parece sabedoria. Ninguém ali percebe que está discutindo apenas o contorno escuro de algo que não vê diretamente.',

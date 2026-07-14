@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build:content": "node scripts/build-content.mjs",
+    "audit:behavior": "node scripts/audit-behavior.mjs --output tests/fixtures/auditoria_comportamental_atual.json && node scripts/generate-behavioral-report.mjs",
     "test": "node scripts/build-content.mjs && node --test tests/*.test.mjs",
     "serve": "node scripts/serve.mjs"
   }

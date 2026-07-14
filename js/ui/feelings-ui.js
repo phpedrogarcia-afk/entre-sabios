@@ -29,7 +29,6 @@ function initFeelings() {
         if (primaryFeelingId === feelingId) primaryFeelingId = getSelectedFeelingIds()[0] || null;
       }
       lastSelectionSignature = null;
-      runtimeSelector?.clear();
       syncSelectedCards();
     });
 
@@ -65,7 +64,6 @@ function setPrimaryFeeling(feelingId) {
   if (!selectedFeelingIds.has(feelingId)) return;
   primaryFeelingId = feelingId;
   lastSelectionSignature = null;
-  runtimeSelector?.clear();
   syncSelectedCards();
   if (currentStory) {
     currentStory.selectedFeelingIds = getSelectedFeelingIds();
@@ -108,17 +106,6 @@ function initIntensity() {
     r.addEventListener('change', () => {
       currentIntensity = r.value;
       lastSelectionSignature = null;
-      runtimeSelector?.clear();
-    });
-  });
-}
-
-function initGenderPreference() {
-  genderRadioEls.forEach((radio) => {
-    radio.addEventListener('change', () => {
-      currentGenderPreference = radio.value;
-      lastSelectionSignature = null;
-      runtimeSelector?.clear();
     });
   });
 }

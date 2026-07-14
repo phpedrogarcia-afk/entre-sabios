@@ -48,7 +48,7 @@
       "ferida",
       "história"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Reconheça a ferida sem entregar a ela toda a autoria da sua vida.",
     "explicacao": "A frase preserva força sem negar trauma.",
@@ -56,6 +56,7 @@
   },
   {
     "id": "batch07-quote-003",
+    "editorialStatus": "quarantine",
     "autor": "Maya Angelou",
     "frase": "Há vozes que tentaram diminuir você; não lhes dê o privilégio de virarem sua voz interna.",
     "quoteType": "inspired",
@@ -152,6 +153,7 @@
   },
   {
     "id": "batch07-quote-007",
+    "editorialStatus": "quarantine",
     "autor": "Nelson Mandela",
     "frase": "Quem sai da prisão carregando a prisão por dentro ainda não atravessou o portão principal.",
     "quoteType": "inspired",
@@ -193,7 +195,7 @@
       "violência",
       "liberdade"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Considere o perdão como libertação interna, não como apagamento da injustiça.",
     "explicacao": "A frase evita confundir perdão com negação do dano.",
@@ -201,6 +203,7 @@
   },
   {
     "id": "batch07-quote-009",
+    "editorialStatus": "quarantine",
     "autor": "Nelson Mandela",
     "frase": "A esperança política e a esperança íntima se parecem: ambas começam quando alguém se recusa a chamar a jaula de casa.",
     "quoteType": "inspired",
@@ -291,7 +294,7 @@
       "profecia",
       "narrativa"
     ],
-    "tom": "cruel_lucido",
+    "tom": "analítico",
     "profundidade": 5,
     "conselho": "Desconfie da narrativa que parece explicar tudo e retirar sua responsabilidade.",
     "explicacao": "Herbert critica seduções messiânicas e narrativas totalizantes.",
@@ -299,6 +302,7 @@
   },
   {
     "id": "batch07-quote-013",
+    "editorialStatus": "quarantine",
     "autor": "Frank Herbert",
     "frase": "O poder mostra o caráter porque dá às sombras internas meios mais eficientes.",
     "quoteType": "inspired",
@@ -371,6 +375,7 @@
   },
   {
     "id": "batch07-quote-016",
+    "editorialStatus": "quarantine",
     "autor": "Bardo Thodol",
     "frase": "O que assusta na passagem não é apenas o desconhecido, mas as formas que a própria mente projeta nele.",
     "quoteType": "inspired",
@@ -412,7 +417,7 @@
       "consciência",
       "transição"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Permaneça um pouco com o desconhecido antes de transformá-lo em ameaça.",
     "explicacao": "A frase interpreta transições psíquicas como bardos internos.",
@@ -420,6 +425,7 @@
   },
   {
     "id": "batch07-quote-018",
+    "editorialStatus": "quarantine",
     "autor": "Bardo Thodol",
     "frase": "A morte não começa no fim; ela ensina durante a vida toda o que não pode ser segurado.",
     "quoteType": "inspired",
@@ -460,7 +466,7 @@
       "visão",
       "liberdade"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Nomeie a imagem mental antes de tratá-la como realidade.",
     "explicacao": "Reconhecer projeções reduz seu domínio.",
@@ -485,14 +491,15 @@
       "identidade",
       "apego"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
-    "conselho": "Permita-se atravessar a transição sem agarrar a identidade antiga por desespero.",
+    "conselho": "Permita-se atravessar a transição sem exigir uma identidade definitiva imediatamente.",
     "explicacao": "O bardo é usado como metáfora de passagens psicológicas.",
     "livro": "Bardo Thodol"
   },
   {
     "id": "batch07-quote-021",
+    "editorialStatus": "quarantine",
     "autor": "Katha Upanishad",
     "frase": "Quem procura o eterno no que muda está condenado a chamar perda de injustiça.",
     "quoteType": "inspired",
@@ -533,7 +540,7 @@
       "caminho",
       "discernimento"
     ],
-    "tom": "confrontador",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Não escolha apenas a voz mais alta dentro de você.",
     "explicacao": "A frase trabalha a distinção entre prazer imediato e bem profundo.",
@@ -541,6 +548,7 @@
   },
   {
     "id": "batch07-quote-023",
+    "editorialStatus": "quarantine",
     "autor": "Katha Upanishad",
     "frase": "A morte interroga melhor que muitos mestres, porque não aceita respostas decorativas.",
     "quoteType": "inspired",
@@ -583,7 +591,7 @@
       "identificação",
       "transitório"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Observe uma emoção como algo que passa, não como sua identidade inteira.",
     "explicacao": "A frase traz a distinção entre consciência e fenômenos transitórios.",
@@ -591,6 +599,7 @@
   },
   {
     "id": "batch07-quote-025",
+    "editorialStatus": "quarantine",
     "autor": "Katha Upanishad",
     "frase": "A sabedoria começa quando o brilho do prazer já não basta para esconder seu preço.",
     "quoteType": "inspired",
@@ -631,7 +640,7 @@
       "pensamento",
       "eu"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Pergunte silenciosamente: quem está percebendo este pensamento?",
     "explicacao": "A autoindagação desloca foco do pensamento para a consciência que o percebe.",
@@ -679,7 +688,7 @@
       "simplicidade",
       "eu"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Em vez de ampliar a busca, investigue quem está buscando.",
     "explicacao": "A frase resume a inversão da atenção proposta por Ramana.",
@@ -703,7 +712,7 @@
       "condição",
       "consciência"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Procure um instante de presença que não dependa de tudo estar resolvido.",
     "explicacao": "A paz é tratada como reconhecimento interior, não arranjo externo perfeito.",
@@ -776,7 +785,7 @@
       "renúncia",
       "identidade"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Pergunte que peso você está chamando de identidade.",
     "explicacao": "A imagem da montanha trabalha renúncia e autoconhecimento.",
@@ -784,6 +793,7 @@
   },
   {
     "id": "batch07-quote-033",
+    "editorialStatus": "quarantine",
     "autor": "Milarepa",
     "frase": "A solidão que amadurece não empobrece a alma; tira dela as companhias internas que mentiam.",
     "quoteType": "inspired",
@@ -825,7 +835,7 @@
       "erro",
       "transformação"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Transforme culpa em mudança concreta, não em residência permanente.",
     "explicacao": "A culpa é deslocada para reparação e transformação.",
@@ -874,7 +884,7 @@
       "dor",
       "acolhimento"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "acolhedor",
     "profundidade": 3,
     "conselho": "Não force alegria; procure o espaço interno que pode acolher a dor.",
     "explicacao": "A alegria é tratada como amplitude espiritual, não euforia.",
@@ -882,6 +892,7 @@
   },
   {
     "id": "batch07-quote-037",
+    "editorialStatus": "quarantine",
     "autor": "Anandamayi Ma",
     "frase": "O corpo chora, a mente pergunta, mas há em você uma presença que observa sem se partir.",
     "quoteType": "inspired",
@@ -907,6 +918,7 @@
   },
   {
     "id": "batch07-quote-038",
+    "editorialStatus": "quarantine",
     "autor": "Anandamayi Ma",
     "frase": "Nem toda perda é separação completa; algumas apenas mudam a linguagem da presença.",
     "quoteType": "inspired",
@@ -947,7 +959,7 @@
       "mistério",
       "permanência"
     ],
-    "tom": "erotico_devocional",
+    "tom": "contemplativo",
     "profundidade": 3,
     "conselho": "Permaneça diante do mistério sem exigir controle total.",
     "explicacao": "A devoção é apresentada como presença sem barganha.",
@@ -971,7 +983,7 @@
       "cansaço",
       "confiança"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Experimente soltar uma exigência de controle por alguns instantes.",
     "explicacao": "A entrega é apresentada como descanso da mente controladora.",
@@ -1076,7 +1088,7 @@
       "pensamento",
       "consciência"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Pergunte 'quem percebe?' antes de tentar obedecer a cada pensamento.",
     "explicacao": "Texto sobre autoindagação como deslocamento da identificação mental.",
@@ -1092,7 +1104,6 @@
     "source": "Microensaio editorial inspirado no Bardo Thodol",
     "sentimentos": [
       "confusão",
-      "luto",
       "falta_de_proposito"
     ],
     "intensidade": [
@@ -1104,7 +1115,7 @@
       "identidade",
       "apego"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Permita o intervalo sem transformar toda ausência de forma em fracasso.",
     "explicacao": "Texto usa o bardo como metáfora para transições psicológicas profundas.",

@@ -346,6 +346,16 @@ html[data-theme="night"] .focus-feeling-btn {
   bottom: 10px;
 }
 
+.quote-share {
+  top: 8px;
+  left: 8px;
+}
+
+.quote-share:focus-visible {
+  outline: 2px solid rgba(79, 125, 93, 0.4);
+  outline-offset: -2px;
+}
+
 .quote-like {
   right: 8px;
   bottom: 10px;
@@ -630,6 +640,13 @@ html[data-theme="night"] .focus-feeling-btn {
   margin-top: 0;
 }
 
+.share-compatibility-note {
+  margin: 7px 0 0;
+  color: rgba(42, 35, 26, 0.56);
+  font-size: 10.5px;
+  line-height: 1.35;
+}
+
 .share-platform-icons {
   display: inline-flex;
   align-items: center;
@@ -795,6 +812,7 @@ html[data-theme="night"] .book-rec-label {
 
 html[data-theme="night"] .book-reason,
 html[data-theme="night"] .share-status,
+html[data-theme="night"] .share-compatibility-note,
 html[data-theme="night"] .selection-hint,
 html[data-theme="night"] .preference-note {
   color: var(--night-text-muted);
@@ -872,6 +890,11 @@ html[data-theme="night"] .quote-action:focus-visible {
   color: var(--night-text-primary);
   text-shadow: 0 0 16px rgba(241, 234, 216, 0.18);
   outline: none;
+}
+
+html[data-theme="night"] .quote-share:focus-visible {
+  outline: 2px solid rgba(199, 217, 180, 0.46);
+  outline-offset: -2px;
 }
 
 html[data-theme="night"] .quote-action.active-like,

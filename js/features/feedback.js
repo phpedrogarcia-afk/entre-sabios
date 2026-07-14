@@ -4,7 +4,6 @@
 
 function loadPreferenceProfile() {
   const fallback = {
-    authors: {},
     tags: {},
     books: {},
     storyFeedback: {},
@@ -13,7 +12,14 @@ function loadPreferenceProfile() {
   try {
     const saved = localStorage.getItem('caixaSabedoriaPreferencias');
     if (!saved) return fallback;
-    return { ...fallback, ...JSON.parse(saved) };
+    const parsed = JSON.parse(saved);
+    return {
+      tags: parsed?.tags && typeof parsed.tags === 'object' ? parsed.tags : {},
+      books: parsed?.books && typeof parsed.books === 'object' ? parsed.books : {},
+      storyFeedback: parsed?.storyFeedback && typeof parsed.storyFeedback === 'object'
+        ? parsed.storyFeedback
+        : {},
+    };
   } catch {
     return fallback;
   }
@@ -34,7 +40,6 @@ function adjustPreference(bucket, key, delta) {
 }
 
 function applyStoryPreference(story, delta) {
-  adjustPreference(preferenceProfile.authors, story.author, delta * 3);
   (story.rawTags || []).forEach((tag) => adjustPreference(preferenceProfile.tags, tag, delta));
   if (story.book) adjustPreference(preferenceProfile.books, story.book.title, delta * 2);
 }
@@ -56,13 +61,19 @@ function setStoryFeedback(value) {
   else preferenceProfile.storyFeedback[key] = next;
 
   savePreferenceProfile();
+  if (next < 0) {
+    recordEditorialSignal('frequentDislike', currentStory.emotionalState || interpretEmotionalState(), {
+      contentId: currentStory.key,
+      relevanceTier: currentStory.relevanceTier,
+    });
+  }
   updateFeedbackButtons();
   updateBookRecommendation(currentStory);
   preferenceNoteEl.textContent = next === 0
     ? ''
     : next > 0
-      ? 'Entendido. Suas próximas reflexões considerarão este estilo.'
-      : 'Entendido. Vamos reduzir recomendações parecidas com esta.';
+      ? 'Entendido. Sua avaliação foi registrada.'
+      : 'Entendido. Sua avaliação foi registrada sem priorizar autores.';
 }
 
 function updateFeedbackButtons() {

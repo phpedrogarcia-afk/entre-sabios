@@ -15,7 +15,7 @@ import {
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const first = buildFromFiles({ rootDir, write: false });
 const second = buildFromFiles({ rootDir, write: false });
-const { master, runtime, serialized } = first;
+const { master, runtime, serialized, serializedScript } = first;
 
 test('mestre e runtime possuem os totais editoriais congelados', () => {
   const truth = validateMaster(master);
@@ -75,6 +75,7 @@ test('runtime usa a versão definitiva-2.1 e é reproduzível', () => {
   assert.equal(runtime.contentVersion, EXPECTED.contentVersion);
   assert.equal(first.serialized, second.serialized);
   assert.equal(serialized, fs.readFileSync(path.join(rootDir, 'data', 'entre_sabios_runtime.json'), 'utf8'));
+  assert.equal(serializedScript, fs.readFileSync(path.join(rootDir, 'data', 'entre_sabios_runtime.js'), 'utf8'));
   assert.ok(Buffer.byteLength(serialized) < 500 * 1024, `Runtime excedeu 500 KB: ${Buffer.byteLength(serialized)} bytes`);
 });
 

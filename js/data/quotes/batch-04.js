@@ -24,7 +24,7 @@
       "corpo",
       "memória"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Não se cobre por procurar presença onde ainda há amor aprendendo nova forma.",
     "explicacao": "A frase dá corpo à ausência sem usar consolo fácil.",
@@ -72,7 +72,7 @@
       "luto",
       "interioridade"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Respeite a dor silenciosa como dor real, mesmo quando ninguém a percebe.",
     "explicacao": "A imagem valoriza sofrimentos que não se exibem.",
@@ -96,7 +96,7 @@
       "tempo",
       "aniversário da dor"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 4,
     "conselho": "Honre datas internas mesmo quando ninguém mais lembra delas.",
     "explicacao": "A frase reconhece a temporalidade íntima do luto.",
@@ -104,6 +104,7 @@
   },
   {
     "id": "batch04-quote-005",
+    "editorialStatus": "quarantine",
     "autor": "Emily Dickinson",
     "frase": "A alma que sobrevive a uma perda não volta intacta; volta com outra gramática.",
     "quoteType": "inspired",
@@ -145,7 +146,7 @@
       "abertura",
       "vida"
     ],
-    "tom": "erotico_devocional",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Observe a ferida sem romantizá-la; veja que necessidade ela revela.",
     "explicacao": "Mantém a imagem espiritual sem transformar dor em ornamento.",
@@ -153,6 +154,7 @@
   },
   {
     "id": "batch04-quote-007",
+    "editorialStatus": "quarantine",
     "autor": "Rumi",
     "frase": "O amor que só quer possuir ainda não aprendeu a reconhecer o sagrado sem trancá-lo.",
     "quoteType": "inspired",
@@ -219,7 +221,7 @@
       "distância",
       "vínculo"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 4,
     "conselho": "Permita que a saudade diga o tamanho do vínculo sem exigir resposta imediata.",
     "explicacao": "A saudade é tratada como movimento do amor, não fraqueza.",
@@ -227,6 +229,7 @@
   },
   {
     "id": "batch04-quote-010",
+    "editorialStatus": "quarantine",
     "autor": "Rumi",
     "frase": "Quem foge do próprio vazio acaba levando esse vazio para todos os encontros.",
     "quoteType": "inspired",
@@ -276,6 +279,7 @@
   },
   {
     "id": "batch04-quote-012",
+    "editorialStatus": "quarantine",
     "autor": "Khalil Gibran",
     "frase": "A tristeza cava em nós o espaço que a alegria, um dia, talvez consiga habitar sem superficialidade.",
     "quoteType": "inspired",
@@ -300,6 +304,7 @@
   },
   {
     "id": "batch04-quote-013",
+    "editorialStatus": "quarantine",
     "autor": "Khalil Gibran",
     "frase": "O adeus não destrói tudo; às vezes apenas revela o que era presença e o que era costume.",
     "quoteType": "inspired",
@@ -325,6 +330,7 @@
   },
   {
     "id": "batch04-quote-014",
+    "editorialStatus": "quarantine",
     "autor": "Khalil Gibran",
     "frase": "A generosidade que espera plateia ainda está negociando com a vaidade.",
     "quoteType": "inspired",
@@ -365,7 +371,7 @@
       "dignidade",
       "verdade"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Reconheça a dor no tamanho real, sem transformá-la em identidade total.",
     "explicacao": "A frase valida sofrimento sem cultuá-lo.",
@@ -397,6 +403,7 @@
   },
   {
     "id": "batch04-quote-017",
+    "editorialStatus": "quarantine",
     "autor": "Mary Oliver",
     "frase": "A natureza não consola explicando; consola lembrando que a vida continua fazendo formas.",
     "quoteType": "inspired",
@@ -437,7 +444,7 @@
       "amor",
       "contemplação"
     ],
-    "tom": "acolhedor_dissolvente",
+    "tom": "contemplativo",
     "profundidade": 3,
     "conselho": "Pratique olhar algo ou alguém sem imediatamente usar, julgar ou segurar.",
     "explicacao": "A frase aproxima amor de atenção livre de posse.",
@@ -510,7 +517,7 @@
       "mundo",
       "absurdo"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Permita a raiva diante da continuidade do mundo sem usá-la contra você.",
     "explicacao": "A frase toca a brutalidade do luto sem suavizar.",
@@ -518,6 +525,7 @@
   },
   {
     "id": "batch04-quote-022",
+    "editorialStatus": "quarantine",
     "autor": "C. S. Lewis",
     "frase": "A fé que nunca atravessou perda talvez ainda não saiba se é chão ou decoração.",
     "quoteType": "inspired",
@@ -559,7 +567,7 @@
       "vulnerabilidade",
       "risco"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Não chame de fraqueza o medo que nasce de se importar profundamente.",
     "explicacao": "O amor é descrito como vulnerabilidade real.",
@@ -583,7 +591,7 @@
       "ausência",
       "luto"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Reconheça o choque entre rotina e perda sem exigir coerência emocional imediata.",
     "explicacao": "A frase mostra o escândalo do cotidiano após a perda.",
@@ -631,7 +639,7 @@
       "casa",
       "desorientação"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Aceite que a desorientação faz parte do luto; o mundo conhecido perdeu eixo.",
     "explicacao": "Didion inspira um retrato seco da desorganização do luto.",
@@ -655,7 +663,7 @@
       "negação",
       "perda"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Observe suas negociações internas sem vergonha; elas tentam amortecer o impossível.",
     "explicacao": "A frase trabalha o pensamento mágico do luto com compaixão.",
@@ -680,7 +688,7 @@
       "ruptura",
       "calendário"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Reconheça a divisão interna do tempo sem esperar que os outros a percebam.",
     "explicacao": "A perda altera a percepção temporal, não apenas o humor.",
@@ -728,7 +736,7 @@
       "sofrimento",
       "solidão"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 4,
     "conselho": "Nomeie a dor para acompanhá-la melhor, não para torná-la bonita.",
     "explicacao": "A linguagem é cuidado, não decoração do sofrimento.",
@@ -752,7 +760,7 @@
       "casa",
       "permanência"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 4,
     "conselho": "Permita que a saudade seja abrigo imperfeito, não só ruína.",
     "explicacao": "A imagem mistura precariedade e permanência afetiva.",
@@ -777,7 +785,7 @@
       "palavra",
       "ausência"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Escute o silêncio como forma de luto, não como vazio sem sentido.",
     "explicacao": "A frase dá linguagem poética ao silêncio da perda.",
@@ -785,6 +793,7 @@
   },
   {
     "id": "batch04-quote-033",
+    "editorialStatus": "quarantine",
     "autor": "Mia Couto",
     "frase": "Quem parte deixa pegadas dentro da gente; o difícil é aprender a caminhar sem pisá-las com culpa.",
     "quoteType": "inspired",
@@ -833,6 +842,7 @@
   },
   {
     "id": "batch04-quote-035",
+    "editorialStatus": "quarantine",
     "autor": "Mia Couto",
     "frase": "Algumas pessoas não conversam: fazem ruído para impedir que a verdade encontre cadeira.",
     "quoteType": "inspired",
@@ -857,6 +867,7 @@
   },
   {
     "id": "batch04-quote-036",
+    "editorialStatus": "quarantine",
     "autor": "Machado de Assis",
     "frase": "A vaidade tem excelente memória para elogios e uma amnésia conveniente para seus próprios motivos.",
     "quoteType": "inspired",
@@ -881,6 +892,7 @@
   },
   {
     "id": "batch04-quote-037",
+    "editorialStatus": "quarantine",
     "autor": "Machado de Assis",
     "frase": "Há sinceridades que só aparecem quando já não oferecem risco ao interesse.",
     "quoteType": "inspired",
@@ -910,19 +922,18 @@
     "quoteType": "inspired",
     "source": "Leitura editorial inspirada em Machado de Assis",
     "sentimentos": [
-      "amor",
+      "insegurança",
       "confusão"
     ],
     "intensidade": [
-      "moderada",
-      "intensa"
+      "moderada"
     ],
     "temas": [
       "ciúme",
       "imaginação",
       "dúvida"
     ],
-    "tom": "confrontador",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Separe fato de narrativa antes de obedecer ao ciúme.",
     "explicacao": "A frase dialoga com o imaginário de Dom Casmurro sem atribuir citação literal.",
@@ -946,7 +957,7 @@
       "lucidez",
       "desencanto"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 4,
     "conselho": "Use a ironia para revelar, não para esconder sua própria ferida.",
     "explicacao": "A ironia aparece como defesa e lucidez, com ambiguidade.",
@@ -954,6 +965,7 @@
   },
   {
     "id": "batch04-quote-040",
+    "editorialStatus": "quarantine",
     "autor": "Machado de Assis",
     "frase": "Nem todo silêncio é mistério; às vezes é apenas cálculo esperando ocasião.",
     "quoteType": "inspired",
@@ -995,7 +1007,7 @@
       "casa",
       "realidade"
     ],
-    "tom": "cruel_lucido",
+    "tom": "contemplativo",
     "profundidade": 5,
     "conselho": "Não estranhe a estranheza: o cotidiano pode parecer ofensivo depois de uma perda.",
     "explicacao": "Texto seco e psicológico sobre a desorganização do mundo no luto.",
@@ -1021,7 +1033,7 @@
       "cotidiano",
       "revolta"
     ],
-    "tom": "clinico_compassivo",
+    "tom": "acolhedor",
     "profundidade": 5,
     "conselho": "Permita a revolta sem transformá-la em culpa por ainda estar vivo.",
     "explicacao": "Texto sobre a colisão entre perda íntima e continuidade externa.",
@@ -1057,6 +1069,7 @@
   },
   {
     "id": "batch04-text-004",
+    "editorialStatus": "quarantine",
     "autor": "Machado de Assis",
     "titulo": "A sinceridade conveniente",
     "texto": "Há pessoas que só descobrem a própria honestidade quando a verdade já não lhes custa nada. Antes disso, chamam silêncio de prudência, cálculo de paciência e interesse de sensatez.\n\nDepois, quando o perigo passa, aparecem com a consciência limpa e a memória bem penteada.\n\n**A moral tardia costuma chegar vestida com a roupa elegante da conveniência.**",
@@ -1102,7 +1115,7 @@
       "ausência",
       "amor"
     ],
-    "tom": "poetico_melancolico",
+    "tom": "poético",
     "profundidade": 5,
     "conselho": "Deixe a saudade testemunhar o amor sem exigir que ela desfaça a distância.",
     "explicacao": "Texto devocional e melancólico sobre saudade como permanência do vínculo.",
