@@ -12,6 +12,11 @@
   const CONTEXT_HISTORY_LIMIT = 120;
   const DEVELOPED_FORMATS = new Set(['microtexto', 'reflexao_curta', 'citacao_longa']);
   const VULNERABLE_FEELINGS = new Set(['luto', 'tristeza', 'inseguranca', 'culpa', 'ansiedade', 'solidao']);
+  const INTENSE_FIRST_RESPONSE_FEELINGS = new Set(['falta_de_proposito', 'raiva']);
+  const FEELING_THEME_KEYS = new Set([
+    'ansiedade', 'medo', 'amor', 'saudade', 'esperanca', 'solidao', 'autoconhecimento',
+    'confusao', 'inseguranca', 'raiva', 'culpa', 'luto', 'tristeza', 'falta de proposito',
+  ]);
 
   function getSelectionLevel(content, state) {
     const associations = content.associations || [];
@@ -59,6 +64,46 @@
 
   function getContentAuthorKey(content) {
     return normalizeComparableText(content.displayedAuthor || content.author || 'entre sabios');
+  }
+
+  function getComparableWords(value) {
+    return new Set(normalizeComparableText(value)
+      .split(' ')
+      .filter((word) => word.length > 1)
+      .map((word) => (word.length > 4 && word.endsWith('s') ? word.slice(0, -1) : word)));
+  }
+
+  function areNearDuplicateTexts(firstValue, secondValue) {
+    const first = normalizeComparableText(firstValue);
+    const second = normalizeComparableText(secondValue);
+    if (!first || !second) return false;
+    if (first === second) return true;
+    const firstWords = getComparableWords(first);
+    const secondWords = getComparableWords(second);
+    const shortestSize = Math.min(firstWords.size, secondWords.size);
+    if (shortestSize < 6) return false;
+    const intersectionSize = [...firstWords].filter((word) => secondWords.has(word)).length;
+    const unionSize = firstWords.size + secondWords.size - intersectionSize;
+    const jaccard = intersectionSize / unionSize;
+    const containment = intersectionSize / shortestSize;
+    return jaccard >= 0.8 || (jaccard >= 0.68 && containment >= 0.85);
+  }
+
+  function getContentConceptKeys(content) {
+    return [...new Set((content.themes || [])
+      .map(normalizeComparableText)
+      .filter((theme) => theme && !FEELING_THEME_KEYS.has(theme)))];
+  }
+
+  function hasRecentConcept(content, recentSelections) {
+    const conceptKeys = getContentConceptKeys(content);
+    if (!conceptKeys.length) return false;
+    return recentSelections.some((item) => {
+      const recentKeys = Array.isArray(item.conceptKeys)
+        ? item.conceptKeys
+        : [item.conceptKey].filter(Boolean);
+      return conceptKeys.some((key) => recentKeys.includes(key));
+    });
   }
 
   function getSecondaryCompatibility(content, state) {
@@ -110,8 +155,20 @@
     if (/(vinganca|vingar|faca (todos|alguem|quem).*(pagar|sofrer))/.test(text)) tags.add('justifies_resentment');
     if (/(afaste se de todos|ninguem merece sua companhia|sozinho e (sempre )?melhor)/.test(text)) tags.add('encourages_isolation');
     if (/(nao ha esperanca|nada (vai|pode) mudar|nao existe saida)/.test(text)) tags.add('confirms_harmful_belief');
+    if (/(tristeza|dor|sofrimento).*(define quem voce e|e quem voce e|sua identidade)/.test(text)) tags.add('turns_emotion_into_identity');
+    if (/(solidao|sozinho|dor|sofrer|sofrimento|escuridao).*(superior|melhor que os outros|mais profundo|profundidade)/.test(text)) {
+      tags.add('romanticizes_suffering');
+    }
+    if (/(aja|reaja|decida).*(agora|imediatamente).*(sem pensar|sem medir|sem considerar)/.test(text)) tags.add('encourages_impulsivity');
+    if (/(merece|deve).*(carregar|sentir|sofrer|punir).*(culpa|culpado|punicao)/.test(text)
+      || /culpa.*prova.*(mau|ruim|imperdoavel)/.test(text)) tags.add('increases_guilt');
+    if (/(isso e exagero|nao deveria sentir|pare de sentir|nao ha motivo para sentir)/.test(text)) tags.add('invalidates_emotion');
     if (state.primaryFeeling === 'luto' && /(siga em frente|seguir em frente|supere|superar|deixe para tras)/.test(text)) {
       tags.add('risks_negative_reinforcement');
+    }
+    if (state.primaryFeeling === 'luto'
+      && /(precisa encontrar sentido|aconteceu para (te )?ensinar|transforme a perda em (uma )?licao)/.test(text)) {
+      tags.add('forces_meaning_on_grief');
     }
 
     const unsafeTags = new Set([
@@ -119,6 +176,11 @@
       'encourages_isolation',
       'justifies_resentment',
       'romanticizes_suffering',
+      'encourages_impulsivity',
+      'forces_meaning_on_grief',
+      'increases_guilt',
+      'invalidates_emotion',
+      'turns_emotion_into_identity',
     ]);
     let safe = ![...tags].some((tag) => unsafeTags.has(tag));
     if (state.primaryFeeling === 'luto') {
@@ -136,6 +198,9 @@
       if (unsafeGriefRisk || unsafeGriefFunction || tags.has('risks_negative_reinforcement')) safe = false;
     }
     if (options.firstResponse && VULNERABLE_FEELINGS.has(state.primaryFeeling)
+      && ['confrontation', 'action'].includes(content.editorialFunction)) safe = false;
+    if (options.firstResponse && state.intensity === 'intensa'
+      && INTENSE_FIRST_RESPONSE_FEELINGS.has(state.primaryFeeling)
       && ['confrontation', 'action'].includes(content.editorialFunction)) safe = false;
 
     return { safe, tags: [...tags] };
@@ -297,6 +362,16 @@
         });
       }
 
+      const nearDuplicateSafeCandidates = candidates.filter(({ content }) => !recentContents.some((item) => (
+        areNearDuplicateTexts(content.finalText, item.textKey)
+      )));
+      const nearDuplicateAvoidanceRelaxed = nearDuplicateSafeCandidates.length === 0;
+      if (!nearDuplicateAvoidanceRelaxed) candidates = nearDuplicateSafeCandidates;
+
+      const conceptSafeCandidates = candidates.filter(({ content }) => !hasRecentConcept(content, recentContents));
+      const conceptAvoidanceRelaxed = conceptSafeCandidates.length === 0;
+      if (!conceptAvoidanceRelaxed) candidates = conceptSafeCandidates;
+
       const bestTrajectoryPriority = Math.min(...candidates.map(({ content }) => getTrajectoryPriority(
         content,
         state,
@@ -333,10 +408,15 @@
         if (developedShare >= 0.3 && conciseCandidates.length) candidates = conciseCandidates;
       }
 
-      const recentAuthorCounts = recentSelections.slice(-(RECENT_AUTHOR_WINDOW - 1)).reduce((counts, item) => {
+      const recentAuthors = recentSelections.slice(-(RECENT_AUTHOR_WINDOW - 1));
+      const recentAuthorCounts = recentAuthors.reduce((counts, item) => {
         counts.set(item.authorKey, (counts.get(item.authorKey) || 0) + 1);
         return counts;
       }, new Map());
+      const recentAuthorKeys = new Set(recentAuthors.map((item) => item.authorKey));
+      const authorFreshCandidates = candidates.filter(({ content }) => !recentAuthorKeys.has(getContentAuthorKey(content)));
+      const authorFreshnessRelaxed = authorFreshCandidates.length === 0;
+      if (!authorFreshnessRelaxed) candidates = authorFreshCandidates;
       const authorSafeCandidates = candidates.filter(({ content }) => (recentAuthorCounts.get(getContentAuthorKey(content)) || 0) < 2);
       const authorAvoidanceRelaxed = authorSafeCandidates.length === 0;
       if (!authorAvoidanceRelaxed) candidates = authorSafeCandidates;
@@ -353,6 +433,7 @@
         id: selectedId,
         textKey: selectedTextKey,
         authorKey: getContentAuthorKey(selected.content),
+        conceptKeys: getContentConceptKeys(selected.content),
         format: selected.content.displayType,
       });
       recentSelections = recentSelections.slice(-RECENT_HISTORY_LIMIT);
@@ -372,6 +453,9 @@
         contextSignals: inspection.signals,
         cycleRestarted,
         exactAvoidanceRelaxed,
+        nearDuplicateAvoidanceRelaxed,
+        conceptAvoidanceRelaxed,
+        authorFreshnessRelaxed,
         authorAvoidanceRelaxed,
         trajectoryStage: effectiveOptions.firstResponse ? 'initial' : (contextHistory.length < 3 ? 'recognition' : 'development'),
       };
@@ -401,8 +485,10 @@
     LEVEL_REASONS,
     RECENT_AUTHOR_WINDOW,
     RECENT_CONTENT_WINDOW,
+    areNearDuplicateTexts,
     classifyEditorialEffects,
     createSelector,
+    getContentConceptKeys,
     getContextSignals,
     getSelectionLevel,
     rankEligibleContents,

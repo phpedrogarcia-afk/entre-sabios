@@ -129,3 +129,79 @@ test('rotação percorre conteúdo exato e limita autor a duas aparições em ci
   }, new Map());
   assert.ok([...authorCounts.values()].every((count) => count <= 2));
 });
+
+test('formulação quase idêntica é evitada quando existe alternativa emocional equivalente', () => {
+  const contents = [
+    { id: 'candidate-a', finalText: 'Texto provisório A', displayedAuthor: 'Autor A', author: 'Autor A', associations: [{ feeling: 'medo', placement: 'nucleo' }], publicationEnabled: true, status: 'ATIVO_NUCLEO', suitableIntensities: ['moderada'], placement: 'nucleo', hardExclusions: [], themes: [] },
+    { id: 'candidate-b', finalText: 'Texto provisório B', displayedAuthor: 'Autor B', author: 'Autor B', associations: [{ feeling: 'medo', placement: 'nucleo' }], publicationEnabled: true, status: 'ATIVO_NUCLEO', suitableIntensities: ['moderada'], placement: 'nucleo', hardExclusions: [], themes: [] },
+  ];
+  const state = { primaryFeeling: 'medo', secondaryFeelings: [], intensity: 'moderada' };
+  const ranked = engine.rankEligibleContents(contents, state, { firstResponse: false });
+  const nearCandidate = ranked[0].content;
+  const distinctCandidate = ranked[1].content;
+  nearCandidate.finalText = 'O medo não precisa decidir todos os passos do seu caminho.';
+  distinctCandidate.finalText = 'Respirar devolve ao presente uma margem para observar o que acontece.';
+
+  const storage = createMemoryStorage();
+  storage.setItem('entreSabiosRecentContent:near-duplicate', JSON.stringify([{
+    id: 'historical-version',
+    textKey: normalizeText('O medo não precisa decidir cada passo do seu caminho.'),
+    authorKey: 'autor anterior',
+    format: 'frase',
+  }]));
+  const selector = engine.createSelector({ version: 'near-duplicate', contents, storage });
+  const selected = selector.select(state, { firstResponse: false });
+  assert.equal(selected.content.id, distinctCandidate.id);
+  assert.equal(selected.nearDuplicateAvoidanceRelaxed, false);
+});
+
+test('conceito específico recente é evitado antes de relaxar para o mesmo tema', () => {
+  const contents = [
+    { id: 'concept-a', finalText: 'Texto conceitual A', displayedAuthor: 'Autor A', author: 'Autor A', associations: [{ feeling: 'medo', placement: 'nucleo' }], publicationEnabled: true, status: 'ATIVO_NUCLEO', suitableIntensities: ['moderada'], placement: 'nucleo', hardExclusions: [], themes: [] },
+    { id: 'concept-b', finalText: 'Texto conceitual B', displayedAuthor: 'Autor B', author: 'Autor B', associations: [{ feeling: 'medo', placement: 'nucleo' }], publicationEnabled: true, status: 'ATIVO_NUCLEO', suitableIntensities: ['moderada'], placement: 'nucleo', hardExclusions: [], themes: [] },
+  ];
+  const state = { primaryFeeling: 'medo', secondaryFeelings: [], intensity: 'moderada' };
+  const ranked = engine.rankEligibleContents(contents, state, { firstResponse: false });
+  const repeatedConcept = ranked[0].content;
+  const distinctConcept = ranked[1].content;
+  repeatedConcept.themes = ['medo', 'perda de controle'];
+  distinctConcept.themes = ['medo', 'presença'];
+
+  const storage = createMemoryStorage();
+  storage.setItem('entreSabiosRecentContent:concept-duplicate', JSON.stringify([{
+    id: 'previous-concept',
+    textKey: 'outro texto sobre o mesmo conceito',
+    conceptKey: 'perda de controle',
+    authorKey: 'outro autor',
+    format: 'frase',
+  }]));
+  const selector = engine.createSelector({ version: 'concept-duplicate', contents, storage });
+  const selected = selector.select(state, { firstResponse: false });
+  assert.equal(selected.content.id, distinctConcept.id);
+  assert.equal(selected.conceptAvoidanceRelaxed, false);
+});
+
+test('autor ausente nas quatro recomendações recentes tem prioridade quando é equivalente', () => {
+  const contents = [
+    { id: 'author-a', finalText: 'Texto de autor A', displayedAuthor: 'Autor A', author: 'Autor A', associations: [{ feeling: 'medo', placement: 'nucleo' }], publicationEnabled: true, status: 'ATIVO_NUCLEO', suitableIntensities: ['moderada'], placement: 'nucleo', hardExclusions: [], themes: [] },
+    { id: 'author-b', finalText: 'Texto de autor B', displayedAuthor: 'Autor B', author: 'Autor B', associations: [{ feeling: 'medo', placement: 'nucleo' }], publicationEnabled: true, status: 'ATIVO_NUCLEO', suitableIntensities: ['moderada'], placement: 'nucleo', hardExclusions: [], themes: [] },
+  ];
+  const state = { primaryFeeling: 'medo', secondaryFeelings: [], intensity: 'moderada' };
+  const ranked = engine.rankEligibleContents(contents, state, { firstResponse: false });
+  const repeatedAuthor = ranked[0].content;
+  const freshAuthor = ranked[1].content;
+  repeatedAuthor.displayedAuthor = repeatedAuthor.author = 'Autor recorrente';
+  freshAuthor.displayedAuthor = freshAuthor.author = 'Autor novo';
+
+  const storage = createMemoryStorage();
+  storage.setItem('entreSabiosRecentContent:author-freshness', JSON.stringify([
+    { id: 'old-1', textKey: 'antigo um', authorKey: 'autor um', format: 'frase' },
+    { id: 'old-2', textKey: 'antigo dois', authorKey: 'autor recorrente', format: 'frase' },
+    { id: 'old-3', textKey: 'antigo tres', authorKey: 'autor tres', format: 'frase' },
+    { id: 'old-4', textKey: 'antigo quatro', authorKey: 'autor quatro', format: 'frase' },
+  ]));
+  const selector = engine.createSelector({ version: 'author-freshness', contents, storage });
+  const selected = selector.select(state, { firstResponse: false });
+  assert.equal(selected.content.id, freshAuthor.id);
+  assert.equal(selected.authorFreshnessRelaxed, false);
+});

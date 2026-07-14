@@ -258,23 +258,26 @@
             </button>
           </div>
           <div class="quote-author" id="quoteAuthor">Sua reflexão começa com uma escolha sincera.</div>
+          <div class="quote-author" id="quoteSource" hidden></div>
 
           <div class="divider" aria-hidden="true"></div>
 
-          <div class="block">
+          <div class="block" id="explanationBlock">
             <div class="block-title" id="explanationTitle">O QUE ESSA FRASE QUER DIZER</div>
             <div class="block-text" id="reflectionText">Selecione seus sentimentos, escolha a intensidade e clique em “ENCONTRAR UMA REFLEXÃO”.</div>
           </div>
 
-          <div class="block philosophy-block">
-            <div class="block-title">CONHEÇA O PENSADOR</div>
+          <div class="block philosophy-block" id="philosophyBlock">
+            <div class="block-title" id="philosophyTitle">CONHEÇA O PENSADOR</div>
             <div class="block-text" id="philosophyText">A cada reflexão, você conhecerá uma ideia do autor escolhido.</div>
           </div>
 
           <div class="block">
-            <div class="block-title">CONSELHO</div>
-            <div class="block-text small" id="adviceText">—</div>
-            <div class="book-rec" aria-live="polite">
+            <div id="adviceBlock">
+              <div class="block-title" id="adviceTitle">CONSELHO</div>
+              <div class="block-text small" id="adviceText">—</div>
+            </div>
+            <div class="book-rec" id="bookRecommendation" aria-live="polite">
               <div class="book-rec-label">LIVRO RECOMENDADO</div>
               <div class="book-rec-title" id="bookText">—</div>
               <div class="book-rec-why"><strong>Por que este livro?</strong> <span id="bookReason">A recomendação aparecerá junto da reflexão.</span></div>
@@ -477,6 +480,8 @@
     <script src="js/data/share-themes.js?v=20260710-1"></script>
     <script src="js/data/tales.js?v=20260714-1"></script>
     <script src="js/data/emotional-taxonomy.js?v=20260712-10"></script>
+    <script src="js/data/editorial-explanations.js?v=20260714-1"></script>
+    <script src="js/data/editorial-guidance.js?v=20260714-1"></script>
     <script src="js/core/normalization.js?v=20260710-1"></script>
     <script src="js/core/runtime-engine.js?v=definitiva-2.1-behavior-1"></script>
     <script src="data/entre_sabios_runtime.js?v=definitiva-2.1"></script>

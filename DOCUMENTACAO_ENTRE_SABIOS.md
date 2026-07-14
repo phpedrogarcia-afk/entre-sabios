@@ -213,7 +213,7 @@ A implementação atual possui uma trajetória curta e funcional por contexto, n
 
 As funções editoriais reconhecidas são: reconhecimento, esclarecimento, investigação, grounding, reformulação, confronto, ação e contemplação. Elas determinam os textos auxiliares apresentados como explicação e conselho.
 
-Uma camada derivada de efeito editorial reconhece presença, esclarecimento, ampliação, investigação, grounding e confronto seguro. Ela também bloqueia padrões que confirmam crenças prejudiciais, incentivam isolamento ou ressentimento e romantizam sofrimento. Os casos negativos usados nos testes são artificiais e não entram no acervo. Em luto, confronto e ironia são bloqueados; ação é bloqueada na primeira resposta e em intensidade alta.
+Uma camada derivada de efeito editorial reconhece presença, esclarecimento, ampliação, investigação, grounding e confronto seguro. Ela também bloqueia padrões que confirmam crenças prejudiciais, transformam emoção em identidade, incentivam isolamento, ressentimento ou impulsividade, aumentam culpa, invalidam a emoção, romantizam sofrimento ou impõem sentido ao luto. Os casos negativos usados nos testes são artificiais e não entram no acervo. Em luto, confronto e ironia são bloqueados; ação é bloqueada na primeira resposta e em intensidade alta. Nos oito sentimentos revisados, a primeira resposta intensa não usa confronto nem ação.
 
 As antigas regras numéricas de catarse e transcendência continuam desconectadas porque misturavam autoria, tom e pontuação de modo capaz de superar a precisão emocional. A arquitetura atual preserva a intenção útil: reconhecimento antes de ampliação e transcendência sem apagar a emoção, sempre como critério secundário dentro do mesmo nível.
 
@@ -248,7 +248,7 @@ Chaves atualmente utilizadas ou mantidas pelo código:
 - `entreSabiosContosRecentes`: últimos contos;
 - `entreSabiosSinaisEditoriais`: sinais editoriais agregados.
 
-O gostei/não gostei preserva a avaliação por conteúdo e ajusta pesos locais de temas e livros. O peso de livros influencia a recomendação de leitura; esses sinais não alteram a seleção runtime das reflexões. Preferências de autor não são carregadas, atualizadas nem salvas novamente, inclusive quando uma instalação possui o antigo campo `authors` no armazenamento local.
+O gostei/não gostei preserva a avaliação por conteúdo e ajusta pesos locais de temas e livros. O peso de livros influencia a recomendação de leitura; esses sinais não alteram a seleção runtime das reflexões. Preferências de autor ou gênero não são carregadas, atualizadas nem salvas novamente, inclusive quando uma instalação possui campos antigos como `authors`, `gender` ou `genderPreference` no armazenamento local. O gênero permanece somente como metadado editorial do acervo e não participa de filtros, pesos, filas, cache, analytics ou ordenação.
 
 ## 11. Favoritos
 

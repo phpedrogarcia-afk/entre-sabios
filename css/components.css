@@ -831,7 +831,6 @@ html[data-theme="night"] .book-rec-title {
 html[data-theme="night"] .share-action,
 html[data-theme="night"] .tales-button,
 html[data-theme="night"] .book-open,
-html[data-theme="night"] .copy-button,
 html[data-theme="night"] .full {
   border-color: var(--night-border);
   background: rgba(31, 50, 39, 0.72);
