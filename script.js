@@ -130,8 +130,10 @@ let currentShareStyle = 'sage';
 let selectedFeelingIds = new Set();
 let primaryFeelingId = null;
 let currentIntensity = 'moderada';
+let needsMotivation = false;
 let runtimeSelector = null;
 let lastSelectionSignature = null;
+let primaryFeelingAnnouncementTimer = null;
 let runtimeContents = [];
 
 const preferenceProfile = loadPreferenceProfile();
@@ -150,7 +152,23 @@ let contosJaVistos = [];
 const feelingsGridEl = document.getElementById('feelingsGrid');
 const primaryFeelingControlEl = document.getElementById('primaryFeelingControl');
 const primaryFeelingLabelEl = document.getElementById('primaryFeelingLabel');
+const primaryFeelingAnnouncementEl = document.getElementById('primaryFeelingAnnouncement');
 const secondaryFeelingActionsEl = document.getElementById('secondaryFeelingActions');
+const emotionalSynthesisSummaryEl = document.getElementById('emotionalSynthesisSummary');
+const synthesisSecondaryFeelingsEl = document.getElementById('synthesisSecondaryFeelings');
+const synthesisHumanSummaryEl = document.getElementById('synthesisHumanSummary');
+const synthesisMotivationDirectionEl = document.getElementById('synthesisMotivationDirection');
+const motivationToggleEl = document.getElementById('motivationToggle');
+const emotionalSynthesisResolver = window.EntreSabiosEmotionalSynthesis.createResolver(
+  window.EntreSabiosData.emotionalSyntheses
+);
+const synthesisRankingAdapter = window.EntreSabiosSynthesisRankingAdapter.createAdapter({
+  catalog: window.EntreSabiosData.emotionalSyntheses,
+  resolver: emotionalSynthesisResolver,
+});
+const motivationRankingAdapter = window.EntreSabiosMotivationRankingAdapter.createAdapter(
+  window.EntreSabiosData.motivationProfiles
+);
 const generateBtn = document.getElementById('generateBtn');
 const backBtn = document.getElementById('backBtn');
 const newBtn = document.getElementById('newBtn');
@@ -412,7 +430,10 @@ function generateReflection({ keepHistory = true } = {}) {
   }
 
   const selectedThemes = getSelectedThemes();
-  const selection = pickRuntimeContent();
+  const selection = pickRuntimeContent({
+    eventTrigger: 'generate_reflection_click',
+    currentContentId: currentStory?.key || null,
+  });
   if (!selection) {
     reflectionTextEl.textContent = 'Ainda não há uma correspondência editorial segura para esta combinação.';
     return false;
@@ -465,7 +486,10 @@ function newPhrase() {
   }
 
   const selectedThemes = getSelectedThemes();
-  const selection = pickRuntimeContent();
+  const selection = pickRuntimeContent({
+    eventTrigger: 'another_perspective_click',
+    currentContentId: currentStory?.key || null,
+  });
   if (!selection) return false;
 
   const story = buildRuntimeStory(selection, selectedThemes);
@@ -489,18 +513,42 @@ function newPhrase() {
 // Eventos
 // =========================
 
-generateBtn.addEventListener('click', () => {
-  if (generateReflection({ keepHistory: true })) {
-    playSoftBell();
-    if (window.matchMedia('(max-width: 720px)').matches) {
-      document.querySelector('.col-center')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+const REFLECTION_SELECTION_LOCK_MS = 350;
+let reflectionSelectionLocked = false;
+
+function runReflectionSelectionAction(action) {
+  if (reflectionSelectionLocked) return false;
+  reflectionSelectionLocked = true;
+  generateBtn.disabled = true;
+  newBtn.disabled = true;
+  try {
+    return action();
+  } finally {
+    window.setTimeout(() => {
+      reflectionSelectionLocked = false;
+      const contentUnavailable = !runtimeSelector;
+      generateBtn.disabled = contentUnavailable;
+      newBtn.disabled = contentUnavailable;
+    }, REFLECTION_SELECTION_LOCK_MS);
   }
+}
+
+generateBtn.addEventListener('click', () => {
+  runReflectionSelectionAction(() => {
+    if (generateReflection({ keepHistory: true })) {
+      playSoftBell();
+      if (window.matchMedia('(max-width: 720px)').matches) {
+        document.querySelector('.col-center')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
 });
 
 backBtn.addEventListener('click', goBack);
 newBtn.addEventListener('click', () => {
-  if (newPhrase()) playSoftBell();
+  runReflectionSelectionAction(() => {
+    if (newPhrase()) playSoftBell();
+  });
 });
 
 likeBtn.addEventListener('click', () => setStoryFeedback(1));
@@ -641,6 +689,7 @@ async function init() {
   if (typeof initThemeToggle === 'function') initThemeToggle();
   initFeelings();
   initIntensity();
+  initMotivationPreference();
   initDailyQuote();
   drawDecor();
 
@@ -662,6 +711,8 @@ async function init() {
       version: runtime.contentVersion,
       contents: runtimeContents,
       storage: window.localStorage,
+      synthesisAdapter: synthesisRankingAdapter,
+      motivationAdapter: motivationRankingAdapter,
     });
     contentLoadStatusEl.textContent = '';
     generateBtn.disabled = false;

@@ -46,6 +46,8 @@ test('perfil só é apresentado quando existe texto editorial específico', () =
   assert.match(script, /const philosophy = String\(thinkerProfiles\[inspiration\] \|\| ''\)\.trim\(\)/);
   assert.doesNotMatch(script, /Esta reflexão pertence ao acervo editorial Entre Sábios/);
   assert.match(reflectionUi, /philosophyBlockEl\.hidden = !hasSpecificPhilosophy/);
+  assert.match(reflectionUi, /getPhilosophyHeading\(story\)/);
+  assert.doesNotMatch(reflectionUi, /philosophyTitleEl\.textContent[^;]*story\.adviceLabel/);
 });
 
 test('somente as 20 fontes documentais específicas são encaminhadas à interface', () => {
