@@ -92,7 +92,10 @@ test('orientação usa somente conteúdo específico, contexto curado e rótulo 
   assert.match(reflectionUiScript, /adviceBlockEl\.hidden = !hasSpecificAdvice/);
   assert.match(reflectionUiScript, /adviceTitleEl\.textContent = hasSpecificAdvice \? story\.adviceLabel : ''/);
   assert.match(reflectionUiScript, /adviceTextEl\.textContent = hasSpecificAdvice \? story\.advice : ''/);
-  assert.match(html, /<\/div>\s*<div class="book-rec" id="bookRecommendation" aria-live="polite">/);
+  assert.match(html, /<section class="block" id="adviceBlock"/);
+  assert.match(html, /<section class="block book-rec" id="bookRecommendation"/);
+  assert.ok(html.indexOf('id="philosophyBlock"') < html.indexOf('id="adviceBlock"'));
+  assert.ok(html.indexOf('id="adviceBlock"') < html.indexOf('id="bookRecommendation"'));
 });
 
 test('renderização alterna orientação presente e ausente sem ocultar o livro', () => {
@@ -157,12 +160,23 @@ test('renderização alterna orientação presente e ausente sem ocultar o livro
   assert.equal(sandbox.adviceTitleEl.textContent, 'UMA ORIENTAÇÃO');
   assert.equal(sandbox.adviceTextEl.textContent, 'Uma orientação específica.');
   assert.equal(sandbox.bookTextEl.textContent, 'Livro seguro, de Autor real');
+  assert.equal(sandbox.philosophyBlockEl.hidden, false);
+  assert.equal(sandbox.philosophyTitleEl.textContent, 'CONHEÇA O PENSADOR');
 
   sandbox.renderStory({ ...baseStory, advice: '', adviceLabel: '' });
   assert.equal(sandbox.adviceBlockEl.hidden, true);
   assert.equal(sandbox.adviceTitleEl.textContent, '');
   assert.equal(sandbox.adviceTextEl.textContent, '');
   assert.equal(sandbox.bookTextEl.textContent, 'Livro seguro, de Autor real');
+  assert.equal(sandbox.philosophyBlockEl.hidden, false);
+  assert.equal(sandbox.philosophyTitleEl.textContent, 'CONHEÇA O PENSADOR');
+});
+
+test('rótulo de orientação não pode substituir Conheça o pensador', () => {
+  assert.match(reflectionUiScript, /function getPhilosophyHeading\(story\)/);
+  assert.match(reflectionUiScript, /story\.philosophyLabel === 'CONHEÇA A TRADIÇÃO'/);
+  assert.match(reflectionUiScript, /: 'CONHEÇA O PENSADOR'/);
+  assert.doesNotMatch(reflectionUiScript, /philosophyTitleEl\.textContent[^;]*story\.adviceLabel/);
 });
 
 test('apresentação de autoria, fonte e perfil evita fallbacks editoriais enganosos', () => {
@@ -255,6 +269,7 @@ test('sentimento principal só muda por seleção inicial, remoção ou ação e
   const sandbox = {
     selectedFeelingIds,
     primaryFeelingId: 'tristeza',
+    primaryFeelingAnnouncementTimer: null,
     lastSelectionSignature: 'assinatura-atual',
     currentStory: null,
     currentIntensity: 'moderada',
@@ -266,17 +281,40 @@ test('sentimento principal só muda por seleção inicial, remoção ou ação e
     feelingsGridEl: { querySelectorAll: () => [] },
     primaryFeelingControlEl: { hidden: false },
     primaryFeelingLabelEl: { textContent: '' },
+    primaryFeelingAnnouncementEl: {
+      textContent: '',
+      classList: { add() {}, remove() {} },
+    },
     secondaryFeelingActionsEl: {
       set innerHTML(value) { this.children = []; },
       children: [],
       appendChild(button) { this.children.push(button); },
     },
     generateBtn: { classList: { toggle() {} } },
+    motivationToggleEl: {
+      disabled: false,
+      setAttribute() {},
+      classList: { toggle() {} },
+    },
+    emotionalSynthesisSummaryEl: { hidden: true, classList: { toggle() {} } },
+    synthesisSecondaryFeelingsEl: { textContent: '' },
+    synthesisHumanSummaryEl: { textContent: '' },
+    synthesisMotivationDirectionEl: { hidden: true },
+    emotionalSynthesisResolver: {
+      resolve: () => ({ profile: { humanSummary: 'Síntese de teste.', ambiguity: 'medium' } }),
+    },
+    needsMotivation: false,
     selectionHintEl: { textContent: '' },
     taleHintEl: null,
     intensityRadioEls: [{ value: 'intensa', addEventListener: (type, listener) => listeners.set(type, listener) }],
     getSelectedFeelingIds: () => [...selectedFeelingIds],
+    getCurrentSelectionContract: () => ({
+      primaryFeeling: sandbox.primaryFeelingId,
+      secondaryFeelings: [...selectedFeelingIds].filter((id) => id !== sandbox.primaryFeelingId).slice(0, 2),
+      needsMotivation: sandbox.needsMotivation,
+    }),
     normalizeTheme: (value) => value,
+    window: { setTimeout: () => 1, clearTimeout() {} },
     document: {
       createElement() {
         const buttonListeners = new Map();

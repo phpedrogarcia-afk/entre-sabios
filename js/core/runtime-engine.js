@@ -12,6 +12,13 @@
   const CONTEXT_HISTORY_LIMIT = 120;
   const DEVELOPED_FORMATS = new Set(['microtexto', 'reflexao_curta', 'citacao_longa']);
   const VULNERABLE_FEELINGS = new Set(['luto', 'tristeza', 'inseguranca', 'culpa', 'ansiedade', 'solidao']);
+  const INTENSE_SAFETY_FEELINGS = new Set([
+    ...VULNERABLE_FEELINGS, 'falta_de_proposito', 'raiva',
+  ]);
+  const INTENSE_PRESSURE_RISKS = new Set([
+    'pressao_por_superacao', 'conselho_prematuro', 'culpabilizacao',
+    'moralizacao', 'agressividade', 'romantizacao_do_sofrimento',
+  ]);
   const INTENSE_FIRST_RESPONSE_FEELINGS = new Set(['falta_de_proposito', 'raiva']);
   const FEELING_THEME_KEYS = new Set([
     'ansiedade', 'medo', 'amor', 'saudade', 'esperanca', 'solidao', 'autoconhecimento',
@@ -93,6 +100,60 @@
     return [...new Set((content.themes || [])
       .map(normalizeComparableText)
       .filter((theme) => theme && !FEELING_THEME_KEYS.has(theme)))];
+  }
+
+  function getContentCanonicalKeys(content) {
+    return [...new Set([
+      `content:${content.canonicalContentId || content.duplicateOf || content.derivedFromId || content.id}`,
+      content.sourceFragmentId ? `fragment:${content.sourceFragmentId}` : null,
+    ].filter(Boolean))];
+  }
+
+  function hasCanonicalKey(content, canonicalKeys) {
+    return getContentCanonicalKeys(content).some((key) => canonicalKeys.has(key));
+  }
+
+  function getCanonicalDiagnostic(content) {
+    return {
+      canonicalContentId: content.canonicalContentId || content.duplicateOf || content.derivedFromId || null,
+      sourceFragmentId: content.sourceFragmentId || null,
+      conceptGroup: content.conceptGroup || null,
+    };
+  }
+
+  function getCandidateDiagnostic(candidate, state = null, { includeText = false } = {}) {
+    const { content, level, synthesisCompatibility, motivationCompatibility } = candidate;
+    const textKey = normalizeComparableText(content.finalText);
+    const diagnostic = {
+      id: content.id,
+      author: content.displayedAuthor || content.author || 'Entre Sábios',
+      authorKey: getContentAuthorKey(content),
+      authorshipCategory: content.attributionType || content.authorshipType || content.sourceCategory || null,
+      format: content.displayType || null,
+      editorialFunction: content.editorialFunction || null,
+      themes: [...(content.themes || [])],
+      conceptKeys: getContentConceptKeys(content),
+      ...getCanonicalDiagnostic(content),
+      level,
+      synthesisBonus: synthesisCompatibility || null,
+      motivationBonus: motivationCompatibility || null,
+      synthesisPreference: synthesisCompatibility || null,
+      synthesisReduction: 0,
+      motivationalPreference: motivationCompatibility || null,
+      finalScore: {
+        model: 'lexicographic',
+        level,
+        secondaryCompatibility: state ? getSecondaryCompatibility(content, state) : null,
+        synthesisVector: synthesisCompatibility?.vector || [0, 0, 0],
+        motivationVector: motivationCompatibility?.vector || [0, 0, 0],
+      },
+    };
+    if (includeText) {
+      diagnostic.text = content.finalText;
+      diagnostic.normalizedText = textKey;
+      diagnostic.normalizedTextHash = stableHash(textKey).toString(16).padStart(8, '0');
+    }
+    return diagnostic;
   }
 
   function hasRecentConcept(content, recentSelections) {
@@ -202,6 +263,14 @@
     if (options.firstResponse && state.intensity === 'intensa'
       && INTENSE_FIRST_RESPONSE_FEELINGS.has(state.primaryFeeling)
       && ['confrontation', 'action'].includes(content.editorialFunction)) safe = false;
+    if (state.intensity === 'intensa' && INTENSE_SAFETY_FEELINGS.has(state.primaryFeeling)) {
+      const pressureRisk = (content.riskTags || []).some((risk) => INTENSE_PRESSURE_RISKS.has(risk));
+      const pressureFunction = ['confrontation', 'action'].includes(content.editorialFunction);
+      if (pressureRisk || pressureFunction) {
+        tags.add('unsafe_pressure_in_intense_state');
+        safe = false;
+      }
+    }
 
     return { safe, tags: [...tags] };
   }
@@ -246,19 +315,44 @@
     return hash >>> 0;
   }
 
+  function getEligibilityExclusions(content, state, options = {}) {
+    const signals = getContextSignals(state, options.firstResponse === true);
+    const exclusions = [];
+    if (content.publicationEnabled !== true) exclusions.push('publication_disabled');
+    if (!['ATIVO_NUCLEO', 'ATIVO_CONTEXTUAL', 'ATIVO_GERAL', 'ATIVO_REFERENCIA_PENDENTE'].includes(content.status)) {
+      exclusions.push('inactive_status');
+    }
+    if (!content.suitableIntensities.includes(state.intensity)) exclusions.push('unsuitable_intensity');
+    if (isBlocked(content, signals)) exclusions.push('hard_exclusion');
+    if (!classifyEditorialEffects(content, state, options).safe) exclusions.push('unsafe_editorial_effect');
+    if (getSelectionLevel(content, state) === null) exclusions.push('outside_emotional_levels');
+    return exclusions;
+  }
+
   function rankEligibleContents(contents, state, options = {}) {
     const firstResponse = options.firstResponse === true;
     const signals = getContextSignals(state, firstResponse);
+    const synthesisAdapter = options.synthesisAdapter || null;
+    const synthesisContext = synthesisAdapter?.resolveState(state) || null;
+    const motivationAdapter = options.motivationAdapter || null;
+    const motivationContext = motivationAdapter?.resolveState(state) || null;
     return contents
       .filter((content) => content.publicationEnabled === true)
       .filter((content) => ['ATIVO_NUCLEO', 'ATIVO_CONTEXTUAL', 'ATIVO_GERAL', 'ATIVO_REFERENCIA_PENDENTE'].includes(content.status))
       .filter((content) => content.suitableIntensities.includes(state.intensity))
       .filter((content) => !isBlocked(content, signals))
       .filter((content) => classifyEditorialEffects(content, state, options).safe)
-      .map((content) => ({ content, level: getSelectionLevel(content, state) }))
+      .map((content) => {
+        const candidate = { content, level: getSelectionLevel(content, state) };
+        if (synthesisAdapter) candidate.synthesisCompatibility = synthesisAdapter.evaluate(content, synthesisContext);
+        if (motivationAdapter) candidate.motivationCompatibility = motivationAdapter.evaluate(content, motivationContext);
+        return candidate;
+      })
       .filter((candidate) => candidate.level !== null)
       .sort((a, b) => a.level - b.level
         || getSecondaryCompatibility(b.content, state) - getSecondaryCompatibility(a.content, state)
+        || synthesisAdapter?.compare(a.synthesisCompatibility, b.synthesisCompatibility)
+        || motivationAdapter?.compare(a.motivationCompatibility, b.motivationCompatibility)
         || stableHash(`${state.primaryFeeling}:${state.intensity}:${a.content.id}`) - stableHash(`${state.primaryFeeling}:${state.intensity}:${b.content.id}`)
         || a.content.id.localeCompare(b.content.id, 'pt-BR'));
   }
@@ -267,10 +361,15 @@
     return [version, state.primaryFeeling, ...(state.secondaryFeelings || []).slice().sort(), state.intensity].join('|');
   }
 
-  function createSelector({ version, contents, storage = null } = {}) {
+  function createSelector({
+    version, contents, storage = null, synthesisAdapter = null, motivationAdapter = null,
+  } = {}) {
+    const contentById = new Map(contents.map((content) => [content.id, content]));
     const queues = new Map();
+    const queueDirections = new Map();
     const contextHistories = new Map();
     const storageKey = `entreSabiosRuntimeQueues:${version}`;
+    const queueDirectionStorageKey = `entreSabiosRuntimeQueueDirections:${version}`;
     const recentStorageKey = `entreSabiosRecentContent:${version}`;
     const contextHistoryStorageKey = `entreSabiosContextHistory:${version}`;
     let recentSelections = [];
@@ -286,10 +385,24 @@
         if (Array.isArray(savedRecent)) {
           recentSelections = savedRecent
             .filter((item) => item && typeof item.id === 'string' && typeof item.textKey === 'string')
+            .map((item) => ({
+              ...item,
+              canonicalKeys: Array.isArray(item.canonicalKeys)
+                ? item.canonicalKeys
+                : getContentCanonicalKeys(contentById.get(item.id) || { id: item.id }),
+            }))
             .slice(-RECENT_HISTORY_LIMIT);
         }
       } catch {
         // O histórico recente continua disponível apenas em memória.
+      }
+      try {
+        const savedDirections = JSON.parse(storage.getItem(queueDirectionStorageKey) || '{}');
+        Object.entries(savedDirections).forEach(([key, direction]) => {
+          if (['standard', 'motivated'].includes(direction)) queueDirections.set(key, direction);
+        });
+      } catch {
+        // A direção da fila pode ser reconstruída sem afetar a elegibilidade.
       }
       try {
         const savedContexts = JSON.parse(storage.getItem(contextHistoryStorageKey) || '{}');
@@ -305,6 +418,7 @@
       if (!storage) return;
       try {
         storage.setItem(storageKey, JSON.stringify(Object.fromEntries(queues)));
+        storage.setItem(queueDirectionStorageKey, JSON.stringify(Object.fromEntries(queueDirections)));
         storage.setItem(recentStorageKey, JSON.stringify(recentSelections.slice(-RECENT_HISTORY_LIMIT)));
         storage.setItem(contextHistoryStorageKey, JSON.stringify(Object.fromEntries(contextHistories)));
       } catch {
@@ -313,15 +427,58 @@
     }
 
     function inspect(state, options = {}) {
-      const ranked = rankEligibleContents(contents, state, options);
+      const ranked = rankEligibleContents(contents, state, { ...options, synthesisAdapter, motivationAdapter });
       const bestLevel = ranked[0]?.level ?? null;
       const eligibleAtLevel = ranked.filter((candidate) => candidate.level === bestLevel);
-      return { ranked, bestLevel, eligibleAtLevel, signals: [...getContextSignals(state, options.firstResponse === true)] };
+      const synthesisContext = synthesisAdapter?.resolveState(state) || null;
+      const motivationContext = motivationAdapter?.resolveState(state) || null;
+      let diagnostics = null;
+      if (options.diagnostics === true) {
+        const beforeSynthesis = synthesisAdapter
+          ? rankEligibleContents(contents, state, {
+            ...options, diagnostics: false, synthesisAdapter: null, motivationAdapter: null,
+          })
+          : ranked;
+        diagnostics = {
+          input: {
+            primaryFeeling: state.primaryFeeling,
+            secondaryFeelings: [...(state.secondaryFeelings || [])],
+            intensity: state.intensity,
+            needsMotivation: state.needsMotivation === true,
+            directionalKey: state.directionalKey || state.selectionContract?.directionalKey || null,
+          },
+          rawCandidates: contents.map((content) => ({ id: content.id })),
+          candidatesBeforeSynthesis: beforeSynthesis.map((candidate) => getCandidateDiagnostic(candidate, state)),
+          candidatesAfterSynthesis: ranked.map(({
+            content, level, synthesisCompatibility, motivationCompatibility,
+          }) => getCandidateDiagnostic({ content, level, synthesisCompatibility, motivationCompatibility }, state)),
+          eligibleCandidates: eligibleAtLevel.map((candidate) => getCandidateDiagnostic(candidate, state)),
+          excludedCandidates: contents.map((content) => ({
+            id: content.id,
+            reasons: getEligibilityExclusions(content, state, options),
+          })).filter((item) => item.reasons.length > 0),
+        };
+      }
+      return {
+        ranked,
+        bestLevel,
+        eligibleAtLevel,
+        signals: [...getContextSignals(state, options.firstResponse === true)],
+        synthesis: synthesisAdapter?.describeContext(synthesisContext) || null,
+        motivation: motivationAdapter?.describeContext(motivationContext) || null,
+        motivationFallback: Boolean(motivationAdapter) && state.needsMotivation === true
+          && !ranked.some((candidate) => (
+            candidate.level === bestLevel && candidate.motivationCompatibility?.strongMatch
+          )),
+        diagnostics,
+      };
     }
 
     function select(state, options = {}) {
       const baseKey = contextKey(version, state);
       const contextHistory = contextHistories.get(baseKey) || [];
+      const globalHistoryBefore = recentSelections.map((item) => ({ ...item }));
+      const contextHistoryBefore = contextHistory.map((item) => ({ ...item }));
       const effectiveOptions = {
         ...options,
         firstResponse: options.firstResponse === true && contextHistory.length === 0,
@@ -332,30 +489,89 @@
       const recentContents = recentSelections.slice(-RECENT_CONTENT_WINDOW);
       const recentIds = new Set(recentContents.map((item) => item.id));
       const recentTextKeys = new Set(recentContents.map((item) => item.textKey));
+      const recentCanonicalKeys = new Set(recentContents.flatMap((item) => item.canonicalKeys || []));
+      const cycleIds = new Set(recentSelections.map((item) => item.id));
+      const cycleTextKeys = new Set(recentSelections.map((item) => item.textKey));
+      const cycleCanonicalKeys = new Set(recentSelections.flatMap((item) => item.canonicalKeys || []));
       const lastSelection = recentSelections.at(-1);
-      const levelCandidates = inspection.ranked.filter((candidate) => candidate.level === inspection.bestLevel);
+      const hasNotBeenSeenInCycle = ({ content }) => {
+        const textKey = normalizeComparableText(content.finalText);
+        return !cycleIds.has(content.id)
+          && !cycleTextKeys.has(textKey)
+          && !hasCanonicalKey(content, cycleCanonicalKeys);
+      };
+      const hasNotBeenRecentlySeen = ({ content }) => {
+        const textKey = normalizeComparableText(content.finalText);
+        return !recentIds.has(content.id)
+          && !recentTextKeys.has(textKey)
+          && !hasCanonicalKey(content, recentCanonicalKeys);
+      };
+      const primaryProgressionLevels = inspection.bestLevel === 1 ? [1, 2] : [inspection.bestLevel];
+      const cycleUnseenLevel = primaryProgressionLevels.find((level) => inspection.ranked.some((candidate) => (
+        candidate.level === level && hasNotBeenSeenInCycle(candidate)
+      )));
+      const recentUnseenLevel = primaryProgressionLevels.find((level) => inspection.ranked.some((candidate) => (
+        candidate.level === level && hasNotBeenRecentlySeen(candidate)
+      )));
+      const activeLevel = cycleUnseenLevel ?? recentUnseenLevel ?? inspection.bestLevel;
+      const levelCandidates = inspection.ranked.filter((candidate) => candidate.level === activeLevel);
       const eligibleIds = levelCandidates.map((candidate) => candidate.content.id);
-      const levelKey = `${key}::level:${inspection.bestLevel}`;
-      let queue = (queues.get(levelKey) || []).filter((id) => eligibleIds.includes(id));
+      const levelKey = `${key}::level:${activeLevel}`;
+      const storedQueueBefore = [...(queues.get(levelKey) || [])];
+      let queue = storedQueueBefore.filter((id) => eligibleIds.includes(id));
+      const queueDirection = state.needsMotivation === true ? 'motivated' : 'standard';
+      const previousQueueDirection = queueDirections.get(levelKey);
+      const motivationDirectionChanged = Boolean(previousQueueDirection && previousQueueDirection !== queueDirection);
+      if (motivationDirectionChanged && queue.length) {
+        const remainingIds = new Set(queue);
+        queue = buildCadencedQueue(levelCandidates).filter((id) => remainingIds.has(id));
+      }
+      queueDirections.set(levelKey, queueDirection);
+      const unseenLevelIds = new Set(levelCandidates
+        .filter(hasNotBeenSeenInCycle)
+        .map(({ content }) => content.id));
+      const recentUnseenLevelIds = new Set(levelCandidates
+        .filter(hasNotBeenRecentlySeen)
+        .map(({ content }) => content.id));
+      const freshLevelIds = unseenLevelIds.size ? unseenLevelIds : recentUnseenLevelIds;
+      const orderedLevelIds = buildCadencedQueue(levelCandidates);
+      if (freshLevelIds.size) {
+        queue = queue.filter((id) => freshLevelIds.has(id));
+        orderedLevelIds.forEach((id) => {
+          if (freshLevelIds.has(id) && !queue.includes(id)) queue.push(id);
+        });
+      }
       const cycleRestarted = queue.length === 0;
-      if (cycleRestarted) queue = buildCadencedQueue(levelCandidates);
+      if (cycleRestarted) queue = orderedLevelIds;
+      const activeQueueBeforeSelection = [...queue];
       const candidateById = new Map(levelCandidates.map((candidate) => [candidate.content.id, candidate]));
       const queuedCandidates = queue.map((id) => candidateById.get(id)).filter(Boolean);
       let candidates = queuedCandidates.filter(({ content }) => {
         const textKey = normalizeComparableText(content.finalText);
-        return !recentIds.has(content.id) && !recentTextKeys.has(textKey);
+        return !recentIds.has(content.id)
+          && !recentTextKeys.has(textKey)
+          && !hasCanonicalKey(content, recentCanonicalKeys);
       });
+      const repetitionRemovedIds = queuedCandidates
+        .filter((candidate) => !candidates.includes(candidate))
+        .map(({ content }) => content.id);
       const exactAvoidanceRelaxed = candidates.length === 0;
       if (exactAvoidanceRelaxed) {
         candidates = queuedCandidates.filter(({ content }) => {
           const textKey = normalizeComparableText(content.finalText);
-          return content.id !== lastSelection?.id && textKey !== lastSelection?.textKey;
+          const lastCanonicalKeys = new Set(lastSelection?.canonicalKeys || []);
+          return content.id !== lastSelection?.id
+            && textKey !== lastSelection?.textKey
+            && !hasCanonicalKey(content, lastCanonicalKeys);
         });
         if (!candidates.length) candidates = queuedCandidates;
         candidates = candidates.slice().sort((a, b) => {
           const getRecency = ({ content }) => {
             const textKey = normalizeComparableText(content.finalText);
-            const index = recentContents.findIndex((item) => item.id === content.id || item.textKey === textKey);
+            const canonicalKeys = new Set(getContentCanonicalKeys(content));
+            const index = recentContents.findIndex((item) => item.id === content.id
+              || item.textKey === textKey
+              || (item.canonicalKeys || []).some((key) => canonicalKeys.has(key)));
             return index < 0 ? -1 : index;
           };
           return getRecency(a) - getRecency(b);
@@ -365,10 +581,16 @@
       const nearDuplicateSafeCandidates = candidates.filter(({ content }) => !recentContents.some((item) => (
         areNearDuplicateTexts(content.finalText, item.textKey)
       )));
+      const nearDuplicatePenalizedIds = candidates
+        .filter((candidate) => !nearDuplicateSafeCandidates.includes(candidate))
+        .map(({ content }) => content.id);
       const nearDuplicateAvoidanceRelaxed = nearDuplicateSafeCandidates.length === 0;
       if (!nearDuplicateAvoidanceRelaxed) candidates = nearDuplicateSafeCandidates;
 
       const conceptSafeCandidates = candidates.filter(({ content }) => !hasRecentConcept(content, recentContents));
+      const conceptPenalizedIds = candidates
+        .filter((candidate) => !conceptSafeCandidates.includes(candidate))
+        .map(({ content }) => content.id);
       const conceptAvoidanceRelaxed = conceptSafeCandidates.length === 0;
       if (!conceptAvoidanceRelaxed) candidates = conceptSafeCandidates;
 
@@ -415,6 +637,9 @@
       }, new Map());
       const recentAuthorKeys = new Set(recentAuthors.map((item) => item.authorKey));
       const authorFreshCandidates = candidates.filter(({ content }) => !recentAuthorKeys.has(getContentAuthorKey(content)));
+      const authorPenalizedIds = candidates
+        .filter((candidate) => !authorFreshCandidates.includes(candidate))
+        .map(({ content }) => content.id);
       const authorFreshnessRelaxed = authorFreshCandidates.length === 0;
       if (!authorFreshnessRelaxed) candidates = authorFreshCandidates;
       const authorSafeCandidates = candidates.filter(({ content }) => (recentAuthorCounts.get(getContentAuthorKey(content)) || 0) < 2);
@@ -424,14 +649,19 @@
       const selected = candidates[0];
       const selectedId = selected.content.id;
       const selectedTextKey = normalizeComparableText(selected.content.finalText);
+      const selectedCanonicalKeys = getContentCanonicalKeys(selected.content);
+      const selectedCanonicalKeySet = new Set(selectedCanonicalKeys);
       queue = queue.filter((id) => {
         const candidate = candidateById.get(id);
-        return id !== selectedId && normalizeComparableText(candidate?.content.finalText) !== selectedTextKey;
+        return id !== selectedId
+          && normalizeComparableText(candidate?.content.finalText) !== selectedTextKey
+          && !getContentCanonicalKeys(candidate.content).some((key) => selectedCanonicalKeySet.has(key));
       });
       queues.set(levelKey, queue);
       recentSelections.push({
         id: selectedId,
         textKey: selectedTextKey,
+        canonicalKeys: selectedCanonicalKeys,
         authorKey: getContentAuthorKey(selected.content),
         conceptKeys: getContentConceptKeys(selected.content),
         format: selected.content.displayType,
@@ -443,7 +673,26 @@
         format: selected.content.displayType,
         authorKey: getContentAuthorKey(selected.content),
       }].slice(-CONTEXT_HISTORY_LIMIT));
+      const globalHistoryAfter = recentSelections.map((item) => ({ ...item }));
+      const contextHistoryAfter = (contextHistories.get(baseKey) || []).map((item) => ({ ...item }));
       persist();
+      const selectedWasRecentlySeen = recentIds.has(selectedId)
+        || recentTextKeys.has(selectedTextKey)
+        || selectedCanonicalKeys.some((key) => recentCanonicalKeys.has(key));
+      const safeUnseenOutsideQueue = levelCandidates.filter(({ content }) => {
+        const textKey = normalizeComparableText(content.finalText);
+        return !activeQueueBeforeSelection.includes(content.id)
+          && !recentIds.has(content.id)
+          && !recentTextKeys.has(textKey)
+          && !hasCanonicalKey(content, recentCanonicalKeys);
+      });
+      const repeatAllowed = selectedWasRecentlySeen;
+      let repeatReason = null;
+      if (repeatAllowed) {
+        repeatReason = safeUnseenOutsideQueue.length
+          ? 'exact_avoidance_relaxed_with_safe_unseen_candidates_outside_active_queue'
+          : 'exact_avoidance_relaxed_without_safe_unseen_candidate_at_selected_level';
+      }
       return {
         content: selected.content,
         level: selected.level,
@@ -457,17 +706,68 @@
         conceptAvoidanceRelaxed,
         authorFreshnessRelaxed,
         authorAvoidanceRelaxed,
+        synthesis: inspection.synthesis,
+        synthesisCompatibility: selected.synthesisCompatibility || null,
+        motivation: inspection.motivation,
+        motivationCompatibility: selected.motivationCompatibility || null,
+        motivationFallback: inspection.motivationFallback,
+        motivationDirectionChanged,
+        diagnostics: inspection.diagnostics ? {
+          ...inspection.diagnostics,
+          timestamp: options.diagnosticContext?.timestamp || new Date().toISOString(),
+          eventTrigger: options.diagnosticContext?.eventTrigger || 'unknown',
+          sessionSelectionCounter: options.diagnosticContext?.sessionSelectionCounter || null,
+          currentContentId: options.diagnosticContext?.currentContentId || null,
+          queueKey: levelKey,
+          queueVersion: version,
+          bestLevel: inspection.bestLevel,
+          activeLevel,
+          levelProgressionReason: activeLevel === inspection.bestLevel
+            ? 'best_level_has_unseen_content_or_primary_cycle_exhausted'
+            : 'best_level_exhausted_progressed_within_primary_feeling',
+          queueDirection,
+          previousQueueDirection: previousQueueDirection || null,
+          storedQueueBefore,
+          activeQueueBeforeSelection,
+          queueAfterSelection: [...queue],
+          globalHistoryBefore,
+          contextHistoryBefore,
+          globalHistoryAfter,
+          contextHistoryAfter,
+          recentBeforeSelection: recentContents.map((item) => ({ ...item })),
+          removedBySafety: inspection.diagnostics.excludedCandidates
+            .filter(({ reasons }) => reasons.includes('unsafe_editorial_effect') || reasons.includes('hard_exclusion')),
+          removedByPrimary: inspection.diagnostics.candidatesAfterSynthesis
+            .filter(({ level }) => level !== inspection.bestLevel)
+            .map(({ id, level }) => ({ id, level })),
+          removedByIntensity: inspection.diagnostics.excludedCandidates
+            .filter(({ reasons }) => reasons.includes('unsuitable_intensity')),
+          removedByRepetition: repetitionRemovedIds,
+          penalizedByNearDuplicate: nearDuplicatePenalizedIds,
+          penalizedByConcept: conceptPenalizedIds,
+          penalizedByAuthor: authorPenalizedIds,
+          safeUnseenOutsideActiveQueue: safeUnseenOutsideQueue
+            .map((candidate) => getCandidateDiagnostic(candidate, state)),
+          repeatAllowed,
+          repeatReason,
+          chosen: {
+            ...getCandidateDiagnostic(selected, state, { includeText: true }),
+            finalReason: LEVEL_REASONS[selected.level],
+          },
+        } : null,
         trajectoryStage: effectiveOptions.firstResponse ? 'initial' : (contextHistory.length < 3 ? 'recognition' : 'development'),
       };
     }
 
     function clear({ includeRecent = false } = {}) {
       queues.clear();
+      queueDirections.clear();
       contextHistories.clear();
       if (includeRecent) recentSelections = [];
       if (storage) {
         try {
           storage.removeItem(storageKey);
+          storage.removeItem(queueDirectionStorageKey);
           storage.removeItem(contextHistoryStorageKey);
           if (includeRecent) storage.removeItem(recentStorageKey);
         } catch { /* opcional */ }
@@ -489,6 +789,7 @@
     classifyEditorialEffects,
     createSelector,
     getContentConceptKeys,
+    getContentCanonicalKeys,
     getContextSignals,
     getSelectionLevel,
     rankEligibleContents,

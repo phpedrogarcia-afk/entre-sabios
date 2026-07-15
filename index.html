@@ -45,7 +45,7 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20260714-2" />
+    <link rel="stylesheet" href="style.css?v=20260714-5" />
     <link rel="stylesheet" href="css/landscape-scroll-fix.css?v=20260713-1" />
     <link rel="stylesheet" href="css/tablet.css?v=20260713-1" />
     <style id="tale-mobile-scroll-fix">
@@ -199,24 +199,48 @@
         </div>
         <div id="primaryFeelingControl" class="primary-feeling-control" hidden>
           <div>Sentimento principal: <strong id="primaryFeelingLabel">—</strong></div>
+          <div id="primaryFeelingAnnouncement" class="primary-feeling-announcement" role="status" aria-live="polite" aria-atomic="true"></div>
           <div id="secondaryFeelingActions" class="secondary-feeling-actions" aria-label="Alterar sentimento principal"></div>
+          <div id="emotionalSynthesisSummary" class="emotional-synthesis-summary" role="status" aria-live="polite" aria-atomic="true" hidden>
+            <div class="synthesis-secondary-line">Também presentes: <span id="synthesisSecondaryFeelings"></span></div>
+            <div class="synthesis-title">O que isso pode estar revelando:</div>
+            <p id="synthesisHumanSummary" class="synthesis-human-summary"></p>
+            <p id="synthesisMotivationDirection" class="synthesis-motivation-direction" hidden>Você também busca: um impulso para continuar.</p>
+          </div>
         </div>
 
-        <div class="audience intensity-control">
-          <div class="audience-title">INTENSIDADE DO SENTIMENTO</div>
-          <div class="audience-options" role="radiogroup" aria-label="Intensidade do sentimento">
-            <label class="radio">
-              <input type="radio" name="intensity" value="fraca" />
-              <span>Fraca</span>
-            </label>
-            <label class="radio">
-              <input type="radio" name="intensity" value="moderada" checked />
-              <span>Moderada</span>
-            </label>
-            <label class="radio">
-              <input type="radio" name="intensity" value="intensa" />
-              <span>Intensa</span>
-            </label>
+        <div class="selection-preferences">
+          <div class="audience intensity-control">
+            <div class="audience-title">INTENSIDADE DO SENTIMENTO</div>
+            <div class="audience-options" role="radiogroup" aria-label="Intensidade do sentimento">
+              <label class="radio">
+                <input type="radio" name="intensity" value="fraca" />
+                <span>Fraca</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="intensity" value="moderada" checked />
+                <span>Moderada</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="intensity" value="intensa" />
+                <span>Intensa</span>
+              </label>
+            </div>
+          </div>
+          <div class="motivation-preference" aria-labelledby="motivationPreferenceTitle">
+            <div id="motivationPreferenceTitle" class="audience-title">PREFERÊNCIA OPCIONAL</div>
+            <button
+              id="motivationToggle"
+              class="motivation-toggle"
+              type="button"
+              aria-pressed="false"
+              aria-describedby="motivationPreferenceHelp"
+              disabled
+            >
+              <span class="motivation-dot" aria-hidden="true"></span>
+              <span>Preciso de motivação</span>
+            </button>
+            <span id="motivationPreferenceHelp" class="visually-hidden">Preferência opcional de direção para a reflexão. Não altera o sentimento nem a intensidade.</span>
           </div>
         </div>
 
@@ -267,22 +291,21 @@
             <div class="block-text" id="reflectionText">Selecione seus sentimentos, escolha a intensidade e clique em “ENCONTRAR UMA REFLEXÃO”.</div>
           </div>
 
-          <div class="block philosophy-block" id="philosophyBlock">
+          <section class="block philosophy-block" id="philosophyBlock" aria-labelledby="philosophyTitle">
             <div class="block-title" id="philosophyTitle">CONHEÇA O PENSADOR</div>
             <div class="block-text" id="philosophyText">A cada reflexão, você conhecerá uma ideia do autor escolhido.</div>
-          </div>
+          </section>
 
-          <div class="block">
-            <div id="adviceBlock">
-              <div class="block-title" id="adviceTitle">CONSELHO</div>
-              <div class="block-text small" id="adviceText">—</div>
-            </div>
-            <div class="book-rec" id="bookRecommendation" aria-live="polite">
-              <div class="book-rec-label">LIVRO RECOMENDADO</div>
-              <div class="book-rec-title" id="bookText">—</div>
-              <div class="book-rec-why"><strong>Por que este livro?</strong> <span id="bookReason">A recomendação aparecerá junto da reflexão.</span></div>
-            </div>
-          </div>
+          <section class="block" id="adviceBlock" aria-labelledby="adviceTitle">
+            <div class="block-title" id="adviceTitle">CONSELHO</div>
+            <div class="block-text small" id="adviceText">—</div>
+          </section>
+
+          <section class="block book-rec" id="bookRecommendation" aria-labelledby="bookRecommendationTitle" aria-live="polite">
+            <div class="book-rec-label" id="bookRecommendationTitle">LIVRO RECOMENDADO</div>
+            <div class="book-rec-title" id="bookText">—</div>
+            <div class="book-rec-why"><strong>Por que este livro?</strong> <span id="bookReason">A recomendação aparecerá junto da reflexão.</span></div>
+          </section>
 
           <div class="tags" id="tagsRow" aria-label="Etiquetas"></div>
 
@@ -476,6 +499,8 @@
       });
     </script>
     <script src="js/data/catalogs.js?v=20260713-1"></script>
+    <script src="js/data/emotional-syntheses.js?v=20260714-2"></script>
+    <script src="js/data/motivation-profiles.js?v=20260714-1"></script>
     <script src="js/data/books.js?v=20260710-1"></script>
     <script src="js/data/share-themes.js?v=20260710-1"></script>
     <script src="js/data/tales.js?v=20260714-1"></script>
@@ -483,21 +508,24 @@
     <script src="js/data/editorial-explanations.js?v=20260714-1"></script>
     <script src="js/data/editorial-guidance.js?v=20260714-1"></script>
     <script src="js/core/normalization.js?v=20260710-1"></script>
-    <script src="js/core/runtime-engine.js?v=definitiva-2.1-behavior-1"></script>
+    <script src="js/core/runtime-engine.js?v=20260715-repetition-fix-1"></script>
     <script src="data/entre_sabios_runtime.js?v=definitiva-2.1"></script>
     <script src="js/core/runtime-loader.js?v=definitiva-2.1-local-1"></script>
-    <script src="js/core/emotional-state.js?v=20260713-4"></script>
-    <script src="js/core/matching.js?v=20260713-4"></script>
+    <script src="js/core/emotional-state.js?v=20260714-1"></script>
+    <script src="js/core/emotional-synthesis.js?v=20260714-2"></script>
+    <script src="js/core/synthesis-ranking-adapter.js?v=20260714-1"></script>
+    <script src="js/core/motivation-ranking-adapter.js?v=20260714-1"></script>
+    <script src="js/core/matching.js?v=20260714-repetition-diagnostic-2"></script>
     <script src="js/core/book-matching.js?v=20260712-10"></script>
     <script src="js/features/feedback.js?v=20260713-4"></script>
     <script src="js/features/favorites.js?v=20260710-1"></script>
     <script src="js/features/sharing.js?v=20260713-4"></script>
     <script src="js/features/tales.js?v=20260714-1"></script>
-    <script src="js/ui/feelings-ui.js?v=20260713-4"></script>
+    <script src="js/ui/feelings-ui.js?v=20260714-3"></script>
     <script src="js/ui/daily-ui.js?v=20260712-1"></script>
-    <script src="js/ui/reflection-ui.js?v=20260713-1"></script>
+    <script src="js/ui/reflection-ui.js?v=20260714-1"></script>
     <script src="js/ui/effects-ui.js?v=20260710-1"></script>
     <script src="js/ui/theme-ui.js?v=20260710-1"></script>
-    <script src="script.js?v=20260714-1"></script>
+    <script src="script.js?v=20260715-repetition-fix-1"></script>
   </body>
 </html>

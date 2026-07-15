@@ -52,6 +52,7 @@ function syncSelectedCards() {
   });
 
   renderPrimaryFeelingControl();
+  syncMotivationPreference();
 
   generateBtn.classList.toggle('has-selection', selectedFeelingIds.size > 0);
   if (selectedFeelingIds.size > 0) {
@@ -65,12 +66,24 @@ function setPrimaryFeeling(feelingId) {
   primaryFeelingId = feelingId;
   lastSelectionSignature = null;
   syncSelectedCards();
+  announcePrimaryFeelingChange(feelingId);
   if (currentStory) {
     currentStory.selectedFeelingIds = getSelectedFeelingIds();
     currentStory.emotionalState = interpretEmotionalState();
     updateBookRecommendation(currentStory);
     preferenceNoteEl.textContent = `Próximas escolhas serão guiadas por ${getFeelingLabel(feelingId)}.`;
   }
+}
+
+function announcePrimaryFeelingChange(feelingId) {
+  if (primaryFeelingAnnouncementTimer) window.clearTimeout(primaryFeelingAnnouncementTimer);
+  primaryFeelingAnnouncementEl.textContent = `Sentimento principal alterado para ${getFeelingLabel(feelingId)}.`;
+  primaryFeelingAnnouncementEl.classList.add('is-visible');
+  primaryFeelingAnnouncementTimer = window.setTimeout(() => {
+    primaryFeelingAnnouncementEl.classList.remove('is-visible');
+    primaryFeelingAnnouncementEl.textContent = '';
+    primaryFeelingAnnouncementTimer = null;
+  }, 2400);
 }
 
 function getFeelingLabel(feelingId) {
@@ -86,11 +99,38 @@ function renderPrimaryFeelingControl() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'focus-feeling-btn';
-    button.textContent = `${getFeelingLabel(id)} · Focar nisto`;
+    button.textContent = getFeelingLabel(id);
+    button.setAttribute('aria-pressed', 'false');
     button.setAttribute('aria-label', `Definir ${getFeelingLabel(id)} como sentimento principal`);
     button.addEventListener('click', () => setPrimaryFeeling(id));
     secondaryFeelingActionsEl.appendChild(button);
   });
+  renderEmotionalSynthesis();
+}
+
+function renderEmotionalSynthesis() {
+  const contract = getCurrentSelectionContract();
+  if (contract.secondaryFeelings.length === 0) {
+    emotionalSynthesisSummaryEl.hidden = true;
+    synthesisSecondaryFeelingsEl.textContent = '';
+    synthesisHumanSummaryEl.textContent = '';
+    synthesisMotivationDirectionEl.hidden = true;
+    return;
+  }
+
+  const synthesis = emotionalSynthesisResolver.resolve(contract);
+  if (!synthesis?.profile?.humanSummary) {
+    emotionalSynthesisSummaryEl.hidden = true;
+    return;
+  }
+
+  synthesisSecondaryFeelingsEl.textContent = contract.secondaryFeelings
+    .map(getFeelingLabel)
+    .join(contract.secondaryFeelings.length === 2 ? ' e ' : '');
+  synthesisHumanSummaryEl.textContent = synthesis.profile.humanSummary;
+  synthesisMotivationDirectionEl.hidden = !contract.needsMotivation;
+  emotionalSynthesisSummaryEl.classList.toggle('is-ambiguous', synthesis.profile.ambiguity === 'high');
+  emotionalSynthesisSummaryEl.hidden = false;
 }
 
 function showSelectionHint(message = 'Escolha pelo menos um sentimento antes de gerar sua reflexão.') {
@@ -107,5 +147,24 @@ function initIntensity() {
       currentIntensity = r.value;
       lastSelectionSignature = null;
     });
+  });
+}
+
+function syncMotivationPreference() {
+  const hasEmotionalSelection = selectedFeelingIds.size > 0;
+  if (!hasEmotionalSelection) needsMotivation = false;
+  motivationToggleEl.disabled = !hasEmotionalSelection;
+  motivationToggleEl.setAttribute('aria-pressed', String(needsMotivation));
+  motivationToggleEl.classList.toggle('is-active', needsMotivation);
+}
+
+function initMotivationPreference() {
+  needsMotivation = false;
+  syncMotivationPreference();
+  motivationToggleEl.addEventListener('click', () => {
+    if (motivationToggleEl.disabled) return;
+    needsMotivation = !needsMotivation;
+    syncMotivationPreference();
+    renderEmotionalSynthesis();
   });
 }

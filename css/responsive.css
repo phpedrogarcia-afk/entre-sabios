@@ -270,6 +270,39 @@
   }
 }
 
+@media (max-width: 520px) {
+  .selection-preferences {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .motivation-preference {
+    border-top: 1px solid var(--stroke);
+    border-left: 0;
+    padding-top: 10px;
+    padding-left: 0;
+  }
+
+  .motivation-toggle {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .focus-feeling-btn {
+    min-height: 44px;
+    padding-inline: 12px;
+  }
+
+  .emotional-synthesis-summary {
+    padding-top: 12px;
+  }
+
+  .synthesis-human-summary {
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+}
+
 @media (max-width: 720px) {
   html[data-theme="night"] .center-card {
     background:

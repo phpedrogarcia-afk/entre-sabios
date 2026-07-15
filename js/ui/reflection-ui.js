@@ -53,6 +53,12 @@ function buildStoryAttribution(story) {
   return String(story.displayAuthor || '').trim() || 'Autoria em revisão';
 }
 
+function getPhilosophyHeading(story) {
+  return story.philosophyLabel === 'CONHEÇA A TRADIÇÃO'
+    ? 'CONHEÇA A TRADIÇÃO'
+    : 'CONHEÇA O PENSADOR';
+}
+
 function renderStory(story) {
   currentStory = story;
   currentStoryShownAt = Date.now();
@@ -76,7 +82,7 @@ function renderStory(story) {
   reflectionTextEl.textContent = hasSpecificExplanation ? story.reflection : '';
   const hasSpecificPhilosophy = Boolean(String(story.philosophy || '').trim());
   philosophyBlockEl.hidden = !hasSpecificPhilosophy;
-  philosophyTitleEl.textContent = hasSpecificPhilosophy ? story.philosophyLabel : '';
+  philosophyTitleEl.textContent = hasSpecificPhilosophy ? getPhilosophyHeading(story) : '';
   philosophyTextEl.textContent = hasSpecificPhilosophy ? story.philosophy : '';
   const hasSpecificAdvice = Boolean(String(story.advice || '').trim() && String(story.adviceLabel || '').trim());
   adviceBlockEl.hidden = !hasSpecificAdvice;

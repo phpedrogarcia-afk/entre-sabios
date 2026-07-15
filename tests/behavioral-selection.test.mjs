@@ -76,14 +76,22 @@ test('baseline protege o acervo congelado por hash e versão', () => {
   assert.equal(runtime.contents.length, baseline.activeContents);
 });
 
-test('nível emocional superior nunca é abandonado para satisfazer diversidade ou recência', () => {
+test('núcleo é percorrido antes da progressão contextual do mesmo sentimento principal', () => {
   for (const feeling of runtime.feelings.map((item) => item.id)) {
     for (const intensity of ['fraca', 'moderada', 'intensa']) {
       const state = { primaryFeeling: feeling, secondaryFeelings: [], intensity };
       const selector = engine.createSelector({ version: `hierarquia-${feeling}-${intensity}`, contents: runtime.contents });
-      const bestLevel = selector.inspect(state, { firstResponse: false }).bestLevel;
-      const results = selectMany(selector, state, 100);
-      assert.ok(results.every((result) => result.level === bestLevel), `${feeling}:${intensity} saiu do nível ${bestLevel}`);
+      const inspection = selector.inspect(state, { firstResponse: false });
+      const progressionLevels = inspection.bestLevel === 1 ? new Set([1, 2]) : new Set([inspection.bestLevel]);
+      const primaryCandidates = inspection.ranked.filter(({ level }) => progressionLevels.has(level));
+      const primaryTexts = new Set(primaryCandidates.map(({ content }) => normalizeText(content.finalText)));
+      const bestTexts = new Set(inspection.eligibleAtLevel.map(({ content }) => normalizeText(content.finalText)));
+      const results = Array.from({ length: primaryTexts.size }, () => selector.select(state, { firstResponse: false }));
+      const resultTexts = results.map(({ content }) => normalizeText(content.finalText));
+
+      assert.equal(new Set(resultTexts).size, primaryTexts.size, `${feeling}:${intensity} repetiu antes de percorrer o principal`);
+      assert.ok(results.slice(0, bestTexts.size).every(({ level }) => level === inspection.bestLevel));
+      assert.ok(results.every(({ level }) => progressionLevels.has(level)), `${feeling}:${intensity} perdeu o sentimento principal`);
     }
   }
 });
@@ -236,15 +244,17 @@ test('inverter tristeza e insegurança altera o centro sem apagar o histórico g
   assert.equal(selector.getRecentSelections().length, 2);
 });
 
-test('cem primeiras respostas de luto por intensidade permanecem em núcleo acolhedor', () => {
+test('sequência extensa de luto permanece segura ao progredir do núcleo ao contextual', () => {
   for (const intensity of ['fraca', 'moderada', 'intensa']) {
     const state = { primaryFeeling: 'luto', secondaryFeelings: [], intensity };
     const selector = engine.createSelector({ version: `grief-first-${intensity}`, contents: runtime.contents });
     const results = selectMany(selector, state, 100, false);
     assert.equal(results.length, 100);
-    assert.ok(results.every((result) => result.level === 1));
-    assert.ok(results.every(({ content }) => SUPPORT_FUNCTIONS.has(content.editorialFunction)));
-    assert.ok(results.every(({ content }) => content.editorialFunction !== 'confrontation' && content.tone !== 'ironico'));
+    assert.equal(results[0].level, 1);
+    assert.ok(SUPPORT_FUNCTIONS.has(results[0].content.editorialFunction));
+    assert.ok(results.every((result) => result.level <= 2));
+    assert.ok(results.every(({ content }) => engine.classifyEditorialEffects(content, state, { firstResponse: false }).safe));
+    assert.ok(results.every(({ content }) => !['confrontation', 'action'].includes(content.editorialFunction) && content.tone !== 'ironico'));
   }
 });
 
@@ -523,8 +533,10 @@ test('histórico por contexto retoma a fila após recarga sem perder bloqueio gl
   selectMany(selector, stateB, 6);
   selector = engine.createSelector({ version: 'persistent-contexts', contents: runtime.contents, storage });
   const resumedA = selectMany(selector, stateA, 6).map((result) => result.content.id);
-  const eligibleAtLevel = selector.inspect(stateA, { firstResponse: false }).eligibleAtLevel.length;
-  assert.equal(new Set([...firstA, ...resumedA]).size, Math.min(12, eligibleAtLevel));
-  assert.equal(new Set([...firstA, ...resumedA].slice(0, eligibleAtLevel)).size, eligibleAtLevel);
+  const inspection = selector.inspect(stateA, { firstResponse: false });
+  const primaryTexts = new Set(inspection.ranked
+    .filter(({ level }) => level === inspection.bestLevel || (inspection.bestLevel === 1 && level === 2))
+    .map(({ content }) => normalizeText(content.finalText)));
+  assert.equal(new Set([...firstA, ...resumedA]).size, Math.min(12, primaryTexts.size));
   assert.ok(selector.getRecentSelections().length >= 18);
 });
