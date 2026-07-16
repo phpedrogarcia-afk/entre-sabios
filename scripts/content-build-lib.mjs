@@ -88,6 +88,28 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+function getCatalogIds(master, catalogName) {
+  const entries = master.catalog?.[catalogName];
+  assert(Array.isArray(entries) && entries.length > 0, `Catálogo ausente ou vazio: ${catalogName}`);
+  const ids = entries.map((entry) => entry?.id);
+  assert(ids.every((id) => typeof id === 'string' && id), `ID inválido no catálogo: ${catalogName}`);
+  assert(new Set(ids).size === ids.length, `IDs duplicados no catálogo: ${catalogName}`);
+  return new Set(ids);
+}
+
+function assertCatalogValue(content, field, allowed, { nullable = false } = {}) {
+  const value = content[field];
+  if (nullable && (value === null || value === '')) return;
+  assert(allowed.has(value), `${content.id}: ${field} inválido (${value})`);
+}
+
+function assertCatalogArray(content, field, allowed) {
+  const values = content[field];
+  assert(Array.isArray(values), `${content.id}: ${field} deve ser uma lista.`);
+  const invalid = values.filter((value) => !allowed.has(value));
+  assert(invalid.length === 0, `${content.id}: ${field} contém valores inválidos (${invalid.join(', ')})`);
+}
+
 export function validateMaster(master) {
   const truth = calculateMasterTruth(master);
   assert(master.schemaVersion === EXPECTED.schemaVersion, `schemaVersion incompatível: ${master.schemaVersion}`);
@@ -112,6 +134,47 @@ export function validateMaster(master) {
   assert(status.selectionSimulationPassed === true, 'Simulação editorial do mestre não foi aprovada.');
   assert(status.dataReadyForWebsiteIntegration === true, 'Mestre não está liberado para integração.');
   assert(status.websiteIntegrationVerified === false, 'Mestre não deve declarar a interface verificada antes da integração.');
+
+  const feelings = getCatalogIds(master, 'feelings');
+  const placements = getCatalogIds(master, 'placements');
+  const statuses = getCatalogIds(master, 'statuses');
+  const editorialFunctions = getCatalogIds(master, 'editorialFunctions');
+  const intensities = getCatalogIds(master, 'intensities');
+  const tones = getCatalogIds(master, 'tones');
+  const riskTags = getCatalogIds(master, 'riskTags');
+  const hardExclusions = getCatalogIds(master, 'hardExclusions');
+  const displayTypes = getCatalogIds(master, 'displayTypes');
+  const attributionTypes = getCatalogIds(master, 'attributionTypes');
+  const authorGenders = getCatalogIds(master, 'authorGenders');
+  const statusPublication = new Map(master.catalog.statuses.map((entry) => [entry.id, entry.publicationEnabled]));
+
+  for (const content of master.contents) {
+    for (const field of ['id', 'finalText', 'displayType', 'attributionType', 'author', 'displayedAuthor', 'status']) {
+      assert(typeof content[field] === 'string' && content[field].trim(), `${content.id || 'conteúdo sem ID'}: ${field} ausente.`);
+    }
+    assert(content.source && typeof content.source === 'object' && !Array.isArray(content.source), `${content.id}: source inválida.`);
+    assert(typeof content.publicationEnabled === 'boolean', `${content.id}: publicationEnabled deve ser booleano.`);
+    assertCatalogValue(content, 'displayType', displayTypes);
+    assertCatalogValue(content, 'attributionType', attributionTypes);
+    assertCatalogValue(content, 'placement', placements, { nullable: true });
+    assertCatalogValue(content, 'editorialFunction', editorialFunctions);
+    assertCatalogValue(content, 'secondaryFunction', editorialFunctions, { nullable: true });
+    assertCatalogValue(content, 'tone', tones);
+    assertCatalogValue(content, 'status', statuses);
+    assertCatalogValue(content, 'authorGender', authorGenders);
+    assertCatalogValue(content, 'filterGender', authorGenders);
+    assertCatalogValue(content, 'primaryFeeling', feelings, { nullable: true });
+    assertCatalogValue(content, 'secondaryFeeling', feelings, { nullable: true });
+    assertCatalogArray(content, 'suitableIntensities', intensities);
+    assertCatalogArray(content, 'riskTags', riskTags);
+    assertCatalogArray(content, 'hardExclusions', hardExclusions);
+    assert(statusPublication.get(content.status) === content.publicationEnabled, `${content.id}: status e publicationEnabled divergem.`);
+    assert(Array.isArray(content.associations), `${content.id}: associations deve ser uma lista.`);
+    for (const association of content.associations) {
+      assert(feelings.has(association?.feeling), `${content.id}: sentimento inválido em associations (${association?.feeling}).`);
+      assert(['nucleo', 'contextual'].includes(association?.placement), `${content.id}: placement inválido em associations (${association?.placement}).`);
+    }
+  }
 
   const active = master.contents.filter(isActive);
   const insecurity = active.filter((content) => content.associations?.some(
