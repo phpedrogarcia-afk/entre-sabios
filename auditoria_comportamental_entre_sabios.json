@@ -1,6 +1,6 @@
 {
   "reportType": "behavioral-audit-final",
-  "generatedAt": "2026-07-14T23:27:52.151Z",
+  "generatedAt": "2026-07-15T18:56:47.870Z",
   "finalStatus": "completed",
   "integrationConcluded": true,
   "stopReason": "Todos os critérios automatizados e a validação da interface publicada foram concluídos sem falhas.",
@@ -80,7 +80,7 @@
     "grief": {
       "fraca": {
         "firstResponseSupportive": true,
-        "supportFunctionShare": 1,
+        "supportFunctionShare": 0.77,
         "confrontationCount": 0,
         "actionCount": 0,
         "ironicCount": 0,
@@ -88,137 +88,163 @@
       },
       "moderada": {
         "firstResponseSupportive": true,
-        "supportFunctionShare": 1,
+        "supportFunctionShare": 0.75,
         "confrontationCount": 0,
-        "actionCount": 0,
+        "actionCount": 1,
         "ironicCount": 0,
         "prematureCycleRepeats": 0
       },
       "intensa": {
         "firstResponseSupportive": true,
-        "supportFunctionShare": 1,
+        "supportFunctionShare": 0.92,
         "confrontationCount": 0,
         "actionCount": 0,
         "ironicCount": 0,
-        "prematureCycleRepeats": 0
+        "prematureCycleRepeats": 7
       }
     },
     "formatFrequencies": {
       "ansiedade": {
-        "developedShare": 0,
+        "developedShare": 0.01,
         "formats": {
-          "citacao_curta": 34,
-          "frase": 66
+          "citacao_curta": 14,
+          "frase": 85,
+          "reflexao_curta": 1
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 3
       },
       "medo": {
-        "developedShare": 0,
+        "developedShare": 0.04,
         "formats": {
-          "frase": 100
+          "citacao_curta": 13,
+          "citacao_longa": 3,
+          "frase": 83,
+          "reflexao_curta": 1
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 3
       },
       "amor": {
-        "developedShare": 0,
+        "developedShare": 0.01,
         "formats": {
-          "citacao_curta": 20,
-          "frase": 80
+          "citacao_curta": 12,
+          "frase": 87,
+          "reflexao_curta": 1
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 5
       },
       "saudade": {
-        "developedShare": 0,
+        "developedShare": 0.05,
         "formats": {
-          "frase": 100
+          "citacao_curta": 10,
+          "frase": 85,
+          "microtexto": 2,
+          "reflexao_curta": 3
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 7
       },
       "esperanca": {
-        "developedShare": 0,
+        "developedShare": 0.01,
         "formats": {
-          "frase": 100
+          "citacao_curta": 14,
+          "frase": 85,
+          "reflexao_curta": 1
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 2
       },
       "solidao": {
-        "developedShare": 0,
+        "developedShare": 0.01,
         "formats": {
-          "frase": 100
+          "citacao_curta": 10,
+          "frase": 89,
+          "reflexao_curta": 1
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 5
       },
       "autoconhecimento": {
-        "developedShare": 0,
+        "developedShare": 0.02,
         "formats": {
-          "citacao_curta": 25,
-          "frase": 75
+          "citacao_curta": 12,
+          "frase": 86,
+          "reflexao_curta": 2
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 4
       },
       "confusao": {
-        "developedShare": 0,
+        "developedShare": 0.01,
         "formats": {
-          "frase": 100
+          "citacao_curta": 11,
+          "frase": 88,
+          "reflexao_curta": 1
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 4
       },
       "inseguranca": {
-        "developedShare": 0.11,
+        "developedShare": 0.06,
         "formats": {
-          "frase": 89,
-          "reflexao_curta": 11
+          "citacao_curta": 11,
+          "frase": 83,
+          "reflexao_curta": 6
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 9
       },
       "raiva": {
-        "developedShare": 0,
+        "developedShare": 0.04,
         "formats": {
-          "frase": 100
+          "citacao_curta": 10,
+          "frase": 86,
+          "reflexao_curta": 4
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 2
       },
       "culpa": {
-        "developedShare": 0,
+        "developedShare": 0.01,
         "formats": {
-          "frase": 100
+          "citacao_curta": 10,
+          "frase": 89,
+          "reflexao_curta": 1
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 1
       },
       "luto": {
-        "developedShare": 0.13,
+        "developedShare": 0.09,
         "formats": {
-          "frase": 87,
-          "reflexao_curta": 13
+          "citacao_curta": 9,
+          "frase": 82,
+          "microtexto": 4,
+          "reflexao_curta": 5
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 8
       },
       "tristeza": {
-        "developedShare": 0.13,
+        "developedShare": 0.03,
         "formats": {
+          "citacao_curta": 10,
           "frase": 87,
-          "microtexto": 13
+          "microtexto": 2,
+          "reflexao_curta": 1
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 8
       },
       "falta_de_proposito": {
-        "developedShare": 0.33,
+        "developedShare": 0.04,
         "formats": {
-          "frase": 67,
-          "microtexto": 33
+          "citacao_curta": 12,
+          "frase": 84,
+          "microtexto": 3,
+          "reflexao_curta": 1
         },
         "targetApplicable": false,
         "eligibleAtBestLevel": 3

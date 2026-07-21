@@ -42,6 +42,34 @@ function normalizeText(value) {
     .trim();
 }
 
+function assertPrimaryTerritoryCyclesBeforeRepeat({ version, state }) {
+  const selector = engine.createSelector({
+    version,
+    contents: runtime.contents,
+    synthesisAdapter,
+    motivationAdapter,
+  });
+  const inspection = selector.inspect(state, { firstResponse: false, diagnostics: true });
+  const allowedLevels = inspection.bestLevel === 1 ? new Set([1, 2]) : new Set([inspection.bestLevel]);
+  const allowedTexts = new Set(inspection.ranked
+    .filter(({ level }) => allowedLevels.has(level))
+    .map(({ content }) => normalizeText(content.finalText)));
+  const selectedTexts = [];
+
+  assert.ok(allowedTexts.size > 1, `${version}: cenário precisa ter mais de uma alternativa permitida`);
+
+  for (let index = 0; index < allowedTexts.size; index += 1) {
+    const result = selector.select(state, { firstResponse: false, diagnostics: true });
+    const textKey = normalizeText(result.content.finalText);
+    assert.ok(allowedLevels.has(result.level), `${version}: seleção saiu do território principal permitido`);
+    assert.ok(allowedTexts.has(textKey), `${version}: seleção não pertence ao conjunto permitido inspecionado`);
+    assert.equal(selectedTexts.includes(textKey), false, `${version}: repetição antes do esgotamento na posição ${index + 1}`);
+    selectedTexts.push(textKey);
+  }
+
+  assert.equal(new Set(selectedTexts).size, allowedTexts.size);
+}
+
 test('sequência real não reinicia o núcleo enquanto há alternativa segura e inédita do mesmo principal', () => {
   const state = {
     primaryFeeling: 'autoconhecimento',
@@ -104,6 +132,121 @@ test('sequência real não reinicia o núcleo enquanto há alternativa segura e 
 
   assert.ok(safeUnseenFromSamePrimary.length > 0, 'o cenário precisa manter alternativas contextuais seguras do principal');
   assert.equal(repeated, false, `repetição evitável reproduzida: ${JSON.stringify(evidence)}`);
+});
+
+test('Luto + Saudade percorre todo o território principal permitido antes de repetir', () => {
+  assertPrimaryTerritoryCyclesBeforeRepeat({
+    version: 'phase1-grief-long-cycle',
+    state: {
+      primaryFeeling: 'luto',
+      secondaryFeelings: ['saudade'],
+      intensity: 'intensa',
+      needsMotivation: false,
+    },
+  });
+});
+
+test('Falta de propósito + Confusão percorre todo o território principal permitido antes de repetir', () => {
+  assertPrimaryTerritoryCyclesBeforeRepeat({
+    version: 'phase1-purpose-long-cycle',
+    state: {
+      primaryFeeling: 'falta_de_proposito',
+      secondaryFeelings: ['confusao'],
+      intensity: 'moderada',
+      needsMotivation: false,
+    },
+  });
+});
+
+test('retornar à combinação anterior preserva o bloqueio global do conteúdo já mostrado', () => {
+  const selector = engine.createSelector({
+    version: 'phase1-return-to-combination',
+    contents: runtime.contents,
+    synthesisAdapter,
+    motivationAdapter,
+  });
+  const original = {
+    primaryFeeling: 'autoconhecimento',
+    secondaryFeelings: ['confusao', 'inseguranca'],
+    intensity: 'moderada',
+    needsMotivation: false,
+  };
+  const temporary = {
+    primaryFeeling: 'confusao',
+    secondaryFeelings: ['autoconhecimento'],
+    intensity: 'moderada',
+    needsMotivation: true,
+  };
+
+  const first = selector.select(original, { firstResponse: false, diagnostics: true });
+  selector.select(temporary, { firstResponse: false, diagnostics: true });
+  const returned = selector.select(original, { firstResponse: false, diagnostics: true });
+
+  assert.notEqual(returned.content.id, first.content.id);
+  assert.notEqual(normalizeText(returned.content.finalText), normalizeText(first.content.finalText));
+  assert.equal(returned.diagnostics.repeatAllowed, false);
+  assert.equal(selector.getRecentSelections().length, 3);
+});
+
+test('inspecção expõe o contrato de candidatos elegíveis e o nível ativo', () => {
+  const state = {
+    primaryFeeling: 'autoconhecimento',
+    secondaryFeelings: ['confusao'],
+    intensity: 'moderada',
+    needsMotivation: false,
+  };
+  const contents = [
+    {
+      id: 'contract-a',
+      finalText: 'Uma presença clara.',
+      displayedAuthor: 'Autor A',
+      author: 'Autor A',
+      displayType: 'frase',
+      editorialFunction: 'presence',
+      tone: 'contemplativo',
+      themes: [],
+      riskTags: [],
+      hardExclusions: [],
+      suitableIntensities: ['fraca', 'moderada', 'intensa'],
+      associations: [{ feeling: 'autoconhecimento', placement: 'nucleo' }],
+      placement: 'nucleo',
+      status: 'ATIVO_NUCLEO',
+      publicationEnabled: true,
+    },
+    {
+      id: 'contract-b',
+      finalText: 'Uma orientação serena.',
+      displayedAuthor: 'Autor B',
+      author: 'Autor B',
+      displayType: 'frase',
+      editorialFunction: 'recognition',
+      tone: 'contemplativo',
+      themes: [],
+      riskTags: [],
+      hardExclusions: [],
+      suitableIntensities: ['fraca', 'moderada', 'intensa'],
+      associations: [{ feeling: 'autoconhecimento', placement: 'contextual' }],
+      placement: 'contextual',
+      status: 'ATIVO_CONTEXTUAL',
+      publicationEnabled: true,
+    },
+  ];
+  const selector = engine.createSelector({
+    version: 'phase3-contract-diag',
+    contents,
+    synthesisAdapter,
+    motivationAdapter,
+  });
+  const inspection = selector.inspect(state, { firstResponse: false, diagnostics: true });
+
+  assert.ok(Array.isArray(inspection.diagnostics?.eligibleCandidates));
+  assert.ok(Array.isArray(inspection.diagnostics?.activeTierCandidates));
+  assert.ok(Array.isArray(inspection.diagnostics?.unseenEligibleCandidates));
+  assert.ok(Array.isArray(inspection.diagnostics?.recentlyBlockedCandidates));
+  assert.equal(inspection.diagnostics.eligibleCandidates.length, inspection.ranked.length);
+  assert.equal(inspection.diagnostics.activeTierCandidates.length, inspection.eligibleAtLevel.length);
+  assert.ok(inspection.diagnostics.unseenEligibleCandidates.length <= inspection.diagnostics.eligibleCandidates.length);
+  assert.ok(inspection.diagnostics.recentlyBlockedCandidates.length <= inspection.diagnostics.eligibleCandidates.length);
 });
 
 test('duplo clique em Outra perspectiva produz somente uma seleção', () => {

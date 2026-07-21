@@ -5,8 +5,26 @@
   "type": "module",
   "scripts": {
     "build:content": "node scripts/build-content.mjs",
+    "check:static": "node scripts/static-check.mjs",
+    "check:content": "node scripts/build-content.mjs --check",
     "audit:behavior": "node scripts/audit-behavior.mjs --output tests/fixtures/auditoria_comportamental_atual.json && node scripts/generate-behavioral-report.mjs",
+    "audit:systematic": "node scripts/run-systematic-audit.mjs",
+    "test:state": "node scripts/run-tests.mjs state",
+    "test:synthesis": "node scripts/run-tests.mjs synthesis",
+    "test:motivation": "node scripts/run-tests.mjs motivation",
+    "test:ranking": "node scripts/run-tests.mjs ranking",
+    "test:rotation": "node scripts/run-tests.mjs rotation",
+    "test:editorial": "node scripts/run-tests.mjs editorial",
+    "test:ui": "node scripts/run-tests.mjs ui",
+    "test:seo": "node scripts/run-tests.mjs seo",
+    "test:fast": "node scripts/run-tests.mjs fast",
+    "test:stress": "node scripts/run-tests.mjs stress",
+    "test:lab": "node scripts/run-tests.mjs lab",
+    "test:all": "node scripts/run-tests.mjs all",
+    "replay:diagnostic": "node scripts/replay-diagnostic.mjs",
+    "lab:emotional": "node scripts/run-emotional-lab.mjs",
     "test": "node scripts/build-content.mjs && node --test tests/*.test.mjs",
+    "verify": "npm run check:static && npm run check:content && npm run test:all",
     "serve": "node scripts/serve.mjs"
   }
 }

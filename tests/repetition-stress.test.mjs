@@ -110,6 +110,8 @@ function runStressScenario({ name, stateAt, reloadAt = () => false }) {
   let authorStreak = 0;
   let previousConcept = null;
   let conceptStreak = 0;
+  const eligibleBeforeFirstRepeat = new Set();
+  const selectedBeforeFirstRepeat = new Set();
 
   for (let index = 0; index < 100; index += 1) {
     if (reloadAt(index)) selector = createSelector(`phase6-${name}`, storage);
@@ -121,7 +123,11 @@ function runStressScenario({ name, stateAt, reloadAt = () => false }) {
     const recentCanonicalKeys = new Set(recent.flatMap(({ canonicalKeys: keys, id }) => (
       keys || [...canonicalKeys(contentById.get(id) || { id })]
     )));
-    const alternatives = allowedCandidates(inspection).filter(({ content }) => (
+    const permittedCandidates = allowedCandidates(inspection);
+    if (metrics.firstRepeat === null) {
+      permittedCandidates.forEach(({ content }) => eligibleBeforeFirstRepeat.add(content.id));
+    }
+    const alternatives = permittedCandidates.filter(({ content }) => (
       !recentIds.has(content.id)
       && !recentTexts.has(normalizeText(content.finalText))
       && ![...canonicalKeys(content)].some((key) => recentCanonicalKeys.has(key))
@@ -131,14 +137,15 @@ function runStressScenario({ name, stateAt, reloadAt = () => false }) {
     const exactRepeat = recentIds.has(result.content.id);
     const normalizedRepeat = recentTexts.has(textKey);
     const canonicalRepeat = [...canonicalKeys(result.content)].some((key) => recentCanonicalKeys.has(key));
-    if (exactRepeat || normalizedRepeat || canonicalRepeat) {
+    const repeated = exactRepeat || normalizedRepeat || canonicalRepeat;
+    if (repeated) {
       metrics.firstRepeat ??= index + 1;
       if (alternatives.length) {
         if (exactRepeat) metrics.avoidableExact += 1;
         if (normalizedRepeat) metrics.avoidableNormalized += 1;
         if (canonicalRepeat) metrics.avoidableCanonical += 1;
       } else metrics.inevitable += 1;
-    }
+    } else if (metrics.firstRepeat === null) selectedBeforeFirstRepeat.add(result.content.id);
 
     const author = result.content.displayedAuthor || result.content.author;
     authorStreak = author === previousAuthor ? authorStreak + 1 : 1;
@@ -169,6 +176,11 @@ function runStressScenario({ name, stateAt, reloadAt = () => false }) {
   }
 
   metrics.averageQueueSize = metrics.queueSizes.reduce((sum, size) => sum + size, 0) / metrics.queueSizes.length;
+  metrics.eligibleDistinctBeforeFirstRepeat = eligibleBeforeFirstRepeat.size;
+  metrics.distinctSelectedBeforeFirstRepeat = selectedBeforeFirstRepeat.size;
+  metrics.coverageBeforeFirstRepeat = eligibleBeforeFirstRepeat.size
+    ? selectedBeforeFirstRepeat.size / eligibleBeforeFirstRepeat.size
+    : 0;
   return metrics;
 }
 
@@ -198,6 +210,10 @@ test('oito sequências de 100 seleções não produzem repetição exata evitáv
     assert.equal(metrics.avoidableNormalized, 0, scenario.name);
     assert.equal(metrics.avoidableCanonical, 0, scenario.name);
     assert.equal(metrics.avoidableAuthorStreaks, 0, scenario.name);
+    assert.ok(metrics.coverageBeforeFirstRepeat > 0, `${scenario.name}: cobertura anterior à repetição não foi medida`);
+    if (metrics.firstRepeat !== null) {
+      assert.equal(metrics.coverageBeforeFirstRepeat, 1, `${scenario.name}: repetiu antes de percorrer os elegíveis`);
+    }
     assert.ok(metrics.formats.size >= 2, `${scenario.name}: formatos deixaram de circular`);
   }
 });
@@ -209,13 +225,78 @@ test('conjuntos pequenos só repetem depois do esgotamento e registram inevitabi
   const results = Array.from({ length: 4 }, () => selector.select(state, { firstResponse: false, diagnostics: true }));
   assert.equal(new Set(results.slice(0, 3).map(({ content }) => content.id)).size, 3);
   assert.equal(results[3].diagnostics.repeatAllowed, true);
-  assert.match(results[3].diagnostics.repeatReason, /without_safe_unseen_candidate/);
+  assert.equal(results[3].diagnostics.repeatReason, 'all_allowed_candidates_exhausted');
+  assert.equal(results[3].diagnostics.repeatProof.eligibleCount, 0);
+  assert.equal(results[3].diagnostics.repeatProof.safeCandidatesChecked, 3);
+  assert.equal(results[3].diagnostics.repeatProof.leastRecentCandidateId, results[0].content.id);
 
   const single = createSelector('phase6-single', createMemoryStorage(), [makeContent('only')]);
   const first = single.select(state, { firstResponse: false, diagnostics: true });
   const second = single.select(state, { firstResponse: false, diagnostics: true });
   assert.equal(first.content.id, second.content.id);
   assert.equal(second.diagnostics.repeatAllowed, true);
+  assert.equal(second.diagnostics.repeatReason, 'all_allowed_candidates_exhausted');
+  assert.equal(second.diagnostics.repeatProof.eligibleCount, 0);
+  assert.equal(second.diagnostics.repeatProof.safeCandidatesChecked, 1);
+  assert.equal(second.diagnostics.repeatProof.leastRecentCandidateId, first.content.id);
+});
+
+test('ciclo restaurado escolhe o menos recente depois do esgotamento global', () => {
+  const state = { primaryFeeling: 'autoconhecimento', secondaryFeelings: [], intensity: 'moderada' };
+  const storage = createMemoryStorage();
+  const contents = [makeContent('oldest'), makeContent('middle'), makeContent('newest')];
+  let selector = createSelector('phase4-restored-cycle', storage, contents);
+  const firstCycle = Array.from({ length: contents.length }, () => selector.select(
+    state,
+    { firstResponse: false, diagnostics: true },
+  ));
+
+  selector = createSelector('phase4-restored-cycle', storage, contents);
+  const repeated = selector.select(state, { firstResponse: false, diagnostics: true });
+
+  assert.equal(repeated.content.id, firstCycle[0].content.id);
+  assert.equal(repeated.diagnostics.territoryCycle.exhausted, true);
+  assert.equal(repeated.diagnostics.leastRecentCandidateId, firstCycle[0].content.id);
+  assert.equal(repeated.diagnostics.repeatReason, 'all_allowed_candidates_exhausted');
+});
+
+test('fila restaurada incorpora novos candidatos elegíveis sem apagar o restante', () => {
+  const state = { primaryFeeling: 'autoconhecimento', secondaryFeelings: [], intensity: 'moderada' };
+  const storage = createMemoryStorage();
+  const initialContents = [makeContent('restore-a'), makeContent('restore-b')];
+  const initialSelector = createSelector('phase6-queue-reconcile', storage, initialContents);
+  initialSelector.select(state, { firstResponse: false, diagnostics: true });
+
+  const restoredContents = [...initialContents, makeContent('restore-c')];
+  const restoredSelector = createSelector('phase6-queue-reconcile', storage, restoredContents);
+  const result = restoredSelector.select(state, { firstResponse: false, diagnostics: true });
+  const queueBefore = result.diagnostics.activeQueueBeforeSelection;
+
+  assert.ok(queueBefore.includes('restore-b'));
+  assert.ok(queueBefore.includes('restore-c'));
+  assert.ok(queueBefore.indexOf('restore-b') < queueBefore.indexOf('restore-c'));
+});
+
+test('versão incompatível reinicia a fila sem apagar o histórico global', () => {
+  const state = { primaryFeeling: 'autoconhecimento', secondaryFeelings: [], intensity: 'moderada' };
+  const storage = createMemoryStorage();
+  const contents = [makeContent('legacy-a'), makeContent('legacy-b')];
+  const selector = createSelector('phase6-queue-schema', storage, contents);
+  selector.select(state, { firstResponse: false, diagnostics: true });
+
+  storage.setItem(`entreSabiosRuntimeQueueMeta:${'phase6-queue-schema'}`, JSON.stringify({
+    selectorSchemaVersion: 'legacy-v0',
+    rotationPolicyVersion: 'legacy-v0',
+  }));
+
+  const restoredSelector = createSelector('phase6-queue-schema', storage, contents);
+  const result = restoredSelector.select(state, { firstResponse: false, diagnostics: true });
+
+  assert.equal(result.diagnostics.storedQueueBefore.length, 0);
+  assert.equal(result.diagnostics.globalHistoryBefore.length, 1);
+  assert.equal(result.diagnostics.activeQueueBeforeSelection.length, 1);
+  assert.notEqual(result.content.id, selector.getRecentSelections()[0].id);
+  assert.equal(result.diagnostics.repeatAllowed, false);
 });
 
 test('IDs distintos com texto literal ou normalizado igual não furam o ciclo', () => {

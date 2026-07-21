@@ -8,9 +8,9 @@ data.feelingsCatalog = [
   { id: 'medo', label: 'Medo', themes: ['medo', 'observação', 'liberdade', 'coragem'] },
   { id: 'amor', label: 'Amor', themes: ['amor', 'solidão', 'introspecção', 'espiritualidade'] },
   { id: 'saudade', label: 'Saudade', themes: ['saudade', 'existência', 'melancolia'] },
-  { id: 'esperança', label: 'Esperança', themes: ['esperança', 'propósito', 'significado', 'superação'] },
-  { id: 'solidão', label: 'Solidão', themes: ['solidão', 'introspecção', 'amor'] },
-  { id: 'confusão', label: 'Confusão', themes: ['confusão', 'observação', 'sabedoria'] },
+  { id: 'esperanca', label: 'Esperança', themes: ['esperança', 'propósito', 'significado', 'superação'] },
+  { id: 'solidao', label: 'Solidão', themes: ['solidão', 'introspecção', 'amor'] },
+  { id: 'confusao', label: 'Confusão', themes: ['confusão', 'observação', 'sabedoria'] },
   { id: 'autoconhecimento', label: 'Autoconhecimento', themes: ['autoconhecimento', 'sabedoria', 'observação'] },
   { id: 'inseguranca', label: 'Insegurança', themes: ['insegurança', 'comparação', 'autoimagem', 'aprovação externa', 'medo de errar', 'identidade', 'julgamento', 'inadequação'] },
   { id: 'raiva', label: 'Raiva', themes: ['raiva', 'limites', 'desapego', 'dignidade', 'indiretas'] },
@@ -38,15 +38,15 @@ data.intensityProfiles = {
 data.combinationRules = [
   { feelings: ['medo', 'ansiedade'], themes: ['futuro', 'controle', 'pensamento acelerado', 'acolhimento'] },
   { feelings: ['raiva', 'culpa'], themes: ['responsabilidade', 'reparação', 'limites', 'autocompaixão'] },
-  { feelings: ['solidão', 'tristeza'], themes: ['pertencimento', 'acolhimento', 'conexão'] },
+  { feelings: ['solidao', 'tristeza'], themes: ['pertencimento', 'acolhimento', 'conexão'] },
   { feelings: ['amor', 'saudade'], themes: ['vínculo', 'memória', 'desapego'] },
-  { feelings: ['confusão', 'ansiedade'], themes: ['clareza', 'observação', 'pensamento acelerado'] },
-  { feelings: ['insegurança', 'ansiedade'], themes: ['comparação', 'antecipação', 'medo de errar', 'validação', 'pensamento acelerado'] },
-  { feelings: ['insegurança', 'amor'], themes: ['rejeição', 'apego', 'validação', 'medo de perda', 'autoimagem'] },
-  { feelings: ['insegurança', 'solidão'], themes: ['pertencimento', 'inadequação', 'comparação', 'isolamento', 'identidade'] },
-  { feelings: ['insegurança', 'autoconhecimento'], themes: ['autoimagem', 'identidade', 'comparação', 'investigação do eu'] },
-  { feelings: ['insegurança', 'confusão'], themes: ['dúvida', 'identidade', 'aprovação externa', 'clareza'] },
-  { feelings: ['insegurança', 'culpa'], themes: ['autojulgamento', 'inadequação', 'vergonha', 'autocompaixão'] },
+  { feelings: ['confusao', 'ansiedade'], themes: ['clareza', 'observação', 'pensamento acelerado'] },
+  { feelings: ['inseguranca', 'ansiedade'], themes: ['comparação', 'antecipação', 'medo de errar', 'validação', 'pensamento acelerado'] },
+  { feelings: ['inseguranca', 'amor'], themes: ['rejeição', 'apego', 'validação', 'medo de perda', 'autoimagem'] },
+  { feelings: ['inseguranca', 'solidao'], themes: ['pertencimento', 'inadequação', 'comparação', 'isolamento', 'identidade'] },
+  { feelings: ['inseguranca', 'autoconhecimento'], themes: ['autoimagem', 'identidade', 'comparação', 'investigação do eu'] },
+  { feelings: ['inseguranca', 'confusao'], themes: ['dúvida', 'identidade', 'aprovação externa', 'clareza'] },
+  { feelings: ['inseguranca', 'culpa'], themes: ['autojulgamento', 'inadequação', 'vergonha', 'autocompaixão'] },
   { feelings: ['culpa'], themes: ['responsabilidade', 'reparação', 'autocompaixão'] },
   { feelings: ['luto'], themes: ['perda', 'memória', 'acolhimento', 'aceitação'] },
   { feelings: ['luto', 'saudade'], themes: ['memória', 'vínculo', 'despedida', 'continuidade'] },
@@ -158,7 +158,7 @@ data.feelingAuthorAffinity = {
     Dostoiévski: 5,
     Schopenhauer: 5,
   },
-  esperança: {
+  esperanca: {
     'Viktor Frankl': 9,
     Nietzsche: 6,
     Rumi: 6,
@@ -167,7 +167,7 @@ data.feelingAuthorAffinity = {
     'Henry David Thoreau': 7,
     'Ralph Waldo Emerson': 6,
   },
-  solidão: {
+  solidao: {
     'Clarice Lispector': 8,
     'Fernando Pessoa': 7,
     Rumi: 6,
@@ -175,7 +175,7 @@ data.feelingAuthorAffinity = {
     'Simone Weil': 6,
     'Nisargadatta Maharaj': 7,
   },
-  confusão: {
+  confusao: {
     Sócrates: 9,
     'Jiddu Krishnamurti': 8,
     Krishnamurti: 7,
