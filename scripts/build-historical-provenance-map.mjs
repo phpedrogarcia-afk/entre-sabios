@@ -17,7 +17,7 @@ const inventoryBranch = 'agent/finaliza-loop-estabilizacao';
 const inventoryCommit = '7876aa46f264a327442aa01e6f169ea333ac6ddf';
 
 function read(relativePath) {
-  return fs.readFileSync(path.join(rootDir, relativePath), 'utf8');
+  return fs.readFileSync(path.join(rootDir, relativePath), 'utf8').replace(/\r\n/g, '\n');
 }
 
 function sha256(value) {
