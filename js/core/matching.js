@@ -133,9 +133,9 @@ function recordEditorialSignal(event, state, details = {}) {
   }
 }
 
-function pickRuntimeContent({ eventTrigger = 'unknown', currentContentId = null } = {}) {
+function pickRuntimeContent({ eventTrigger = 'unknown', currentContentId = null, intensity = currentIntensity } = {}) {
   if (!runtimeSelector) return null;
-  const state = interpretEmotionalState();
+  const state = interpretEmotionalState(intensity);
   const signature = getSelectionSignature(state);
   const firstResponse = signature !== lastSelectionSignature;
   lastSelectionSignature = signature;

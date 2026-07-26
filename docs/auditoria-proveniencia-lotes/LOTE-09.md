@@ -1,0 +1,26 @@
+# Auditoria de proveniência — lote 09
+
+IDs ativos 161–180 de 257. A decisão de cada linha separa proveniência de qualidade e preserva o texto enquanto não houver prova de fabricação artificial.
+
+| ID | Texto | Autoria exibida | Tipo | Categoria | Relação | Qualidade | Decisão | Confiança |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| persp-21 | Uma dor carregada sem comunidade pode parecer apenas pessoal, mesmo quando também fala de vínculos rompidos. | Entre Sábios, inspirado em Malidoma Somé | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| persp-22 | Amar é uma prática feita de cuidado, respeito, responsabilidade e compromisso com o crescimento. | Entre Sábios, inspirado em bell hooks | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| persp-23 | Escrever pode devolver voz a partes do corpo e da experiência que aprenderam a permanecer caladas. | Entre Sábios, inspirado em Hélène Cixous | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| persp-24 | Amar não exige transformar o outro numa cópia de si nem desaparecer para caber no desejo dele. | Entre Sábios, inspirado em Luce Irigaray | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| persp-26 | A prática não prepara você para o presente; a própria prática já é uma forma de habitar o presente. | Entre Sábios, inspirado em Dogen | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| persp-27 | Desejo e espiritualidade não precisam fingir que vivem em mundos separados; ambos pedem honestidade. | Entre Sábios, inspirado em Ikkyu Sojun | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Jiddu Krishnamurti-0 | A verdade sobre você se torna mais clara quando sua mente reconhece os próprios medos, desejos e contradições. | Entre Sábios, inspirado em Jiddu Krishnamurti | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Jiddu Krishnamurti-2 | Olhar para dentro sem julgamento já é o começo da transformação. | Entre Sábios, inspirado em Jiddu Krishnamurti | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Jiddu Krishnamurti-3 | A clareza nasce quando você para de lutar contra o que sente. | Entre Sábios, inspirado em Jiddu Krishnamurti | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Krishnamurti-0 | A mente encontra calma quando reconhece a realidade antes de tentar mudá-la. | Entre Sábios, inspirado em Krishnamurti | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Krishnamurti-1 | O silêncio pode diminuir as defesas da mente e permitir que você perceba o que estava evitando. | Entre Sábios, inspirado em Krishnamurti | inspired | G | distante | requer atenção | manter com referência pendente | alta |
+| Krishnamurti-2 | Compreender a si mesmo é mais profundo do que controlar a si mesmo. | Entre Sábios, inspirado em Krishnamurti | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Krishnamurti-3 | A paz começa quando você deixa de reagir com pressa ao que sente. | Entre Sábios, inspirado em Krishnamurti | inspired | G | distante | requer atenção | manter com referência pendente | alta |
+| Nisargadatta Maharaj-2 | A ansiedade perde parte do domínio quando deixa de ser confundida com identidade. | Entre Sábios, inspirado em Nisargadatta Maharaj | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Nisargadatta Maharaj-3 | O silêncio não precisa ser produzido; ele aparece quando a busca descansa por um instante. | Entre Sábios, inspirado em Nisargadatta Maharaj | inspired | E | plausível | requer atenção | manter como inspiração validada | média |
+| Platão-0 | O conhecimento que não transforma o coração é apenas informação. | Entre Sábios, inspirado em Platão | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Platão-1 | A vida ganha direção quando suas escolhas se aproximam daquilo que você reconhece como verdadeiro. | Entre Sábios, inspirado em Platão | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Platão-2 | A atenção à beleza pode ensinar você a perceber valor e significado além da utilidade imediata. | Entre Sábios, inspirado em Platão | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Platão-3 | Buscar a verdade exige examinar não apenas os fatos, mas também os desejos que influenciam seu julgamento. | Entre Sábios, inspirado em Platão | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Sócrates-0 | Conhece-te a ti mesmo: é aí que a vida começa a responder. | Entre Sábios, inspirado em Sócrates | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |

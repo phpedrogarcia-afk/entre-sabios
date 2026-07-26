@@ -1,14 +1,21 @@
 {
   "name": "entre-sabios",
   "private": true,
-  "version": "2.1.0",
+  "version": "2.2.0",
   "type": "module",
   "scripts": {
     "build:content": "node scripts/build-content.mjs",
+    "build:deploy": "node scripts/build-deploy-package.mjs",
     "check:static": "node scripts/static-check.mjs",
     "check:content": "node scripts/build-content.mjs --check",
+    "check:governance": "node scripts/check-governance.mjs",
+    "check:deploy": "node scripts/check-deploy.mjs",
     "audit:behavior": "node scripts/audit-behavior.mjs --output tests/fixtures/auditoria_comportamental_atual.json && node scripts/generate-behavioral-report.mjs",
     "audit:systematic": "node scripts/run-systematic-audit.mjs",
+    "audit:blocks": "node scripts/audit-four-block-coverage.mjs --summary",
+    "audit:provenance": "node scripts/audit-complete-provenance.mjs",
+    "build:provenance-map": "node scripts/build-historical-provenance-map.mjs",
+    "check:provenance-map": "node scripts/build-historical-provenance-map.mjs --check",
     "test:state": "node scripts/run-tests.mjs state",
     "test:synthesis": "node scripts/run-tests.mjs synthesis",
     "test:motivation": "node scripts/run-tests.mjs motivation",
@@ -20,11 +27,17 @@
     "test:fast": "node scripts/run-tests.mjs fast",
     "test:stress": "node scripts/run-tests.mjs stress",
     "test:lab": "node scripts/run-tests.mjs lab",
+    "test:governance": "node --test tests/governance-contract.test.mjs tests/deploy-manifest.test.mjs tests/historical-provenance-map.test.mjs",
+    "test:browser": "playwright test",
+    "test:changed": "node scripts/select-tests.mjs",
     "test:all": "node scripts/run-tests.mjs all",
     "replay:diagnostic": "node scripts/replay-diagnostic.mjs",
     "lab:emotional": "node scripts/run-emotional-lab.mjs",
     "test": "node scripts/build-content.mjs && node --test tests/*.test.mjs",
-    "verify": "npm run check:static && npm run check:content && npm run test:all",
+    "verify": "npm run check:governance && npm run check:deploy && npm run check:static && npm run check:content && npm run test:all",
     "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
   }
 }

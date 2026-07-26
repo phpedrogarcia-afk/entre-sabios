@@ -21,7 +21,7 @@ test('laboratório exporta métricas estruturadas sem alterar o acervo', () => {
   const scenario = report.scenarios[0];
   assert.equal(report.schemaVersion, 1);
   assert.equal(report.developmentOnly, true);
-  assert.equal(report.runtimeContentVersion, 'definitiva-2.1');
+  assert.equal(report.runtimeContentVersion, 'definitiva-2.4');
   assert.equal(scenario.selections.length, 12);
   for (const metric of [
     'primaryRetention', 'secondaryInfluence', 'secondaryDominanceRisk', 'synthesisSpecificity',

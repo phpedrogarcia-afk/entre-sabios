@@ -3,15 +3,16 @@ import path from 'node:path';
 
 export const EXPECTED = Object.freeze({
   schemaVersion: '1.1.0',
-  contentVersion: 'definitiva-2.1',
-  historical: 344,
-  active: 283,
-  removed: 60,
+  contentVersion: 'definitiva-2.4',
+  historical: 351,
+  active: 257,
+  removed: 92,
   moved: 1,
-  nucleus: 64,
-  contextual: 151,
-  general: 68,
-  pending: 20,
+  quarantine: 1,
+  nucleus: 41,
+  contextual: 150,
+  general: 66,
+  pending: 18,
 });
 
 export const ACTIVE_STATUSES = new Set([
@@ -22,15 +23,8 @@ export const ACTIVE_STATUSES = new Set([
 ]);
 
 export const REQUIRED_INSECURITY_IDS = Object.freeze([
-  'ANT-INS-001',
-  'ANT-INS-002',
-  'ANT-INS-003',
-  'ANT-INS-004',
-  'ANT-INS-005',
-  'ANT-INS-006',
   'batch02-quote-040',
   'batch04-quote-038',
-  'ES-INS-VERGONHA-001',
 ]);
 
 export function readJson(filePath) {
@@ -114,10 +108,9 @@ export function validateMaster(master) {
   const truth = calculateMasterTruth(master);
   assert(master.schemaVersion === EXPECTED.schemaVersion, `schemaVersion incompatível: ${master.schemaVersion}`);
   assert(master.contentVersion === EXPECTED.contentVersion, `contentVersion incompatível: ${master.contentVersion}`);
-  for (const key of ['historical', 'active', 'removed', 'moved', 'nucleus', 'contextual', 'general', 'pending']) {
+  for (const key of ['historical', 'active', 'removed', 'moved', 'quarantine', 'nucleus', 'contextual', 'general', 'pending']) {
     assert(truth[key] === EXPECTED[key], `${key}: esperado ${EXPECTED[key]}, encontrado ${truth[key]}`);
   }
-  assert(truth.quarantine === 0, `quarentena inesperada: ${truth.quarantine}`);
   assert(truth.duplicateIds.length === 0, `IDs duplicados: ${truth.duplicateIds.join(', ')}`);
   assert(truth.duplicateActiveTexts.length === 0, 'Existem textos ativos exatamente duplicados.');
   assert(truth.activeWithNullPlacement.length === 0, `Ativos sem placement: ${truth.activeWithNullPlacement.join(', ')}`);
@@ -180,7 +173,7 @@ export function validateMaster(master) {
   const insecurity = active.filter((content) => content.associations?.some(
     (association) => association.feeling === 'inseguranca' && association.placement === 'nucleo',
   ));
-  assert(insecurity.length === 9, `Insegurança deveria possuir 9 núcleos; possui ${insecurity.length}.`);
+  assert(insecurity.length === REQUIRED_INSECURITY_IDS.length, `Insegurança deveria possuir ${REQUIRED_INSECURITY_IDS.length} núcleos após as retiradas editoriais; possui ${insecurity.length}.`);
   for (const id of REQUIRED_INSECURITY_IDS) {
     const content = insecurity.find((item) => item.id === id);
     assert(content, `Núcleo obrigatório de Insegurança ausente: ${id}`);

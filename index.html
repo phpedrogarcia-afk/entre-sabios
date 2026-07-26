@@ -45,7 +45,7 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20260714-5" />
+    <link rel="stylesheet" href="style.css?v=20260718-cache-fix-1" />
     <link rel="stylesheet" href="css/landscape-scroll-fix.css?v=20260713-1" />
     <link rel="stylesheet" href="css/tablet.css?v=20260713-1" />
     <style id="tale-mobile-scroll-fix">
@@ -198,9 +198,11 @@
           <!-- Itens gerados via JS -->
         </div>
         <div id="primaryFeelingControl" class="primary-feeling-control" hidden>
-          <div>Sentimento principal: <strong id="primaryFeelingLabel">—</strong></div>
+          <div class="primary-feeling-summary">
+            <div>Sentimento principal: <strong id="primaryFeelingLabel">—</strong></div>
+            <div id="secondaryFeelingActions" class="secondary-feeling-actions" aria-label="Alterar sentimento principal"></div>
+          </div>
           <div id="primaryFeelingAnnouncement" class="primary-feeling-announcement" role="status" aria-live="polite" aria-atomic="true"></div>
-          <div id="secondaryFeelingActions" class="secondary-feeling-actions" aria-label="Alterar sentimento principal"></div>
           <div id="emotionalSynthesisSummary" class="emotional-synthesis-summary" role="status" aria-live="polite" aria-atomic="true" hidden>
             <div class="synthesis-secondary-line">Também presentes: <span id="synthesisSecondaryFeelings"></span></div>
             <div class="synthesis-title">O que isso pode estar revelando:</div>
@@ -211,24 +213,23 @@
 
         <div class="selection-preferences">
           <div class="audience intensity-control">
-            <div class="audience-title">INTENSIDADE DO SENTIMENTO</div>
-            <div class="audience-options" role="radiogroup" aria-label="Intensidade do sentimento">
+            <div class="audience-title">Como você quer receber esta reflexão?</div>
+            <div class="audience-options" role="radiogroup" aria-label="Como você quer receber esta reflexão?">
               <label class="radio">
                 <input type="radio" name="intensity" value="fraca" />
-                <span>Fraca</span>
+                <span>Delicado</span>
               </label>
               <label class="radio">
-                <input type="radio" name="intensity" value="moderada" checked />
-                <span>Moderada</span>
+                <input type="radio" name="intensity" value="moderada" />
+                <span>Equilibrado</span>
               </label>
               <label class="radio">
                 <input type="radio" name="intensity" value="intensa" />
-                <span>Intensa</span>
+                <span>Profundo</span>
               </label>
             </div>
           </div>
-          <div class="motivation-preference" aria-labelledby="motivationPreferenceTitle">
-            <div id="motivationPreferenceTitle" class="audience-title">PREFERÊNCIA OPCIONAL</div>
+          <div class="motivation-preference">
             <button
               id="motivationToggle"
               class="motivation-toggle"
@@ -288,7 +289,7 @@
 
           <div class="block" id="explanationBlock">
             <div class="block-title" id="explanationTitle">O QUE ESSA FRASE QUER DIZER</div>
-            <div class="block-text" id="reflectionText">Selecione seus sentimentos, escolha a intensidade e clique em “ENCONTRAR UMA REFLEXÃO”.</div>
+            <div class="block-text" id="reflectionText">Selecione seus sentimentos e clique em “ENCONTRAR UMA REFLEXÃO”.</div>
           </div>
 
           <section class="block philosophy-block" id="philosophyBlock" aria-labelledby="philosophyTitle">
@@ -403,15 +404,15 @@
         </figure>
         <article id="taleText" class="tale-text"></article>
         <section class="tale-lesson">
-          <h3>O que esse conto nos ensina?</h3>
+          <h3>Um modo de olhar</h3>
           <div id="taleLesson"></div>
         </section>
         <section class="tale-lesson tale-relation">
-          <h3>Por que este conto apareceu para você?</h3>
+          <h3>O que talvez esteja pedindo para ser visto</h3>
           <div id="taleRelation"></div>
         </section>
         <section class="tale-lesson tale-question">
-          <h3>Pergunta para reflexão</h3>
+          <h3>Uma pergunta para levar consigo</h3>
           <div id="taleQuestion"></div>
         </section>
         <button id="closeTaleBtn" class="full" type="button">Fechar</button>
@@ -498,34 +499,34 @@
         set(currentUserPresenceRef, null).catch(() => {});
       });
     </script>
-    <script src="js/data/catalogs.js?v=20260713-1"></script>
+    <script src="js/data/catalogs.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/emotional-syntheses.js?v=20260714-2"></script>
     <script src="js/data/motivation-profiles.js?v=20260714-1"></script>
-    <script src="js/data/books.js?v=20260710-1"></script>
+    <script src="js/data/books.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/share-themes.js?v=20260710-1"></script>
-    <script src="js/data/tales.js?v=20260714-1"></script>
+    <script src="js/data/tales.js?v=tales-d7fbbf8fc478"></script>
     <script src="js/data/emotional-taxonomy.js?v=20260712-10"></script>
-    <script src="js/data/editorial-explanations.js?v=20260714-1"></script>
-    <script src="js/data/editorial-guidance.js?v=20260714-1"></script>
+    <script src="js/data/editorial-explanations.js?v=20260718-cache-fix-1"></script>
+    <script src="js/data/editorial-guidance.js?v=20260718-cache-fix-1"></script>
     <script src="js/core/normalization.js?v=20260710-1"></script>
     <script src="js/core/runtime-engine.js?v=20260715-repetition-fix-1"></script>
-    <script src="data/entre_sabios_runtime.js?v=definitiva-2.1"></script>
-    <script src="js/core/runtime-loader.js?v=definitiva-2.1-local-1"></script>
-    <script src="js/core/emotional-state.js?v=20260714-1"></script>
+    <script src="data/entre_sabios_runtime.js?v=definitiva-2.4"></script>
+    <script src="js/core/runtime-loader.js?v=definitiva-2.4"></script>
+    <script src="js/core/emotional-state.js?v=20260718-cache-fix-1"></script>
     <script src="js/core/emotional-synthesis.js?v=20260714-2"></script>
     <script src="js/core/synthesis-ranking-adapter.js?v=20260714-1"></script>
     <script src="js/core/motivation-ranking-adapter.js?v=20260714-1"></script>
-    <script src="js/core/matching.js?v=20260714-repetition-diagnostic-2"></script>
+    <script src="js/core/matching.js?v=20260718-cache-fix-1"></script>
     <script src="js/core/book-matching.js?v=20260712-10"></script>
     <script src="js/features/feedback.js?v=20260713-4"></script>
     <script src="js/features/favorites.js?v=20260710-1"></script>
     <script src="js/features/sharing.js?v=20260713-4"></script>
-    <script src="js/features/tales.js?v=20260714-1"></script>
-    <script src="js/ui/feelings-ui.js?v=20260714-3"></script>
+    <script src="js/features/tales.js?v=tales-d7fbbf8fc478"></script>
+    <script src="js/ui/feelings-ui.js?v=20260718-cache-fix-1"></script>
     <script src="js/ui/daily-ui.js?v=20260712-1"></script>
     <script src="js/ui/reflection-ui.js?v=20260714-1"></script>
     <script src="js/ui/effects-ui.js?v=20260710-1"></script>
     <script src="js/ui/theme-ui.js?v=20260710-1"></script>
-    <script src="script.js?v=20260715-repetition-fix-1"></script>
+    <script src="script.js?v=20260718-cache-fix-1"></script>
   </body>
 </html>

@@ -65,3 +65,16 @@ commit:
 - correção: nenhuma; não criar textos nem reclassificar formatos.
 
 Nenhuma repetição evitável, dominância secundária, perda do principal ou lacuna com menos de três candidatos seguros foi confirmada. A Fase 11 percorreu 100% dos elegíveis observados antes de reiniciar os ciclos e validou também a atomicidade de mouse, teclado e toque.
+
+### ES-2026-004 — Contos sujeitos a combinação de arquivos em cache
+
+- categoria: `INTERFACE`;
+- estado: `validado`;
+- evidência: o catálogo, o controlador e o HTML dos contos foram alterados no primeiro lote, mas os dois scripts continuaram inicialmente referenciados por marcadores de cache anteriores; a abertura funcionava em sessão limpa, sem cobrir navegadores com arquivos já armazenados;
+- sequência de reprodução: comparar os marcadores de `js/data/tales.js` e `js/features/tales.js` no HTML publicado com o conteúdo novo entregue sob as mesmas URLs versionadas;
+- ambiente: site publicado e navegador com cache anterior; a sessão local limpa não reproduziu falha funcional;
+- causa: a validação anterior cobria abertura, conteúdo, rolagem e responsividade, mas não vinculava o marcador de cache ao conteúdo efetivo dos dois scripts;
+- correção: marcador único derivado do SHA-256 combinado do catálogo e do controlador; teste falha sempre que qualquer um dos arquivos mudar sem atualização correspondente no HTML;
+- teste de regressão: `tests/tales-editorial-batch.test.mjs` e fluxo de abrir, fechar e reabrir em `tests/browser/critical-paths.spec.mjs`;
+- arquivos afetados: `index.html`, `tests/tales-editorial-batch.test.mjs`, `tests/browser/critical-paths.spec.mjs`;
+- publicação: pendente e separada desta correção local.

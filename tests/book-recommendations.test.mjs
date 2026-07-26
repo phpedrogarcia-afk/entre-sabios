@@ -89,7 +89,7 @@ test('todas as recomendações do runtime possuem relação substantiva, intensi
     }
   }
   assert.ok(evaluated.some(Boolean), 'nenhum contexto recebeu recomendação');
-  assert.ok(evaluated.some((recommendation) => !recommendation), 'a ausência segura nunca foi exercitada');
+  assert.ok(evaluated.every(Boolean), 'todo contexto publicado deve receber recomendação substantiva');
 });
 
 test('mesmo autor não torna uma obra irrelevante elegível', () => {

@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const script = fs.readFileSync(path.join(rootDir, 'script.js'), 'utf8');
 const html = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
+const styleCss = fs.readFileSync(path.join(rootDir, 'style.css'), 'utf8');
+const componentsCss = fs.readFileSync(path.join(rootDir, 'css/components.css'), 'utf8');
 const matching = fs.readFileSync(path.join(rootDir, 'js/core/matching.js'), 'utf8');
 const runtimeEngine = fs.readFileSync(path.join(rootDir, 'js/core/runtime-engine.js'), 'utf8');
 const lockStart = script.indexOf('const REFLECTION_SELECTION_LOCK_MS');
@@ -18,8 +20,16 @@ const newListenerSource = script.match(/newBtn\.addEventListener\('click',[\s\S]
 function createSandbox() {
   let clickHandler = null;
   const scheduled = [];
+  const generateButtonClasses = new Set();
   const sandbox = {
-    generateBtn: { disabled: false },
+    generateBtn: {
+      disabled: false,
+      classList: {
+        add(className) { generateButtonClasses.add(className); },
+        remove(className) { generateButtonClasses.delete(className); },
+        contains(className) { return generateButtonClasses.has(className); },
+      },
+    },
     newBtn: {
       disabled: false,
       addEventListener(event, handler) {
@@ -87,9 +97,11 @@ test('a trava cobre a transação inteira e sempre libera os controles', () => {
   assert.equal(concurrent, false);
   assert.deepEqual(order, ['read-state', 'select-and-persist', 'update-history', 'render']);
   assert.equal(environment.sandbox.generateBtn.disabled, true);
+  assert.equal(environment.sandbox.generateBtn.classList.contains('is-selection-locked'), true);
   assert.equal(environment.sandbox.newBtn.disabled, true);
   environment.scheduled[0].callback();
   assert.equal(environment.sandbox.generateBtn.disabled, false);
+  assert.equal(environment.sandbox.generateBtn.classList.contains('is-selection-locked'), false);
   assert.equal(environment.sandbox.newBtn.disabled, false);
 
   assert.throws(() => environment.sandbox.runReflectionSelectionAction(() => {
@@ -98,6 +110,13 @@ test('a trava cobre a transação inteira e sempre libera os controles', () => {
   assert.equal(environment.sandbox.newBtn.disabled, true);
   environment.scheduled[1].callback();
   assert.equal(environment.sandbox.newBtn.disabled, false);
+});
+
+test('trava de seleção não simula carregamento depois que a reflexão já foi renderizada', () => {
+  assert.match(componentsCss, /\.primary\.is-selection-locked:disabled\s*\{[\s\S]*?cursor:\s*pointer;[\s\S]*?opacity:\s*1;/);
+  assert.match(html, /style\.css\?v=20260718-cache-fix-1/);
+  assert.match(styleCss, /css\/components\.css\?v=20260718-cache-fix-1/);
+  assert.match(html, /script\.js\?v=20260718-cache-fix-1/);
 });
 
 test('botões nativos possuem um único listener de seleção e não criam caminhos paralelos', () => {

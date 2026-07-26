@@ -1,0 +1,165 @@
+{
+  "auditMetadata": {
+    "date": "2026-07-22",
+    "time": "horário não preservado; data de acesso registrada",
+    "branch": "agent/finaliza-loop-estabilizacao",
+    "commit": "7876aa46f264a327442aa01e6f169ea333ac6ddf",
+    "masterVersion": "definitiva-2.3",
+    "constitutionDecision": "DEC-033",
+    "pilotReportVersion": "lote piloto de 9 casos, 22/07/2026",
+    "authorizedCases": ["REC-01 / TXT-LUT-003", "REC-02 / texto de coragem sem ID", "REC-03 / TXT-MED-004"],
+    "limitations": [
+      "A autorização decorre da marcação dos três casos como prioritários e aptos à investigação no relatório piloto; nenhuma decisão de aplicação foi inferida.",
+      "O histórico Git do mestre é raso.",
+      "As buscas públicas não demonstram inexistência universal de uma fonte.",
+      "Não houve acesso integral à edição Loyola de 2005 nem pesquisa externa em massa."
+    ]
+  },
+  "cases": [
+    {
+      "caseId": "REC-01",
+      "contentId": "TXT-LUT-003",
+      "text": "Quando eu me for, o mundo não vai parar para se despedir — e talvez seja isso que torne tudo tão bonito. Os pássaros continuarão dizendo seus segredos ao vento. As árvores aceitarão a chuva. O sol surgirá no horizonte sem consultar a ausência que deixei. Para o universo, talvez quase nada tenha mudado. Mas eu terei estado aqui por um instante. Terei ouvido vozes, tocado rostos, atravessado manhãs comuns. Enquanto houver um sabiá cantando em algum quintal ou uma folha insistindo no galho, a vida continuará dizendo que nenhum de nós precisava sustentá-la sozinho. Um dia poderemos descansar. O mundo saberá continuar.",
+      "format": "microtexto",
+      "currentAttribution": {"state": "fora do mestre", "protectedProposal": "Adaptação do poema Quando eu morrer, de Augusto Frederico Schmidt"},
+      "historicalAttributions": ["candidata anterior: Entre Sábios", "lembrança anterior de Mário Quintana, corrigida no Núcleo", "base documental: Augusto Frederico Schmidt"],
+      "hypotheses": ["adaptação de Augusto Frederico Schmidt", "paráfrase", "texto editorial independente"],
+      "searchQueries": ["Quando eu morrer Augusto Frederico Schmidt", "mundo continuará o mesmo Schmidt", "pássaros continuarão mundo saberá continuar"],
+      "languagesSearched": ["português"],
+      "worksSearched": ["Quando eu morrer", "Revista de Antropofagia, ano I, n. 10"],
+      "sources": [
+        {"url":"https://digital.bbm.usp.br/bitstream/bbm/7064/11/Anno.1_n.10_45000033273.pdf","title":"Revista de Antropofagia, ano I, n. 10","author":"publicação original; poema assinado Augusto Schimidt no fac-símile","year":1929,"location":"página 6 impressa; página 5 do PDF","type":"primária","authority":"nível 1","accessedAt":"2026-07-22"},
+        {"url":"https://www.fclar.unesp.br/Home/Biblioteca/colecoesespeciais/colecaoyeddaaugustofredericoschmidt/boletim-schmidt_ano2numero1_2022.pdf","title":"Boletim Schmidt, ano 2, n. 1","author":"Biblioteca da FCLAr/UNESP","year":2022,"location":"p. 7","type":"institucional","authority":"nível 2","accessedAt":"2026-07-22"},
+        {"file":"NUCLEO_PRESERVACAO_EDITORIAL.md","type":"interna","authority":"proteção canônica","supports":"texto local, trajetória interna e bloqueio por direitos"}
+      ],
+      "sourceMatrix": [
+        {"source":"Revista de Antropofagia, fev. 1929","type":"primária","authority":"alta","supports":"autoria de Schmidt, título e redação do poema-base","limitations":"OCR contém grafia histórica e pequeno erro no sobrenome impresso/OCR"},
+        {"source":"Boletim Schmidt/UNESP","type":"institucional","authority":"alta","supports":"existência do poema e vínculo com Schmidt","limitations":"não reproduz comparação integral da adaptação"},
+        {"source":"Núcleo de Preservação","type":"interna","authority":"alta para história do projeto","supports":"entrada interna e versão protegida","limitations":"não prova autoria da redação nova"}
+      ],
+      "matchingLevel": "T4 — adaptação textual",
+      "documentaryConfidence": "D4 — evidência forte",
+      "documentaryClassification": "DOC-D — adaptação documentada",
+      "authorshipState": "Augusto Frederico Schmidt é autor do poema-base; autoria individual da redação adaptada permanece não identificada no repositório",
+      "sourceState": "poema-base verificado em fonte primária",
+      "translationState": "não aplicável; original e adaptação estão em português",
+      "adaptationState": "documentada: preserva continuidade do mundo, natureza e pequena presença humana, mas acrescenta gratidão, vínculo e descanso",
+      "aiEvidence": "ART-0 — nenhuma evidência localizada",
+      "contextLoss": "parcial: a adaptação retém imagens centrais, mas altera o fecho existencial do poema e não deve ser apresentada como fala literal de Schmidt",
+      "presentationRisks": ["atribuir a adaptação integral a Schmidt", "atribuir a Mário Quintana", "tratar descanso como conselho em luto intenso", "publicar sem decisão sobre direitos"],
+      "safeClaims": ["o poema-base é de Augusto Frederico Schmidt", "a versão local é transformada e não literal", "há vínculo textual reconhecível"],
+      "unsupportedClaims": ["Schmidt escreveu o microtexto", "Mário Quintana é a fonte", "a adaptação está autorizada para publicação"],
+      "provisionalRecommendation": "manter como adaptação documentada protegida e encaminhar à peneira apenas após decisão humana e análise de direitos",
+      "nextEditorialDecision": "decidir se a adaptação pode avançar à peneira de qualidade e segurança sem publicação",
+      "humanDecisionRequired": true,
+      "limitations": ["não foi localizada a versão original interna anterior à revisão"]
+    },
+    {
+      "caseId": "REC-02",
+      "contentId": null,
+      "text": "Existe em nós uma coragem capaz de enfrentar aquilo que tenta nos reduzir. Ela não elimina o abismo nem promete uma vida sem dor; ensina a olhar para a dificuldade e ainda afirmar a existência. Crescer não é evitar toda queda, mas descobrir uma força que antes permanecia escondida.",
+      "format": "microtexto sem ID",
+      "currentAttribution": {"state": "nenhuma atribuição canônica; caso pendente"},
+      "historicalAttributions": ["associação anterior alegada a Nietzsche/Assim falou Zaratustra, sem registro interno localizado"],
+      "hypotheses": ["citação de Nietzsche", "inspiração em Nietzsche", "autoria não identificada", "origem interna", "fabricação artificial"],
+      "searchQueries": ["redação exata em português", "Ela não elimina o abismo", "Crescer não é evitar toda queda", "Nietzsche coragem abismo sofrimento força", "Also sprach Zarathustra Mut Abgrund Leiden Kraft"],
+      "languagesSearched": ["português", "inglês", "alemão"],
+      "worksSearched": ["Assim falou Zaratustra / Also sprach Zarathustra"],
+      "sources": [
+        {"url":"https://www.gutenberg.org/cache/epub/1998/pg1998-images.html","title":"Thus Spake Zarathustra","author":"Friedrich Nietzsche","type":"primária em tradução inglesa de domínio público","authority":"nível 1 para localizar passagens; não para tradução portuguesa","location":"The Vision and the Enigma; The Higher Man","accessedAt":"2026-07-22"},
+        {"url":"https://www.gutenberg.org/cache/epub/7205/pg7205.html","title":"Also sprach Zarathustra","author":"Friedrich Nietzsche","language":"alemão","type":"primária digital","authority":"nível 1","accessedAt":"2026-07-22"},
+        {"file":"PADRAO_EDITORIAL_ENTRE_SABIOS.md","type":"interna","authority":"canônica para o estado do caso","supports":"primeira ocorrência interna localizada e proibição de atribuição sem evidência"}
+      ],
+      "sourceMatrix": [
+        {"source":"Assim falou Zaratustra, The Vision and the Enigma / Das Gesicht und das Räthsel","type":"primária","authority":"alta","supports":"Nietzsche relaciona coragem, abismo, dor e superação","limitations":"não contém a redação investigada nem a mesma sequência argumentativa"},
+        {"source":"Assim falou Zaratustra, The Higher Man / Vom höheren Menschen","type":"primária","authority":"alta","supports":"afinidade temática entre coragem, medo e abismo","limitations":"correspondência apenas temática"},
+        {"source":"buscas exatas e por fragmentos","type":"circulação","authority":"baixa","supports":"nenhuma ocorrência externa foi localizada nas buscas executadas","limitations":"resultado negativo não prova origem interna nem fabricação"},
+        {"source":"Padrão Editorial","type":"interna","authority":"alta para estado do projeto","supports":"texto entrou como caso fornecido à Constituição","limitations":"não identifica autor, data anterior ou processo de criação"}
+      ],
+      "matchingLevel": "T1 — correspondência apenas temática",
+      "documentaryConfidence": "D1 — indício fraco",
+      "documentaryClassification": "DOC-I — proveniência indeterminada",
+      "authorshipState": "não identificada",
+      "sourceState": "nenhuma fonte documental específica localizada",
+      "translationState": "não há evidência de tradução",
+      "adaptationState": "não demonstrada",
+      "aiEvidence": "ART-0 — nenhuma evidência localizada",
+      "contextLoss": "desconhecido; não foi localizada unidade maior",
+      "presentationRisks": ["converter afinidade temática em autoria", "atribuir a Assim falou Zaratustra", "inferir IA pelo silêncio das buscas", "atribuir ao Entre Sábios sem decisão humana"],
+      "safeClaims": ["o texto está preservado internamente desde a Constituição", "há afinidade temática com passagens de Zaratustra", "não foi localizada correspondência textual específica"],
+      "unsupportedClaims": ["Nietzsche escreveu o texto", "o texto é inspiração demonstrável em Nietzsche", "a origem é Zaratustra", "o texto foi produzido por IA", "o texto é do Entre Sábios"],
+      "provisionalRecommendation": "preservar como proveniência indeterminada e retirar futuramente qualquer atribuição a Nietzsche, caso exista fora das fontes canônicas, somente após decisão humana",
+      "nextEditorialDecision": "decidir se o texto avança à peneira como conteúdo sem autoria identificada e proveniência pendente",
+      "humanDecisionRequired": true,
+      "limitations": ["busca pública não é corpus universal", "nenhuma evidência técnica de criação interna foi localizada"]
+    },
+    {
+      "caseId": "REC-03",
+      "contentId": "TXT-MED-004",
+      "text": "Sonhamos com asas, mas trememos diante do céu aberto. Queremos o voo e, ao mesmo tempo, exigimos um chão que nos acompanhe até as nuvens. A liberdade assusta porque não oferece corrimão. Nada está escrito, ninguém garante o pouso, e cada escolha fecha caminhos que também poderiam ter sido nossos. Então construímos abrigos pequenos e chamamos de destino aquilo que nasceu de renúncias repetidas. As grades raramente chegam prontas; nós as forjamos em silêncio, com o metal dos adiamentos. Dizemos que desejamos a porta aberta. Quando ela finalmente se escancara, descobrimos que também era a prisão que nos protegia do desconhecido.",
+      "format": "microtexto",
+      "currentAttribution": {"protectedState":"adaptação de trecho de Rubem Alves, em Religião e Repressão","publication":"local; publicação externa bloqueada"},
+      "historicalAttributions": ["candidata anterior: Entre Sábios", "fragmento Gaiola atribuído a Rubem Alves", "circulação secundária também atribui variantes a Dostoiévski, sem sustentar o microtexto"],
+      "hypotheses": ["citação de Rubem Alves", "adaptação de Rubem Alves", "passagem de Dostoiévski", "texto editorial independente"],
+      "searchQueries": ["Sonhamos o voo mas tememos as alturas", "Para voar é preciso amar o vazio", "Religião e Repressão p. 9", "Rubem Alves gaiolas certezas"],
+      "languagesSearched": ["português"],
+      "worksSearched": ["Religião e Repressão", "Protestantismo e Repressão", "Os irmãos Karamazov como atribuição concorrente de circulação"],
+      "sources": [
+        {"url":"https://saberaberto.uneb.br/bitstreams/b34e428c-fc91-4934-a3d8-d5e82af324b6/download","title":"Trabalho acadêmico com epígrafe e referência","author":"Universidade do Estado da Bahia","type":"acadêmica/institucional","authority":"nível 2/3","location":"epígrafe; referência a Religião e Repressão, 2005, p. 9","accessedAt":"2026-07-22"},
+        {"url":"https://repositorio.unb.br/bitstream/10482/53419/1/2025_CamilaDeAraujoAntonio_TESE.pdf","title":"Tese da Universidade de Brasília","author":"Camila de Araujo Antonio","year":2025,"type":"acadêmica","authority":"nível 3","location":"epígrafe, pp. 3-4 do PDF","accessedAt":"2026-07-22"},
+        {"url":"https://www.institutorubemalves.org.br/produto/religiao-e-repressao/","title":"Religião e Repressão","author":"Instituto Rubem Alves","type":"institucional","authority":"nível 2","supports":"autoria e existência da obra","accessedAt":"2026-07-22"},
+        {"file":"NUCLEO_PRESERVACAO_EDITORIAL.md","type":"interna","authority":"proteção canônica","supports":"fragmento, versão revisada e histórico de atribuição"}
+      ],
+      "sourceMatrix": [
+        {"source":"UNEB, citação com referência à p. 9","type":"acadêmica/institucional","authority":"média-alta","supports":"redação-base, autor, obra, ano e página","limitations":"citação secundária; não é fac-símile da edição Loyola"},
+        {"source":"UnB, tese de 2025","type":"acadêmica","authority":"média","supports":"variante longa e atribuição a Rubem Alves/obra","limitations":"fonte secundária"},
+        {"source":"Instituto Rubem Alves","type":"institucional","authority":"alta para catálogo","supports":"autoria e existência da obra","limitations":"não exibe a página investigada"},
+        {"source":"atribuição circulante a Dostoiévski","type":"contraditória/de circulação","authority":"baixa","supports":"existência de atribuição concorrente","limitations":"não sustenta obra ou passagem de Dostoiévski"}
+      ],
+      "matchingLevel": "T4 — adaptação textual",
+      "documentaryConfidence": "D4 — evidência forte",
+      "documentaryClassification": "DOC-D — adaptação documentada",
+      "authorshipState": "Rubem Alves é sustentado como autor do fragmento-base; autoria individual do microtexto adaptado permanece preservada, não identificada publicamente",
+      "sourceState": "obra e página sustentadas por fontes acadêmicas; fac-símile da edição Loyola não acessado",
+      "translationState": "não aplicável",
+      "adaptationState": "documentada: mantém voo, vazio, liberdade e gaiola, acrescentando chão, escolha, renúncia, adiamento e autoproteção",
+      "aiEvidence": "ART-0 — nenhuma evidência localizada",
+      "contextLoss": "parcial: a frase curta vem de uma passagem maior sobre liberdade e certezas; o microtexto transforma e amplia essa passagem",
+      "presentationRisks": ["atribuir todo o microtexto a Rubem Alves", "apresentar como citação literal", "atribuir a Dostoiévski por circulação secundária", "ignorar bloqueio de direitos"],
+      "safeClaims": ["há um fragmento-base de Rubem Alves em Religião e Repressão", "o microtexto é transformação substancial", "a relação é mais que temática"],
+      "unsupportedClaims": ["Rubem Alves escreveu o microtexto", "Dostoiévski é autor do fragmento", "a publicação externa está autorizada"],
+      "provisionalRecommendation": "manter como adaptação documentada e encaminhar à peneira somente após decisão humana sobre direitos e apresentação",
+      "nextEditorialDecision": "decidir se a adaptação avança à avaliação de qualidade e formato, mantendo o bloqueio de publicação",
+      "humanDecisionRequired": true,
+      "limitations": ["a edição Loyola de 2005 não foi consultada diretamente nesta execução"]
+    }
+  ],
+  "batchFindings": {
+    "cases": 3,
+    "finding": "dois casos possuem textos-base sustentados e transformação reconhecível; um permanece sem proveniência específica",
+    "scopeWarning": "resultados não se aplicam ao restante do acervo"
+  },
+  "conflicts": [
+    {"caseId":"REC-01","conflict":"lembrança anterior de Mário Quintana versus fonte primária de Augusto Frederico Schmidt","resolution":"fonte primária sustenta Schmidt para o poema-base; microtexto continua adaptação"},
+    {"caseId":"REC-03","conflict":"variantes de circulação atribuem o fragmento a Dostoiévski","resolution":"fontes acadêmicas e institucionais sustentam Rubem Alves/Religião e Repressão; não foi localizada fonte primária de Dostoiévski para o fragmento"}
+  ],
+  "statistics": {
+    "cases": 3,
+    "documentaryClassification": {"DOC-A":0,"DOC-B":0,"DOC-C":0,"DOC-D":2,"DOC-E":0,"DOC-F":0,"DOC-G":0,"DOC-H":0,"DOC-I":1,"DOC-J":0,"DOC-K":0,"DOC-X":0},
+    "matchingLevel": {"T0":0,"T1":1,"T2":0,"T3":0,"T4":2,"T5":0,"T6":0,"T7":0,"TX":0},
+    "documentaryConfidence": {"D0":0,"D1":1,"D2":0,"D3":0,"D4":2,"D5":0,"DX":0},
+    "aiEvidence": {"ART-0":3,"ART-1":0,"ART-2":0,"ART-3":0,"ART-4":0,"ART-X":0},
+    "verifiedQuotes": 0,
+    "identifiedTranslations": 0,
+    "adaptations": 2,
+    "paraphrases": 0,
+    "demonstrableInspirations": 0,
+    "unidentifiedAuthorship": 1,
+    "indeterminateProvenance": 1,
+    "contradictedAttributions": 0,
+    "provenArtificialFabrication": 0,
+    "contextLostOrPartial": 3,
+    "requiresHumanDecision": 3,
+    "eligibleForNextStageAfterApproval": 3
+  }
+}

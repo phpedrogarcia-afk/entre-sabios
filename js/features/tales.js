@@ -1,6 +1,10 @@
 // Contos filosóficos: seleção, ciclo e modal.
 // Extraído de script.js na Fase 4 da refatoração segura.
-// Não alterar comportamento nesta fase.
+
+function resolveTaleIntensity(explicitIntensity = currentIntensity) {
+  if (VALID_INTENSITIES.has(explicitIntensity)) return explicitIntensity;
+  return explicitIntensity == null || explicitIntensity === '' ? 'moderada' : null;
+}
 
 function normalizeTaleList(list = []) {
   return list.map(normalizeTheme);
@@ -20,13 +24,15 @@ function getTaleParagraphHtml(paragraphs = []) {
     .join('');
 }
 
-function getTaleRelationFallback(tale) {
-  const feelings = getSelectedFeelingLabels();
-  const feelingText = feelings.length ? feelings.join(', ').toLowerCase() : 'o momento que você escolheu';
-  const themes = (tale.temas || []).slice(0, 3).join(', ').toLowerCase();
-  return [
-    `Este conto apareceu porque conversa com ${feelingText} e com temas como ${themes}. Ele amplia a frase principal sem competir com ela: em vez de entregar uma resposta pronta, transforma o sentimento em imagem, travessia e pergunta.`
-  ];
+function getTaleFirstReflectionSection(tale) {
+  if (tale.umModoDeOlhar?.length) return tale.umModoDeOlhar;
+  return (tale.explicacaoFilosofica || []).slice(0, 1);
+}
+
+function getTaleSecondReflectionSection(tale) {
+  if (tale.oQueTalvezEstejaPedindoParaSerVisto?.length) return tale.oQueTalvezEstejaPedindoParaSerVisto;
+  const legacyParagraphs = (tale.explicacaoFilosofica || []).slice(1);
+  return legacyParagraphs.length ? legacyParagraphs : (tale.explicacaoFilosofica || []);
 }
 
 function getTaleQuestionFallback(tale) {
@@ -115,7 +121,7 @@ function getNearbyThemeScore(tale, state) {
 }
 
 function pickBestTale({ gradualVariety = false } = {}) {
-  const state = interpretEmotionalState();
+  const state = interpretEmotionalState(resolveTaleIntensity(currentIntensity));
   let restartedJourney = false;
 
   if (contosJaVistos.length >= philosophicalTales.length) {
@@ -199,20 +205,12 @@ function renderTale(tale) {
     taleImageEl.alt = '';
   }
   taleTextEl.innerHTML = getTaleParagraphHtml(tale.texto);
-  taleLessonEl.innerHTML = getTaleParagraphHtml(tale.explicacaoFilosofica);
-  taleRelationEl.innerHTML = getTaleParagraphHtml(tale.relacaoSentimento || getTaleRelationFallback(tale));
-  taleQuestionEl.innerHTML = getTaleParagraphHtml([tale.perguntaReflexao || getTaleQuestionFallback(tale)]);
+  taleLessonEl.innerHTML = getTaleParagraphHtml(getTaleFirstReflectionSection(tale));
+  taleRelationEl.innerHTML = getTaleParagraphHtml(getTaleSecondReflectionSection(tale));
+  taleQuestionEl.innerHTML = getTaleParagraphHtml([tale.perguntaParaLevar || tale.perguntaReflexao || getTaleQuestionFallback(tale)]);
 }
 
 function openPhilosophicalTale() {
-  if (!ensureSelectionMin()) {
-    const message = 'Escolha um sentimento primeiro para encontrar um conto que converse com o seu momento.';
-    if (taleHintEl) taleHintEl.textContent = 'Selecione um sentimento primeiro.';
-    showSelectionHint(message);
-    reflectionTextEl.textContent = 'Selecione seus sentimentos, escolha a intensidade e clique em “ENCONTRAR UMA REFLEXÃO”.';
-    return;
-  }
-
   if (taleHintEl) taleHintEl.textContent = '';
   showTale({ gradualVariety: false });
   lockTalePageScroll();

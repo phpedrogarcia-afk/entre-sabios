@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const runtime = JSON.parse(fs.readFileSync(path.join(rootDir, 'data', 'entre_sabios_runtime.json'), 'utf8'));
+const master = JSON.parse(fs.readFileSync(path.join(rootDir, 'entre_sabios_acervo_mestre_final.json'), 'utf8'));
 const sandbox = {};
 vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(path.join(rootDir, 'js', 'data', 'editorial-guidance.js'), 'utf8'), sandbox);
@@ -34,26 +35,37 @@ function loadLegacyContents() {
   ];
 }
 
-test('30 orientações prioritárias exigem correspondência exata com o runtime', () => {
-  assert.equal(Object.keys(guidance).length, 30);
+test('perguntas editoriais prioritárias exigem correspondência exata com o runtime', () => {
+  assert.ok(Object.keys(guidance).length >= 30);
   assert.deepEqual(Object.keys(contexts).sort(), Object.keys(guidance).sort());
   for (const [id, entry] of Object.entries(guidance)) {
     const content = runtime.contents.find((item) => item.id === id);
-    assert.ok(content, `${id} não existe no runtime`);
-    assert.equal(entry.finalText, content.finalText, `${id} mudou de texto`);
+    const historicalContent = master.contents.find((item) => item.id === id);
+    assert.ok(historicalContent, `${id} não existe no mestre`);
+    assert.equal(entry.finalText, historicalContent.finalText, `${id} mudou de texto`);
+    if (!content) assert.equal(historicalContent.status, 'REMOVIDO', `${id} ausente do runtime não está removido`);
     assert.ok(entry.guidance.length >= 35, `${id} possui orientação insuficiente`);
   }
 });
 
-test('orientações e contextos continuam idênticos às fontes editoriais anteriores', () => {
+test('revisões preservam a orientação anterior e não apagam os contextos de origem', () => {
   const legacyContents = loadLegacyContents();
   for (const [id, entry] of Object.entries(guidance)) {
     const source = legacyContents.find((item) => item.id === id
       && normalizeText(item.frase || item.texto) === normalizeText(entry.finalText));
-    assert.ok(source, `${id} não possui fonte editorial anterior correspondente`);
-    assert.equal(entry.guidance, source.conselho, `${id} teve a orientação reescrita`);
-    assert.deepEqual([...contexts[id].feelings], [...source.sentimentos], `${id} mudou os sentimentos editoriais`);
-    assert.deepEqual([...contexts[id].intensities], [...source.intensidade], `${id} mudou as intensidades editoriais`);
+    if (!source) {
+      assert.equal(entry.previousGuidance, undefined, `${id} sem fonte anterior não pode declarar orientação preservada`);
+      continue;
+    }
+    assert.equal(entry.previousGuidance || entry.guidance, source.conselho, `${id} perdeu a orientação editorial anterior`);
+    const preservedContext = contexts[id].previousContext || contexts[id];
+    const currentFeelings = preservedContext.feelings.map(normalizeText);
+    for (const feeling of source.sentimentos) {
+      assert.ok(currentFeelings.includes(normalizeText(feeling)), `${id} perdeu o sentimento editorial ${feeling}`);
+    }
+    for (const intensity of source.intensidade) {
+      assert.ok(preservedContext.intensities.includes(intensity), `${id} perdeu a intensidade editorial ${intensity}`);
+    }
   }
 });
 
@@ -69,19 +81,31 @@ test('rótulos são explícitos, permitidos e coerentes com perguntas', () => {
   for (const [id, entry] of Object.entries(guidance)) {
     assert.ok(allowedLabels.has(entry.label), `${id} possui rótulo não autorizado`);
     if (/^Pergunte\b/.test(entry.guidance)) assert.equal(entry.label, 'UMA PERGUNTA', `${id} deveria ser pergunta`);
+    if (entry.previousGuidance) {
+      assert.equal(entry.label, 'UMA PERGUNTA', `${id} revisado não usa o título canônico`);
+      assert.match(entry.guidance, /\?$/, `${id} revisado não termina como pergunta`);
+    }
   }
 });
 
-test('trava contextual mantém orientação somente no sentimento e intensidade curados', () => {
-  const availability = { fraca: 0, moderada: 0, intensa: 0 };
+test('trava contextual respeita o sentimento principal e as intensidades permitidas', () => {
   for (const [id, context] of Object.entries(contexts)) {
     const content = runtime.contents.find((item) => item.id === id);
-    const matchesPrimary = context.feelings.map(normalizeText).includes(normalizeText(content.primaryFeeling));
-    for (const intensity of Object.keys(availability)) {
-      if (matchesPrimary && context.intensities.includes(intensity)) availability[intensity] += 1;
+    if (!content) {
+      assert.equal(master.contents.find((item) => item.id === id)?.status, 'REMOVIDO', `${id} ausente do runtime não está removido`);
+      continue;
+    }
+    const matchesPrimary = content.primaryFeeling
+      ? context.feelings.map(normalizeText).includes(normalizeText(content.primaryFeeling))
+      : context.universal === true;
+    assert.ok(matchesPrimary, `${id} não cobre seu sentimento principal ou a condição universal`);
+    for (const intensity of context.intensities) {
+      assert.ok(content.suitableIntensities.includes(intensity), `${id} usa intensidade editorial inelegível`);
+    }
+    if (guidance[id].previousGuidance) {
+      assert.deepEqual([...context.intensities].sort(), [...content.suitableIntensities].sort(), `${id} revisado não cobre todas as intensidades permitidas`);
     }
   }
-  assert.deepEqual(availability, { fraca: 4, moderada: 25, intensa: 12 });
 });
 
 test('função real recusa texto, sentimento ou intensidade fora do contexto curado', () => {
@@ -99,7 +123,7 @@ test('função real recusa texto, sentimento ou intensidade fora do contexto cur
   const valid = functionSandbox.getSpecificEditorialGuidance(content, { primaryFeeling: 'luto', intensity: 'intensa' });
   assert.equal(valid.guidance, guidance['batch04-quote-021'].guidance);
   assert.equal(valid.label, guidance['batch04-quote-021'].label);
-  assert.equal(functionSandbox.getSpecificEditorialGuidance(content, { primaryFeeling: 'luto', intensity: 'moderada' }), null);
+  assert.equal(functionSandbox.getSpecificEditorialGuidance(content, { primaryFeeling: 'luto', intensity: 'neutra' }), null);
   assert.equal(functionSandbox.getSpecificEditorialGuidance(content, { primaryFeeling: 'saudade', intensity: 'intensa' }), null);
   assert.equal(functionSandbox.getSpecificEditorialGuidance({ ...content, finalText: `${content.finalText} alterado` }, { primaryFeeling: 'luto', intensity: 'intensa' }), null);
 });

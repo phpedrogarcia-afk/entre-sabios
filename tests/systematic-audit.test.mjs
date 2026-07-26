@@ -40,7 +40,7 @@ test('resumo separa problemas objetivos, observações de distribuição e lacun
     firstRepeat: null, coverageBeforeRepeat: 1, allowedDistinct: 2, availableFormatCount: 1,
   };
   const report = summarizeSystematicAudit({
-    generatedAt: '2026-07-16T00:00:00.000Z', runtimeContentVersion: 'definitiva-2.1',
+    generatedAt: '2026-07-16T00:00:00.000Z', runtimeContentVersion: 'definitiva-2.3',
     summary: { selectionCount: 3 }, scenarios: [{ id: 'sample', metrics, alerts: [{
       id: 'motivation_without_effect', category: 'RELEVANCE', title: 'Observação', evidence: {}, state: 'detected',
     }] }],

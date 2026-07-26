@@ -6,3 +6,7 @@ RewriteEngine On
 # O host canônico do projeto é entresabios.com, sem www.
 RewriteCond %{HTTP_HOST} ^www\.entresabios\.com$ [NC]
 RewriteRule ^ https://entresabios.com%{REQUEST_URI} [R=301,L,NE]
+
+# Evita que /index.html e /caminho/index.html coexistam com a URL canônica.
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html(?:[\s?]|$) [NC]
+RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L,NE]

@@ -108,9 +108,21 @@ test('quebra respeita parágrafos e divide tokens maiores que a largura útil', 
   assert.ok(lines.every((line) => context.measureText(line).width <= 112));
 });
 
-test('todo o acervo ativo cabe nas três variações sem corte ou fonte serializada', () => {
+test('todo o acervo ativo e todas as categorias cabem nas três variações sem corte ou fonte serializada', () => {
   const seenTypes = new Set();
-  for (const content of runtime.contents.filter((item) => item.publicationEnabled)) {
+  const exactQuoteCoverage = {
+    id: 'synthetic-exact-quote-layout',
+    publicationEnabled: true,
+    attributionType: 'exact_quote',
+    finalText: 'Amostra documental para cobertura visual.',
+    displayedAuthor: 'Autoria documental',
+    source: { title: 'Obra documentada', status: 'verified' },
+  };
+  const contents = [
+    ...runtime.contents.filter((item) => item.publicationEnabled),
+    exactQuoteCoverage,
+  ];
+  for (const content of contents) {
     seenTypes.add(content.attributionType);
     const story = {
       quote: content.finalText,
@@ -133,6 +145,6 @@ test('todo o acervo ativo cabe nas três variações sem corte ou fonte serializ
   }
   assert.deepEqual(
     [...seenTypes].sort(),
-    ['exact_quote', 'inspired', 'original', 'traditional', 'translated_quote'],
+    ['exact_quote', 'inspired', 'original', 'paraphrase', 'traditional', 'translated_quote'],
   );
 });

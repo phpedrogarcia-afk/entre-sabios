@@ -1,0 +1,26 @@
+# Auditoria de proveniência — lote 04
+
+IDs ativos 61–80 de 257. A decisão de cada linha separa proveniência de qualidade e preserva o texto enquanto não houver prova de fabricação artificial.
+
+| ID | Texto | Autoria exibida | Tipo | Categoria | Relação | Qualidade | Decisão | Confiança |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| batch03-quote-017 | Fugir da dor muitas vezes a transforma em perseguição; sentar-se com ela pode devolver tamanho às coisas. | Entre Sábios, inspirado em Pema Chödrön | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch03-quote-018 | A coragem não é endurecer; é permanecer sensível sem se abandonar. | Entre Sábios, inspirado em Pema Chödrön | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch03-quote-022 | A segurança absoluta é uma fantasia que cobra caro: pede a vida em troca da sensação de controle. | Entre Sábios, inspirado em Alan Watts | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch03-quote-023 | Quem tenta observar a própria vida de fora esquece que também está dentro da dança. | Entre Sábios, inspirado em Alan Watts | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch03-quote-024 | Às vezes o problema não é a falta de caminho, mas a exigência de que o caminho pareça uma linha reta. | Entre Sábios, inspirado em Alan Watts | inspired | G | distante | requer atenção | manter com referência pendente | alta |
+| batch03-quote-025 | Pensar demais sobre a água não ensina o corpo a nadar. | Entre Sábios, inspirado em Alan Watts | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch03-quote-032 | Nenhuma chama externa queima tanto quanto uma mente que se tornou inimiga de si mesma. | Entre Sábios, inspirado em Buda / Dhammapada | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| batch03-quote-037 | Você pode não dominar o acontecimento, mas ainda responde pela qualidade da alma que leva até ele. | Entre Sábios, inspirado em Marco Aurélio | inspired | G | distante | requer atenção | manter com referência pendente | alta |
+| batch03-quote-038 | Não ajas como se fosses viver dez mil anos; enquanto vives, enquanto podes, torna-te bom. | Marco Aurélio | translated_quote | B | direto | requer atenção | manter com referência pendente | média |
+| batch04-quote-001 | A ausência tem uma educação severa: ensina o corpo a procurar quem já não entra pela porta. | Entre Sábios, inspirado em Emily Dickinson | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch04-quote-002 | A esperança não precisa gritar; às vezes ela sobrevive como um pássaro miúdo no lugar mais frio. | Entre Sábios, inspirado em Emily Dickinson | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| batch04-quote-003 | Há dores que não fazem barulho porque já atravessaram a fase de pedir licença. | Entre Sábios, inspirado em Emily Dickinson | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch04-quote-004 | O coração guarda calendários que o mundo esquece de consultar. | Entre Sábios, inspirado em Emily Dickinson | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch04-quote-009 | A saudade é o amor tentando conversar com uma distância que não responde. | Entre Sábios, inspirado em Rumi | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| batch04-quote-011 | Amar não é fechar a mão sobre alguém; é suportar que o outro continue tendo céu próprio. | Entre Sábios, inspirado em Khalil Gibran | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch04-quote-015 | A dor não pede que você a adore; pede apenas que não finja que ela é pequena. | Entre Sábios, inspirado em Khalil Gibran | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch04-quote-018 | A atenção é uma forma de amor que não precisa possuir o que contempla. | Entre Sábios, inspirado em Mary Oliver | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch04-quote-019 | Há manhãs em que sobreviver já é uma forma discreta de responder ao mundo. | Entre Sábios, inspirado em Mary Oliver | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| batch04-quote-020 | A pergunta certa talvez não seja o que fazer da vida inteira, mas o que fazer deste dia sem traí-lo. | Entre Sábios, inspirado em Mary Oliver | inspired | G | distante | requer atenção | manter com referência pendente | alta |
+| batch04-quote-021 | O luto não é apenas saudade; é descobrir que o mundo continua sem pedir permissão à nossa perda. | Entre Sábios, inspirado em C. S. Lewis | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |

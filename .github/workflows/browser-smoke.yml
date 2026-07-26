@@ -1,0 +1,50 @@
+name: Browser smoke
+
+on:
+  pull_request:
+    paths:
+      - "index.html"
+      - "script.js"
+      - "style.css"
+      - "css/**"
+      - "data/**"
+      - "js/**"
+      - "tests/browser/**"
+      - "playwright.config.mjs"
+      - "package.json"
+      - "package-lock.json"
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "script.js"
+      - "style.css"
+      - "css/**"
+      - "data/**"
+      - "js/**"
+      - "tests/browser/**"
+      - "playwright.config.mjs"
+      - "package.json"
+      - "package-lock.json"
+  workflow_dispatch:
+
+concurrency:
+  group: browser-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser

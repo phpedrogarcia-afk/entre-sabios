@@ -263,7 +263,10 @@ test('duplo clique em Outra perspectiva produz somente uma seleção', () => {
   let bells = 0;
   let releaseLock = null;
   const eventSandbox = {
-    generateBtn: { disabled: false },
+    generateBtn: {
+      disabled: false,
+      classList: { add() {}, remove() {} },
+    },
     newBtn: {
       disabled: false,
       addEventListener(event, handler) {

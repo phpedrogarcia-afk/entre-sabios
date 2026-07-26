@@ -319,7 +319,7 @@ test('um único formato desenvolvido percorre o ciclo sem repetição artificial
   assert.deepEqual(developedPositions, [cycle.findIndex((content) => content.id === developedId) + 1]);
 });
 
-test('nove formatos desenvolvidos passam pelos filtros e o microtexto abstrato de luto permanece bloqueado', () => {
+test('onze formatos desenvolvidos passam pelos filtros e o microtexto abstrato de luto permanece bloqueado', () => {
   const developedContents = runtime.contents.filter((content) => DEVELOPED_FORMATS.has(content.displayType));
   const reachable = new Set();
   const bestLevelReachable = new Set();
@@ -338,8 +338,8 @@ test('nove formatos desenvolvidos passam pelos filtros e o microtexto abstrato d
     }
   }
 
-  assert.equal(developedContents.length, 10);
-  assert.equal(reachable.size, 9);
+  assert.equal(developedContents.length, 11);
+  assert.equal(reachable.size, 10);
   assert.deepEqual(
     developedContents.filter((content) => !reachable.has(content.id)).map((content) => content.id),
     ['curadoria-final-epicuro-luto-microtexto'],
@@ -351,9 +351,12 @@ test('nove formatos desenvolvidos passam pelos filtros e o microtexto abstrato d
     intensity: 'moderada',
   }, { firstResponse: false }).safe, false);
   assert.deepEqual([...bestLevelReachable].sort(), [
-    'ANT-MICRO-PRO-001',
-    'ANT-MICRO-TRI-001',
-    'ES-INS-VERGONHA-001',
+    'TXT-CUL-001',
+    'TXT-ESP-002',
+    'TXT-MED-001',
+    'TXT-MED-002',
+    'TXT-MED-003',
+    'TXT-MED-004',
     'curated-113',
   ]);
 });
@@ -375,7 +378,7 @@ test('cada formato desenvolvido no melhor nível aparece uma vez antes de reinic
       assert.ok(developedIds.every((id) => cycle.some((content) => content.id === id)));
     }
   }
-  assert.equal(coveredScenarios, 12);
+  assert.equal(coveredScenarios, 13);
 });
 
 test('efeito editorial bloqueia crenças prejudiciais artificiais sem inserir casos no acervo', () => {

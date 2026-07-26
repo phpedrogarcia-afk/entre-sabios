@@ -1,0 +1,115 @@
+{
+  "approvalMetadata": {
+    "approvedBy": "Pedro",
+    "approvedAt": "2026-07-22",
+    "sourceReport": "MINUTA_DECISOES_EDITORIAIS_LOTE_01.md",
+    "sourceReportCommit": null,
+    "baseCommit": "7876aa46f264a327442aa01e6f169ea333ac6ddf",
+    "batchId": "LOTE-01",
+    "masterVersion": "definitiva-2.3",
+    "notes": "Decisões editoriais fornecidas em 22/07/2026. Mapeamentos técnicos de MINUTA-LOT01-001 e MINUTA-LOT01-003 aprovados explicitamente pelo editor-chefe em 22/07/2026. Não autoriza commit, push ou publicação externa."
+  },
+  "decisions": [
+    {
+      "decisionId": "MINUTA-LOT01-001",
+      "contentId": "TXT-LUT-003",
+      "expectedCurrentText": null,
+      "expectedCurrentState": {
+        "canonicalPresence": false,
+        "idCollision": false,
+        "legacyIdCollision": false,
+        "protectionGroup": "NP-LUT-SCHMIDT-001"
+      },
+      "approvedAction": "integrar_conteudo_protegido_em_quarentena_documental",
+      "approvedTargetState": {
+        "status": "QUARENTENA_DOCUMENTAL",
+        "publicationEnabled": false,
+        "placement": "contextual"
+      },
+      "approvedText": "Quando eu me for, o mundo não vai parar para se despedir — e talvez seja isso que torne tudo tão bonito. Os pássaros continuarão dizendo seus segredos ao vento. As árvores aceitarão a chuva. O sol surgirá no horizonte sem consultar a ausência que deixei. Para o universo, talvez quase nada tenha mudado. Mas eu terei estado aqui por um instante. Terei ouvido vozes, tocado rostos, atravessado manhãs comuns. Enquanto houver um sabiá cantando em algum quintal ou uma folha insistindo no galho, a vida continuará dizendo que nenhum de nós precisava sustentá-la sozinho. Um dia poderemos descansar. O mundo saberá continuar.",
+      "approvedAttribution": {
+        "attributionType": "paraphrase",
+        "author": "Autoria não identificada",
+        "displayedAuthor": "Adaptação de ‘Quando eu morrer’, de Augusto Frederico Schmidt — autoria da adaptação não identificada.",
+        "inspirationSource": "Augusto Frederico Schmidt",
+        "authorGender": "unknown"
+      },
+      "approvedSource": {
+        "title": "Quando eu morrer",
+        "section": "",
+        "edition": "Revista de Antropofagia, ano I, número 10",
+        "publisher": "",
+        "year": 1929,
+        "translator": "",
+        "page": "6",
+        "status": "verified",
+        "notes": "Poema-base e relação documental de adaptação verificados. Autoria da redação adaptada não identificada. Direitos de uso e publicação externa pendentes. Curadoria editorial do Entre Sábios não substitui a autoria da adaptação. Risco específico: aproximação entre morte e descanso."
+      },
+      "approvedFormat": "microtexto",
+      "approvedAssociations": {
+        "primaryFeeling": "luto",
+        "secondaryFeeling": "esperanca",
+        "placement": "contextual",
+        "associations": [
+          {"feeling": "luto", "placement": "contextual"},
+          {"feeling": "esperanca", "placement": "contextual"}
+        ]
+      },
+      "approvedIntensities": ["fraca", "moderada"],
+      "approvedEditorialFunction": {
+        "primary": "contemplation",
+        "secondary": "reframing",
+        "tone": "poetico",
+        "riskTags": ["romantizacao_do_sofrimento"],
+        "hardExclusions": ["primeira_resposta", "perda_recente", "luto_intenso"]
+      },
+      "approvedProtectionState": {
+        "group": "NP-LUT-SCHMIDT-001",
+        "state": "protegido para integração",
+        "automaticRemovalOrRewrite": false
+      },
+      "preserveHistoricalVersion": true,
+      "humanNotes": "Integrar no mestre sob quarentena documental, sem entrada no runtime público, sem reescrita e sem publicação externa. Restrições sem enum permanecem registradas na governança."
+    },
+    {
+      "decisionId": "MINUTA-LOT01-003",
+      "contentId": "TXT-MED-004",
+      "expectedCurrentText": "Sonhamos com asas, mas trememos diante do céu aberto. Queremos o voo e, ao mesmo tempo, exigimos um chão que nos acompanhe até as nuvens. A liberdade assusta porque não oferece corrimão. Nada está escrito, ninguém garante o pouso, e cada escolha fecha caminhos que também poderiam ter sido nossos. Então construímos abrigos pequenos e chamamos de destino aquilo que nasceu de renúncias repetidas. As grades raramente chegam prontas; nós as forjamos em silêncio, com o metal dos adiamentos. Dizemos que desejamos a porta aberta. Quando ela finalmente se escancara, descobrimos que também era a prisão que nos protegia do desconhecido.",
+      "expectedCurrentState": {
+        "status": "ATIVO_REFERENCIA_PENDENTE",
+        "publicationEnabled": true,
+        "placement": "nucleo",
+        "medoAssociationPlacement": "nucleo",
+        "hardExclusions": [],
+        "displayedAuthor": "Adaptação de trecho de Rubem Alves, em Religião e Repressão"
+      },
+      "approvedAction": "corrigir_associacoes_editoriais",
+      "approvedTargetState": {
+        "status": "ATIVO_REFERENCIA_PENDENTE",
+        "publicationEnabled": true,
+        "placement": "contextual",
+        "medoAssociationPlacement": "contextual",
+        "hardExclusions": ["primeira_resposta", "medo_intenso"]
+      },
+      "approvedText": null,
+      "approvedAttribution": null,
+      "approvedSource": null,
+      "approvedFormat": null,
+      "approvedAssociations": {
+        "placement": "contextual",
+        "medoAssociationPlacement": "contextual"
+      },
+      "approvedIntensities": null,
+      "approvedEditorialFunction": {
+        "hardExclusions": ["primeira_resposta", "medo_intenso"]
+      },
+      "approvedProtectionState": {
+        "group": "NP-MED-GAIOLA-001",
+        "state": "protegido ativo",
+        "unchanged": true
+      },
+      "preserveHistoricalVersion": true,
+      "humanNotes": "Preservar texto, formato, atribuição, fonte e proteção. Aplicar somente a mudança de placement e as exclusões técnicas aprovadas."
+    }
+  ]
+}

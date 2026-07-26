@@ -208,6 +208,6 @@ const report = {
   ],
 };
 
-const outputPath = path.join(rootDir, 'auditoria_comportamental_entre_sabios.json');
+const outputPath = path.join(rootDir, 'docs', 'auditorias', 'comportamental', 'auditoria_comportamental_entre_sabios.json');
 fs.writeFileSync(outputPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 console.info(outputPath);
