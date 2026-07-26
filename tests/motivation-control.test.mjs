@@ -68,7 +68,7 @@ test('controle de motivação é um botão opcional separado do radiogroup de in
   const radiogroupEnd = html.indexOf('</div>', html.indexOf('role="radiogroup"'));
   const togglePosition = html.indexOf('id="motivationToggle"');
   assert.ok(togglePosition > radiogroupEnd, 'motivação foi inserida dentro do grupo de intensidades');
-  assert.match(html, /id="motivationPreferenceTitle"[^>]*>PREFERÊNCIA OPCIONAL</);
+  assert.doesNotMatch(html, /PREFERÊNCIA OPCIONAL/);
   assert.match(html, /id="motivationToggle"[\s\S]*?type="button"[\s\S]*?aria-pressed="false"/);
   assert.match(html, /aria-describedby="motivationPreferenceHelp"/);
   assert.match(html, /Preferência opcional de direção para a reflexão\. Não altera o sentimento nem a intensidade\./);

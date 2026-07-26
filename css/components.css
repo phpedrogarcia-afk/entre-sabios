@@ -93,6 +93,13 @@
   vertical-align: 1px;
 }
 
+.primary-feeling-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+
 .primary-feeling-announcement {
   max-height: 0;
   margin-top: 0;
@@ -113,7 +120,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 7px;
 }
 
 .secondary-feeling-actions:empty { display: none; }
@@ -369,6 +375,11 @@ html[data-theme="night"] .motivation-toggle.is-active {
   transform: none;
 }
 
+.primary.is-selection-locked:disabled {
+  cursor: pointer;
+  opacity: 1;
+}
+
 .content-load-status {
   min-height: 17px;
   margin-top: 6px;
@@ -386,7 +397,8 @@ html[data-theme="night"] .motivation-toggle.is-active {
   text-align: center;
 }
 
-.feelings-grid.needs-selection {
+.feelings-grid.needs-selection,
+.intensity-control.needs-selection {
   animation: selection-nudge 360ms ease;
 }
 

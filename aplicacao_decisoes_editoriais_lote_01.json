@@ -1,0 +1,110 @@
+{
+  "applicationMetadata": {
+    "date": "2026-07-22",
+    "branch": "agent/finaliza-loop-estabilizacao",
+    "baseCommit": "7876aa46f264a327442aa01e6f169ea333ac6ddf",
+    "finalWorkingTreeState": "árvore com numerosas alterações preexistentes preservadas; arquivos deste lote permanecem sem commit",
+    "masterVersionBefore": "definitiva-2.3",
+    "masterVersionAfter": "definitiva-2.4",
+    "runtimeVersionBefore": "definitiva-2.3",
+    "runtimeVersionAfter": "definitiva-2.4",
+    "approvalPackage": "decisoes_editoriais_aprovadas_lote_01.json",
+    "approvedBy": "Pedro",
+    "limitations": [
+      "Direitos de uso e publicação externa de TXT-LUT-003 permanecem pendentes.",
+      "Crise aguda e ideação suicida não possuem enums próprios no contrato atual; as vedações permanecem na governança.",
+      "Contextos de coerção não possuem enum próprio; a vedação de TXT-MED-004 permanece na governança.",
+      "Nenhum commit, push, merge ou publicação foi autorizado."
+    ]
+  },
+  "decisions": [
+    {
+      "decisionId": "MINUTA-LOT01-001",
+      "contentId": "TXT-LUT-003",
+      "approvedAction": "integrar_conteudo_protegido_em_quarentena_documental",
+      "versionCheck": {
+        "expected": {"canonicalPresence": false, "idCollision": false, "legacyIdCollision": false, "protectionGroup": "NP-LUT-SCHMIDT-001"},
+        "found": {"canonicalPresence": false, "idCollision": false, "legacyIdCollision": false, "protectionGroup": "NP-LUT-SCHMIDT-001"},
+        "compatible": true,
+        "differences": []
+      },
+      "status": "APLICADA",
+      "filesChanged": ["entre_sabios_acervo_mestre_final.json", "NUCLEO_PRESERVACAO_EDITORIAL.md", "PROJECT_STATUS.md"],
+      "fieldsChanged": ["contents", "summary.historicalTotal", "summary.quarantineTotal", "changeLog"],
+      "before": {"canonicalPresence": false, "runtimePresence": false},
+      "after": {
+        "canonicalPresence": true,
+        "runtimePresence": false,
+        "status": "QUARENTENA_DOCUMENTAL",
+        "publicationEnabled": false,
+        "displayType": "microtexto",
+        "displayedAuthor": "Adaptação de ‘Quando eu morrer’, de Augusto Frederico Schmidt — autoria da adaptação não identificada.",
+        "primaryFeeling": "luto",
+        "secondaryFeeling": "esperanca",
+        "placement": "contextual",
+        "suitableIntensities": ["fraca", "moderada"],
+        "hardExclusions": ["primeira_resposta", "perda_recente", "luto_intenso"]
+      },
+      "historyPreserved": true,
+      "tests": ["validação estrutural JSON", "check:content", "auditoria de proveniência", "governança", "testes editoriais e de segurança"],
+      "visualValidation": {"required": false, "reason": "conteúdo permanece fora do runtime e de toda apresentação pública"},
+      "blockers": [],
+      "notes": "Texto preservado byte a byte entre a decisão aprovada, originalText e finalText."
+    },
+    {
+      "decisionId": "MINUTA-LOT01-003",
+      "contentId": "TXT-MED-004",
+      "approvedAction": "corrigir_associacoes_editoriais",
+      "versionCheck": {
+        "expected": {"status": "ATIVO_REFERENCIA_PENDENTE", "publicationEnabled": true, "placement": "nucleo", "medoAssociationPlacement": "nucleo", "hardExclusions": [], "displayedAuthor": "Adaptação de trecho de Rubem Alves, em Religião e Repressão"},
+        "found": {"status": "ATIVO_REFERENCIA_PENDENTE", "publicationEnabled": true, "placement": "nucleo", "medoAssociationPlacement": "nucleo", "hardExclusions": [], "displayedAuthor": "Adaptação de trecho de Rubem Alves, em Religião e Repressão"},
+        "compatible": true,
+        "differences": []
+      },
+      "status": "APLICADA",
+      "filesChanged": ["entre_sabios_acervo_mestre_final.json", "data/entre_sabios_runtime.json", "data/entre_sabios_runtime.js", "NUCLEO_PRESERVACAO_EDITORIAL.md", "PROJECT_STATUS.md"],
+      "fieldsChanged": ["placement", "associations[feeling=medo].placement", "hardExclusions", "lastReviewedAt", "changeLog"],
+      "before": {"placement": "nucleo", "medoAssociationPlacement": "nucleo", "hardExclusions": []},
+      "after": {"placement": "contextual", "medoAssociationPlacement": "contextual", "hardExclusions": ["primeira_resposta", "medo_intenso"]},
+      "historyPreserved": true,
+      "tests": ["check:content", "auditoria comportamental", "testes editoriais", "seleção", "rotação", "segurança vulnerável"],
+      "visualValidation": {"required": false, "reason": "texto, crédito, fonte e formato visual não mudaram"},
+      "blockers": [],
+      "notes": "Texto, formato, atribuição, fonte, intensidades, funções e proteção permaneceram idênticos."
+    }
+  ],
+  "unexpectedChanges": [],
+  "buildResults": {
+    "contentVersion": "definitiva-2.4",
+    "activeTotal": 257,
+    "nucleusTotal": 41,
+    "contextualTotal": 150,
+    "generalTotal": 66,
+    "runtimeJsonSha256": "570de4f538866d97b309e150050374374c4652c1dd95349d347dd169fe8ada73",
+    "runtimeJsSha256": "8c57eee32c3b8e7eab28132976800c6c988a0492e2a49a49a756a45761f73280"
+  },
+  "testResults": {
+    "status": "APROVADO",
+    "focusedTests": {"total": 26, "passed": 26, "failed": 0},
+    "fullVerification": {"total": 298, "passed": 298, "failed": 0},
+    "checks": ["check:governance", "check:deploy", "check:static", "check:content", "test:all"],
+    "knownPreexistingFailures": []
+  },
+  "contentStatisticsBefore": {"historicalTotal": 350, "activeTotal": 257, "quarantineTotal": 0, "nucleusTotal": 42, "contextualTotal": 149, "generalTotal": 66},
+  "contentStatisticsAfter": {"historicalTotal": 351, "activeTotal": 257, "quarantineTotal": 1, "nucleusTotal": 41, "contextualTotal": 150, "generalTotal": 66},
+  "coverageImpacts": [
+    {"feeling": "medo", "before": {"nucleus": 7, "contextual": 11}, "after": {"nucleus": 6, "contextual": 12}, "totalAssociations": 18},
+    {"contentId": "TXT-LUT-003", "impact": "nenhum impacto no runtime enquanto permanecer em quarentena"}
+  ],
+  "governanceUpdates": ["NUCLEO_PRESERVACAO_EDITORIAL.md", "PROJECT_STATUS.md", "mapa histórico de proveniência atualizado para 351 IDs"],
+  "complianceMatrix": [
+    {"requirement": "Pacote aprovado localizado", "status": "COMPROVADO", "evidence": "decisoes_editoriais_aprovadas_lote_01.json", "limitation": null},
+    {"requirement": "Aprovação humana comprovada", "status": "COMPROVADO", "evidence": "Pedro, 22/07/2026; aprovação técnica explícita de 001 e 003", "limitation": null},
+    {"requirement": "Somente IDs aprovados alterados", "status": "COMPROVADO", "evidence": "TXT-LUT-003 e TXT-MED-004", "limitation": null},
+    {"requirement": "Textos preservados", "status": "COMPROVADO", "evidence": "comparação entre pacote, mestre e runtime", "limitation": null},
+    {"requirement": "Runtime apenas gerado", "status": "COMPROVADO", "evidence": "npm run build:content", "limitation": null},
+    {"requirement": "Commit e publicação não realizados", "status": "COMPROVADO", "evidence": "estado Git e ausência de ações externas", "limitation": null}
+  ],
+  "safeToCommit": false,
+  "safeToPublish": false
+}

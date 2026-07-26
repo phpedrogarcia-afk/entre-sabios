@@ -129,7 +129,7 @@ let currentShareStyle = 'sage';
 
 let selectedFeelingIds = new Set();
 let primaryFeelingId = null;
-let currentIntensity = 'moderada';
+let currentIntensity = null;
 let needsMotivation = false;
 let runtimeSelector = null;
 let lastSelectionSignature = null;
@@ -348,7 +348,8 @@ function getSpecificEditorialGuidance(content, state) {
   const intensity = normalizeTheme(state?.intensity);
   const allowedFeelings = (context?.feelings || []).map(normalizeTheme);
   const allowedIntensities = (context?.intensities || []).map(normalizeTheme);
-  if (!allowedFeelings.includes(primaryFeeling) || !allowedIntensities.includes(intensity)) return null;
+  const isUniversalContext = context?.universal === true;
+  if ((!isUniversalContext && !allowedFeelings.includes(primaryFeeling)) || !allowedIntensities.includes(intensity)) return null;
   const guidance = String(entry.guidance || '').trim();
   const label = String(entry.label || '').trim();
   return guidance && label ? { guidance, label } : null;
@@ -411,7 +412,7 @@ function buildRuntimeStory(selection, selectedThemes) {
     selectedThemes,
     selectedFeelingIds: getSelectedFeelingIds(),
     book: null,
-    tags: [currentIntensity, content.tone, ...tags].slice(0, 8).map((tag) => prettifyTag(tag)),
+    tags: [selection.state.intensity, content.tone, ...tags].slice(0, 8).map((tag) => prettifyTag(tag)),
   };
 }
 
@@ -428,11 +429,12 @@ function generateReflection({ keepHistory = true } = {}) {
     showSelectionHint();
     return false;
   }
-
+  const generationIntensity = resolveGenerationIntensity(currentIntensity);
   const selectedThemes = getSelectedThemes();
   const selection = pickRuntimeContent({
     eventTrigger: 'generate_reflection_click',
     currentContentId: currentStory?.key || null,
+    intensity: generationIntensity,
   });
   if (!selection) {
     reflectionTextEl.textContent = 'Ainda não há uma correspondência editorial segura para esta combinação.';
@@ -475,7 +477,7 @@ function newPhrase() {
     showSelectionHint();
     return false;
   }
-
+  const generationIntensity = resolveGenerationIntensity(currentIntensity);
   if (currentStory && currentStoryShownAt && Date.now() - currentStoryShownAt < 5000) {
     applyStoryPreference(currentStory, -0.5);
     savePreferenceProfile();
@@ -489,6 +491,7 @@ function newPhrase() {
   const selection = pickRuntimeContent({
     eventTrigger: 'another_perspective_click',
     currentContentId: currentStory?.key || null,
+    intensity: generationIntensity,
   });
   if (!selection) return false;
 
@@ -519,6 +522,7 @@ let reflectionSelectionLocked = false;
 function runReflectionSelectionAction(action) {
   if (reflectionSelectionLocked) return false;
   reflectionSelectionLocked = true;
+  generateBtn.classList.add('is-selection-locked');
   generateBtn.disabled = true;
   newBtn.disabled = true;
   try {
@@ -526,6 +530,7 @@ function runReflectionSelectionAction(action) {
   } finally {
     window.setTimeout(() => {
       reflectionSelectionLocked = false;
+      generateBtn.classList.remove('is-selection-locked');
       const contentUnavailable = !runtimeSelector;
       generateBtn.disabled = contentUnavailable;
       newBtn.disabled = contentUnavailable;
@@ -693,7 +698,7 @@ async function init() {
   initDailyQuote();
   drawDecor();
 
-  reflectionTextEl.textContent = 'Selecione seus sentimentos, escolha a intensidade e clique em “ENCONTRAR UMA REFLEXÃO”.';
+  reflectionTextEl.textContent = 'Selecione seus sentimentos e clique em “ENCONTRAR UMA REFLEXÃO”.';
   philosophyTextEl.textContent = 'A cada reflexão, você conhecerá uma ideia do autor escolhido.';
   adviceTextEl.textContent = '—';
   bookTextEl.textContent = '—';

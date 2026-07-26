@@ -1,0 +1,193 @@
+{
+  "registryMetadata": {
+    "schemaVersion": "1.0.0",
+    "version": "1.0.0",
+    "status": "ATIVO_AGUARDANDO_ENTRADAS",
+    "createdAt": "2026-07-22T21:38:21-03:00",
+    "updatedAt": "2026-07-22T21:38:21-03:00",
+    "constitutionDecision": "DEC-033",
+    "constitutionFile": "PADRAO_EDITORIAL_ENTRE_SABIOS.md",
+    "masterFile": "entre_sabios_acervo_mestre_final.json",
+    "masterVersion": "definitiva-2.4",
+    "runtimeFiles": [
+      "data/entre_sabios_runtime.json",
+      "data/entre_sabios_runtime.js"
+    ],
+    "runtimeVersion": "definitiva-2.4",
+    "canonicalMarkdown": "REGISTRO_SEMENTES_EDITORIAIS.md",
+    "seedIdConvention": "SEMENTE-AAAA-MM-NNN",
+    "seedIdPurpose": "código temporário sem reserva de ID definitivo do acervo",
+    "nextSequencePolicy": "calcular mensalmente a partir das sementes existentes; não criar código sem conteúdo recebido",
+    "seedCount": 0,
+    "lastBatch": "ENTRADA-EDITORIAL-LOTE-01"
+  },
+  "authority": {
+    "canonicalEditorialConstitution": "PADRAO_EDITORIAL_ENTRE_SABIOS.md",
+    "durableDecision": "DEC-033",
+    "authorshipProtectionDecision": "DEC-024",
+    "protectedContentRegistry": "NUCLEO_PRESERVACAO_EDITORIAL.md",
+    "publishedContentSource": "entre_sabios_acervo_mestre_final.json",
+    "rule": "Uma semente não é conteúdo aprovado e nunca entra diretamente no acervo ativo."
+  },
+  "workflow": [
+    "DESCOBERTA",
+    "REGISTRO_DA_REDACAO",
+    "REGISTRO_DA_ORIGEM",
+    "INVESTIGACAO_DOCUMENTAL",
+    "CLASSIFICACAO",
+    "AVALIACAO_EDITORIAL",
+    "AVALIACAO_DE_SEGURANCA",
+    "COMPARACAO_COM_O_ACERVO",
+    "PROPOSTA_DE_FORMATO",
+    "DECISAO_HUMANA",
+    "PACOTE_DE_INTEGRACAO",
+    "APLICACAO_TECNICA_SEPARADA"
+  ],
+  "entryTypes": [
+    "ENTRADA-A",
+    "ENTRADA-B",
+    "ENTRADA-C",
+    "ENTRADA-D",
+    "ENTRADA-E",
+    "ENTRADA-F",
+    "ENTRADA-G",
+    "ENTRADA-H",
+    "ENTRADA-I",
+    "ENTRADA-J",
+    "ENTRADA-X"
+  ],
+  "batchLimits": {
+    "shortQuotes": 10,
+    "microtextsOrReflections": 5,
+    "longQuotes": 3,
+    "tales": 3,
+    "videosOrDiscoverySources": 5,
+    "mixedItems": 8,
+    "overflowStatus": "AGUARDANDO PRÓXIMO LOTE"
+  },
+  "seedStatuses": [
+    "RECEBIDA",
+    "PRESERVADA",
+    "EM INVESTIGAÇÃO DOCUMENTAL",
+    "DOCUMENTAÇÃO PENDENTE",
+    "EM AVALIAÇÃO EDITORIAL",
+    "EM REVISÃO DE SEGURANÇA",
+    "BLOQUEADA POR DIREITOS",
+    "BLOQUEADA POR DIVERGÊNCIA",
+    "PROTEGIDA PARA DECISÃO",
+    "PRONTA PARA DECISÃO HUMANA",
+    "APROVADA PARA PREPARAÇÃO TÉCNICA",
+    "REJEITADA",
+    "ARQUIVADA"
+  ],
+  "aiRecommendations": {
+    "N-A": "Avançar para decisão humana de integração",
+    "N-B": "Avançar com correção documental",
+    "N-C": "Avançar como citação contextualizada",
+    "N-D": "Avançar como microtexto ou reflexão",
+    "N-E": "Preservar como proveniência pendente",
+    "N-F": "Investigar novamente",
+    "N-G": "Manter como semente",
+    "N-H": "Bloquear por segurança",
+    "N-I": "Bloquear por direitos",
+    "N-J": "Arquivar",
+    "N-K": "Recomendar rejeição editorial",
+    "N-X": "Decisão humana complexa"
+  },
+  "humanDecisionOptions": [
+    "APROVAR PARA PREPARAÇÃO TÉCNICA",
+    "MANTER COMO SEMENTE",
+    "PRESERVAR COM PROVENIÊNCIA PENDENTE",
+    "SOLICITAR NOVA INVESTIGAÇÃO",
+    "ARQUIVAR",
+    "REJEITAR",
+    "ALTERAR A RECOMENDAÇÃO",
+    "NÃO TENHO CERTEZA"
+  ],
+  "existingProcessRule": {
+    "marker": "CONTEÚDO JÁ POSSUI PROCESSO EDITORIAL",
+    "requiredLinks": ["contentId", "report", "batch", "draft", "decision", "currentState"],
+    "rule": "não criar segunda linhagem concorrente"
+  },
+  "editorChiefProtectionRule": {
+    "marker": "PROTEÇÃO EDITORIAL SOLICITADA PELO EDITOR-CHEFE",
+    "effects": ["preservar", "não apagar", "não substituir", "não reescrever automaticamente", "investigar", "encaminhar para decisão"],
+    "doesNotAuthorize": ["publicação", "autoria", "integração", "direitos", "dispensa de segurança"]
+  },
+  "sourceSpecificRules": {
+    "videoOrAudio": {
+      "required": ["url", "channel", "title", "publicationDate", "duration", "startTime", "endTime", "narratedText", "allegedAuthor", "allegedWork", "description", "providedReferences", "narrator", "translation", "apparentAdaptation", "imageryOrCharacter", "channelAdditions"],
+      "rule": "separar autor, obra, personagem, narrador, canal, tradução, resumo, adaptação e acréscimos"
+    },
+    "corvoSeco": {
+      "marker": "FONTE DE DESCOBERTA EDITORIAL",
+      "required": ["video", "title", "url", "excerpt", "allegedWork", "reasonForInterest", "discoveryDate"],
+      "rule": "procurar fonte original e não presumir literalidade, autoria, tradução ou contexto integral"
+    },
+    "imageCardOrSocial": {
+      "required": ["imageText", "displayedAuthor", "displayedWork", "profileOrLocation", "date", "design", "quotationMarks", "caption", "originComments", "variants"],
+      "rule": "nome exibido não comprova autoria"
+    },
+    "providedByEditorChief": {
+      "internalProvenance": "Fornecido pelo editor-chefe",
+      "unknownDocumentaryOrigin": "Origem documental não identificada",
+      "rule": "fornecimento não comprova autoria"
+    },
+    "aiAssisted": {
+      "required": ["toolOrAgent", "date", "promptOrContext", "purpose", "humanReview", "humanChanges", "individualApproval", "preservationReason", "proposedPublicAttribution", "documentaryState"],
+      "rule": "a IA nunca decide sozinha autoria institucional ou aprovação"
+    }
+  },
+  "requiredSeedFields": [
+    "seedId",
+    "receivedAt",
+    "providedBy",
+    "entryType",
+    "originalText",
+    "title",
+    "discoverySource",
+    "receivedClaims",
+    "internalProvenance",
+    "documentaryProvenance",
+    "documentaryClassification",
+    "documentaryConfidence",
+    "editorialAssessment",
+    "archiveComparison",
+    "emotionalAssessment",
+    "safetyAssessment",
+    "rightsAssessment",
+    "recommendedFormat",
+    "status",
+    "aiRecommendation",
+    "humanDecision",
+    "approvedForTechnicalPreparation",
+    "protectionRequested",
+    "evidence",
+    "limitations",
+    "history"
+  ],
+  "invariants": {
+    "preserveOriginalText": true,
+    "separateDiscoveryAndDocumentarySources": true,
+    "noAutomaticInstitutionalAuthorship": true,
+    "noThematicAttribution": true,
+    "noQuantityFilling": true,
+    "noDirectMasterIntegration": true,
+    "noRuntimeGeneration": true,
+    "noAlgorithmChange": true,
+    "noInterfaceChange": true,
+    "noDefinitiveIdBeforeHumanDecision": true,
+    "noPublication": true,
+    "noGitAction": true
+  },
+  "historyContract": {
+    "required": ["date", "previousState", "newState", "action", "responsible", "evidence", "note"],
+    "neverOverwrite": ["receivedAuthorshipClaim", "originalText", "initialDiscoverySource", "previousInvestigation", "rejectedDecision", "versions"]
+  },
+  "autonomy": {
+    "aiMay": ["register", "preserve", "identify discovery source", "research", "compare versions", "detect exact duplicate", "flag probable false attribution", "classify uncertainty", "assess quality", "assess risk", "propose format", "propose decision", "block automatic publication"],
+    "aiMayBlockButNotFinallyReject": ["unproven authorship", "pending rights", "indeterminate origin", "undemonstrated inspiration", "lost context", "possible fabrication", "editor-valued content", "emotional risk", "lineage conflict"],
+    "humanRequired": ["master integration", "publication", "institutional authorship", "publication with unidentified authorship", "adoption of AI text", "rewriting", "adaptation", "substantial format change", "protected-content rejection", "removal of valued content", "risk acceptance", "rights determination", "definitive ID creation"]
+  },
+  "seeds": []
+}

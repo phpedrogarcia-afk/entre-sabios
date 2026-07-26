@@ -1,7 +1,8 @@
 # Documentação mestre — Entre Sábios
 
-> Estado documentado em 14 de julho de 2026, com base no código presente em `public_html_pronto` e na revisão final da etapa 8.
+> Estado documentado em 16 de julho de 2026, com base no código presente em `public_html_pronto`, na regressão automatizada de 257 testes Node, em sete testes Playwright e na validação em navegador real já registrada.
 > Este documento descreve o comportamento efetivamente implementado. Ideias planejadas são identificadas como futuras ou como limitações, e não como funcionalidades existentes.
+> Para saber o estado de cada funcionalidade e as decisões que não devem ser reimplementadas, consulte `PROJECT_STATUS.md` e `DECISIONS.md`.
 
 ## 1. Propósito e identidade
 
@@ -17,7 +18,7 @@ O fluxo atual da página inicial é:
 
 1. A pessoa escolhe um ou mais sentimentos.
 2. O primeiro sentimento selecionado torna-se o sentimento principal; outro sentimento selecionado pode ser promovido manualmente a principal.
-3. A pessoa escolhe uma intensidade: fraca, moderada ou intensa.
+3. A pessoa pode escolher como deseja receber a reflexão: delicado, equilibrado ou profundo. Nenhuma opção começa marcada; sem escolha, uma das três intensidades é sorteada novamente a cada geração antes da seleção determinística do conteúdo.
 4. Ao acionar **Encontrar uma reflexão**, o sistema consulta o acervo runtime e escolhe um conteúdo elegível.
 5. A interface apresenta o texto principal, a autoria exibida, uma explicação editorial, um conselho, uma indicação de livro e etiquetas temáticas.
 6. A pessoa pode gostar, não gostar, favoritar, voltar no histórico da sessão, pedir outra frase, gerar uma imagem para compartilhar ou abrir um conto relacionado.
@@ -34,7 +35,7 @@ O arquivo `index.html` reúne:
 
 - cabeçalho com marca, contador de presença, alternância de tema, acesso às favoritas e seção Sobre;
 - seletor de sentimentos;
-- seletor de intensidade;
+- seletor opcional de intensidade, apresentado como forma de receber a reflexão;
 - botão de geração;
 - área central com frase ou texto, autoria e ações de feedback;
 - explicação da reflexão;
@@ -84,6 +85,9 @@ Existem 14 páginas públicas em `sentimentos/<slug>/index.html`, correspondente
 - `js/core/runtime-loader.js`: carrega e valida o acervo runtime.
 - `js/core/runtime-engine.js`: filtra, ordena e rotaciona os conteúdos elegíveis.
 - `js/core/emotional-state.js`: transforma as escolhas da interface em estado emocional normalizado.
+- `js/core/emotional-synthesis.js`: resolve o perfil direcional aplicável sem selecionar conteúdos.
+- `js/core/synthesis-ranking-adapter.js`: traduz a síntese em sinais limitados para o ranking.
+- `js/core/motivation-ranking-adapter.js`: aplica a direção motivacional opcional sem alterar elegibilidade.
 - `js/core/matching.js`: conecta o estado emocional ao seletor runtime.
 - `js/core/book-matching.js`: seleciona a recomendação de livro.
 - `js/core/normalization.js`: normaliza temas e nomes.
@@ -95,6 +99,8 @@ Existem 14 páginas públicas em `sentimentos/<slug>/index.html`, correspondente
 - `data/entre_sabios_runtime.json`: projeção JSON reproduzível do acervo ativo.
 - `data/entre_sabios_runtime.js`: projeção equivalente carregável pelo navegador, inclusive sob protocolo `file:`.
 - `js/data/emotional-taxonomy.js`: famílias e temas emocionais usados para interpretar o estado.
+- `js/data/emotional-syntheses.js`: catálogo canônico de sínteses primárias, direcionais e fallbacks.
+- `js/data/motivation-profiles.js`: catálogo canônico da direção opcional de motivação.
 - `js/data/catalogs.js`: perfis de intensidade, combinações, autores e metadados auxiliares.
 - `js/data/books.js`: catálogo de livros.
 - `js/data/tales.js`: catálogo de contos usado pelo diálogo da página inicial.
@@ -131,19 +137,54 @@ Existem 14 páginas públicas em `sentimentos/<slug>/index.html`, correspondente
 - `sitemap.xml`: URLs públicas declaradas ao buscador.
 - `robots.txt`: permissão de rastreamento e referência ao sitemap.
 - `PADRAO_EDITORIAL_ENTRE_SABIOS.md`: estrutura provisória da curadoria futura, sem definição editorial congelada.
-- `auditoria_comportamental_entre_sabios.json`: relatório final reproduzível da auditoria comportamental.
+- `docs/auditorias/comportamental/auditoria_comportamental_entre_sabios.json`: relatório final reproduzível da auditoria comportamental.
+
+### 4.6 Fontes canônicas e classificação de arquivos
+
+Uma informação importante deve possuir uma fonte canônica identificável. No estado atual:
+
+| Domínio | Fonte canônica | Derivados ou consumidores |
+| --- | --- | --- |
+| Conteúdo, autoria e associações publicadas | `entre_sabios_acervo_mestre_final.json` | `data/entre_sabios_runtime.*` e seletores |
+| Runtime | gerado por `scripts/content-build-lib.mjs` | loader e navegador; nunca editar manualmente |
+| Estado emocional selecionado | variáveis de estado em `script.js` | projeção normalizada de `js/core/emotional-state.js` |
+| Sínteses | `js/data/emotional-syntheses.js` | resolvedor, adaptador, interface e testes |
+| Motivação | `js/data/motivation-profiles.js` | adaptador, interface e testes |
+| Antirrepetição, filas e histórico decisório | `js/core/runtime-engine.js` | `matching.js` apenas orquestra a escolha |
+| Livros | `js/data/books.js` | enriquecimento em `script.js` e `book-matching.js` |
+| Explicações específicas | `js/data/editorial-explanations.js` | lookup por ID e texto final |
+| Orientações específicas | `js/data/editorial-guidance.js` | lookup por ID, texto e contexto |
+| Temas visuais de compartilhamento | `js/data/share-themes.js` | `sharing.js` e interface |
+| Contos do diálogo | `js/data/tales.js` (fonte editorial provisória conforme `DEC-032`) | `js/features/tales.js`; páginas SEO do lote revisado são sincronizadas manualmente até existir gerador próprio |
+
+Classificações obrigatórias:
+
+- **fonte canônica**: pode ser editada manualmente conforme as regras do domínio;
+- **derivado**: deve ser gerado e não editado diretamente;
+- **ativo**: carregado por `index.html` ou utilizado por build/testes vigentes;
+- **legado**: preservado apenas para histórico ou migração; não recebe recursos novos;
+- **paralelo**: versão em avaliação, como arquivos `-PEDRO`; não é carregado sem autorização;
+- **relatório histórico**: evidência de uma tarefa, não definição automática do comportamento atual.
+
+O catálogo de bootstrap repete os sentimentos para que a interface possa ser montada antes do runtime, mas seus IDs e rótulos são obrigatoriamente equivalentes aos do mestre por `tests/canonical-contracts.test.mjs`. Versões ainda aparecem no build, loader e HTML, porém o mesmo contrato impede divergência entre esses pontos. A segurança editorial continua composta por exclusões do mestre, taxonomia e invariantes do motor; essa área não deve ser centralizada sem teste de regressão específico.
 
 ## 5. Acervo runtime
 
 O navegador usa primeiro `data/entre_sabios_runtime.js`, gerado automaticamente a partir do mesmo mestre e equivalente ao JSON. Se a projeção incorporada não estiver presente, o carregador tenta `data/entre_sabios_runtime.json` com cache desativado. Em ambos os caminhos, o conteúdo é rejeitado se não respeitar estes contratos atuais:
 
 - `schemaVersion` igual a `1.1.0`;
-- `contentVersion` igual a `definitiva-2.1`;
-- exatamente 283 conteúdos ativos;
+- `contentVersion` igual a `definitiva-2.3`;
+- exatamente 257 conteúdos ativos;
 - exatamente 14 sentimentos;
 - ausência de `coragem` como sentimento selecionável.
 
-O resumo congelado do runtime contém 64 itens de núcleo, 151 contextuais e 68 gerais. Vinte itens ativos estão marcados como referência pendente. Os conteúdos publicáveis possuem identificação, texto final, tipo de exibição, tipo de atribuição, autoria, associações emocionais, posição editorial, funções, intensidades adequadas, tom, temas, exclusões, estado de publicação e filtro de gênero.
+O resumo congelado do runtime contém 42 itens de núcleo, 149 contextuais e 66 gerais. Dezoito itens ativos estão marcados como referência pendente. Os conteúdos publicáveis possuem identificação, texto final, tipo de exibição, tipo de atribuição, autoria, associações emocionais, posição editorial, funções, intensidades adequadas, tom, temas, exclusões, estado de publicação e filtro de gênero.
+
+Na versão `definitiva-2.2`, os 28 IDs provenientes da “Antologia do Silêncio” deixaram o runtime após confirmação humana de que a coleção foi integralmente gerada por IA. Eles permanecem no mestre com texto, ID, metadados anteriores e histórico, marcados como `REMOVIDO` e sem publicação. A alteração não alcançou adaptações recentes, conteúdos baseados em autores nem originais preservados, e não criou reposição automática para compensar a redução do acervo.
+
+A versão `definitiva-2.3` retira mais quatro reformulações que o editor-chefe confirmou como criações de IA sem base autoral e que recebiam crédito integral do Entre Sábios. Os únicos quatro créditos integrais ativos foram preservados historicamente como `REMOVIDO`; `Reflexão contemporânea-0`, o texto longo anterior, continua em `MOVER_PARA_TEXTOS`. As 234 inspirações em autores permanecem ativas, incluindo o exemplo de Machado de Assis em `batch04-quote-038`.
+
+A auditoria A–J completa está em `docs/AUDITORIA_PROVENIENCIA_COMPLETA_2026-07-18.json` e nos 13 lotes de `docs/auditoria-proveniencia-lotes/`. Ela cobre os 350 IDs históricos e separa proveniência, relação conceitual, qualidade e decisão. Itens G permanecem explicitamente não comprovados — sem serem chamados de IA — e as categorias B/C mantêm referências não conclusivas sem inventar dados bibliográficos. A categoria I agora contém 32 registros históricos confirmados: 28 da Antologia e quatro originais sem base.
 
 ## 6. Sentimentos e intensidades
 
@@ -166,7 +207,7 @@ Os 14 sentimentos selecionáveis são:
 
 É necessário escolher pelo menos um. O sentimento principal tem prioridade na seleção; os demais são secundários. Trocar sentimentos, foco principal ou intensidade recalcula o contexto, mas não apaga o histórico recente global nem libera conteúdos recém-exibidos.
 
-As intensidades são `fraca`, `moderada` e `intensa`. Cada conteúdo declara explicitamente em quais intensidades pode aparecer. O estado intenso também gera sinais de contexto específicos para ansiedade, medo, raiva, tristeza e luto. Esses sinais podem bloquear conteúdos por meio de `hardExclusions`.
+As intensidades são `fraca`, `moderada` e `intensa`. Nenhuma começa presumida: a pessoa precisa escolher uma delas antes de gerar a reflexão. Ausência ou valor inválido permanece neutro e não produz elegibilidade, temas ou tons de intensidade. Cada conteúdo declara explicitamente em quais intensidades pode aparecer. O estado intenso também gera sinais de contexto específicos para ansiedade, medo, raiva, tristeza e luto. Esses sinais podem bloquear conteúdos por meio de `hardExclusions`.
 
 A taxonomia emocional também produz:
 
@@ -174,6 +215,12 @@ A taxonomia emocional também produz:
 - temas derivados dos sentimentos secundários;
 - temas de combinações reconhecidas;
 - temas e tons adequados ao perfil de intensidade.
+
+### 6.1 Contrato da analogia das cores
+
+O contrato técnico mantém responsabilidades separadas: o sentimento principal é a cor dominante e define o território; até dois secundários refinam essa direção; a intensidade regula profundidade e segurança; a síntese interpreta somente combinações existentes; e a motivação permanece uma direção opcional, nunca uma nova emoção.
+
+Os 29 pares direcionais e a única tríade já aprovados possuem um `relationType` interno. Os valores permitidos são `reinforcement`, `tension`, `ambivalence`, `masking`, `transition` e `context`. A classificação não aparece ao usuário e não é inferida a partir de `humanSummary` ou `editorialRationale`. O adaptador consulta apenas sinais estruturados de tema, função editorial e tom, sempre depois da elegibilidade, do sentimento principal, da intensidade e da segurança. Combinações sem perfil específico usam `context` como fallback cauteloso; nenhum novo par ou tríade é criado automaticamente.
 
 No seletor runtime atual, a elegibilidade é decidida principalmente pelas associações, posição editorial, intensidade e exclusões. Os temas calculados enriquecem a história renderizada e ajudam na escolha de livros e contos, mas não substituem a hierarquia de associações do runtime.
 
@@ -219,6 +266,8 @@ As antigas regras numéricas de catarse e transcendência continuam desconectada
 
 ## 9. Rotação e histórico
 
+A classificação completa de autoridade, produtores, consumidores, persistência e destino recomendado está em `MATRIZ_AUTORIDADE_HISTORICOS.md`. Essa matriz distingue o histórico decisório runtime dos registros passivos, da navegação, dos favoritos, das avaliações e da rotação independente dos contos.
+
 Cada contexto runtime mantém filas persistidas com a chave `entreSabiosRuntimeQueues:<versão>`. Elas são separadas por versão, sentimento principal, sentimentos secundários, intensidade e nível editorial. Em paralelo, `entreSabiosRecentContent:<versão>` mantém até 120 escolhas recentes entre todos os contextos, com ID, texto normalizado, autor e formato. `entreSabiosContextHistory:<versão>` preserva função editorial, formato e autoria por contexto para retomar cadência e trajetória após uma recarga.
 
 Além da fila runtime:
@@ -238,9 +287,9 @@ Chaves atualmente utilizadas ou mantidas pelo código:
 - `entreSabiosTheme`: tema visual;
 - `caixaSabedoriaPreferencias`: gostei/não gostei e pesos locais;
 - `caixaSabedoriaFavoritas`: frases favoritas;
-- `entreSabiosRuntimeQueues:definitiva-2.1`: filas do seletor;
-- `entreSabiosRecentContent:definitiva-2.1`: histórico global recente usado contra repetições;
-- `entreSabiosContextHistory:definitiva-2.1`: trajetória, autoria e formato recentes por contexto;
+- `entreSabiosRuntimeQueues:definitiva-2.3`: filas do seletor;
+- `entreSabiosRecentContent:definitiva-2.3`: histórico global recente usado contra repetições;
+- `entreSabiosContextHistory:definitiva-2.3`: trajetória, autoria e formato recentes por contexto;
 - `caixaSabedoriaHistoricoVisto`: conteúdos vistos;
 - `caixaSabedoriaConteudosGerados`: quantidade gerada;
 - `entreSabiosHistoricoContextual`: histórico contextual;
@@ -317,7 +366,9 @@ Limitações atuais:
 
 ## 16. Contos filosóficos
 
-O diálogo de contos exige ao menos um sentimento selecionado. A pontuação de cada conto soma:
+O diálogo de contos pode ser aberto diretamente, sem sentimento selecionado. Nesse modo, percorre o acervo com rotação neutra e antirrepetição. Quando há um ou mais sentimentos selecionados, eles funcionam como filtro editorial e refinam a pontuação, sem se tornarem requisito de leitura. A pontuação de cada conto soma:
+
+Para a seleção dos contos, uma escolha explícita de intensidade é respeitada. Quando nenhuma opção está marcada, o conto usa internamente a intensidade moderada (`Equilibrado`), sem marcar o controle e sem alterar o sorteio independente da intensidade da reflexão.
 
 - 8 pontos por correspondência com o sentimento principal;
 - 4 pontos por sentimento secundário correspondente;
@@ -327,7 +378,9 @@ O diálogo de contos exige ao menos um sentimento selecionado. A pontuação de 
 
 A rotação desconta 5 pontos quando o conto já apareceu para a mesma seleção e 4 pontos quando está entre os seis mais recentes. O sistema prefere contos compatíveis ainda não vistos na sessão; ao pedir outro conto, aceita variedade temática gradual. Depois que todos forem percorridos, reinicia a jornada e informa isso na interface.
 
-O diálogo mostra título, origem, tempo aproximado, narrativa, explicação filosófica, relação com o sentimento e pergunta de reflexão. Valores editoriais são escapados antes de serem inseridos como parágrafos. O histórico contextual dos contos mantém até 120 combinações e seis IDs recentes no navegador.
+O diálogo mostra título, origem, tempo aproximado, narrativa e somente três seções posteriores: **Um modo de olhar**, **O que talvez esteja pedindo para ser visto** e **Uma pergunta para levar consigo**. A antiga explicação pública do motivo da recomendação foi retirada para preservar a atmosfera e manter o mecanismo emocional nos metadados e no algoritmo. Valores editoriais são escapados antes de serem inseridos como parágrafos. O histórico contextual dos contos mantém até 120 combinações e seis IDs recentes no navegador.
+
+Conforme a `DEC-032`, a revisão editorial ocorreu em onze lotes de três, todos abrangidos pela autorização editorial de 25/07/2026. Os 33 registros de `js/data/tales.js` e suas 33 páginas estáticas correspondentes usam as três seções públicas aprovadas. A fonte editorial continua provisória e a sincronização permanece manual e limitada às páginas de cada lote; esta conclusão não cria gerador, não altera a rotação e não modifica a `DEC-032`.
 
 ### 16.1 Padrão visual das imagens dos contos
 
@@ -387,26 +440,32 @@ A faixa animada da frase diária respeita `prefers-reduced-motion: reduce`: a an
 
 ## 20. Estado da revisão final
 
-A revisão final de 14 de julho de 2026 confirmou:
+A revisão consolidada de 15 de julho de 2026 confirmou:
 
 - 77 documentos HTML com idioma, viewport, região principal, IDs não duplicados e textos alternativos nas imagens;
 - 153 blocos JSON-LD sintaticamente válidos;
 - 76 páginas internas com breadcrumb visual e `BreadcrumbList` equivalente;
 - sitemap XML válido com as mesmas 77 URLs canônicas, sem `priority` ou `changefreq`;
 - referências internas de `href` e `src` apontando para destinos existentes;
-- 52 testes automatizados aprovados, incluindo a auditoria comportamental;
-- 30 trocas simuladas sem repetição de ID ou texto normalizado;
+- 257 testes Node e sete testes Playwright aprovados, incluindo contratos canônicos, governança, pacote público, análise estática, integração, regressão, estresse e navegador;
+- oito sequências de 100 seleções sem repetição exata, normalizada ou canônica evitável e com 100% de cobertura dos elegíveis antes do reinício;
 - sintaxe válida nos arquivos JavaScript e módulos testados;
 - compartilhamento progressivo preservando escolha manual, sorteio no atalho, Web Share quando disponível e download como fallback;
 - estrutura editorial futura criada em `PADRAO_EDITORIAL_ENTRE_SABIOS.md`, ainda aberta à curadoria.
 
-Não foi possível executar nesta revisão uma sessão visual no navegador incorporado. Permanecem como verificações pós-publicação: ausência de erros no console em navegador real, comportamento visual nos aparelhos-alvo, suporte efetivo a compartilhamento de arquivos e aplicação do redirecionamento canônico pelo servidor.
+A validação em navegador real confirmou 21 perspectivas únicas no cenário principal, persistência após recarga, proteção contra clique duplo, rolagem em smartphone retrato e paisagem e ausência de overflow horizontal. Compartilhamento nativo de arquivos e a folha final oferecida por cada sistema operacional continuam dependendo do dispositivo. A publicação também deve ser validada separadamente: o GitHub Pages e o domínio principal não usam atualmente o mesmo processo operacional.
 
 A imagem-piloto da caverna continua sendo o único exemplo autorizado. Novas imagens e a consolidação da identidade editorial dependem de revisão humana futura.
 
 ## 21. Execução local e verificações
 
-Com Node.js disponível:
+Com Node.js disponível, instale as dependências de desenvolvimento bloqueadas em `package-lock.json`:
+
+```sh
+npm ci
+```
+
+Para iniciar o site:
 
 ```sh
 npm run serve
@@ -420,6 +479,56 @@ Para reconstruir e validar o runtime editorial:
 npm run build:content
 ```
 
+Para apenas verificar se o runtime versionado corresponde ao mestre, sem escrever arquivos:
+
+```sh
+npm run check:content
+```
+
+Os testes podem ser executados por domínio com `test:state`, `test:synthesis`, `test:motivation`, `test:ranking`, `test:rotation`, `test:editorial`, `test:ui`, `test:seo`, `test:lab`, `test:governance` e `test:browser`. `npm run test:changed -- <arquivos>` escolhe os grupos proporcionais ao diff; `npm run test:fast` omite os cenários mais caros; `npm run test:stress` executa a auditoria comportamental, as sequências extensas e a atomicidade da seleção; `npm run test:all` executa os 257 testes Node sem reconstruir o runtime.
+
+A análise estática leve pode ser executada isoladamente com:
+
+```sh
+npm run check:static
+```
+
+Ela usa o próprio Node, sem dependências adicionais, para verificar a sintaxe dos arquivos `.js` e `.mjs`, o parsing dos JSON e os destinos dos imports relativos. Arquivos paralelos com sufixo `-PEDRO` estão explicitamente excluídos enquanto permanecerem protegidos e fora da aplicação ativa. Essa verificação não substitui testes comportamentais, análise visual ou validação em navegador.
+
+Uma sessão baixada por `window.EntreSabiosSelectionDiagnostics.downloadJson()` no modo `?debugEmotional=1` pode ser reproduzida localmente com:
+
+```sh
+npm run replay:diagnostic -- caminho/entre-sabios-diagnostico.json
+```
+
+O relatório compara, seleção por seleção, o conteúdo registrado com o conteúdo escolhido ao restaurar a fila, sua direção e os históricos anteriores. Código de saída `0` indica correspondência integral, `1` indica escolha divergente e `2` indica arquivo ou esquema inválido. A ferramenta é somente de observabilidade: ela não escreve no acervo, no runtime nem no armazenamento do navegador e não participa do caminho de produção.
+
+O laboratório da mistura emocional também é exclusivamente local e pode executar cenários novos ou uma configuração JSON:
+
+```sh
+npm run lab:emotional
+npm run lab:emotional -- --input cenarios.json --output relatorio.json
+```
+
+Cada cenário aceita sentimento principal, até dois secundários, intensidade, motivação, quantidade de seleções, fallback forçado para auditoria e mudanças programadas com recarga opcional. A saída registra escolhas, candidatos, progressão, remoções, repetição, autoria, conceitos, formatos e as métricas `primaryRetention`, `secondaryInfluence`, `secondaryDominanceRisk`, `synthesisSpecificity`, `motivationInfluence`, `candidateConcentration`, `coverageBeforeRepeat`, `fallbackRate`, `authorConcentration`, `conceptConcentration` e `formatCoverage`. Essas medidas são diagnóstico, não pesos do ranking. Limites de concentração e influência só podem ser calibrados depois da distribuição sistemática da Fase 10.
+
+A matriz sistemática reproduzível usa:
+
+```sh
+npm run audit:systematic
+npm run audit:systematic -- --output relatorio.json
+```
+
+Ela cobre os 14 sentimentos, três intensidades, todos os pares ordenados, perfis prioritários, inversões, retornos, fallbacks e recargas sem criar tríades. O resultado vigente está em `docs/relatorios/fases/RELATORIO_FASE_10_AUDITORIA_SISTEMATICA.md`.
+
+A bateria específica de estresse executa oito sequências de 100 seleções, além de conjuntos reduzidos, persistência, equivalência canônica, rotação e atomicidade da interface. A métrica de cobertura compara os candidatos elegíveis distintos com os conteúdos distintos percorridos antes da primeira repetição. O resultado vigente está em `docs/relatorios/fases/RELATORIO_FASE_11_TESTES_ESTRESSE.md`.
+
+A validação da Fase 12 exercitou a interface em uma instância real do Chrome com viewports de desktop, smartphone em ambas as orientações e tablet em ambas as orientações. Não houve overflow horizontal, o smartphone horizontal rolou até o final, o duplo clique gerou somente uma nova seleção, o histórico sobreviveu à recarga, motor e interface exibiram o mesmo conteúdo e o console permaneceu limpo. Viewport responsivo não equivale a dispositivo físico; tablet e toque físicos continuam como conferência manual pendente. Os detalhes estão em `docs/relatorios/fases/RELATORIO_FASE_12_NAVEGADOR_E_DISPOSITIVOS.md`.
+
+A Fase 13 executou a regressão editorial completa e confirmou, sem novas alterações funcionais, acervo, autoria, status, formatos, pensador, orientação, explicação, livros, compartilhamento, modo claro, contos, ensaios, segurança, motivação, síntese, principal, secundários e intensidade. O runtime permaneceu em `definitiva-2.1` com 283 ativos e os 249 testes passaram. A matriz de evidências está em `docs/relatorios/fases/RELATORIO_FASE_13_REGRESSAO_EDITORIAL.md`.
+
+A consolidação das Fases 0 a 14 está em `docs/relatorios/finais/RELATORIO_FINAL_LOOP_ALGORITMO_MAPA_EMOCIONAL.md`. Esse documento reúne causa original, arquitetura preservada, progressão, barreira global, ciclo, atomicidade, migração, reconciliação, métricas, alertas, testes, navegador, antes/depois, riscos e lacunas editoriais. A conclusão local não autoriza automaticamente commit, merge, publicação ou revisão do acervo.
+
 Para reconstruir o runtime e executar toda a suíte:
 
 ```sh
@@ -427,6 +536,31 @@ npm test
 ```
 
 Como `npm test` começa pela reconstrução do conteúdo, ele pode alterar o arquivo runtime se o acervo-mestre tiver mudado. Quando a intenção for apenas executar os testes contra o estado existente, os arquivos `tests/*.test.mjs` podem ser passados diretamente ao executor de testes do Node.
+
+Antes de integrar ao Git, o comando recomendado é:
+
+```sh
+npm run verify
+```
+
+O mesmo comando é executado pelo workflow `.github/workflows/verify.yml` em pull requests e em atualizações de `main`.
+
+O smoke test do navegador executa geração de reflexão, “Outra perspectiva”, cinco viewports e rolagem móvel do conto:
+
+```sh
+npm run test:browser
+```
+
+O workflow `.github/workflows/browser-smoke.yml` executa esse teste em Chromium somente quando arquivos visuais, runtime, JavaScript de produção ou o próprio contrato de navegador mudam. Dispositivos físicos continuam sendo a validação final para gestos e folhas nativas de compartilhamento.
+
+O pacote da hospedagem é uma allowlist, não uma cópia integral do repositório:
+
+```sh
+npm run check:deploy
+npm run build:deploy -- caminho/para/diretorio-vazio
+```
+
+O destino deve estar vazio e ser informado explicitamente. O pacote exclui acervo-mestre, testes, relatórios, scripts internos, arquivos `-PEDRO` e compactados.
 
 ## 22. Regra de manutenção desta documentação
 

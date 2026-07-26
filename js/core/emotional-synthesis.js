@@ -16,10 +16,14 @@
 
   function validateCatalog(catalog) {
     const errors = [];
+    const validRelationTypes = new Set(['reinforcement', 'tension', 'ambivalence', 'masking', 'transition', 'context']);
     if (!catalog || typeof catalog !== 'object') return ['Catálogo de sínteses ausente.'];
     if (typeof catalog.version !== 'string' || !catalog.version) errors.push('Versão ausente.');
-    for (const collectionName of ['primaryProfiles', 'directionalPairs', 'triadOverrides', 'secondaryModifiers', 'themeAdapters', 'fallbackProfiles']) {
+    for (const collectionName of ['primaryProfiles', 'directionalPairs', 'triadOverrides', 'secondaryModifiers', 'themeAdapters', 'relationTypes', 'fallbackProfiles']) {
       if (!catalog[collectionName] || typeof catalog[collectionName] !== 'object') errors.push(`Coleção ausente: ${collectionName}.`);
+    }
+    for (const relationType of validRelationTypes) {
+      if (!catalog.relationTypes?.[relationType]) errors.push(`Tipo de relação ausente: ${relationType}.`);
     }
     for (const [key, profile] of Object.entries(catalog.directionalPairs || {})) {
       if (profile.id !== key) errors.push(`ID divergente no par ${key}.`);
@@ -28,17 +32,20 @@
       if (!['low', 'medium', 'high'].includes(profile.confidence)) errors.push(`Confiança inválida no par ${key}.`);
       if (!['low', 'medium', 'high'].includes(profile.ambiguity)) errors.push(`Ambiguidade inválida no par ${key}.`);
       if (!['proposed', 'reviewed', 'disabled'].includes(profile.status)) errors.push(`Status inválido no par ${key}.`);
+      if (profile.relationType !== undefined && !validRelationTypes.has(profile.relationType)) errors.push(`Tipo de relação inválido no par ${key}.`);
     }
     for (const [key, profile] of Object.entries(catalog.triadOverrides || {})) {
       if (profile.id !== key || profile.secondaryFeelings?.length !== 2) errors.push(`Tríade inválida: ${key}.`);
+      if (profile.relationType !== undefined && !validRelationTypes.has(profile.relationType)) errors.push(`Tipo de relação inválido na tríade ${key}.`);
     }
     return errors;
   }
 
   function mergePairWithModifier(pair, remainingSecondary, modifiers) {
     const modifier = remainingSecondary ? modifiers[remainingSecondary] : null;
-    if (!modifier) return pair;
+    if (!modifier) return { relationType: 'context', ...pair };
     return {
+      relationType: 'context',
       ...pair,
       hiddenThemes: unique([...(pair.hiddenThemes || []), ...(modifier.hiddenThemes || [])]),
       preferredExistingSignals: {
@@ -71,7 +78,12 @@
 
       const triad = catalog.triadOverrides[directionalKey];
       if (secondaryFeelings.length === 2 && isAvailable(triad, includeProposed)) {
-        return { ...base, fallbackLevel: 1, profile: { ...triad }, reason: 'exact_triad' };
+        return {
+          ...base,
+          fallbackLevel: 1,
+          profile: { relationType: 'context', ...triad },
+          reason: 'exact_triad',
+        };
       }
 
       const pairCandidates = secondaryFeelings.slice().sort().map((secondaryFeeling) => ({
@@ -101,6 +113,7 @@
             id: directionalKey,
             primaryFeeling,
             secondaryFeelings,
+            relationType: cautiousFallback.relationType || 'context',
             humanSummary: cautiousFallback.humanSummary,
             hiddenThemes: unique([...(primaryProfile.focusThemes || []), ...modifiers.flatMap((modifier) => modifier.hiddenThemes || [])]),
             preferredExistingSignals: {
@@ -117,7 +130,12 @@
       }
 
       if (isAvailable(cautiousFallback, includeProposed)) {
-        return { ...base, fallbackLevel: 4, profile: { ...cautiousFallback, id: directionalKey }, reason: 'cautious_fallback' };
+        return {
+          ...base,
+          fallbackLevel: 4,
+          profile: { relationType: 'context', ...cautiousFallback, id: directionalKey },
+          reason: 'cautious_fallback',
+        };
       }
 
       return { ...base, fallbackLevel: 5, profile: null, reason: 'current_algorithm_only' };

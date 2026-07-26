@@ -1,0 +1,26 @@
+# Auditoria de proveniência — lote 10
+
+IDs ativos 181–200 de 257. A decisão de cada linha separa proveniência de qualidade e preserva o texto enquanto não houver prova de fabricação artificial.
+
+| ID | Texto | Autoria exibida | Tipo | Categoria | Relação | Qualidade | Decisão | Confiança |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Marco Aurélio-1 | A calma cresce quando você concentra sua energia naquilo que realmente pode escolher ou modificar. | Entre Sábios, inspirado em Marco Aurélio | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Marco Aurélio-3 | Volte ao presente: é nele que sua força pode agir. | Entre Sábios, inspirado em Marco Aurélio | inspired | G | distante | requer atenção | manter com referência pendente | alta |
+| Epicteto-1 | Separe o que depende de você do que pertence ao mundo. | Entre Sábios, inspirado em Epicteto | inspired | E | plausível | requer atenção | manter como inspiração validada | média |
+| Epicteto-2 | A liberdade cresce quando a mente deixa de obedecer ao impulso. | Entre Sábios, inspirado em Epicteto | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Epicteto-3 | Dignidade é escolher uma resposta coerente mesmo diante de acontecimentos que você não pôde evitar. | Entre Sábios, inspirado em Epicteto | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| kierkegaard-diarios-1843-01 | A vida só pode ser compreendida olhando-se para trás; mas só pode ser vivida olhando-se para frente. | Kierkegaard | translated_quote | B | direto | sem fórmula recorrente detectada | manter com referência pendente | média |
+| Clarice Lispector-1 | Nem toda compreensão nasce do raciocínio; sentimentos também revelam o que importa para você. | Entre Sábios, inspirado em Clarice Lispector | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Clarice Lispector-2 | Há verdades que só aparecem quando a gente aceita sentir. | Entre Sábios, inspirado em Clarice Lispector | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Clarice Lispector-3 | Uma pausa consciente pode abrir espaço para uma maneira nova de viver e escolher. | Entre Sábios, inspirado em Clarice Lispector | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Fernando Pessoa-1 | A saudade é uma presença que aprendeu a ficar longe. | Entre Sábios, inspirado em Fernando Pessoa | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Fernando Pessoa-3 | O silêncio pode expressar sentimentos que você ainda não conseguiu organizar em palavras. | Entre Sábios, inspirado em Fernando Pessoa | inspired | G | distante | requer atenção | manter com referência pendente | alta |
+| Dostoiévski-1 | A pessoa pode carregar dores profundas e, ao mesmo tempo, continuar procurando esperança e sentido. | Entre Sábios, inspirado em Dostoiévski | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Dostoiévski-2 | Quando existe dor, buscar compreensão costuma ajudar mais do que culpar a si mesmo ou condenar o que sente. | Entre Sábios, inspirado em Dostoiévski | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Viktor Frankl-3 | A esperança pode surgir quando encontramos uma pessoa, responsabilidade ou tarefa que dê direção ao próximo passo. | Entre Sábios, inspirado em Viktor Frankl | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Rumi-2 | Quando você age de acordo com aquilo que valoriza, torna-se mais capaz de reconhecer oportunidades compatíveis com sua busca. | Entre Sábios, inspirado em Rumi | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Rumi-3 | Quando você reconhece honestamente o que sente e valoriza, suas escolhas podem ganhar uma direção mais clara. | Entre Sábios, inspirado em Rumi | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Lao-Tsé-0 | A flexibilidade permite atravessar obstáculos que a rigidez não consegue superar. | Entre Sábios, inspirado em Lao-Tsé | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Lao-Tsé-1 | A pressa pode fazer você ignorar informações e etapas importantes para tomar uma boa decisão. | Entre Sábios, inspirado em Lao-Tsé | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Lao-Tsé-2 | Simplificar ajuda a perceber o essencial quando o excesso de opções produz confusão. | Entre Sábios, inspirado em Lao-Tsé | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Lao-Tsé-3 | Diminuir a pressão por uma resposta imediata permite perceber sentimentos e possibilidades com mais honestidade. | Entre Sábios, inspirado em Lao-Tsé | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |

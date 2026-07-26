@@ -1,0 +1,291 @@
+{
+  "auditMetadata": {
+    "date": "2026-07-22",
+    "branch": "agent/finaliza-loop-estabilizacao",
+    "commit": "7876aa46f264a327442aa01e6f169ea333ac6ddf",
+    "masterVersion": "definitiva-2.3",
+    "constitutionDecision": "DEC-033",
+    "documentaryReportVersion": "lote documental verificado anterior à peneira",
+    "authorizedCases": ["REC-01 / TXT-LUT-003", "REC-02 / sem ID", "REC-03 / TXT-MED-004"],
+    "authorizationEvidence": "A solicitação humana atual nomeia e autoriza expressamente a peneira dos três casos documentais. Ela regulariza esta execução prospectivamente, sem apagar a constatação histórica de que a versão anterior destes artefatos foi produzida sem autorização específica.",
+    "scope": "Somente análise e recomendação. Nenhuma decisão foi aplicada ao acervo, runtime, código, interface, governança ou publicação.",
+    "inputFingerprints": {
+      "entre_sabios_acervo_mestre_final.json": "sha256:a9b9688e677d2752d76dc1ccf8074490fbda1284ee14daa13f4bc38db82020d8",
+      "data/entre_sabios_runtime.json": "sha256:01a100c8e569e075a8d2008433078c121ea0f4935cf71b6d76151817be276e69",
+      "data/entre_sabios_runtime.js": "sha256:c40a9744ad400d6176e290be4b59b6ea3213dc130cdc390f0c19d669c4274a57"
+    },
+    "previousOutputFingerprints": {
+      "docs/RELATORIO_PENEIRA_QUALIDADE_EDITORIAL_LOTE_01.md": "sha256:9dc0342ed825aee712e383610c20cb845327a3b7e206d4b630b21ba7dea1d407",
+      "docs/peneira_qualidade_editorial_lote_01.json": "sha256:d0cf43e858fd6f59e7216b12be037b978922e73a980c1faa0009343b61870282"
+    },
+    "limitations": [
+      "A peneira não reabre investigação de autoria ou de direitos; usa o estado documental verificado.",
+      "REC-01 e REC-03 pertencem ao núcleo protegido e dependem de decisão humana individual.",
+      "O fac-símile da edição-fonte de REC-03 continua indisponível; a fonte acadêmica sustenta a linhagem, não uma citação literal desta redação.",
+      "A análise não autoriza publicação externa nem altera elegibilidade, sentimentos ou posição na trajetória.",
+      "A verificação integral teve 297 testes aprovados e uma falha preexistente fora do escopo: o marcador de cache do HTML está em definitiva-2.3-20260718-cache-fix-1, enquanto o contrato espera definitiva-2.3."
+    ]
+  },
+  "cases": [
+    {
+      "caseId": "REC-01",
+      "contentId": "TXT-LUT-003",
+      "text": "Quando eu me for, o mundo não vai parar para se despedir — e talvez seja isso que torne tudo tão bonito. Os pássaros continuarão dizendo seus segredos ao vento. As árvores aceitarão a chuva. O sol surgirá no horizonte sem consultar a ausência que deixei. Para o universo, talvez quase nada tenha mudado. Mas eu terei estado aqui por um instante. Terei ouvido vozes, tocado rostos, atravessado manhãs comuns. Enquanto houver um sabiá cantando em algum quintal ou uma folha insistindo no galho, a vida continuará dizendo que nenhum de nós precisava sustentá-la sozinho. Um dia poderemos descansar. O mundo saberá continuar.",
+      "documentaryStatus": {
+        "class": "DOC-D — adaptação documentada",
+        "tier": "T4",
+        "decision": "D4",
+        "provenance": "Augusto Frederico Schmidt é autor do poema-base; a autoria da adaptação local não foi identificada.",
+        "displayAttributionProposal": "Adaptação do poema Quando eu morrer, de Augusto Frederico Schmidt",
+        "artRisk": "ART-0",
+        "canonicalPresence": "Ausente do mestre e do runtime.",
+        "protectedLineage": "NP-LUT-SCHMIDT-001",
+        "rights": "Direitos patrimoniais não regularizados para publicação."
+      },
+      "editorialEvaluation": {
+        "conceptualStrength": "forte",
+        "specificity": "alta; imagens concretas de pássaros, chuva, sol, quintal e folha sustentam identidade própria",
+        "development": "completo, com arco da ausência à continuidade",
+        "clarity": "claro, embora extenso e contemplativo",
+        "resonance": "alta e duradoura",
+        "emotionalHonesty": "honesto, sem negar a perda; a promessa de descanso exige contexto",
+        "editorialNecessity": "relevante e complementar, não indispensável",
+        "confidence": "moderada"
+      },
+      "patternFlags": [
+        "A formulação 'Um dia poderemos descansar' pode soar como promessa de alívio ou aproximação indevida entre morte e descanso em contexto intenso.",
+        "A progressão universalizante no final pede mediação para não converter contemplação em certeza."
+      ],
+      "emotionalAdequacy": {
+        "nucleus": ["Luto"],
+        "contextual": ["Esperança"],
+        "inadequate": [],
+        "intensity": ["leve", "moderada"],
+        "excludedContexts": ["primeira resposta", "luto intenso", "risco de autoagressão ou ideação de morte"],
+        "rationale": "A linguagem reconhece ausência e continuidade, mas sua contemplação da própria morte e do descanso não é segura como acolhimento inicial ou em alta intensidade."
+      },
+      "safetyAssessment": {
+        "level": "contextual moderado",
+        "risks": ["possível romantização do descanso após a morte", "promessa implícita de serenidade futura", "distanciamento contemplativo incompatível com crise"],
+        "mitigations": ["uso tardio na trajetória", "enquadramento explícito como uma forma de olhar", "não usar em primeira resposta nem em intensidade alta"]
+      },
+      "redundancy": {
+        "level": "parcial",
+        "relatedIds": ["batch04-quote-021", "curated-111", "batch04-quote-024"],
+        "comparison": "Compartilha a ideia de que o mundo continua diante da ausência. Ganha complementaridade pela escala sensorial e pela formulação de que ninguém sustenta a vida sozinho; batch04-quote-021 permanece mais forte para resposta breve."
+      },
+      "formatAssessment": {
+        "current": "microtexto documental",
+        "recommended": "microtexto ou reflexão contemplativa, apenas após decisão humana",
+        "briefPhrase": false,
+        "needsContext": true
+      },
+      "supportAssessment": {
+        "oneWayOfLooking": "útil",
+        "whatThisTextAsks": "opcional",
+        "question": "opcional e somente em contexto não intenso"
+      },
+      "decision": {
+        "principal": "Q-X — Decisão humana complexa",
+        "secondary": ["Q-E — Preservar como microtexto ou reflexão", "Q-H — Revisar segurança ou posição na trajetória"],
+        "rationale": "Há valor editorial, mas a proteção, os direitos não regularizados e a frase sensível impedem decisão automática.",
+        "requiresHumanDecision": true,
+        "applicationStatus": "não aplicado"
+      }
+    },
+    {
+      "caseId": "REC-02",
+      "contentId": null,
+      "text": "Existe em nós uma coragem capaz de enfrentar aquilo que tenta nos reduzir. Ela não elimina o abismo nem promete uma vida sem dor; ensina a olhar para a dificuldade e ainda afirmar a existência. Crescer não é evitar toda queda, mas descobrir uma força que antes permanecia escondida.",
+      "documentaryStatus": {
+        "class": "DOC-I — autoria e fonte não identificadas",
+        "tier": "T1",
+        "decision": "D1",
+        "provenance": "Autoria desconhecida, sem fonte e sem cadeia de adaptação verificável.",
+        "displayAttributionProposal": null,
+        "artRisk": "ART-0",
+        "canonicalPresence": "Ausente do mestre e do runtime.",
+        "protectedLineage": null,
+        "rights": "Sem base documental para atribuição ou publicação."
+      },
+      "editorialEvaluation": {
+        "conceptualStrength": "moderada",
+        "specificity": "baixa; intercambiável com fórmulas motivacionais já presentes",
+        "development": "suficiente, porém previsível",
+        "clarity": "claro",
+        "resonance": "baixa a momentânea",
+        "emotionalHonesty": "requer cuidado; associa dificuldade a crescimento e força escondida",
+        "editorialNecessity": "dispensável e redundante",
+        "confidence": "moderada"
+      },
+      "patternFlags": [
+        "Vocabulário automático: coragem, abismo, queda e força escondida.",
+        "Estrutura corretiva recorrente: 'não elimina', 'nem promete', 'não é evitar'.",
+        "Pressão implícita para que dor e queda revelem crescimento.",
+        "Tom de coaching com pouca imagem concreta ou tensão singular."
+      ],
+      "emotionalAdequacy": {
+        "nucleus": [],
+        "contextual": ["Medo"],
+        "inadequate": ["Tristeza intensa", "Luto intenso", "Culpa intensa", "Falta de propósito intensa"],
+        "intensity": ["leve"],
+        "excludedContexts": ["primeira resposta", "intensidade moderada ou alta", "situações em que a pessoa não consegue agir"],
+        "rationale": "Coragem não é sentimento canônico do acervo. A referência a medo seria apenas contextual e o fechamento em crescimento pode pressionar quem está fragilizado."
+      },
+      "safetyAssessment": {
+        "level": "moderado",
+        "risks": ["meritocracia emocional", "culpabilização por não encontrar força", "simplificação de sofrimento persistente"],
+        "mitigations": ["não publicar", "preservar apenas como evidência histórica da peneira"]
+      },
+      "redundancy": {
+        "level": "forte",
+        "relatedIds": ["batch03-quote-018", "batch05-quote-003", "batch07-quote-001", "batch01-quote-012"],
+        "comparison": "Repete coragem sem endurecimento, medo subordinado à ação, dor que não decide e queda como descoberta. Os itens ativos são mais breves e específicos."
+      },
+      "formatAssessment": {
+        "current": "microtexto sem ID",
+        "recommended": "arquivo histórico, sem publicação",
+        "briefPhrase": false,
+        "needsContext": false
+      },
+      "supportAssessment": {
+        "oneWayOfLooking": "desnecessário",
+        "whatThisTextAsks": "desnecessário",
+        "question": "inadequado"
+      },
+      "decision": {
+        "principal": "Q-J — Arquivar como evidência histórica",
+        "secondary": [],
+        "rationale": "A proveniência é insuficiente e, independentemente dela, o texto é genérico, redundante e emocionalmente pressionador. Não deve receber autoria, adaptação, inspiração nem integração.",
+        "requiresHumanDecision": true,
+        "applicationStatus": "não aplicado"
+      }
+    },
+    {
+      "caseId": "REC-03",
+      "contentId": "TXT-MED-004",
+      "text": "Sonhamos com asas, mas trememos diante do céu aberto. Queremos o voo e, ao mesmo tempo, exigimos um chão que nos acompanhe até as nuvens. A liberdade assusta porque não oferece corrimão. Nada está escrito, ninguém garante o pouso, e cada escolha fecha caminhos que também poderiam ter sido nossos. Então construímos abrigos pequenos e chamamos de destino aquilo que nasceu de renúncias repetidas. As grades raramente chegam prontas; nós as forjamos em silêncio, com o metal dos adiamentos. Dizemos que desejamos a porta aberta. Quando ela finalmente se escancara, descobrimos que também era a prisão que nos protegia do desconhecido.",
+      "documentaryStatus": {
+        "class": "DOC-D — adaptação documentada",
+        "tier": "T4",
+        "decision": "D4",
+        "provenance": "Rubem Alves é autor do fragmento-base; a autoria da adaptação local está preservada, mas não é pública.",
+        "displayAttributionProposal": "Adaptação de trecho de Rubem Alves, em Religião e Repressão",
+        "artRisk": "ART-0",
+        "canonicalPresence": "Presente no mestre como ATIVO_REFERENCIA_PENDENTE e no runtime local.",
+        "protectedLineage": "NP-MED-GAIOLA-001",
+        "rights": "Publicação externa bloqueada; fac-símile da edição-fonte não localizado."
+      },
+      "editorialEvaluation": {
+        "conceptualStrength": "forte",
+        "specificity": "alta; asas, céu, corrimão, pouso, metal, grades e porta compõem uma metáfora coerente",
+        "development": "completo e progressivo",
+        "clarity": "claro, ainda que denso",
+        "resonance": "alta e duradoura",
+        "emotionalHonesty": "honesto ao reconhecer ambivalência; exige cuidado para não atribuir toda prisão à escolha individual",
+        "editorialNecessity": "relevante e complementar",
+        "confidence": "moderada"
+      },
+      "patternFlags": [
+        "'Nós as forjamos' pode culpabilizar pessoas submetidas a limites materiais, sociais ou traumáticos que não escolheram.",
+        "A oposição liberdade/prisão é potente, mas confrontativa demais para acolhimento inicial.",
+        "A densidade metafórica pede leitura lenta e contexto."
+      ],
+      "emotionalAdequacy": {
+        "nucleus": [],
+        "contextual": ["Medo", "Insegurança", "Falta de propósito"],
+        "inadequate": ["uso como primeira resposta a qualquer sentimento", "intensidade alta"],
+        "intensity": ["moderada"],
+        "excludedContexts": ["primeira resposta", "crise aguda", "situações de coerção ou violência sem enquadramento cuidadoso"],
+        "rationale": "O texto confronta adiamento, liberdade e escolhas; por isso, Medo deve deixar de ser núcleo proposto e permanecer contextual, junto de Insegurança e Falta de propósito."
+      },
+      "safetyAssessment": {
+        "level": "contextual moderado",
+        "risks": ["culpabilização por restrições não escolhidas", "confronto precoce", "redução de condicionantes externos a adiamento pessoal"],
+        "mitigations": ["posição posterior na trajetória", "uso apenas em intensidade moderada", "enquadramento como uma leitura possível", "evitar contextos de coerção"]
+      },
+      "redundancy": {
+        "level": "complementar",
+        "relatedIds": ["NP-MED-GAIOLA-001", "Kierkegaard-0", "batch06-quote-018", "batch07-quote-035"],
+        "comparison": "A linhagem protegida é a mesma obra editorial, não conteúdo adicional. Os demais itens tratam vertigem, segurança e custo da liberdade de modo breve; este texto oferece desenvolvimento metafórico próprio."
+      },
+      "formatAssessment": {
+        "current": "microtexto",
+        "recommended": "manter como microtexto, sem criar versão paralela",
+        "briefPhrase": false,
+        "needsContext": true
+      },
+      "supportAssessment": {
+        "oneWayOfLooking": "útil",
+        "whatThisTextAsks": "útil",
+        "question": "opcional, sem induzir culpa"
+      },
+      "decision": {
+        "principal": "Q-X — Decisão humana complexa",
+        "secondary": ["Q-A — Manter no formato atual", "Q-G — Revisar associações emocionais", "Q-H — Revisar segurança ou posição na trajetória"],
+        "rationale": "O texto tem identidade e valor, mas a proteção, o bloqueio externo, a associação nuclear atual e o risco de culpabilização exigem decisão humana individual.",
+        "requiresHumanDecision": true,
+        "applicationStatus": "não aplicado"
+      }
+    }
+  ],
+  "batchComparison": {
+    "strongestEditorialIdentity": ["REC-03", "REC-01"],
+    "bestBriefResponse": "Nenhum caso; os dois textos valiosos são microtextos contextuais.",
+    "mostRedundant": "REC-02",
+    "highestSafetyAttention": ["REC-01", "REC-03"],
+    "protectedCases": ["REC-01", "REC-03"],
+    "recommendedHumanQueue": ["REC-03", "REC-01", "REC-02"],
+    "summary": "Dois casos têm valor editorial, mas permanecem protegidos e contextuais; o terceiro deve ficar apenas como evidência histórica."
+  },
+  "conflicts": [
+    {
+      "type": "authorization-history",
+      "status": "resolved-for-current-execution",
+      "detail": "A auditoria anterior registrou falta de autorização específica. A solicitação humana atual autoriza estes três casos, sem apagar o achado histórico."
+    },
+    {
+      "type": "rights-and-protection",
+      "caseId": "REC-01",
+      "status": "pending-human-decision",
+      "detail": "Valor editorial não supera proteção nem direitos patrimoniais não regularizados."
+    },
+    {
+      "type": "source-limit",
+      "caseId": "REC-03",
+      "status": "pending-documentary-limit",
+      "detail": "A linhagem é documentada, mas não há fac-símile da edição-fonte; a redação não pode ser tratada como citação literal."
+    }
+  ],
+  "statistics": {
+    "cases": 3,
+    "principalDecisions": {"Q-X": 2, "Q-J": 1},
+    "valuableButProtected": 2,
+    "historicalArchive": 1,
+    "briefPhrases": 0,
+    "requiresContext": 2,
+    "canonicalFilesModified": 0,
+    "decisionsApplied": 0
+  },
+  "validation": {
+    "testChanged": "concluído; grupo editorial selecionado",
+    "governance": "aprovado; 33 decisões consistentes",
+    "deployAllowlist": "aprovado; 136 arquivos públicos e relatórios excluídos",
+    "static": "aprovado; sintaxe e 17 JSON válidos",
+    "content": "aprovado; runtime sincronizado sem escrita",
+    "tests": {"total": 298, "passed": 297, "failed": 1},
+    "knownFailure": "tests/canonical-contracts.test.mjs: HTML usa definitiva-2.3-20260718-cache-fix-1 no marcador de cache, mas o contrato espera definitiva-2.3; divergência preexistente e não alterada nesta tarefa.",
+    "scopeAssessment": "A falha não invalida a conformidade crítica desta peneira documental, pois nenhum HTML, contrato, acervo ou runtime foi alterado."
+  },
+  "complianceMatrix": [
+    {"requirement": "Escopo limitado aos três casos autorizados", "action": "Foram analisados somente REC-01, REC-02 e REC-03.", "evidence": "auditMetadata.authorizedCases e cases", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "Separar proveniência de qualidade", "action": "Cada caso contém documentaryStatus e editorialEvaluation independentes.", "evidence": "cases[*].documentaryStatus e cases[*].editorialEvaluation", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "Conteúdo protegido recebe Q-X", "action": "REC-01 e REC-03 têm Q-X como decisão principal.", "evidence": "cases[0].decision e cases[2].decision", "status": "COMPROVADO", "limitation": "A decisão final permanece humana."},
+    {"requirement": "Não atribuir o texto da coragem", "action": "REC-02 permanece sem autoria, adaptação ou inspiração e recebe Q-J.", "evidence": "cases[1].documentaryStatus e cases[1].decision", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "Avaliar emoção, intensidade, primeira resposta e segurança", "action": "Todos os casos têm adequação e segurança explícitas.", "evidence": "cases[*].emotionalAdequacy e cases[*].safetyAssessment", "status": "COMPROVADO", "limitation": "São recomendações, não configuração aplicada."},
+    {"requirement": "Analisar redundância contra o acervo", "action": "Foram registrados IDs relacionados e ganho ou sobreposição.", "evidence": "cases[*].redundancy", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "Não alterar fontes canônicas ou publicar", "action": "Somente os dois artefatos autorizados desta peneira foram reescritos.", "evidence": "statistics.canonicalFilesModified e statistics.decisionsApplied", "status": "COMPROVADO", "limitation": "Confirmação final por hashes e status do Git integra a validação de encerramento."},
+    {"requirement": "Limitações documentais honestas", "action": "Direitos de REC-01 e ausência de fac-símile em REC-03 foram preservados.", "evidence": "auditMetadata.limitations e conflicts", "status": "PARCIALMENTE COMPROVADO", "limitation": "A peneira não executa nova investigação documental."},
+    {"requirement": "Próxima etapa separada e humana", "action": "Nenhuma recomendação foi aplicada.", "evidence": "cases[*].decision.applicationStatus", "status": "COMPROVADO", "limitation": null}
+  ]
+}

@@ -29,7 +29,7 @@ function plain(value) {
 }
 
 test('catálogo aprovado possui versão, 14 perfis principais, 29 pares e uma tríade', () => {
-  assert.equal(catalog.version, '1.1.0');
+  assert.equal(catalog.version, '1.2.0');
   assert.equal(Object.keys(catalog.primaryProfiles).length, 14);
   assert.equal(Object.keys(catalog.directionalPairs).length, 29);
   assert.equal(Object.keys(catalog.triadOverrides).length, 1);

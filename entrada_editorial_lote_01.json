@@ -1,0 +1,139 @@
+{
+  "batchMetadata": {
+    "batchId": "ENTRADA-EDITORIAL-LOTE-01",
+    "schemaVersion": "1.0.0",
+    "createdAt": "2026-07-22T21:38:21-03:00",
+    "status": "AGUARDANDO_CONTEUDOS",
+    "requestClassification": "novo",
+    "permanentRegistry": "registro_sementes_editoriais.json",
+    "humanReport": "RELATORIO_ENTRADA_EDITORIAL_LOTE_01.md",
+    "receivedCount": 0,
+    "processedCount": 0,
+    "overflowCount": 0
+  },
+  "initialState": {
+    "branch": "agent/finaliza-loop-estabilizacao",
+    "commit": "7876aa46f264a327442aa01e6f169ea333ac6ddf",
+    "capturedAt": "2026-07-22T21:38:21-03:00",
+    "timezone": "America/Sao_Paulo",
+    "workingTree": {
+      "dirtyBeforeBatch": true,
+      "porcelainEntries": 133,
+      "trackedChangedEntries": 76,
+      "untrackedEntries": 57,
+      "preservation": "Todas as alterações locais preexistentes foram preservadas; nenhuma limpeza, restauração ou ação destrutiva foi executada."
+    },
+    "master": {
+      "file": "entre_sabios_acervo_mestre_final.json",
+      "version": "definitiva-2.4",
+      "historicalTotal": 351,
+      "activeTotal": 257,
+      "quarantineTotal": 1,
+      "sha256": "be72c04474e85ac27a26313bb23ba2dca10ab50f8fd6cf102d4e78599b46365e"
+    },
+    "runtime": {
+      "version": "definitiva-2.4",
+      "activeTotal": 257,
+      "nucleusTotal": 41,
+      "contextualTotal": 150,
+      "generalTotal": 66,
+      "jsonSha256": "570de4f538866d97b309e150050374374c4652c1dd95349d347dd169fe8ada73",
+      "jsSha256": "8c57eee32c3b8e7eab28132976800c6c988a0492e2a49a49a756a45761f73280",
+      "synchronizedAtPreflight": true
+    },
+    "existingEntryFiles": [],
+    "relatedEditorialArtifacts": [
+      "PADRAO_EDITORIAL_ENTRE_SABIOS.md",
+      "DECISIONS.md",
+      "PROJECT_STATUS.md",
+      "NUCLEO_PRESERVACAO_EDITORIAL.md",
+      "MINUTA_DECISOES_EDITORIAIS_LOTE_01.md",
+      "minuta_decisoes_editoriais_lote_01.json",
+      "decisoes_editoriais_aprovadas_lote_01.json",
+      "RELATORIO_APLICACAO_DECISOES_EDITORIAIS_LOTE_01.md",
+      "aplicacao_decisoes_editoriais_lote_01.json"
+    ],
+    "existingSeedIdConvention": null,
+    "adoptedTemporaryConvention": "SEMENTE-AAAA-MM-NNN",
+    "definitiveContentIdCreated": false
+  },
+  "preconditions": {
+    "filesConsulted": [
+      "AGENTS.md",
+      "PADRAO_EDITORIAL_ENTRE_SABIOS.md",
+      "DECISIONS.md",
+      "PROJECT_STATUS.md",
+      "NUCLEO_PRESERVACAO_EDITORIAL.md",
+      "DOCUMENTACAO_ENTRE_SABIOS.md",
+      "entre_sabios_acervo_mestre_final.json"
+    ],
+    "canonicalMasterConfirmed": "entre_sabios_acervo_mestre_final.json",
+    "runtimeConfirmedAsGenerated": true,
+    "relatedDecisions": ["DEC-024", "DEC-033"],
+    "contradictions": [],
+    "governanceCheck": "APROVADO: 33 decisões e fontes vivas consistentes"
+  },
+  "receivedContents": [],
+  "declaredOrigins": [],
+  "documentaryResults": [],
+  "editorialResults": [],
+  "redundancies": [],
+  "risks": [],
+  "pendingRights": [],
+  "proposedFormats": [],
+  "seedStates": [],
+  "aiRecommendations": [
+    {
+      "recommendation": "AGUARDAR_CONTEUDO_REAL",
+      "reason": "Nenhuma semente foi fornecida; criar conteúdo ou código temporário apenas para preencher a fila violaria o protocolo."
+    }
+  ],
+  "humanDecisionsRequired": [],
+  "filesCreated": [
+    "REGISTRO_SEMENTES_EDITORIAIS.md",
+    "registro_sementes_editoriais.json",
+    "RELATORIO_ENTRADA_EDITORIAL_LOTE_01.md",
+    "entrada_editorial_lote_01.json"
+  ],
+  "validation": {
+    "status": "APROVADO",
+    "jsonValid": true,
+    "markdownJsonConsistent": true,
+    "masterHashUnchanged": true,
+    "runtimeHashesUnchanged": true,
+    "onlyAuthorizedFilesCreated": true,
+    "governancePassed": true,
+    "focusedEditorialTests": {"total": 54, "passed": 54, "failed": 0},
+    "fullVerification": {"total": 298, "passed": 298, "failed": 0},
+    "checks": ["check:governance", "check:deploy", "check:static", "check:content", "test:all"]
+  },
+  "complianceMatrix": [
+    {"requirement": "pré-condições", "action": "fontes canônicas e decisões consultadas", "evidence": "preconditions.filesConsulted", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "estado inicial", "action": "branch, commit, horário, status, versões, totais e hashes registrados", "evidence": "initialState", "status": "COMPROVADO", "limitation": "alterações preexistentes resumidas por contagens"},
+    {"requirement": "lote respeitado", "action": "nenhum conteúdo artificial criado", "evidence": "batchMetadata.receivedCount=0", "status": "COMPROVADO", "limitation": "aguarda conteúdo"},
+    {"requirement": "redações preservadas", "action": "nenhuma redação recebida ou reescrita", "evidence": "receivedContents=[]", "status": "COMPROVADO", "limitation": "não aplicável a item individual"},
+    {"requirement": "origens registradas", "action": "ausência declarada", "evidence": "declaredOrigins=[]", "status": "COMPROVADO", "limitation": "não aplicável a item individual"},
+    {"requirement": "nenhuma autoria inventada", "action": "nenhum autor ou obra criado", "evidence": "registro permanente com seeds=[]", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "nenhuma integração automática", "action": "fila criada fora do mestre", "evidence": "hash final do mestre idêntico ao inicial", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "nenhum preenchimento quantitativo", "action": "lote encerrado vazio", "evidence": "processedCount=0", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "nenhuma alteração no mestre", "action": "hash inicial e final comparados", "evidence": "validation.masterHashUnchanged=true", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "nenhum runtime alterado", "action": "hashes iniciais e finais comparados", "evidence": "validation.runtimeHashesUnchanged=true", "status": "COMPROVADO", "limitation": null},
+    {"requirement": "decisão humana preservada", "action": "nenhuma recomendação promovida a decisão", "evidence": "humanDecisionsRequired=[]", "status": "COMPROVADO", "limitation": "nenhuma semente pronta"},
+    {"requirement": "condição de parada", "action": "encerrar após criar e validar a fila", "evidence": "batchMetadata.status", "status": "COMPROVADO", "limitation": "aguarda nova entrada"}
+  ],
+  "guarantees": {
+    "contentEnteredMaster": false,
+    "contentPublished": false,
+    "authorshipInvented": false,
+    "receivedTextRewritten": false,
+    "definitiveIdCreated": false,
+    "runtimeGenerated": false,
+    "algorithmChanged": false,
+    "interfaceChanged": false,
+    "commitCreated": false,
+    "pushPerformed": false,
+    "mergePerformed": false,
+    "publicationPerformed": false
+  },
+  "stopCondition": "Lote encerrado sem sementes; aguardar conteúdo real e não iniciar integração, publicação ou outro lote."
+}

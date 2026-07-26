@@ -38,12 +38,21 @@
 
       const preferredThemes = profile.preferredExistingSignals?.themes || [];
       const mappedHiddenThemes = (profile.hiddenThemes || []).flatMap((theme) => catalog?.themeAdapters?.[theme] || []);
+      const relationType = profile.relationType || 'context';
+      const relationSignals = catalog?.relationTypes?.[relationType] || catalog?.relationTypes?.context || {};
       return {
         resolution,
         profile,
+        relationType,
         mappedThemes: uniqueNormalized([...preferredThemes, ...mappedHiddenThemes]),
-        preferredEditorialFunctions: uniqueNormalized(profile.preferredExistingSignals?.editorialFunctions),
-        preferredTones: uniqueNormalized(profile.preferredExistingSignals?.tones),
+        preferredEditorialFunctions: uniqueNormalized([
+          ...(profile.preferredExistingSignals?.editorialFunctions || []),
+          ...(relationSignals.editorialFunctions || []),
+        ]),
+        preferredTones: uniqueNormalized([
+          ...(profile.preferredExistingSignals?.tones || []),
+          ...(relationSignals.tones || []),
+        ]),
         policy: getInfluencePolicy(profile),
       };
     }
@@ -92,6 +101,7 @@
         directionalKey: context.resolution.directionalKey,
         fallbackLevel: context.resolution.fallbackLevel,
         resolutionReason: context.resolution.reason,
+        relationType: context.relationType,
         hiddenThemes: [...(context.profile.hiddenThemes || [])],
         mappedThemes: [...context.mappedThemes],
         confidence: context.profile.confidence,

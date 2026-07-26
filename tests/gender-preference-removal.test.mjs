@@ -94,7 +94,7 @@ test('campo antigo de gênero não entra na assinatura nem nas chaves persistida
   assert.ok(Object.keys(persisted).every((key) => !/gender|genero|female|male/i.test(key)));
   assert.ok(Object.values(persisted).every((value) => !/genderPreference|"gender"|female|male/i.test(value)));
   const queueState = JSON.parse(persisted['entreSabiosRuntimeQueues:fase-9-compat']);
-  assert.deepEqual(Object.keys(queueState), ['fase-9-compat|tristeza|inseguranca|moderada::level:1']);
+  assert.deepEqual(Object.keys(queueState), ['fase-9-compat|tristeza|inseguranca|moderada::level:2']);
 });
 
 test('analytics editorial ignora propriedades antigas de gênero', () => {

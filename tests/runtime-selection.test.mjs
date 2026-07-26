@@ -57,13 +57,13 @@ test('hardExclusions respeitam primeira resposta e intensidade intensa', () => {
   }
 });
 
-test('Insegurança fraca percorre nove núcleos antes de repetir', () => {
+test('Insegurança fraca percorre os dois núcleos remanescentes antes de repetir', () => {
   const state = { primaryFeeling: 'inseguranca', secondaryFeelings: [], intensity: 'fraca' };
   const selector = engine.createSelector({ version: runtime.contentVersion, contents: runtime.contents });
   const inspection = selector.inspect(state, { firstResponse: false });
   assert.equal(inspection.bestLevel, 1);
-  assert.equal(inspection.eligibleAtLevel.length, 9);
-  const selected = Array.from({ length: 9 }, () => selector.select(state, { firstResponse: false }));
+  assert.equal(inspection.eligibleAtLevel.length, 2);
+  const selected = Array.from({ length: 2 }, () => selector.select(state, { firstResponse: false }));
   assert.ok(selected.every((item) => item.level === 1 && !item.fallback));
   assert.deepEqual([...new Set(selected.map((item) => item.content.id))].sort(), [...REQUIRED_INSECURITY_IDS].sort());
 });
@@ -72,8 +72,8 @@ test('transição da primeira resposta não repete imediatamente e percorre o ci
   const state = { primaryFeeling: 'inseguranca', secondaryFeelings: [], intensity: 'fraca' };
   const selector = engine.createSelector({ version: runtime.contentVersion, contents: runtime.contents });
   const selected = [selector.select(state, { firstResponse: true })];
-  for (let index = 1; index < 9; index += 1) selected.push(selector.select(state, { firstResponse: false }));
-  assert.equal(new Set(selected.map((item) => item.content.id)).size, 9);
+  for (let index = 1; index < 3; index += 1) selected.push(selector.select(state, { firstResponse: false }));
+  assert.equal(new Set(selected.map((item) => item.content.id)).size, 3);
   assert.notEqual(selected[0].content.id, selected[1].content.id);
 });
 

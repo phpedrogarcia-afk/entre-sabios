@@ -4,7 +4,8 @@
 // normalizada para as próximas integrações; não mantém um segundo estado.
 
 const MAX_SECONDARY_FEELINGS = 2;
-const VALID_INTENSITIES = new Set(['fraca', 'moderada', 'intensa']);
+const VALID_INTENSITY_VALUES = Object.freeze(['fraca', 'moderada', 'intensa']);
+const VALID_INTENSITIES = new Set(VALID_INTENSITY_VALUES);
 
 function normalizeSelectionFeelingId(value) {
   return typeof value === 'string' && value.trim() ? normalizeTheme(value.trim()) : '';
@@ -37,7 +38,7 @@ function normalizeEmotionalSelection(selection = {}, catalog = feelingsCatalog) 
     .filter((feeling) => feeling !== primaryFeeling)
     .slice(0, MAX_SECONDARY_FEELINGS);
   const feelings = primaryFeeling ? [primaryFeeling, ...secondaryFeelings] : [];
-  const intensity = VALID_INTENSITIES.has(selection.intensity) ? selection.intensity : 'moderada';
+  const intensity = VALID_INTENSITIES.has(selection.intensity) ? selection.intensity : null;
   const normalizedNeedsMotivation = Boolean(primaryFeeling) && selection.needsMotivation === true;
 
   return {
@@ -50,18 +51,28 @@ function normalizeEmotionalSelection(selection = {}, catalog = feelingsCatalog) 
   };
 }
 
-function getCurrentSelectionContract() {
+function resolveGenerationIntensity(explicitIntensity, randomSource = Math.random) {
+  if (VALID_INTENSITIES.has(explicitIntensity)) return explicitIntensity;
+  if (explicitIntensity != null && explicitIntensity !== '') return null;
+  const rawRoll = Number(randomSource());
+  const boundedRoll = Number.isFinite(rawRoll)
+    ? Math.min(Math.max(rawRoll, 0), 1 - Number.EPSILON)
+    : 0.5;
+  return VALID_INTENSITY_VALUES[Math.floor(boundedRoll * VALID_INTENSITY_VALUES.length)];
+}
+
+function getCurrentSelectionContract(intensity = currentIntensity) {
   const feelings = getSelectedFeelingIds();
   if (feelings.length === 0) needsMotivation = false;
   return normalizeEmotionalSelection({
     feelings,
     primaryFeeling: primaryFeelingId,
-    intensity: currentIntensity,
+    intensity,
     needsMotivation,
   });
 }
 
-function interpretEmotionalState() {
+function interpretEmotionalState(intensity = currentIntensity) {
   const feelings = getSelectedFeelingIds();
   const primaryFeeling = feelings.includes(primaryFeelingId) ? primaryFeelingId : (feelings[0] || null);
   const secondaryFeelings = feelings.filter((feeling) => feeling !== primaryFeeling);
@@ -83,8 +94,10 @@ function interpretEmotionalState() {
     }
   });
 
-  const intensityProfile = intensityProfiles[currentIntensity] || intensityProfiles.moderada;
-  const selectionContract = getCurrentSelectionContract();
+  const selectionContract = getCurrentSelectionContract(intensity);
+  const intensityProfile = selectionContract.intensity
+    ? intensityProfiles[selectionContract.intensity]
+    : null;
 
   return {
     feelings,
@@ -93,9 +106,9 @@ function interpretEmotionalState() {
     rootThemeDefinitions,
     secondaryThemes: Array.from(new Set(secondaryThemes)),
     combinationThemes: Array.from(new Set(combinationThemes)),
-    intensityThemes: intensityProfile.themes.map(normalizeTheme),
-    intensity: currentIntensity,
-    suitableTones: intensityProfile.suitableTones.map(normalizeTheme),
+    intensityThemes: (intensityProfile?.themes || []).map(normalizeTheme),
+    intensity: selectionContract.intensity,
+    suitableTones: (intensityProfile?.suitableTones || []).map(normalizeTheme),
     needsMotivation: selectionContract.needsMotivation,
     directionalKey: selectionContract.directionalKey,
     selectionContract,

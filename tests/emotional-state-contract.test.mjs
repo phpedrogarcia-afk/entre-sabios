@@ -118,7 +118,7 @@ test('mais de dois secundários usa somente os dois primeiros distintos sem alte
   assert.deepEqual(Array.from(state.feelings), ['amor', 'medo', 'saudade']);
 });
 
-test('principal inválido usa a primeira seleção válida e intensidade inválida volta à moderada', () => {
+test('principal inválido usa a primeira seleção válida e intensidade inválida permanece neutra', () => {
   const sandbox = createStateSandbox();
   const state = sandbox.normalizeEmotionalSelection({
     feelings: ['inexistente', 'tristeza', 'solidão'],
@@ -127,7 +127,45 @@ test('principal inválido usa a primeira seleção válida e intensidade inváli
   });
   assert.equal(state.primaryFeeling, 'tristeza');
   assert.deepEqual(Array.from(state.secondaryFeelings), ['solidao']);
-  assert.equal(state.intensity, 'moderada');
+  assert.equal(state.intensity, null);
+});
+
+test('intensidade ausente permanece neutra no contrato até o momento da geração', () => {
+  const sandbox = createStateSandbox();
+  const state = sandbox.normalizeEmotionalSelection({
+    feelings: ['tristeza'],
+    primaryFeeling: 'tristeza',
+  });
+  assert.equal(state.intensity, null);
+  assert.deepEqual(engine.rankEligibleContents(runtime.contents, state), []);
+});
+
+test('ausência sorteia as três intensidades e escolha explícita sempre prevalece', () => {
+  const sandbox = createStateSandbox();
+  assert.equal(sandbox.resolveGenerationIntensity(null, () => 0), 'fraca');
+  assert.equal(sandbox.resolveGenerationIntensity(null, () => 0.34), 'moderada');
+  assert.equal(sandbox.resolveGenerationIntensity(null, () => 0.99), 'intensa');
+  assert.equal(sandbox.resolveGenerationIntensity('fraca', () => 0.99), 'fraca');
+  assert.equal(sandbox.resolveGenerationIntensity('extrema', () => 0.5), null);
+});
+
+test('estado visual neutro não herda perfil antes do sorteio da geração', () => {
+  const sandbox = createStateSandbox({
+    selectedFeelingIds: new Set(['tristeza']),
+    primaryFeelingId: 'tristeza',
+    currentIntensity: null,
+    intensityProfiles: {
+      fraca: { themes: ['leve'], suitableTones: ['sereno'] },
+      moderada: { themes: ['moderado_implícito'], suitableTones: ['direto'] },
+      intensa: { themes: ['profundo'], suitableTones: ['acolhedor'] },
+    },
+  });
+  const state = sandbox.interpretEmotionalState();
+  assert.equal(sandbox.currentIntensity, null);
+  assert.equal(state.intensity, null);
+  assert.equal(state.selectionContract.intensity, null);
+  assert.deepEqual(Array.from(state.intensityThemes), []);
+  assert.deepEqual(Array.from(state.suitableTones), []);
 });
 
 test('limpeza total desliga motivação e uma nova sessão começa sem persistência', () => {

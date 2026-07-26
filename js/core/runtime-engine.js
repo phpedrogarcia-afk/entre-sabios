@@ -10,6 +10,8 @@
   const RECENT_AUTHOR_WINDOW = 5;
   const RECENT_HISTORY_LIMIT = 120;
   const CONTEXT_HISTORY_LIMIT = 120;
+  const QUEUE_SELECTOR_SCHEMA_VERSION = 2;
+  const QUEUE_ROTATION_POLICY_VERSION = 2;
   const DEVELOPED_FORMATS = new Set(['microtexto', 'reflexao_curta', 'citacao_longa']);
   const VULNERABLE_FEELINGS = new Set(['luto', 'tristeza', 'inseguranca', 'culpa', 'ansiedade', 'solidao']);
   const INTENSE_SAFETY_FEELINGS = new Set([
@@ -372,13 +374,56 @@
     const queueDirectionStorageKey = `entreSabiosRuntimeQueueDirections:${version}`;
     const recentStorageKey = `entreSabiosRecentContent:${version}`;
     const contextHistoryStorageKey = `entreSabiosContextHistory:${version}`;
+    const queueMetaStorageKey = `entreSabiosRuntimeQueueMeta:${version}`;
     let recentSelections = [];
+    let queueStateCompatible = true;
+    const queueRestoration = {
+      contentVersion: version,
+      selectorSchemaVersion: QUEUE_SELECTOR_SCHEMA_VERSION,
+      rotationPolicyVersion: QUEUE_ROTATION_POLICY_VERSION,
+      status: storage ? 'empty' : 'memory_only',
+      queueParseError: false,
+    };
     if (storage) {
+      let savedMeta = {};
+      const savedMetaRaw = storage.getItem(queueMetaStorageKey);
+      const hasMeta = savedMetaRaw !== null;
+      const persistedQueueStateExists = [
+        storage.getItem(storageKey),
+        storage.getItem(queueDirectionStorageKey),
+        storage.getItem(contextHistoryStorageKey),
+      ].some((value) => typeof value === 'string' && value.trim() && value.trim() !== '{}' && value.trim() !== '[]');
       try {
-        const saved = JSON.parse(storage.getItem(storageKey) || '{}');
-        Object.entries(saved).forEach(([key, ids]) => queues.set(key, Array.isArray(ids) ? ids : []));
+        if (savedMetaRaw) savedMeta = JSON.parse(savedMetaRaw) || {};
+        queueStateCompatible = !persistedQueueStateExists || (hasMeta
+          && savedMeta.contentVersion === version
+          && savedMeta.selectorSchemaVersion === QUEUE_SELECTOR_SCHEMA_VERSION
+          && savedMeta.rotationPolicyVersion === QUEUE_ROTATION_POLICY_VERSION);
+        queueRestoration.status = !persistedQueueStateExists
+          ? 'empty'
+          : (queueStateCompatible ? 'compatible' : (hasMeta ? 'incompatible_invalidated' : 'missing_meta_invalidated'));
       } catch {
-        // A rotação em memória continua disponível.
+        queueStateCompatible = false;
+        queueRestoration.status = 'corrupt_meta_invalidated';
+      }
+      if (queueStateCompatible) {
+        try {
+          const saved = JSON.parse(storage.getItem(storageKey) || '{}');
+          Object.entries(saved).forEach(([key, ids]) => queues.set(key, Array.isArray(ids) ? ids : []));
+        } catch {
+          queueRestoration.queueParseError = true;
+          queueRestoration.status = 'corrupt_queue_rebuilt';
+        }
+      } else {
+        queues.clear();
+        queueDirections.clear();
+        contextHistories.clear();
+        try {
+          storage.removeItem(storageKey);
+          storage.removeItem(queueDirectionStorageKey);
+          storage.removeItem(contextHistoryStorageKey);
+          storage.removeItem(queueMetaStorageKey);
+        } catch { /* invalidação seletiva opcional */ }
       }
       try {
         const savedRecent = JSON.parse(storage.getItem(recentStorageKey) || '[]');
@@ -396,21 +441,23 @@
       } catch {
         // O histórico recente continua disponível apenas em memória.
       }
-      try {
-        const savedDirections = JSON.parse(storage.getItem(queueDirectionStorageKey) || '{}');
-        Object.entries(savedDirections).forEach(([key, direction]) => {
-          if (['standard', 'motivated'].includes(direction)) queueDirections.set(key, direction);
-        });
-      } catch {
-        // A direção da fila pode ser reconstruída sem afetar a elegibilidade.
-      }
-      try {
-        const savedContexts = JSON.parse(storage.getItem(contextHistoryStorageKey) || '{}');
-        Object.entries(savedContexts).forEach(([key, entries]) => {
-          if (Array.isArray(entries)) contextHistories.set(key, entries.slice(-CONTEXT_HISTORY_LIMIT));
-        });
-      } catch {
-        // A trajetória por contexto continua disponível apenas em memória.
+      if (queueStateCompatible) {
+        try {
+          const savedDirections = JSON.parse(storage.getItem(queueDirectionStorageKey) || '{}');
+          Object.entries(savedDirections).forEach(([key, direction]) => {
+            if (['standard', 'motivated'].includes(direction)) queueDirections.set(key, direction);
+          });
+        } catch {
+          // A direção da fila pode ser reconstruída sem afetar a elegibilidade.
+        }
+        try {
+          const savedContexts = JSON.parse(storage.getItem(contextHistoryStorageKey) || '{}');
+          Object.entries(savedContexts).forEach(([key, entries]) => {
+            if (Array.isArray(entries)) contextHistories.set(key, entries.slice(-CONTEXT_HISTORY_LIMIT));
+          });
+        } catch {
+          // A trajetória por contexto continua disponível apenas em memória.
+        }
       }
     }
 
@@ -421,9 +468,52 @@
         storage.setItem(queueDirectionStorageKey, JSON.stringify(Object.fromEntries(queueDirections)));
         storage.setItem(recentStorageKey, JSON.stringify(recentSelections.slice(-RECENT_HISTORY_LIMIT)));
         storage.setItem(contextHistoryStorageKey, JSON.stringify(Object.fromEntries(contextHistories)));
+        storage.setItem(queueMetaStorageKey, JSON.stringify({
+          contentVersion: version,
+          selectorSchemaVersion: QUEUE_SELECTOR_SCHEMA_VERSION,
+          rotationPolicyVersion: QUEUE_ROTATION_POLICY_VERSION,
+        }));
       } catch {
         // Persistência é opcional; nunca afeta a elegibilidade.
       }
+    }
+
+    function hasRecentSelectionMatch(candidate, recentEntries) {
+      const textKey = normalizeComparableText(candidate.content.finalText);
+      const candidateCanonicalKeys = new Set(getContentCanonicalKeys(candidate.content));
+      return recentEntries.some((item) => item.id === candidate.content.id
+        || item.textKey === textKey
+        || (item.canonicalKeys || []).some((key) => candidateCanonicalKeys.has(key)));
+    }
+
+    function getLastSelectionIndex(candidate, recentEntries) {
+      for (let index = recentEntries.length - 1; index >= 0; index -= 1) {
+        if (hasRecentSelectionMatch(candidate, [recentEntries[index]])) return index;
+      }
+      return -1;
+    }
+
+    function getPermittedLevels(bestLevel) {
+      if (bestLevel === null) return [];
+      return bestLevel === 1 ? [1, 2] : [bestLevel];
+    }
+
+    function buildCandidateContract(ranked, state, { activeLevel, recentEntries = recentSelections } = {}) {
+      const permittedLevels = getPermittedLevels(ranked[0]?.level ?? null);
+      const permittedLevelSet = new Set(permittedLevels);
+      const eligible = ranked.filter((candidate) => permittedLevelSet.has(candidate.level));
+      const unseen = eligible.filter((candidate) => !hasRecentSelectionMatch(candidate, recentEntries));
+      const recentlyBlocked = eligible.filter((candidate) => hasRecentSelectionMatch(candidate, recentEntries));
+      return {
+        permittedLevels,
+        eligibleCandidates: eligible.map((candidate) => getCandidateDiagnostic(candidate, state)),
+        activeTierCandidates: eligible.filter((candidate) => candidate.level === activeLevel)
+          .map((candidate) => getCandidateDiagnostic(candidate, state)),
+        unseenEligibleCandidates: unseen.map((candidate) => getCandidateDiagnostic(candidate, state)),
+        recentlyBlockedCandidates: recentlyBlocked.map((candidate) => getCandidateDiagnostic(candidate, state)),
+        repeatAllowed: false,
+        repeatReason: null,
+      };
     }
 
     function inspect(state, options = {}) {
@@ -432,6 +522,7 @@
       const eligibleAtLevel = ranked.filter((candidate) => candidate.level === bestLevel);
       const synthesisContext = synthesisAdapter?.resolveState(state) || null;
       const motivationContext = motivationAdapter?.resolveState(state) || null;
+      const candidateContract = buildCandidateContract(ranked, state, { activeLevel: bestLevel });
       let diagnostics = null;
       if (options.diagnostics === true) {
         const beforeSynthesis = synthesisAdapter
@@ -452,7 +543,8 @@
           candidatesAfterSynthesis: ranked.map(({
             content, level, synthesisCompatibility, motivationCompatibility,
           }) => getCandidateDiagnostic({ content, level, synthesisCompatibility, motivationCompatibility }, state)),
-          eligibleCandidates: eligibleAtLevel.map((candidate) => getCandidateDiagnostic(candidate, state)),
+          ...candidateContract,
+          eligibleAtLevel: eligibleAtLevel.map((candidate) => getCandidateDiagnostic(candidate, state)),
           excludedCandidates: contents.map((content) => ({
             id: content.id,
             reasons: getEligibilityExclusions(content, state, options),
@@ -506,19 +598,32 @@
           && !recentTextKeys.has(textKey)
           && !hasCanonicalKey(content, recentCanonicalKeys);
       };
-      const primaryProgressionLevels = inspection.bestLevel === 1 ? [1, 2] : [inspection.bestLevel];
+      const primaryProgressionLevels = getPermittedLevels(inspection.bestLevel);
+      const permittedLevelSet = new Set(primaryProgressionLevels);
+      const territoryCandidates = inspection.ranked.filter(({ level }) => permittedLevelSet.has(level));
+      const unseenTerritoryCandidates = territoryCandidates.filter(hasNotBeenSeenInCycle);
+      const territoryCycleExhausted = unseenTerritoryCandidates.length === 0;
       const cycleUnseenLevel = primaryProgressionLevels.find((level) => inspection.ranked.some((candidate) => (
         candidate.level === level && hasNotBeenSeenInCycle(candidate)
       )));
-      const recentUnseenLevel = primaryProgressionLevels.find((level) => inspection.ranked.some((candidate) => (
-        candidate.level === level && hasNotBeenRecentlySeen(candidate)
-      )));
-      const activeLevel = cycleUnseenLevel ?? recentUnseenLevel ?? inspection.bestLevel;
+      const candidatesOtherThanCurrent = territoryCandidates.filter((candidate) => (
+        !lastSelection || !hasRecentSelectionMatch(candidate, [lastSelection])
+      ));
+      const repeatCandidates = candidatesOtherThanCurrent.length ? candidatesOtherThanCurrent : territoryCandidates;
+      const leastRecentCandidate = territoryCycleExhausted
+        ? repeatCandidates.slice().sort((left, right) => (
+          getLastSelectionIndex(left, globalHistoryBefore) - getLastSelectionIndex(right, globalHistoryBefore)
+        ))[0] || null
+        : null;
+      const activeLevel = cycleUnseenLevel ?? leastRecentCandidate?.level ?? inspection.bestLevel;
       const levelCandidates = inspection.ranked.filter((candidate) => candidate.level === activeLevel);
       const eligibleIds = levelCandidates.map((candidate) => candidate.content.id);
       const levelKey = `${key}::level:${activeLevel}`;
       const storedQueueBefore = [...(queues.get(levelKey) || [])];
       let queue = storedQueueBefore.filter((id) => eligibleIds.includes(id));
+      const removedMissingIds = storedQueueBefore.filter((id) => !contentById.has(id));
+      const removedIneligibleIds = storedQueueBefore.filter((id) => contentById.has(id) && !eligibleIds.includes(id));
+      const preservedQueueIds = [...queue];
       const queueDirection = state.needsMotivation === true ? 'motivated' : 'standard';
       const previousQueueDirection = queueDirections.get(levelKey);
       const motivationDirectionChanged = Boolean(previousQueueDirection && previousQueueDirection !== queueDirection);
@@ -535,17 +640,32 @@
         .map(({ content }) => content.id));
       const freshLevelIds = unseenLevelIds.size ? unseenLevelIds : recentUnseenLevelIds;
       const orderedLevelIds = buildCadencedQueue(levelCandidates);
+      const appendedEligibleIds = [];
       if (freshLevelIds.size) {
         queue = queue.filter((id) => freshLevelIds.has(id));
         orderedLevelIds.forEach((id) => {
-          if (freshLevelIds.has(id) && !queue.includes(id)) queue.push(id);
+          if (freshLevelIds.has(id) && !queue.includes(id)) {
+            queue.push(id);
+            appendedEligibleIds.push(id);
+          }
         });
       }
       const cycleRestarted = queue.length === 0;
-      if (cycleRestarted) queue = orderedLevelIds;
+      if (cycleRestarted) {
+        queue = orderedLevelIds;
+        orderedLevelIds.forEach((id) => {
+          if (!preservedQueueIds.includes(id) && !appendedEligibleIds.includes(id)) appendedEligibleIds.push(id);
+        });
+      }
       const activeQueueBeforeSelection = [...queue];
       const candidateById = new Map(levelCandidates.map((candidate) => [candidate.content.id, candidate]));
-      const queuedCandidates = queue.map((id) => candidateById.get(id)).filter(Boolean);
+      const candidateContract = buildCandidateContract(inspection.ranked, state, {
+        activeLevel,
+        recentEntries: globalHistoryBefore,
+      });
+      const queuedCandidates = territoryCycleExhausted && leastRecentCandidate
+        ? [leastRecentCandidate]
+        : queue.map((id) => candidateById.get(id)).filter(Boolean);
       let candidates = queuedCandidates.filter(({ content }) => {
         const textKey = normalizeComparableText(content.finalText);
         return !recentIds.has(content.id)
@@ -676,9 +796,7 @@
       const globalHistoryAfter = recentSelections.map((item) => ({ ...item }));
       const contextHistoryAfter = (contextHistories.get(baseKey) || []).map((item) => ({ ...item }));
       persist();
-      const selectedWasRecentlySeen = recentIds.has(selectedId)
-        || recentTextKeys.has(selectedTextKey)
-        || selectedCanonicalKeys.some((key) => recentCanonicalKeys.has(key));
+      const selectedWasPreviouslySeen = hasRecentSelectionMatch(selected, globalHistoryBefore);
       const safeUnseenOutsideQueue = levelCandidates.filter(({ content }) => {
         const textKey = normalizeComparableText(content.finalText);
         return !activeQueueBeforeSelection.includes(content.id)
@@ -686,13 +804,11 @@
           && !recentTextKeys.has(textKey)
           && !hasCanonicalKey(content, recentCanonicalKeys);
       });
-      const repeatAllowed = selectedWasRecentlySeen;
-      let repeatReason = null;
-      if (repeatAllowed) {
-        repeatReason = safeUnseenOutsideQueue.length
-          ? 'exact_avoidance_relaxed_with_safe_unseen_candidates_outside_active_queue'
-          : 'exact_avoidance_relaxed_without_safe_unseen_candidate_at_selected_level';
-      }
+      const repeatAllowed = selectedWasPreviouslySeen
+        && candidateContract.unseenEligibleCandidates.length === 0;
+      const repeatReason = repeatAllowed
+        ? 'all_allowed_candidates_exhausted'
+        : (selectedWasPreviouslySeen ? 'unseen_allowed_candidates_remain' : null);
       return {
         content: selected.content,
         level: selected.level,
@@ -722,11 +838,30 @@
           queueVersion: version,
           bestLevel: inspection.bestLevel,
           activeLevel,
-          levelProgressionReason: activeLevel === inspection.bestLevel
-            ? 'best_level_has_unseen_content_or_primary_cycle_exhausted'
-            : 'best_level_exhausted_progressed_within_primary_feeling',
+          ...candidateContract,
+          territoryCycle: {
+            scope: 'global_session_allowed_territory',
+            permittedLevels: [...primaryProgressionLevels],
+            eligibleCount: territoryCandidates.length,
+            unseenCount: unseenTerritoryCandidates.length,
+            exhausted: territoryCycleExhausted,
+            currentContentExcluded: Boolean(lastSelection && candidatesOtherThanCurrent.length),
+          },
+          leastRecentCandidateId: leastRecentCandidate?.content.id || null,
+          levelProgressionReason: territoryCycleExhausted
+            ? 'allowed_territory_exhausted_least_recent_repeat'
+            : (activeLevel === inspection.bestLevel
+              ? 'best_level_has_unseen_content'
+              : 'best_level_exhausted_progressed_within_primary_feeling'),
           queueDirection,
           previousQueueDirection: previousQueueDirection || null,
+          queueRestoration: { ...queueRestoration },
+          queueReconciliation: {
+            preservedIds: preservedQueueIds,
+            removedMissingIds,
+            removedIneligibleIds,
+            appendedEligibleIds,
+          },
           storedQueueBefore,
           activeQueueBeforeSelection,
           queueAfterSelection: [...queue],
@@ -750,6 +885,13 @@
             .map((candidate) => getCandidateDiagnostic(candidate, state)),
           repeatAllowed,
           repeatReason,
+          repeatProof: repeatAllowed ? {
+            eligibleCount: candidateContract.unseenEligibleCandidates.length,
+            safeCandidatesChecked: territoryCandidates.length,
+            nextTierCandidatesChecked: territoryCandidates
+              .filter(({ level }) => level !== inspection.bestLevel).length,
+            leastRecentCandidateId: leastRecentCandidate?.content.id || null,
+          } : null,
           chosen: {
             ...getCandidateDiagnostic(selected, state, { includeText: true }),
             finalReason: LEVEL_REASONS[selected.level],
@@ -769,6 +911,7 @@
           storage.removeItem(storageKey);
           storage.removeItem(queueDirectionStorageKey);
           storage.removeItem(contextHistoryStorageKey);
+          storage.removeItem(queueMetaStorageKey);
           if (includeRecent) storage.removeItem(recentStorageKey);
         } catch { /* opcional */ }
       }
@@ -783,6 +926,8 @@
 
   root.EntreSabiosRuntimeEngine = {
     LEVEL_REASONS,
+    QUEUE_ROTATION_POLICY_VERSION,
+    QUEUE_SELECTOR_SCHEMA_VERSION,
     RECENT_AUTHOR_WINDOW,
     RECENT_CONTENT_WINDOW,
     areNearDuplicateTexts,

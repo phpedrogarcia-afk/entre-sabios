@@ -10,8 +10,10 @@ const html = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
 const script = fs.readFileSync(path.join(rootDir, 'script.js'), 'utf8');
 const embeddedRuntimeScript = fs.readFileSync(path.join(rootDir, 'data', 'entre_sabios_runtime.js'), 'utf8');
 const runtimeLoaderScript = fs.readFileSync(path.join(rootDir, 'js', 'core', 'runtime-loader.js'), 'utf8');
+const emotionalStateScript = fs.readFileSync(path.join(rootDir, 'js', 'core', 'emotional-state.js'), 'utf8');
 const matchingScript = fs.readFileSync(path.join(rootDir, 'js', 'core', 'matching.js'), 'utf8');
 const feedbackScript = fs.readFileSync(path.join(rootDir, 'js', 'features', 'feedback.js'), 'utf8');
+const talesScript = fs.readFileSync(path.join(rootDir, 'js', 'features', 'tales.js'), 'utf8');
 const feelingsScript = fs.readFileSync(path.join(rootDir, 'js', 'ui', 'feelings-ui.js'), 'utf8');
 const reflectionUiScript = fs.readFileSync(path.join(rootDir, 'js', 'ui', 'reflection-ui.js'), 'utf8');
 const sharingScript = fs.readFileSync(path.join(rootDir, 'js', 'features', 'sharing.js'), 'utf8');
@@ -22,7 +24,7 @@ const tabletCss = fs.readFileSync(path.join(rootDir, 'css', 'tablet.css'), 'utf8
 
 test('HTML carrega runtime e não carrega bancos editoriais legados', () => {
   assert.match(html, /runtime-engine\.js/);
-  assert.match(html, /data\/entre_sabios_runtime\.js\?v=definitiva-2\.1/);
+  assert.match(html, /data\/entre_sabios_runtime\.js\?v=definitiva-2\.4/);
   assert.match(html, /runtime-loader\.js/);
   for (const legacy of ['authors.js', 'quotes/base.js', 'quotes/batch-', 'perspectives.js', 'content-normalizer.js']) {
     assert.ok(!html.includes(legacy), `Script legado ainda carregado: ${legacy}`);
@@ -44,6 +46,44 @@ test('interface possui estado de carregamento e não exibe preferência pessoal 
   assert.doesNotMatch(feedbackScript, /preferenceProfile\.authors/);
 });
 
+test('intensidade começa neutra e sorteia uma opção por geração sem marcar a interface', () => {
+  const intensityInputs = [...html.matchAll(/<input[^>]+name="intensity"[^>]*>/g)].map(([input]) => input);
+  assert.equal(intensityInputs.length, 3);
+  assert.ok(intensityInputs.every((input) => !/\schecked(?:\s|\/|>)/.test(input)));
+  assert.match(html, /Como você quer receber esta reflexão\?/);
+  assert.match(html, />Delicado</);
+  assert.match(html, />Equilibrado</);
+  assert.match(html, />Profundo</);
+  assert.doesNotMatch(html, /aria-required="true"/);
+  assert.match(script, /let currentIntensity = null;/);
+  assert.match(emotionalStateScript, /function resolveGenerationIntensity\(explicitIntensity, randomSource = Math\.random\)/);
+  const generationBlock = script.slice(script.indexOf('function generateReflection'), script.indexOf('function goBack'));
+  const newPhraseBlock = script.slice(script.indexOf('function newPhrase'), script.indexOf('// =========================\n// Compartilhamento como imagem'));
+  assert.match(generationBlock, /resolveGenerationIntensity\(currentIntensity\)/);
+  assert.match(generationBlock, /intensity: generationIntensity/);
+  assert.match(newPhraseBlock, /resolveGenerationIntensity\(currentIntensity\)/);
+  assert.match(newPhraseBlock, /intensity: generationIntensity/);
+  assert.doesNotMatch(generationBlock, /hasExplicitIntensity|showIntensityHint/);
+  assert.doesNotMatch(newPhraseBlock, /hasExplicitIntensity|showIntensityHint/);
+});
+
+test('conto usa Equilibrado como fallback sem marcar intensidade na interface', () => {
+  assert.match(talesScript, /function resolveTaleIntensity\(explicitIntensity = currentIntensity\)/);
+  assert.match(talesScript, /explicitIntensity == null \|\| explicitIntensity === '' \? 'moderada' : null/);
+  assert.match(talesScript, /interpretEmotionalState\(resolveTaleIntensity\(currentIntensity\)\)/);
+  assert.doesNotMatch(talesScript, /escolha a intensidade/i);
+});
+
+test('conto abre sem sentimento e usa a seleção emocional somente como filtro opcional', () => {
+  const openTaleBlock = talesScript.match(/function openPhilosophicalTale\(\) \{([\s\S]*?)\n\}/)?.[1] || '';
+  assert.ok(openTaleBlock, 'função de abertura do conto não encontrada');
+  assert.doesNotMatch(openTaleBlock, /ensureSelectionMin|showSelectionHint|Selecione um sentimento/i);
+  assert.match(openTaleBlock, /showTale\(\{ gradualVariety: false \}\)/);
+  assert.match(talesScript, /state\.primaryFeeling && taleFeelings\.includes/);
+  assert.match(talesScript, /\(state\.secondaryFeelings \|\| \[\]\)\.forEach/);
+  assert.match(talesScript, /\|\| 'sem_sentimento'/);
+});
+
 test('sentimentos são montados antes do carregamento assíncrono do acervo', () => {
   assert.match(script, /feelingsCatalog\s*=\s*Array\.isArray\(window\.EntreSabiosData\.feelingsCatalog\)/);
   const initBlock = script.slice(script.indexOf('async function init()'));
@@ -58,8 +98,8 @@ test('acervo incorporado habilita a reflexão sem depender de fetch local', asyn
   vm.runInNewContext(embeddedRuntimeScript, sandbox);
   vm.runInNewContext(runtimeLoaderScript, sandbox);
   const loaded = await sandbox.EntreSabiosRuntimeLoader.loadRuntimeContent();
-  assert.equal(loaded.contentVersion, 'definitiva-2.1');
-  assert.equal(loaded.contents.length, 283);
+  assert.equal(loaded.contentVersion, 'definitiva-2.4');
+  assert.equal(loaded.contents.length, 257);
   assert.equal(loaded.feelings.length, 14);
 });
 

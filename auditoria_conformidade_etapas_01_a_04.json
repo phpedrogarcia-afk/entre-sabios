@@ -1,0 +1,201 @@
+{
+  "auditMetadata": {
+    "date": "2026-07-22T19:22:43-03:00",
+    "branch": "agent/finaliza-loop-estabilizacao",
+    "commit": "7876aa46f264a327442aa01e6f169ea333ac6ddf",
+    "baselineCommit": "573cbba6b6685391103e5e64a08a386d77a847f8",
+    "auditorSession": "auditoria retroativa estritamente documental das etapas 01 a 04",
+    "limitations": [
+      "As etapas auditadas não possuem commits próprios; seus artefatos permanecem não rastreados ou misturados a uma árvore de trabalho preexistente.",
+      "Não há snapshot versionado do diretório de trabalho imediatamente anterior a cada etapa.",
+      "Datas de início são inferidas somente de mtimes; os próprios relatórios não preservam horário e os prompts/aprovações humanas não estão no repositório.",
+      "O histórico Git direto do mestre contém apenas uma versão útil anterior, no commit 573cbba6b6685391103e5e64a08a386d77a847f8.",
+      "A URL da UNEB respondeu com desafio antibot nesta auditoria; a passagem de Rubem Alves foi reproduzida pela tese da UnB e a existência/autoria da obra pelo Instituto Rubem Alves.",
+      "Negativas de alteração anteriores ao primeiro fingerprint preservado são parcialmente comprovadas por mtime e estado do Git, não por snapshot criptográfico contemporâneo.",
+      "A regressão completa possui uma falha preexistente em tests/canonical-contracts.test.mjs: index.html usa o cache definitiva-2.3-20260718-cache-fix-1 e o teste espera definitiva-2.3. A auditoria não corrigiu o arquivo."
+    ]
+  },
+  "initialState": {
+    "capturedAt": "2026-07-22T19:22:43-03:00",
+    "branch": "agent/finaliza-loop-estabilizacao",
+    "head": "7876aa46f264a327442aa01e6f169ea333ac6ddf",
+    "headDate": "2026-07-16T15:18:14-03:00",
+    "headSubject": "Consolida algoritmo e auditoria emocional",
+    "masterVersion": "definitiva-2.3",
+    "runtimeVersion": "definitiva-2.3",
+    "masterHistoricalTotal": 350,
+    "masterActiveTotal": 257,
+    "masterRemovedTotal": 92,
+    "masterMovedToTextsTotal": 1,
+    "runtimeActiveTotal": 257,
+    "trackedChangesAtStart": [
+      ".gitignore (D)", ".htaccess (M)", "DECISIONS.md (M)", "DOCUMENTACAO_ENTRE_SABIOS.md (M)", "PADRAO_EDITORIAL_ENTRE_SABIOS.md (M)", "PROJECT_STATUS.md (M)", "README.md (D)", "REGISTRO_PROBLEMAS_RECORRENTES.md (M)",
+      "contos/agricultor-e-o-cavalo/index.html (M)", "contos/dois-monges-e-a-mulher/index.html (M)", "contos/flecha-envenenada/index.html (M)", "contos/grande-inquisidor/index.html (M)", "contos/mito-de-narciso/index.html (M)", "contos/navio-de-teseu/index.html (M)",
+      "css/components.css (M)", "data/entre_sabios_runtime.js (M)", "data/entre_sabios_runtime.json (M)", "entre_sabios_acervo_mestre_final.json (M)", "index.html (M)", "js/core/emotional-state.js (M)", "js/core/matching.js (M)", "js/core/runtime-loader.js (M)",
+      "js/data/books.js (M)", "js/data/catalogs.js (M)", "js/data/editorial-explanations.js (M)", "js/data/editorial-guidance.js (M)", "js/data/tales.js (M)", "js/features/tales.js (M)", "js/ui/feelings-ui.js (M)", "package.json (M)", "script.js (M)", "scripts/content-build-lib.mjs (M)", "scripts/generate-behavioral-report.mjs (M)", "style.css (M)",
+      "tests/authorship-presentation.test.mjs (M)", "tests/behavioral-selection.test.mjs (M)", "tests/book-recommendations.test.mjs (M)", "tests/content-runtime.test.mjs (M)", "tests/editorial-explanations.test.mjs (M)", "tests/editorial-guidance.test.mjs (M)", "tests/emotional-lab.test.mjs (M)", "tests/emotional-state-contract.test.mjs (M)", "tests/fixtures/auditoria_comportamental_atual.json (M)", "tests/fixtures/auditoria_comportamental_baseline.json (M)", "tests/gender-preference-removal.test.mjs (M)", "tests/interface-wiring.test.mjs (M)", "tests/motivation-control.test.mjs (M)", "tests/repetition-real-path-regression.test.mjs (M)", "tests/runtime-selection.test.mjs (M)", "tests/selection-atomicity.test.mjs (M)", "tests/share-image-layout.test.mjs (M)", "tests/systematic-audit.test.mjs (M)",
+      "21 relatórios anteriores renomeados para docs/ (R/RM)"
+    ],
+    "untrackedAtStart": [
+      ".github/workflows/browser-smoke.yml", "AGENTS.md", "NUCLEO_PRESERVACAO_EDITORIAL.md", "css/modals-PEDRO.css", "curadoria-rigida-3.1.zip", "curadoria-rigida-3.1/", "deploy-manifest.json", "docs/ALGORITMO_ATUAL_E_SINCRONICIDADE_COM_O_ACERVO.md", "docs/ARQUIVO_REJEITADOS_ANTOLOGIA_IA.md", "docs/ARQUIVO_REJEITADOS_ORIGINAIS_IA_SEM_BASE.md", "docs/AUDITORIA_PROVENIENCIA_ACERVO_LOTE_01.md", "docs/AUDITORIA_PROVENIENCIA_COMPLETA_2026-07-18.json", "docs/AUDITORIA_PROVENIENCIA_COMPLETA_2026-07-18.md", "docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.json", "docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.md", "docs/README.md", "docs/RELATORIO_LOTE_PILOTO_RECUPERACAO_EDITORIAL.md", "docs/RELATORIO_PENEIRA_QUALIDADE_EDITORIAL_LOTE_01.md", "docs/RELATORIO_VERIFICACAO_DOCUMENTAL_LOTE_01.md", "docs/RESULTADO_PENEIRA_IA_ACERVO_2026-07-18.md", "docs/auditoria-proveniencia-lotes/", "docs/lote_piloto_recuperacao_editorial.json", "docs/peneira_qualidade_editorial_lote_01.json", "docs/verificacao_documental_lote_01.json", "js/data/tales-PEDRO.js", "js/features/tales-PEDRO.js", "node_modules/", "package-lock.json", "playwright.config.mjs", "scripts/audit-complete-provenance.mjs", "scripts/audit-four-block-coverage.mjs", "scripts/build-deploy-package.mjs", "scripts/build-historical-provenance-map.mjs", "scripts/check-deploy.mjs", "scripts/check-governance.mjs", "scripts/deploy-lib.mjs", "scripts/governance-lib.mjs", "scripts/retire-ai-antologia.mjs", "scripts/retire-unbased-ai-originals.mjs", "scripts/select-tests.mjs", "scripts/test-routing-lib.mjs", "test-results/", "tests/browser/", "tests/deploy-manifest.test.mjs", "tests/four-block-coverage-audit.test.mjs", "tests/governance-contract.test.mjs", "tests/historical-provenance-map.test.mjs", "tests/provenance-audit-complete.test.mjs", "tests/tales-editorial-batch.test.mjs"
+    ]
+  },
+  "timeline": [
+    {"stageId":"01","probableStart":"2026-07-22 12:29 -03:00","files":["PADRAO_EDITORIAL_ENTRE_SABIOS.md","DECISIONS.md","AGENTS.md","PROJECT_STATUS.md"],"commitOrDiff":"somente diff local contra 7876aa4; nenhum commit da etapa","state":"entrega material localizada; início exato não comprovado"},
+    {"stageId":"02","probableStart":"2026-07-22 14:33 -03:00","files":["docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.md","docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.json","scripts/build-historical-provenance-map.mjs","tests/historical-provenance-map.test.mjs"],"commitOrDiff":"não rastreados; nenhum commit","state":"equivalentes substantivos encontrados, nomes obrigatórios ausentes"},
+    {"stageId":"03","probableStart":"2026-07-22 18:24 -03:00","files":["docs/RELATORIO_LOTE_PILOTO_RECUPERACAO_EDITORIAL.md","docs/lote_piloto_recuperacao_editorial.json"],"commitOrDiff":"não rastreados; nenhum commit","state":"lote de 9 casos localizado"},
+    {"stageId":"04","probableStart":"2026-07-22 18:46 -03:00","files":["docs/RELATORIO_VERIFICACAO_DOCUMENTAL_LOTE_01.md","docs/verificacao_documental_lote_01.json"],"commitOrDiff":"não rastreados; nenhum commit","state":"pesquisa de 3 casos localizada; autorização inferida indevidamente"},
+    {"stageId":"posterior","probableStart":"2026-07-22 19:13 -03:00","files":["docs/RELATORIO_PENEIRA_QUALIDADE_EDITORIAL_LOTE_01.md","docs/peneira_qualidade_editorial_lote_01.json"],"commitOrDiff":"não rastreados; nenhum commit","state":"etapa posterior existe apesar da condição de parada da etapa 04"}
+  ],
+  "stages": [
+    {
+      "stageId": "01",
+      "title": "Constituição Editorial Canônica",
+      "expectedOutputs": ["PADRAO_EDITORIAL_ENTRE_SABIOS.md","DECISIONS.md","PROJECT_STATUS.md","AGENTS.md"],
+      "foundOutputs": ["PADRAO_EDITORIAL_ENTRE_SABIOS.md","DECISIONS.md: DEC-033","PROJECT_STATUS.md: linha de estado da Constituição","AGENTS.md: resumo operacional"],
+      "requirements": [
+        {"requirement":"Constituição integrada ao local canônico","expectedEvidence":"texto normativo em PADRAO_EDITORIAL_ENTRE_SABIOS.md","foundEvidence":["seção Constituição Editorial Canônica; SHA-256 82dcd5ec3d8dc98121fe4697697bc749707b8eaef9c74346874ec982833a39ad"],"status":"COMPROVADO","severity":"G1","notes":"Autoridade, escopo, proveniência, qualidade, IA, preservação e limites estão integrados."},
+        {"requirement":"Nova decisão canônica","expectedEvidence":"decisão vigente com ID, data, escopo e limites","foundEvidence":["DEC-033, data 22/07/2026, estado vigente, linhas 363-378"],"status":"COMPROVADO","severity":"G1","notes":"A decisão referencia os quatro arquivos obrigatórios."},
+        {"requirement":"Preservação da DEC-024","expectedEvidence":"antes/depois e ausência de substituição","foundEvidence":["DEC-024 atual está vigente; DEC-033 declara preservação integral; diff local adiciona ambas"],"status":"PARCIALMENTE COMPROVADO","severity":"G2","notes":"Não existe snapshot imediatamente anterior à etapa 01; não é possível comparar o texto pré-etapa."},
+        {"requirement":"Resumo operacional em AGENTS.md","expectedEvidence":"resumo e referência, sem duplicação integral","foundEvidence":["AGENTS.md contém síntese de oito regras e aponta PADRAO_EDITORIAL_ENTRE_SABIOS.md"],"status":"COMPROVADO","severity":"G1","notes":"A Constituição completa não foi duplicada."},
+        {"requirement":"Registro honesto em PROJECT_STATUS.md","expectedEvidence":"estado coerente com entregáveis","foundEvidence":["Constituição marcada concluída em governança com DEC-033 e PADRAO como evidência"],"status":"COMPROVADO","severity":"G1","notes":"Os entregáveis centrais existem."},
+        {"requirement":"Nenhuma alteração no mestre/runtime/algoritmo/interface/testes/conteúdos","expectedEvidence":"snapshot ou hashes pré/pós da etapa","foundEvidence":["master/runtime têm mtime 18/07, anterior à etapa; arquivos de algoritmo têm mtime 17-18/07; index/tales 22/07 11:58, anterior aos documentos 12:29"],"status":"PARCIALMENTE COMPROVADO","severity":"G2","notes":"O Git mostra mudanças preexistentes, mas não há snapshot criptográfico contemporâneo à etapa 01 para excluir restauração silenciosa."}
+      ],
+      "stopConditionStatus": "impossível determinar",
+      "prohibitedChanges": [],
+      "classification": "APROVADA COM RESSALVAS",
+      "trustedForNextStage": true
+    },
+    {
+      "stageId": "02",
+      "title": "Inventário histórico e mapa de proveniência",
+      "expectedOutputs": ["RELATORIO_INVENTARIO_HISTORICO_E_PROVENIENCIA.md","inventario_historico_proveniencia.json"],
+      "foundOutputs": ["docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.md","docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.json","scripts/build-historical-provenance-map.mjs","tests/historical-provenance-map.test.mjs"],
+      "requirements": [
+        {"requirement":"Arquivos obrigatórios com os nomes pedidos","expectedEvidence":"dois basenames exatos","foundEvidence":["ambos os nomes exatos estão ausentes; existem equivalentes com outros nomes em docs/"],"status":"NÃO EXECUTADO","severity":"G2","notes":"O conteúdo equivalente existe, mas o contrato nominal não foi seguido."},
+        {"requirement":"Estrutura abrangente do JSON","expectedEvidence":"metadados, fontes, inventários, histórico, removidos, IDs, linhagens, lotes, protegidos, externos, duplicatas, autoria, conflitos, não resolvidos e estatísticas","foundEvidence":["todas as chaves estruturais existem; 350 registros, 93 inativos, 54 changedIds, 10 linhagens, 10 lotes, 10 protegidos, 49 externos, 44 attributionChanges, 176 conflitos, 180 não resolvidos"],"status":"COMPROVADO","severity":"G1","notes":"Cobertura estrutural ampla."},
+        {"requirement":"Totais atuais e históricos reproduzíveis","expectedEvidence":"recontagem independente","foundEvidence":["mestre: 350 históricos, 257 ativos, 92 REMOVIDO e 1 MOVER_PARA_TEXTOS; runtime: 257; união declarada: 399 IDs"],"status":"PARCIALMENTE COMPROVADO","severity":"G2","notes":"Totais atuais conferem; o total histórico de 399 depende dos 49 artefatos externos e do histórico raso."},
+        {"requirement":"Conteúdos removidos","expectedEvidence":"remoção, evidência, data/motivo quando disponível","foundEvidence":["removedContents contém 93 entradas e limitações explícitas"],"status":"PARCIALMENTE COMPROVADO","severity":"G3","notes":"A coleção mistura 92 REMOVIDO com 1 MOVER_PARA_TEXTOS; primeira remoção e última versão ativa não são reconstruídas para a maioria."},
+        {"requirement":"IDs alterados","expectedEvidence":"ID anterior, ID atual e evidência","foundEvidence":["somente dois changeType=id_normalization com legacyIds; a seção chama 54 diferenças de campos de 'IDs alterados'"],"status":"PARCIALMENTE COMPROVADO","severity":"G3","notes":"54 é total de registros alterados, não total de identificadores renomeados."},
+        {"requirement":"Mudanças de autoria","expectedEvidence":"antes/depois verificável","foundEvidence":["44 attributionChanges agregam autoria, atribuição ou fonte; amostra confirma mudanças documentadas"],"status":"PARCIALMENTE COMPROVADO","severity":"G2","notes":"O total não isola mudanças de autoria das mudanças apenas de fonte."},
+        {"requirement":"Lotes históricos","expectedEvidence":"composição e fonte","foundEvidence":["10 lotes; amostras lote_01_1_45.json e lote_02_46_90.json contêm 45 IDs cada"],"status":"COMPROVADO","severity":"G1","notes":"A origem histórica é declarada indeterminada quando o Git não sustenta mais."},
+        {"requirement":"Protegidos ausentes","expectedEvidence":"todos os casos","foundEvidence":["NP-MED-DUNA-001, NP-MED-GAIOLA-001, NP-CUL-001, NP-ESP-DAWKINS-001, NP-LUT-SCHMIDT-001 e TXT-LUT-003 estão listados fora do mestre"],"status":"COMPROVADO","severity":"G1","notes":"Todos os seis foram conferidos contra o Núcleo e o mestre."},
+        {"requirement":"Consistência relatório/JSON sobre rastreabilidade","expectedEvidence":"mesmas classes e totais","foundEvidence":["Markdown diz que casos sem motivo estão em R3; JSON registra R3=0 e R1=93"],"status":"CONTRADITÓRIO","severity":"G3","notes":"A contradição impede confiar na classe de rastreabilidade sem correção futura."},
+        {"requirement":"Nenhuma alteração em mestre/runtime","expectedEvidence":"fingerprints preservados","foundEvidence":["SHA-256 atuais coincidem com fingerprints do inventário para mestre e ambos os runtimes"],"status":"COMPROVADO","severity":"G1","notes":"Comprovado da geração do inventário até esta auditoria."}
+      ],
+      "stopConditionStatus": "impossível determinar",
+      "prohibitedChanges": [],
+      "classification": "PARCIAL",
+      "trustedForNextStage": false
+    },
+    {
+      "stageId": "03",
+      "title": "Lote piloto de recuperação editorial",
+      "expectedOutputs": ["RELATORIO_LOTE_PILOTO_RECUPERACAO_EDITORIAL.md","lote_piloto_recuperacao_editorial.json"],
+      "foundOutputs": ["docs/RELATORIO_LOTE_PILOTO_RECUPERACAO_EDITORIAL.md","docs/lote_piloto_recuperacao_editorial.json"],
+      "requirements": [
+        {"requirement":"Lote de 8 a 12 casos","expectedEvidence":"contagem real","foundEvidence":["9 casos REC-01 a REC-09"],"status":"COMPROVADO","severity":"G1","notes":"Dentro do intervalo."},
+        {"requirement":"Diversidade de casos","expectedEvidence":"protegidos, externos, removidos, atribuição e controles","foundEvidence":["4 protegidos, 2 exclusivos de patch, 2 remoções justificadas, 1 sem ID e controles ativos"],"status":"COMPROVADO","severity":"G1","notes":"Diversidade material comprovada."},
+        {"requirement":"Texto histórico integral, linha temporal e evidências por caso","expectedEvidence":"campos individuais","foundEvidence":["historicalTexts, firstLocatedAt, lastActiveAt, removalOrChangeAt, lineage e evidence existem em todos os casos conforme aplicável"],"status":"PARCIALMENTE COMPROVADO","severity":"G2","notes":"Datas ausentes são reconhecidas; algumas trajetórias dependem do Núcleo/patch, não do Git."},
+        {"requirement":"Classificação de saída e recuperabilidade","expectedEvidence":"duas classificações separadas","foundEvidence":["S1/S2/S5/S6/S7/S8 e REC-A/B/C/D para os 9 casos"],"status":"COMPROVADO","severity":"G1","notes":"As taxonomias estão separadas."},
+        {"requirement":"Separação entre valor editorial e proveniência","expectedEvidence":"campos independentes","foundEvidence":["preliminaryEditorialValue e preliminaryProvenanceRisk em cada caso"],"status":"COMPROVADO","severity":"G1","notes":"Separação explícita."},
+        {"requirement":"Caso do texto sobre coragem rastreado sem autoria inventada","expectedEvidence":"local, IDs, versões, datas, remoção, recuperabilidade e próxima etapa","foundEvidence":["REC-02 preserva texto integral; localiza apenas Constituição; contentId null; não atribui Nietzsche, Zaratustra, Entre Sábios ou IA"],"status":"PARCIALMENTE COMPROVADO","severity":"G3","notes":"Classificá-lo como S8 'desaparecimento' não é sustentado: não há prova de que o texto existia antes da Constituição ou tenha sido removido."},
+        {"requirement":"Nenhum caso restaurado/alterado/publicado","expectedEvidence":"hashes e ausência de aplicação","foundEvidence":["fingerprints de mestre/runtime permanecem idênticos ao inventário; saídas são somente relatório/JSON"],"status":"COMPROVADO","severity":"G1","notes":"Nenhuma aplicação detectada."},
+        {"requirement":"Condição de parada antes da verificação documental","expectedEvidence":"aprovação humana explícita preservada","foundEvidence":["o piloto exige aprovação; a etapa 04 posterior declara que a autorização decorre apenas da marcação como prioritários"],"status":"VIOLAÇÃO","severity":"G4","notes":"Prioridade documental não equivale a aprovação humana."}
+      ],
+      "stopConditionStatus": "parada violada",
+      "prohibitedChanges": ["A etapa seguinte foi iniciada sem autorização humana comprovada; a própria etapa 04 registra autorização inferida."],
+      "classification": "REPROVADA",
+      "trustedForNextStage": false
+    },
+    {
+      "stageId": "04",
+      "title": "Verificação documental",
+      "expectedOutputs": ["RELATORIO_VERIFICACAO_DOCUMENTAL_LOTE_01.md","verificacao_documental_lote_01.json"],
+      "foundOutputs": ["docs/RELATORIO_VERIFICACAO_DOCUMENTAL_LOTE_01.md","docs/verificacao_documental_lote_01.json"],
+      "requirements": [
+        {"requirement":"Somente casos autorizados","expectedEvidence":"aprovação humana explícita do subconjunto","foundEvidence":["auditMetadata afirma que a autorização decorre da prioridade do piloto"],"status":"VIOLAÇÃO","severity":"G4","notes":"O próprio piloto exigia aprovação humana posterior; não há registro humano no repositório."},
+        {"requirement":"Fontes primárias/institucionais priorizadas","expectedEvidence":"URLs reais e autoridade","foundEvidence":["fac-símile BBM/USP, boletim UNESP, corpora Gutenberg, tese UnB, repositório UNEB e Instituto Rubem Alves"],"status":"COMPROVADO","severity":"G1","notes":"As URLs existem; UNEB ficou inacessível por antibot nesta reprodução."},
+        {"requirement":"Matriz de fontes, classificação, confiança e correspondência","expectedEvidence":"campos por caso","foundEvidence":["sourceMatrix, T1/T4, D1/D4 e DOC-D/DOC-I nos 3 casos"],"status":"COMPROVADO","severity":"G1","notes":"Estrutura e conteúdo presentes."},
+        {"requirement":"Schmidt/TXT-LUT-003","expectedEvidence":"poema-base e distinção da adaptação","foundEvidence":["Revista de Antropofagia, p.6 impressa, traz 'Quando eu morrer' assinado Augusto Schimidt; microtexto local é transformação"],"status":"COMPROVADO","severity":"G1","notes":"DOC-D/T4 é compatível com a evidência."},
+        {"requirement":"Texto de coragem/Nietzsche","expectedEvidence":"comparação sem converter afinidade em inspiração","foundEvidence":["Zaratustra contém coragem, abismo e dor; a redação local não aparece; classificado T1/D1/DOC-I"],"status":"COMPROVADO","severity":"G1","notes":"O relatório rejeita corretamente DOC-F e autoria de Nietzsche."},
+        {"requirement":"Rubem Alves/TXT-MED-004","expectedEvidence":"passagem-base, obra e transformação","foundEvidence":["tese UnB reproduz voo/vazio/gaiolas e atribui a Religião e Repressão; Instituto confirma obra e autor; microtexto acrescenta desenvolvimento próprio"],"status":"PARCIALMENTE COMPROVADO","severity":"G2","notes":"A edição Loyola/página original não foi acessada; D4 depende de reproduções acadêmicas mais catálogo institucional."},
+        {"requirement":"Inspiração demonstrável","expectedEvidence":"obra, passagem, transformação e diferença","foundEvidence":["nenhum caso foi classificado como inspiração demonstrável; coragem permaneceu afinidade temática"],"status":"COMPROVADO","severity":"G1","notes":"Não houve inflação de afinidade em inspiração."},
+        {"requirement":"Fabricação por IA somente com prova técnica/humana","expectedEvidence":"prompt, resposta, script, commit ou confirmação","foundEvidence":["3 casos ART-0; nenhuma fabricação comprovada"],"status":"COMPROVADO","severity":"G1","notes":"Estilo não foi usado como prova."},
+        {"requirement":"Direitos autorais e cópia mínima","expectedEvidence":"ausência de reprodução excessiva","foundEvidence":["relatório resume e cita apenas o necessário; textos locais completos são objetos internos da auditoria"],"status":"COMPROVADO","severity":"G1","notes":"Nenhuma cópia excessiva identificada."},
+        {"requirement":"Nenhuma conclusão aplicada ao acervo","expectedEvidence":"hashes e ausência de diffs posteriores atribuíveis","foundEvidence":["hashes do mestre/runtime seguem iguais aos fingerprints da etapa 02"],"status":"COMPROVADO","severity":"G1","notes":"Nenhuma aplicação detectada."},
+        {"requirement":"Condição de parada antes da peneira","expectedEvidence":"aprovação humana preservada","foundEvidence":["peneira criada às 19:13; relatório da peneira apenas afirma que houve aprovação, sem registro humano verificável"],"status":"NÃO COMPROVADO","severity":"G4","notes":"A existência da etapa posterior é comprovada; não é possível comprovar que o avanço foi autorizado."}
+      ],
+      "stopConditionStatus": "parada parcialmente respeitada",
+      "prohibitedChanges": ["Pesquisa iniciada para casos cuja autorização foi inferida, não comprovada.","Etapa posterior de peneira existe sem prova repositorial da aprovação humana exigida."],
+      "classification": "REPROVADA",
+      "trustedForNextStage": false
+    }
+  ],
+  "fileChanges": [
+    {"file":"PADRAO_EDITORIAL_ENTRE_SABIOS.md","probableStage":"01","authorization":"autorizado pela etapa 01","compatibility":"permitido","impact":"Constituição canônica integrada"},
+    {"file":"DECISIONS.md","probableStage":"01","authorization":"autorizado pela etapa 01","compatibility":"permitido","impact":"DEC-033 adicionada; DEC-024 atual vigente"},
+    {"file":"PROJECT_STATUS.md","probableStage":"01/02","authorization":"autorizado para registrar estado","compatibility":"permitido com limitação temporal","impact":"Constituição e inventário marcados concluídos"},
+    {"file":"AGENTS.md","probableStage":"01","authorization":"autorizado pela etapa 01","compatibility":"permitido","impact":"resumo operacional"},
+    {"file":"scripts/build-historical-provenance-map.mjs","probableStage":"02","authorization":"instrumento do inventário","compatibility":"permitido","impact":"gera os dois equivalentes do inventário"},
+    {"file":"tests/historical-provenance-map.test.mjs","probableStage":"02","authorization":"validação do inventário","compatibility":"permitido","impact":"testa cobertura e reprodutibilidade"},
+    {"file":"docs/RELATORIO_PENEIRA_QUALIDADE_EDITORIAL_LOTE_01.md","probableStage":"posterior à 04","authorization":"não comprovada","compatibility":"evidência de avanço posterior","impact":"condição de parada não pode ser considerada comprovadamente respeitada"}
+  ],
+  "contentChanges": [
+    {"scope":"etapas 01-04","finding":"nenhuma mudança de conteúdo atribuível às etapas foi detectada","evidence":"master mtime 18/07/2026 e SHA-256 a9b9688e677d2752d76dc1ccf8074490fbda1284ee14daa13f4bc38db82020d8, igual ao fingerprint da etapa 02","status":"PARCIALMENTE COMPROVADO","limitation":"não há snapshot imediatamente anterior à etapa 01"}
+  ],
+  "runtimeChanges": [
+    {"file":"data/entre_sabios_runtime.json","sha256":"01a100c8e569e075a8d2008433078c121ea0f4935cf71b6d76151817be276e69","finding":"igual ao fingerprint do inventário; 257 ativos","status":"COMPROVADO da etapa 02 em diante"},
+    {"file":"data/entre_sabios_runtime.js","sha256":"c40a9744ad400d6176e290be4b59b6ea3213dc130cdc390f0c19d669c4274a57","finding":"igual ao fingerprint do inventário","status":"COMPROVADO da etapa 02 em diante"}
+  ],
+  "decisionConflicts": [],
+  "reportContradictions": [
+    {"id":"RC-01","files":["docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.md","docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.json"],"contradiction":"Markdown afirma casos R3; JSON registra R3=0.","severity":"G3"},
+    {"id":"RC-02","files":["docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.md","entre_sabios_acervo_mestre_final.json"],"contradiction":"O relatório apresenta 54 como IDs alterados; apenas 2 registros têm id_normalization/legacyIds. Os 54 são registros com qualquer campo diferente.","severity":"G3"},
+    {"id":"RC-03","files":["docs/RELATORIO_LOTE_PILOTO_RECUPERACAO_EDITORIAL.md","docs/lote_piloto_recuperacao_editorial.json"],"contradiction":"REC-02 é chamado de desaparecimento S8, mas a primeira ocorrência localizada é a própria Constituição e não há prova de remoção ou presença anterior.","severity":"G3"},
+    {"id":"RC-04","files":["docs/RELATORIO_LOTE_PILOTO_RECUPERACAO_EDITORIAL.md","docs/verificacao_documental_lote_01.json"],"contradiction":"O piloto exige aprovação humana; a etapa documental diz que a autorização decorre da marcação de prioridade.","severity":"G4"}
+  ],
+  "samplingChecks": [
+    {"sampleType":"ativo","items":["curated-03","batch01-quote-007","TXT-MED-004","TXT-CUL-001","batch07-quote-011"],"result":"5/5 presentes no mestre e com estado ativo; texto/status/autoria conferidos","status":"COMPROVADO"},
+    {"sampleType":"removido","items":["curated-04","curated-38","ANT-MICRO-TRI-001","ES-INS-VERGONHA-001","Reflexão contemporânea-1"],"result":"5/5 presentes historicamente como REMOVIDO; motivo/decisão variam e primeira remoção não é datável pelo Git","status":"PARCIALMENTE COMPROVADO"},
+    {"sampleType":"ID alterado","items":["kierkegaard-diarios-1843-01","nietzsche-maximas-flechas-08"],"result":"somente dois IDs normalizados com legacyIds comprovados; não existem três casos reais na categoria","status":"CONTRADITÓRIO com o total 54"},
+    {"sampleType":"mudança de autoria/fonte","items":["curated-03","batch01-quote-007","batch01-quote-008"],"result":"3/3 têm diferença de fonte; a amostra não comprova três mudanças estritamente autorais","status":"PARCIALMENTE COMPROVADO"},
+    {"sampleType":"lote histórico","items":["lote_01_1_45.json","lote_02_46_90.json"],"result":"45 IDs em cada lote e composição reproduzida; proveniência do lote permanece indeterminada","status":"COMPROVADO"},
+    {"sampleType":"protegido ausente","items":["NP-MED-DUNA-001","NP-MED-GAIOLA-001","NP-CUL-001","NP-ESP-DAWKINS-001","NP-LUT-SCHMIDT-001","TXT-LUT-003"],"result":"6/6 listados no Núcleo e ausentes do mestre","status":"COMPROVADO"},
+    {"sampleType":"prioridade alta","items":[],"result":"o inventário não atribui prioridade; o relatório reserva a decisão ao editor-chefe","status":"NÃO EXECUTADO"},
+    {"sampleType":"documental DOC-D","items":["TXT-LUT-003","TXT-MED-004"],"result":"Schmidt plenamente reproduzido em fac-símile; Rubem Alves sustentado por reprodução acadêmica e catálogo institucional, sem edição original acessada","status":"PARCIALMENTE COMPROVADO"},
+    {"sampleType":"documental DOC-I","items":["REC-02 sem ID"],"result":"afinidade temática com Nietzsche confirmada, correspondência textual e origem não confirmadas","status":"COMPROVADO"}
+  ],
+  "findings": [
+    {"id":"F-01","stage":"03/04","severity":"G4","status":"VIOLAÇÃO","finding":"A etapa 04 tratou prioridade do piloto como autorização humana, contrariando a condição expressa de parada."},
+    {"id":"F-02","stage":"04","severity":"G4","status":"NÃO COMPROVADO","finding":"Uma peneira posterior existe, mas a aprovação humana exigida não está preservada no repositório."},
+    {"id":"F-03","stage":"02","severity":"G3","status":"CONTRADITÓRIO","finding":"R3 é afirmado no Markdown e zerado no JSON."},
+    {"id":"F-04","stage":"02","severity":"G3","status":"PARCIALMENTE COMPROVADO","finding":"54 registros alterados foram apresentados sob o título de IDs alterados; apenas dois IDs foram normalizados."},
+    {"id":"F-05","stage":"03","severity":"G3","status":"NÃO COMPROVADO","finding":"O texto de coragem foi classificado como desaparecimento sem prova de existência anterior ou remoção."},
+    {"id":"F-06","stage":"02","severity":"G2","status":"NÃO EXECUTADO","finding":"Os dois nomes de arquivo obrigatórios da etapa 02 não existem; há equivalentes com outros nomes."},
+    {"id":"F-07","stage":"01-04","severity":"G2","status":"PARCIALMENTE COMPROVADO","finding":"Ausência de commits, horários e snapshots por etapa limita atribuição causal e comparação antes/depois."}
+  ],
+  "requiredRemediation": [
+    "Registrar explicitamente, fora desta auditoria, se houve ou não aprovação humana entre as etapas 02, 03, 04 e a peneira posterior.",
+    "Não usar a etapa 04 nem a peneira posterior como base para aplicação enquanto a autorização do subconjunto não for comprovada ou renovada.",
+    "Corrigir futuramente a contradição R3 entre Markdown e JSON, sem alterar o acervo.",
+    "Separar futuramente IDs realmente renomeados de registros com outros campos alterados e recalcular os rótulos/totais.",
+    "Reclassificar futuramente REC-02 como caso sem trajetória localizada, salvo aparecimento de evidência de existência/removal anterior.",
+    "Decidir se os nomes obrigatórios da etapa 02 devem ser criados por migração controlada ou se a convenção em docs/ será formalmente aceita.",
+    "Preservar snapshot, horário, branch, commit, hashes e autorização humana antes de qualquer nova etapa."
+  ],
+  "validation": {
+    "jsonParse": "aprovado",
+    "commitsConfirmed": ["7876aa46f264a327442aa01e6f169ea333ac6ddf", "573cbba6b6685391103e5e64a08a386d77a847f8"],
+    "governanceCheck": "aprovado: 33 decisões e fontes vivas consistentes",
+    "deployCheck": "aprovado: allowlist válida, relatórios excluídos",
+    "staticCheck": "aprovado: sintaxe e 17 JSONs válidos",
+    "contentCheck": "aprovado: runtime sincronizado, sem escrita",
+    "historicalProvenanceTests": "9/9 aprovados",
+    "fullRegression": "297 aprovados, 1 falhou",
+    "fullRegressionFailure": "tests/canonical-contracts.test.mjs: marcador de cache do HTML é definitiva-2.3-20260718-cache-fix-1; esperado definitiva-2.3",
+    "auditOutputGitState": ["?? RELATORIO_AUDITORIA_CONFORMIDADE_ETAPAS_01_A_04.md", "?? auditoria_conformidade_etapas_01_a_04.json"]
+  },
+  "overallClassification": "REPROVADA — não prosseguir antes de remediação",
+  "safeToProceed": false
+}

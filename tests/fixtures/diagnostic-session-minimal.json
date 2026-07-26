@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "sessionId": "fixture-diagnostic-replay-v1",
+  "startedAt": "2026-07-15T00:00:00.000Z",
+  "selections": [
+    {
+      "input": {
+        "primaryFeeling": "ansiedade",
+        "secondaryFeelings": [
+          "medo",
+          "inseguranca"
+        ],
+        "intensity": "moderada",
+        "needsMotivation": false,
+        "directionalKey": null
+      },
+      "contextSignals": [
+        "primeira_resposta",
+        "reconhecimento_inicial"
+      ],
+      "queueKey": "definitiva-2.1|ansiedade|inseguranca|medo|moderada::level:1",
+      "queueVersion": "definitiva-2.1",
+      "activeLevel": 1,
+      "previousQueueDirection": null,
+      "storedQueueBefore": [],
+      "globalHistoryBefore": [],
+      "contextHistoryBefore": [],
+      "chosen": {
+        "id": "Michel de Montaigne-1",
+        "level": 1
+      },
+      "diagnosticContext": {
+        "eventTrigger": "fixture",
+        "sessionSelectionCounter": 1,
+        "currentContentId": null
+      }
+    }
+  ]
+}

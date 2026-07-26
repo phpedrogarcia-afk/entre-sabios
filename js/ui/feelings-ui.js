@@ -142,10 +142,12 @@ function showSelectionHint(message = 'Escolha pelo menos um sentimento antes de 
 }
 
 function initIntensity() {
+  currentIntensity = intensityRadioEls.find((radio) => radio.checked)?.value || null;
   intensityRadioEls.forEach((r) => {
     r.addEventListener('change', () => {
       currentIntensity = r.value;
       lastSelectionSignature = null;
+      if (selectedFeelingIds.size > 0) selectionHintEl.textContent = '';
     });
   });
 }

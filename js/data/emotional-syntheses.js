@@ -4,10 +4,43 @@
   const data = root.EntreSabiosData = root.EntreSabiosData || {};
 
   const signal = (themes, editorialFunctions = [], tones = []) => ({ themes, editorialFunctions, tones });
+  const reviewedRelationTypes = Object.freeze({
+    autoconhecimento__confusao: 'context',
+    autoconhecimento__inseguranca: 'tension',
+    confusao__autoconhecimento: 'context',
+    inseguranca__autoconhecimento: 'context',
+    luto__saudade: 'reinforcement',
+    saudade__luto: 'reinforcement',
+    amor__medo: 'ambivalence',
+    medo__amor: 'context',
+    ansiedade__medo: 'reinforcement',
+    medo__ansiedade: 'reinforcement',
+    tristeza__solidao: 'reinforcement',
+    solidao__tristeza: 'reinforcement',
+    raiva__culpa: 'tension',
+    culpa__raiva: 'tension',
+    falta_de_proposito__confusao: 'context',
+    confusao__falta_de_proposito: 'context',
+    falta_de_proposito__inseguranca: 'context',
+    esperanca__luto: 'tension',
+    luto__esperanca: 'transition',
+    amor__saudade: 'reinforcement',
+    saudade__amor: 'reinforcement',
+    ansiedade__autoconhecimento: 'context',
+    autoconhecimento__ansiedade: 'tension',
+    inseguranca__amor: 'context',
+    amor__inseguranca: 'ambivalence',
+    culpa__tristeza: 'transition',
+    tristeza__culpa: 'reinforcement',
+    falta_de_proposito__esperanca: 'transition',
+    esperanca__falta_de_proposito: 'tension',
+    autoconhecimento__confusao__inseguranca: 'tension',
+  });
   const reviewed = (id, primaryFeeling, secondaryFeelings, humanSummary, hiddenThemes, preferredExistingSignals, editorialRationale, confidence = 'medium', ambiguity = 'medium') => ({
     id,
     primaryFeeling,
     secondaryFeelings,
+    relationType: reviewedRelationTypes[id] || 'context',
     humanSummary,
     hiddenThemes,
     preferredExistingSignals,
@@ -28,7 +61,15 @@
   });
 
   data.emotionalSyntheses = {
-    version: '1.1.0',
+    version: '1.2.0',
+    relationTypes: {
+      reinforcement: signal([], ['recognition', 'contemplation'], ['acolhedor', 'contemplativo']),
+      tension: signal([], ['recognition', 'clarification', 'inquiry'], ['contemplativo']),
+      ambivalence: signal([], ['recognition', 'inquiry'], ['acolhedor', 'contemplativo']),
+      masking: signal([], ['recognition', 'clarification'], ['acolhedor', 'contemplativo']),
+      transition: signal([], ['recognition', 'contemplation', 'clarification'], ['acolhedor', 'contemplativo']),
+      context: signal([], ['recognition', 'clarification', 'inquiry'], ['contemplativo']),
+    },
     primaryProfiles: {
       ansiedade: { focusThemes: ['ansiedade', 'antecipacao', 'controle'], status: 'reviewed' },
       medo: { focusThemes: ['medo', 'vulnerabilidade', 'protecao'], status: 'reviewed' },
@@ -264,7 +305,7 @@
     fallbackProfiles: {
       cautious: {
         humanSummary: 'Esses sentimentos podem estar se atravessando de uma maneira difícil de separar. Talvez não seja necessário compreender todos eles de uma vez.',
-        confidence: 'low', ambiguity: 'high', status: 'reviewed',
+        relationType: 'context', confidence: 'low', ambiguity: 'high', status: 'reviewed',
       },
     },
   };

@@ -1,0 +1,26 @@
+# Auditoria de proveniência — lote 12
+
+IDs ativos 221–240 de 257. A decisão de cada linha separa proveniência de qualidade e preserva o texto enquanto não houver prova de fabricação artificial.
+
+| ID | Texto | Autoria exibida | Tipo | Categoria | Relação | Qualidade | Decisão | Confiança |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Henry David Thoreau-2 | Nunca é tarde para abandonar uma forma de pensar que já não resiste à experiência. | Entre Sábios, inspirado em Henry David Thoreau | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Henry David Thoreau-3 | Melhorar a qualidade do dia é uma das artes mais importantes que podemos praticar. | Entre Sábios, inspirado em Henry David Thoreau | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Ralph Waldo Emerson-0 | Confie em si: toda voz verdadeira começa quando você deixa de viver apenas pelo olhar dos outros. | Entre Sábios, inspirado em Ralph Waldo Emerson | inspired | E | plausível | requer atenção | manter como inspiração validada | média |
+| Ralph Waldo Emerson-1 | Aquilo que você pensa com honestidade pode encontrar eco em outros corações. | Entre Sábios, inspirado em Ralph Waldo Emerson | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Ralph Waldo Emerson-2 | A imitação enfraquece; a autenticidade dá forma à própria vida. | Entre Sábios, inspirado em Ralph Waldo Emerson | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Ralph Waldo Emerson-3 | Respeitar a si mesmo é o primeiro modo pelo qual a grandeza aparece. | Entre Sábios, inspirado em Ralph Waldo Emerson | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Michel de Montaigne-0 | Aprender a viver é também aprender a não ser governado pelo medo do que ainda não aconteceu. | Entre Sábios, inspirado em Michel de Montaigne | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Michel de Montaigne-1 | Minha vida foi cheia de dificuldades, e muitas delas nunca chegaram a acontecer. | Entre Sábios, inspirado em Michel de Montaigne | inspired | G | distante | sem fórmula recorrente detectada | manter com referência pendente | alta |
+| Michel de Montaigne-2 | A sabedoria começa quando aceitamos estudar a nós mesmos sem fingir perfeição. | Entre Sábios, inspirado em Michel de Montaigne | inspired | G | distante | requer atenção | manter com referência pendente | alta |
+| Dhammapada-0 | Aquilo que somos toma forma nos pensamentos que alimentamos e nas ações que escolhemos repetir. | Entre Sábios, inspirado em Dhammapada | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Dhammapada-1 | A mente precede nossas ações; quando ela se torna clara, a paz acompanha nossos passos. | Entre Sábios, inspirado em Dhammapada | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Dhammapada-2 | O ódio não termina com mais ódio: ele se desfaz quando deixa de ser alimentado. | Entre Sábios, inspirado em Dhammapada | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Dhammapada-3 | Mais valiosa que mil palavras vazias é uma palavra que devolve paz. | Entre Sábios, inspirado em Dhammapada | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Ptahhotep-1 | Se você ocupa uma posição de autoridade, use o conhecimento para servir, não para humilhar. | Entre Sábios, inspirado em Ptahhotep | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Ptahhotep-3 | A pessoa que realmente sabe continua disposta a aprender com quem sabe menos. | Entre Sábios, inspirado em Ptahhotep | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Heráclito-0 | Tudo muda; compreender a vida exige aprender a mudar com ela. | Entre Sábios, inspirado em Heráclito | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Heráclito-1 | Você não encontra a mesma experiência duas vezes, porque o mundo e você já mudaram. | Entre Sábios, inspirado em Heráclito | inspired | E | plausível | requer atenção | manter como inspiração validada | média |
+| Heráclito-2 | Os opostos podem fazer parte do mesmo movimento, como tensão e harmonia numa corda. | Entre Sábios, inspirado em Heráclito | inspired | E | plausível | sem fórmula recorrente detectada | manter como inspiração validada | média |
+| Heráclito-3 | O caráter que você cultiva influencia o caminho que sua vida toma. | Entre Sábios, inspirado em Heráclito | inspired | E | plausível | requer atenção | manter como inspiração validada | média |
+| Katha Upanishad-0 | O agradável e o que realmente faz bem nem sempre conduzem ao mesmo caminho. | Entre Sábios, inspirado em Katha Upanishad | inspired | E | plausível | requer atenção | manter como inspiração validada | média |
