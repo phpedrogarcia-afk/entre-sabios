@@ -12,6 +12,9 @@ const patchRelative = 'curadoria-rigida-3.1/0001-Integra-curadoria-r-gida-de-mic
 const jsonRelative = 'docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.json';
 const markdownRelative = 'docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.md';
 const checkOnly = process.argv.includes('--check');
+const inventoryCutoff = '2026-07-23T00:00:00Z';
+const inventoryBranch = 'agent/finaliza-loop-estabilizacao';
+const inventoryCommit = '7876aa46f264a327442aa01e6f169ea333ac6ddf';
 
 function read(relativePath) {
   return fs.readFileSync(path.join(rootDir, relativePath), 'utf8');
@@ -86,7 +89,7 @@ function listFiles(startRelative, matcher) {
 
 function gitHistory() {
   const output = execFileSync('git', [
-  'log', '--all', '--format=%H%x09%ad%x09%an%x09%s', '--date=short', '--', masterRelative,
+  'log', '--all', `--before=${inventoryCutoff}`, '--format=%H%x09%ad%x09%an%x09%s', '--date=short', '--', masterRelative,
   ], { cwd: rootDir, encoding: 'utf8' }).trim();
   if (!output) return [];
   return output.split(/\r?\n/).map((line) => {
@@ -470,8 +473,8 @@ const output = {
   gitMasterHistory: history,
   summary,
   auditMetadata: {
-    date: '2026-07-22', time: 'não registrada na execução inicial; saída deliberadamente reproduzível', branch: execFileSync('git', ['branch', '--show-current'], { cwd: rootDir, encoding: 'utf8' }).trim(),
-    commit: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: rootDir, encoding: 'utf8' }).trim(),
+    date: '2026-07-22', time: 'não registrada na execução inicial; saída deliberadamente reproduzível', branch: inventoryBranch,
+    commit: inventoryCommit,
     masterFile: masterRelative, masterVersion: master.contentVersion, runtimeVersion: runtime.contentVersion || null,
     constitutionDecision: 'DEC-033', limitations: [statistics.limitation, 'Não foi realizado OCR em massa nem pesquisa externa de autoria.'],
   },
