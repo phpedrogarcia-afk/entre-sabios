@@ -169,6 +169,7 @@ data.philosophicalTales = [
     origem: 'Adaptação editorial de Zhuangzi, capítulo 2 (齐物论)',
     tradicao: 'Taoismo',
     tempoLeitura: 1,
+    tempoLeituraTexto: '1 minuto',
     sentimentosRelacionados: ['confusão', 'autoconhecimento', 'ansiedade'],
     temas: ['identidade', 'percepção', 'mistério', 'leveza', 'realidade'],
     palavrasChave: ['borboleta', 'sonho', 'confusão', 'identidade', 'realidade'],

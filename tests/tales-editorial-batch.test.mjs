@@ -195,7 +195,10 @@ test('as páginas públicas dos lotes revisados estão sincronizadas com o catá
     assert.match(html, /<h2>O que talvez esteja pedindo para ser visto<\/h2>/);
     assert.match(html, /<h2>Uma pergunta para levar consigo<\/h2>/);
     assert.doesNotMatch(html, /O que este conto nos ensina\?|Pergunta para reflexão/i);
-    assert.ok(html.includes(`Leitura de aproximadamente ${tale.tempoLeitura} minutos`));
+    const readingTimeText = tale.tempoLeituraTexto
+      || `${tale.tempoLeitura} ${tale.tempoLeitura === 1 ? 'minuto' : 'minutos'}`;
+    assert.ok(html.includes(`Leitura de aproximadamente ${readingTimeText}`));
+    assert.doesNotMatch(html, /Leitura de aproximadamente 1 minutos/);
     assert.ok(html.includes(tale.origem));
     for (const paragraph of tale.texto) assert.ok(html.includes(paragraph));
     assert.ok(html.includes(tale.umModoDeOlhar[0]));

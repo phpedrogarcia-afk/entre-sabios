@@ -192,7 +192,9 @@ function renderTale(tale) {
   if (!tale) return;
   taleTitleEl.textContent = tale.titulo;
   taleOriginEl.textContent = `Origem: ${tale.origem}`;
-  taleReadingTimeEl.textContent = `📖 Leitura de aproximadamente ${tale.tempoLeitura} minutos.`;
+  const readingTimeText = tale.tempoLeituraTexto
+    || `${tale.tempoLeitura} ${tale.tempoLeitura === 1 ? 'minuto' : 'minutos'}`;
+  taleReadingTimeEl.textContent = `📖 Leitura de aproximadamente ${readingTimeText}.`;
   if (tale.imagem?.src && taleImageFrameEl && taleImageEl) {
     taleImageEl.src = tale.imagem.src;
     taleImageEl.alt = tale.imagem.alt || '';
