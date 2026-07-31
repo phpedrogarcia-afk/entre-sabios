@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <!-- Google tag (gtag.js) -->
@@ -7,7 +7,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-9591SHYV5M');
     </script>
     <!-- Google AdSense -->
@@ -45,11 +44,10 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20260718-cache-fix-1" />
+    <link rel="stylesheet" href="style.css?v=20260730" />
     <link rel="stylesheet" href="css/landscape-scroll-fix.css?v=20260713-1" />
     <link rel="stylesheet" href="css/tablet.css?v=20260713-1" />
     <style id="tale-mobile-scroll-fix">
-      /* Correção crítica inline: prevalece mesmo quando o servidor retém CSS antigo. */
       #taleDialog.tale-dialog {
         box-sizing: border-box !important;
         height: min(680px, calc(100vh - 32px)) !important;
@@ -58,82 +56,42 @@
         overflow-y: auto !important;
         overscroll-behavior: contain !important;
       }
-
-      #taleDialog.tale-dialog[open] {
-        display: block !important;
-      }
-
+      #taleDialog.tale-dialog[open] { display: block !important; }
       #taleDialog .favorites-head {
-        position: sticky;
-        top: -18px;
-        z-index: 3;
-        margin: -18px -18px 0;
-        padding: 18px 18px 14px;
-        background: var(--bg);
+        position: sticky; top: -18px; z-index: 3;
+        margin: -18px -18px 0; padding: 18px 18px 14px; background: var(--bg);
       }
-
       #taleDialog .tale-content {
-        display: block !important;
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-        flex: none !important;
+        display: block !important; height: auto !important;
+        max-height: none !important; overflow: visible !important; flex: none !important;
       }
-
       html[data-theme="night"] #taleDialog .tale-meta,
       html[data-theme="night"] #taleDialog .tale-cycle-notice {
         color: var(--night-text-primary, #f6efdc) !important;
       }
-
       html[data-theme="night"] .book-rec-label {
         color: var(--night-gold, #d8bd75) !important;
       }
-
       @media (max-width: 720px) {
-        html.tale-modal-open,
-        html.tale-modal-open body {
-          overflow: auto !important;
-          overscroll-behavior: auto !important;
+        html.tale-modal-open, html.tale-modal-open body {
+          overflow: auto !important; overscroll-behavior: auto !important;
         }
-
         #taleDialog.tale-dialog {
-          position: fixed !important;
-          inset: 12px auto auto 12px !important;
-          box-sizing: border-box !important;
-          width: calc(100vw - 24px) !important;
-          min-width: 0 !important;
-          max-width: calc(100vw - 24px) !important;
-          height: calc(100vh - 24px) !important;
-          max-height: calc(100vh - 24px) !important;
-          margin: 0 !important;
-          overflow-x: hidden !important;
-          overflow-y: scroll !important;
-          overscroll-behavior: contain !important;
-          -webkit-overflow-scrolling: touch;
-          touch-action: auto !important;
+          position: fixed !important; inset: 12px auto auto 12px !important;
+          box-sizing: border-box !important; width: calc(100vw - 24px) !important;
+          min-width: 0 !important; max-width: calc(100vw - 24px) !important;
+          height: calc(100vh - 24px) !important; max-height: calc(100vh - 24px) !important;
+          margin: 0 !important; overflow-x: hidden !important; overflow-y: scroll !important;
+          overscroll-behavior: contain !important; -webkit-overflow-scrolling: touch; touch-action: auto !important;
         }
-
-        #taleDialog.tale-dialog[open] {
-          display: block !important;
-        }
-
+        #taleDialog.tale-dialog[open] { display: block !important; }
         #taleDialog .favorites-head {
-          position: sticky;
-          top: -14px;
-          z-index: 3;
-          flex-wrap: nowrap;
-          margin: -14px -14px 0;
-          padding: 14px 14px 12px;
-          background: var(--bg);
+          position: sticky; top: -14px; z-index: 3; flex-wrap: nowrap;
+          margin: -14px -14px 0; padding: 14px 14px 12px; background: var(--bg);
         }
-
         #taleDialog .tale-content {
-          display: block !important;
-          height: auto !important;
-          min-height: 0 !important;
-          max-height: none !important;
-          overflow: visible !important;
-          touch-action: auto !important;
+          display: block !important; height: auto !important; min-height: 0 !important;
+          max-height: none !important; overflow: visible !important; touch-action: auto !important;
         }
       }
     </style>
@@ -149,6 +107,7 @@
     </script>
   </head>
   <body>
+    <!-- ===== HEADER ===== -->
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Entre Sábios, página inicial">
         <div class="brand-icon" aria-hidden="true"></div>
@@ -157,14 +116,38 @@
           <div class="brand-subtitle">Reflexões para a vida</div>
         </div>
       </a>
+      <div class="daily-strip-header" aria-label="Frase do dia">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="opacity:0.6">
+          <path d="M12 19c-4 0-7-2.5-7-6 0-2 1-3.5 2-5s2-3.5 3-3.5 1.5 1 1.5 2.5c0-1.5 1-2.5 2-2.5s2 2 3 3.5 2 3 2 5c0 3.5-3 6-6.5 6Z"/>
+        </svg>
+        <span style="font-size:12px; font-weight:700; letter-spacing:0.05em;">Frase do dia</span>
+        <span style="border-left:1px solid var(--header-separator); margin-left:8px; padding-left:8px; font-size:12px;">
+          <em id="dailyQuoteTextHeader">"A mente que se acalma vê com clareza." — Dhammapada</em>
+        </span>
+      </div>
       <div class="live-info" aria-label="Informações do site">
-        <p class="online-counter">Presentes: <span id="contador-online">0</span></p>
+        <div style="text-align:right;">
+          <span id="contador-online" style="font-size:22px; font-weight:700; color:var(--header-text);">23</span>
+          <span style="display:block; font-size:10px; color:var(--header-counter);">Presentes</span>
+        </div>
+        <span style="border-left:1px solid var(--header-separator); height:36px; margin:0 4px;"></span>
         <button id="themeToggleBtn" class="theme-toggle" type="button" aria-label="Ativar Floresta Noturna" title="Ativar Floresta Noturna">☾</button>
-        <a class="about-trigger essays-trigger" href="ensaios/">Ensaios</a>
-        <button id="aboutBtn" class="about-trigger" type="button">Sobre</button>
+        <button id="aboutBtn" class="about-trigger" type="button" style="color:var(--header-text); font-weight:600;">Sobre</button>
       </div>
     </header>
 
+    <!-- ===== FAIXA DIÁRIA ===== -->
+    <div class="daily-strip" aria-label="Frase do dia">
+      <div class="daily-track">
+        <span class="daily-label">FRASE DO DIA</span>
+        <span id="dailyQuoteText">A sabedoria começa quando prestamos atenção ao momento presente.</span>
+        <span class="daily-separator" aria-hidden="true">✦</span>
+        <span class="daily-label">FRASE DO DIA</span>
+        <span id="dailyQuoteTextClone" aria-hidden="true">A sabedoria começa quando prestamos atenção ao momento presente.</span>
+      </div>
+    </div>
+
+    <!-- ===== FOLHAS DECORATIVAS ===== -->
     <div class="leaf-layer" aria-hidden="true">
       <span class="falling-leaf leaf-1"></span>
       <span class="falling-leaf leaf-2"></span>
@@ -178,25 +161,16 @@
       <span class="falling-leaf leaf-10"></span>
     </div>
 
-    <div class="daily-strip" aria-label="Frase do dia">
-      <div class="daily-track">
-        <span class="daily-label">FRASE DO DIA</span>
-        <span id="dailyQuoteText">A sabedoria começa quando prestamos atenção ao momento presente.</span>
-        <span class="daily-separator" aria-hidden="true">✦</span>
-        <span class="daily-label">FRASE DO DIA</span>
-        <span id="dailyQuoteTextClone" aria-hidden="true">A sabedoria começa quando prestamos atenção ao momento presente.</span>
-      </div>
-    </div>
-
+    <!-- ===== LAYOUT 3 COLUNAS ===== -->
     <main class="shell" aria-label="Entre Sábios">
-      <!-- COLUNA ESQUERDA -->
+
+      <!-- ===== COLUNA ESQUERDA ===== -->
       <aside class="col-left">
         <div class="section-title">COMO VOCÊ ESTÁ SE SENTINDO?</div>
-        <div class="section-subtitle">Selecione um ou mais e escolha qual deve orientar a reflexão.</div>
+        <div class="section-subtitle">Selecione um ou mais sentimentos.</div>
 
-        <div class="feelings-grid" id="feelingsGrid" aria-label="Sentimentos">
-          <!-- Itens gerados via JS -->
-        </div>
+        <div class="feelings-grid" id="feelingsGrid" aria-label="Sentimentos"></div>
+
         <div id="primaryFeelingControl" class="primary-feeling-control" hidden>
           <div class="primary-feeling-summary">
             <div>Sentimento principal: <strong id="primaryFeelingLabel">—</strong></div>
@@ -215,81 +189,70 @@
           <div class="audience intensity-control">
             <div class="audience-title">Como você quer receber esta reflexão?</div>
             <div class="audience-options" role="radiogroup" aria-label="Como você quer receber esta reflexão?">
-              <label class="radio">
-                <input type="radio" name="intensity" value="fraca" />
-                <span>Delicado</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="intensity" value="moderada" />
-                <span>Equilibrado</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="intensity" value="intensa" />
-                <span>Profundo</span>
-              </label>
+              <label class="radio"><input type="radio" name="intensity" value="fraca" /><span>Delicado</span></label>
+              <label class="radio"><input type="radio" name="intensity" value="moderada" /><span>Equilibrado</span></label>
+              <label class="radio"><input type="radio" name="intensity" value="intensa" /><span>Profundo</span></label>
             </div>
           </div>
           <div class="motivation-preference">
-            <button
-              id="motivationToggle"
-              class="motivation-toggle"
-              type="button"
-              aria-pressed="false"
-              aria-describedby="motivationPreferenceHelp"
-              disabled
-            >
-              <span class="motivation-dot" aria-hidden="true"></span>
-              <span>Preciso de motivação</span>
+            <button id="motivationToggle" class="motivation-toggle" type="button" aria-pressed="false" aria-describedby="motivationPreferenceHelp" disabled>
+              <span class="motivation-dot" aria-hidden="true"></span><span>Preciso de motivação</span>
             </button>
-            <span id="motivationPreferenceHelp" class="visually-hidden">Preferência opcional de direção para a reflexão. Não altera o sentimento nem a intensidade.</span>
+            <span id="motivationPreferenceHelp" class="visually-hidden">Preferência opcional de direção para a reflexão.</span>
           </div>
         </div>
 
-        <button id="generateBtn" class="primary" disabled>ENCONTRAR UMA REFLEXÃO</button>
+        <button id="generateBtn" class="primary" disabled>ENCONTRAR UMA REFLEXÃO <span aria-hidden="true">&rarr;</span></button>
         <div id="contentLoadStatus" class="content-load-status" role="status" aria-live="polite">Carregando o acervo de reflexões…</div>
         <div id="selectionHint" class="selection-hint" role="alert" aria-live="assertive"></div>
 
         <div class="tip">
           <div class="tip-box">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="vertical-align:middle; margin-right:4px; opacity:0.5;">
+              <path d="M12 2C8 6 4 10 4 14c0 4 3.5 8 8 8s8-4 8-8c0-4-4-8-8-12Z"/>
+            </svg>
             Quanto mais sinceramente você escolher seus sentimentos, mais significativa será sua reflexão.
           </div>
         </div>
       </aside>
 
-      <!-- COLUNA CENTRAL -->
+      <!-- ===== COLUNA CENTRAL ===== -->
       <section class="col-center">
-        <h1 class="center-fixed">Encontre uma reflexão filosófica para o momento que você está vivendo.</h1>
 
         <div class="center-top">
-          <button id="backBtn" class="ghost" type="button" aria-label="Voltar">← Voltar</button>
+          <button id="backBtn" class="ghost" type="button" aria-label="Voltar">&larr; Voltar</button>
           <button id="favoritesBtn" class="ghost favorite-library" type="button" aria-label="Abrir frases favoritas">
-            ♡ Favoritas <span id="favoritesCount">0</span>
+            &#9825; Favoritas <span id="favoritesCount">0</span>
           </button>
-          <button id="newBtn" class="ghost" type="button" aria-label="Consultar outra perspectiva">↻ Outra perspectiva</button>
+          <button id="newBtn" class="ghost" type="button" aria-label="Consultar outra perspectiva">&circlearrowright; Outra perspectiva</button>
         </div>
 
         <div class="center-card" role="region" aria-label="Reflexão">
           <div class="quote-stage">
-            <button id="quoteShareBtn" class="quote-action quote-share" type="button" aria-label="Compartilhar esta reflexão" title="Compartilhar esta reflexão">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c2.8-5.6 7.3-8.4 14-8.4m-4.2-4.1L18.5 7.6l-4.7 4.1"/></svg>
+            <!-- Botões de ação posicionados via CSS -->
+            <button id="likeBtn" class="quote-action quote-like" type="button" aria-label="Gostei desta frase" aria-pressed="false" title="Gostei">
+              <svg viewBox="0 0 24 24"><path d="M7 21V10m0 11H4.8A1.8 1.8 0 0 1 3 19.2v-7.4A1.8 1.8 0 0 1 4.8 10H7m0 11h8.3a2 2 0 0 0 1.9-1.4l2.3-7A2 2 0 0 0 17.6 10H14l.8-3.2A3 3 0 0 0 11.9 3L7 10"/></svg>
             </button>
             <button id="dislikeBtn" class="quote-action quote-dislike" type="button" aria-label="Não gostei desta frase" aria-pressed="false" title="Não gostei">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v11m0-11H4.8A1.8 1.8 0 0 0 3 4.8v7.4A1.8 1.8 0 0 0 4.8 14H7m0-11h8.3a2 2 0 0 1 1.9 1.4l2.3 7A2 2 0 0 1 17.6 14H14l.8 3.2a3 3 0 0 1-2.9 3.8L7 14"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M7 3v11m0-11H4.8A1.8 1.8 0 0 0 3 4.8v7.4A1.8 1.8 0 0 0 4.8 14H7m0-11h8.3a2 2 0 0 1 1.9 1.4l2.3 7A2 2 0 0 1 17.6 14H14l.8 3.2a3 3 0 0 1-2.9 3.8L7 14"/></svg>
             </button>
-            <button id="favoriteBtn" class="quote-action quote-favorite" type="button" aria-label="Adicionar às favoritas" aria-pressed="false" title="Favoritar">☆</button>
+            <button id="quoteShareBtn" class="quote-action quote-share" type="button" aria-label="Compartilhar esta reflexão" title="Compartilhar">
+              <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+            </button>
+            <button id="favoriteBtn" class="quote-action quote-favorite" type="button" aria-label="Adicionar às favoritas" aria-pressed="false" title="Favoritar">
+              <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 5.5 5.5 5.5 0 0 1 21.5 12c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+            </button>
+
             <div class="quote invitation" id="quoteText">Como você está se sentindo hoje? Escolha um ou mais sentimentos e gere uma reflexão para este momento.</div>
-            <button id="likeBtn" class="quote-action quote-like" type="button" aria-label="Gostei desta frase" aria-pressed="false" title="Gostei">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 21V10m0 11H4.8A1.8 1.8 0 0 1 3 19.2v-7.4A1.8 1.8 0 0 1 4.8 10H7m0 11h8.3a2 2 0 0 0 1.9-1.4l2.3-7A2 2 0 0 0 17.6 10H14l.8-3.2A3 3 0 0 0 11.9 3L7 10"/></svg>
-            </button>
+            <div class="quote-author" id="quoteAuthor">Sua reflexão começa com uma escolha sincera.</div>
+            <div class="quote-source" id="quoteSource" hidden></div>
           </div>
-          <div class="quote-author" id="quoteAuthor">Sua reflexão começa com uma escolha sincera.</div>
-          <div class="quote-author" id="quoteSource" hidden></div>
 
           <div class="divider" aria-hidden="true"></div>
 
           <div class="block" id="explanationBlock">
             <div class="block-title" id="explanationTitle">O QUE ESSA FRASE QUER DIZER</div>
-            <div class="block-text" id="reflectionText">Selecione seus sentimentos e clique em “ENCONTRAR UMA REFLEXÃO”.</div>
+            <div class="block-text" id="reflectionText">Selecione seus sentimentos e clique em "ENCONTRAR UMA REFLEXÃO".</div>
           </div>
 
           <section class="block philosophy-block" id="philosophyBlock" aria-labelledby="philosophyTitle">
@@ -302,9 +265,15 @@
             <div class="block-text small" id="adviceText">—</div>
           </section>
 
+          <section class="question-block" id="questionBlock" aria-labelledby="questionTitle" hidden>
+            <div class="block-title" id="questionTitle">UMA PERGUNTA PARA LEVAR CONSIGO</div>
+            <div class="question-text" id="questionText"></div>
+          </section>
+
           <section class="block book-rec" id="bookRecommendation" aria-labelledby="bookRecommendationTitle" aria-live="polite">
             <div class="book-rec-label" id="bookRecommendationTitle">LIVRO RECOMENDADO</div>
             <div class="book-rec-title" id="bookText">—</div>
+            <div class="book-rec-author" id="bookAuthor" hidden></div>
             <div class="book-rec-why"><strong>Por que este livro?</strong> <span id="bookReason">A recomendação aparecerá junto da reflexão.</span></div>
           </section>
 
@@ -316,45 +285,93 @@
         <canvas id="decorCanvas" class="decor" width="600" height="360" aria-hidden="true"></canvas>
       </section>
 
-      <!-- COLUNA DIREITA -->
+      <!-- ===== COLUNA DIREITA ===== -->
       <aside class="col-right">
-        <div class="share-block">
+
+        <!-- EXPLORAR -->
+        <div class="explore-section">
+          <div class="explore-title">EXPLORAR</div>
+
+          <a href="contos/" class="explore-card" aria-label="Contos Filosóficos">
+            <div class="explore-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8 6 4 10 4 14c0 4 3.5 8 8 8s8-4 8-8c0-4-4-8-8-12Z"/></svg>
+            </div>
+            <div class="explore-card-text">
+              <div class="explore-card-label">Contos Filosóficos</div>
+              <div class="explore-card-desc">Histórias que atravessaram séculos e ainda falam sobre nós.</div>
+            </div>
+            <div class="explore-card-arrow">&rsaquo;</div>
+          </a>
+
+          <a href="ensaios/" class="explore-card" aria-label="Ensaios">
+            <div class="explore-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" rx="2"/><path d="M4 9h16"/><path d="M8 4v16"/></svg>
+            </div>
+            <div class="explore-card-text">
+              <div class="explore-card-label">Ensaios</div>
+              <div class="explore-card-desc">Textos que aprofundam ideias e expandem o olhar.</div>
+            </div>
+            <div class="explore-card-arrow">&rsaquo;</div>
+          </a>
+
+          <!-- Leituras salvas (trigger para modal de favoritas) -->
+          <div class="explore-card" role="button" tabindex="0" aria-label="Leituras salvas" onclick="document.getElementById('favoritesDialog').showModal()">
+            <div class="explore-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="explore-card-text">
+              <div class="explore-card-label">Leituras salvas</div>
+              <div class="explore-card-desc">Suas reflexões favoritas guardadas para voltar.</div>
+            </div>
+            <div class="explore-card-arrow">&rsaquo;</div>
+          </div>
+        </div>
+
+        <!-- COMPARTILHAR -->
+        <div class="share-section">
           <div class="share-title">COMPARTILHAR</div>
+          <div class="share-subtitle">Leve esta reflexão para alguém.</div>
+
+          <div class="share-icons-row">
+            <button id="shareGeneralBtn" class="share-icon-btn" type="button" aria-label="Compartilhar">
+              <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+            </button>
+            <button id="whatsShareBtn" class="share-icon-btn" type="button" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M5.3 19.1 6.4 16A7.7 7.7 0 1 1 9 18.1l-3.7 1Z"/><path d="M9.1 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.6 1.4c.1.3 0 .5-.2.7l-.4.5c.6 1 1.4 1.8 2.5 2.4l.6-.5c.2-.2.4-.2.7-.1l1.3.6c.3.1.4.3.4.6v.5c0 .3-.1.6-.4.8-.4.3-.9.5-1.5.5-2.8-.1-6.4-3.1-6.6-6.2 0-.6.2-1.1.5-1.5Z"/></svg>
+            </button>
+            <button class="share-icon-btn" type="button" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4"/><circle cx="12" cy="12" r="3.2"/><path d="M16.8 7.5h.1"/></svg>
+            </button>
+            <button class="share-icon-btn" type="button" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M14.4 8.2h-1.2c-.9 0-1.2.5-1.2 1.3v1.4h2.3l-.3 2.2h-2v5.4H9.7v-5.4H8v-2.2h1.7V9.3c0-2 1.2-3.4 3.2-3.4.7 0 1.2.1 1.5.2v2.1Z"/></svg>
+            </button>
+          </div>
+
           <div class="share-style-picker" aria-label="Escolha o estilo da imagem de compartilhamento">
             <button class="share-style-option cream" type="button" data-share-style="cream" aria-label="Fundo creme"></button>
             <button class="share-style-option sage active" type="button" data-share-style="sage" aria-label="Fundo verde" aria-pressed="true"></button>
             <button class="share-style-option blue" type="button" data-share-style="blue" aria-label="Fundo azul"></button>
           </div>
-          <div class="share-actions">
-            <button id="whatsShareBtn" class="full share-main-action" type="button">Status / Stories</button>
-            <div class="share-platform-icons" aria-label="Compatível com WhatsApp, Instagram e Facebook">
-              <span title="WhatsApp" aria-label="WhatsApp">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 19.1 6.4 16A7.7 7.7 0 1 1 9 18.1l-3.7 1Z"/><path d="M9.1 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.6 1.4c.1.3 0 .5-.2.7l-.4.5c.6 1 1.4 1.8 2.5 2.4l.6-.5c.2-.2.4-.2.7-.1l1.3.6c.3.1.4.3.4.6v.5c0 .3-.1.6-.4.8-.4.3-.9.5-1.5.5-2.8-.1-6.4-3.1-6.6-6.2 0-.6.2-1.1.5-1.5Z"/></svg>
-              </span>
-              <span title="Instagram" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="4"/><circle cx="12" cy="12" r="3.2"/><path d="M16.8 7.5h.1"/></svg>
-              </span>
-              <span title="Facebook" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.4 8.2h-1.2c-.9 0-1.2.5-1.2 1.3v1.4h2.3l-.3 2.2h-2v5.4H9.7v-5.4H8v-2.2h1.7V9.3c0-2 1.2-3.4 3.2-3.4.7 0 1.2.1 1.5.2v2.1Z"/></svg>
-              </span>
-            </div>
-          </div>
-          <p class="share-compatibility-note">O envio direto depende dos aplicativos disponíveis no dispositivo.</p>
-
-          <section class="tales-block" aria-labelledby="talesTitle">
-            <div class="share-title" id="talesTitle">📖 CONTOS FILOSÓFICOS</div>
-            <p class="tales-intro">Histórias que atravessaram séculos e ainda falam sobre nós.</p>
-            <button id="openTaleBtn" class="full" type="button">Ler um conto</button>
-            <div id="taleHint" class="share-status" role="status" aria-live="polite"></div>
-          </section>
-
-          <div id="shareStatus" class="share-status" role="status" aria-live="polite"></div>
         </div>
 
-        <div class="footer-note">&nbsp;</div>
+        <!-- CONTOS FILOSÓFICOS (compatibilidade com JS) -->
+        <div class="tales-block" aria-labelledby="talesTitle">
+          <div class="share-title" id="talesTitle">&#128214; CONTOS FILOSÓFICOS</div>
+          <p class="tales-intro">Histórias que atravessaram séculos e ainda falam sobre nós.</p>
+          <button id="openTaleBtn" class="full" type="button">Ler um conto</button>
+          <div id="taleHint" class="share-status" role="status" aria-live="polite"></div>
+        </div>
+
+        <!-- STATUS DE COMPARTILHAMENTO -->
+        <div id="shareStatus" class="share-status" role="status" aria-live="polite"></div>
+
+        <!-- ÁRVORE DECORATIVA -->
+        <div class="tree-decoration" aria-hidden="true"></div>
+
       </aside>
     </main>
 
+    <!-- ===== DIALOG: FAVORITAS ===== -->
     <dialog id="favoritesDialog" class="favorites-dialog" aria-labelledby="favoritesTitle">
       <div class="favorites-head">
         <div>
@@ -366,6 +383,7 @@
       <div id="favoritesList" class="favorites-list"></div>
     </dialog>
 
+    <!-- ===== DIALOG: SOBRE ===== -->
     <dialog id="aboutDialog" class="favorites-dialog about-dialog" aria-labelledby="aboutTitle">
       <div class="favorites-head">
         <div>
@@ -382,6 +400,7 @@
       </div>
     </dialog>
 
+    <!-- ===== DIALOG: CONTO ===== -->
     <dialog id="taleDialog" class="favorites-dialog tale-dialog" aria-labelledby="taleDialogTitle">
       <div class="favorites-head">
         <div>
@@ -397,7 +416,7 @@
         <div id="taleCycleNotice" class="tale-cycle-notice" role="status" aria-live="polite"></div>
         <div class="tale-meta">
           <span id="taleOrigin">Origem: —</span>
-          <span id="taleReadingTime">📖 Leitura de aproximadamente — minutos.</span>
+          <span id="taleReadingTime">&#128214; Leitura de aproximadamente — minutos.</span>
         </div>
         <figure id="taleImageFrame" class="tale-image-frame" hidden>
           <img id="taleImage" class="tale-image" alt="" width="1536" height="864" loading="lazy" decoding="async" />
@@ -419,17 +438,12 @@
       </div>
     </dialog>
 
+    <!-- ===== SCRIPTS ===== -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
       import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
       import {
-        getDatabase,
-        ref,
-        push,
-        set,
-        onDisconnect,
-        onValue,
-        serverTimestamp,
+        getDatabase, ref, push, set, onDisconnect, onValue, serverTimestamp,
       } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
       const firebaseConfig = {
@@ -446,12 +460,8 @@
       const app = initializeApp(firebaseConfig);
 
       isSupported()
-        .then((supported) => {
-          if (supported) getAnalytics(app);
-        })
-        .catch(() => {
-          // Analytics pode não inicializar em alguns contextos locais; o contador segue funcionando.
-        });
+        .then((supported) => { if (supported) getAnalytics(app); })
+        .catch(() => {});
 
       const onlineCounterEl = document.getElementById("contador-online");
       const database = getDatabase(app);
@@ -463,7 +473,6 @@
 
       onValue(connectedRef, (snapshot) => {
         if (snapshot.val() !== true) return;
-
         onDisconnect(currentUserPresenceRef)
           .remove()
           .then(() => set(currentUserPresenceRef, {
@@ -499,34 +508,34 @@
         set(currentUserPresenceRef, null).catch(() => {});
       });
     </script>
-    <script src="js/data/catalogs.js?v=20260718-cache-fix-1"></script>
+    <script src="js/data/catalogs.js?v=20260730"></script>
     <script src="js/data/emotional-syntheses.js?v=20260714-2"></script>
     <script src="js/data/motivation-profiles.js?v=20260714-1"></script>
-    <script src="js/data/books.js?v=20260718-cache-fix-1"></script>
+    <script src="js/data/books.js?v=20260730"></script>
     <script src="js/data/share-themes.js?v=20260710-1"></script>
     <script src="js/data/tales.js?v=tales-da55893a6099"></script>
     <script src="js/data/emotional-taxonomy.js?v=20260712-10"></script>
-    <script src="js/data/editorial-explanations.js?v=20260718-cache-fix-1"></script>
-    <script src="js/data/editorial-guidance.js?v=20260718-cache-fix-1"></script>
+    <script src="js/data/editorial-explanations.js?v=20260730"></script>
+    <script src="js/data/editorial-guidance.js?v=20260730"></script>
     <script src="js/core/normalization.js?v=20260710-1"></script>
     <script src="js/core/runtime-engine.js?v=20260715-repetition-fix-1"></script>
     <script src="data/entre_sabios_runtime.js?v=definitiva-2.4"></script>
     <script src="js/core/runtime-loader.js?v=definitiva-2.4"></script>
-    <script src="js/core/emotional-state.js?v=20260718-cache-fix-1"></script>
+    <script src="js/core/emotional-state.js?v=20260730"></script>
     <script src="js/core/emotional-synthesis.js?v=20260714-2"></script>
     <script src="js/core/synthesis-ranking-adapter.js?v=20260714-1"></script>
     <script src="js/core/motivation-ranking-adapter.js?v=20260714-1"></script>
-    <script src="js/core/matching.js?v=20260718-cache-fix-1"></script>
+    <script src="js/core/matching.js?v=20260730"></script>
     <script src="js/core/book-matching.js?v=20260712-10"></script>
-    <script src="js/features/feedback.js?v=20260713-4"></script>
+    <script src="js/features/feedback.js?v=20260730"></script>
     <script src="js/features/favorites.js?v=20260710-1"></script>
-    <script src="js/features/sharing.js?v=20260713-4"></script>
+    <script src="js/features/sharing.js?v=20260730"></script>
     <script src="js/features/tales.js?v=tales-da55893a6099"></script>
-    <script src="js/ui/feelings-ui.js?v=20260718-cache-fix-1"></script>
+    <script src="js/ui/feelings-ui.js?v=20260730"></script>
     <script src="js/ui/daily-ui.js?v=20260712-1"></script>
-    <script src="js/ui/reflection-ui.js?v=20260714-1"></script>
+    <script src="js/ui/reflection-ui.js?v=20260730"></script>
     <script src="js/ui/effects-ui.js?v=20260710-1"></script>
     <script src="js/ui/theme-ui.js?v=20260710-1"></script>
-    <script src="script.js?v=20260718-cache-fix-1"></script>
+    <script src="script.js?v=20260730"></script>
   </body>
 </html>

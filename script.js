@@ -608,7 +608,8 @@ function setImageShareBusy(isBusy, triggerButton) {
   quoteShareBtn.disabled = isBusy;
   triggerButton?.setAttribute('aria-busy', String(isBusy));
   if (triggerButton === whatsShareBtn) {
-    whatsShareBtn.textContent = isBusy ? 'Gerando...' : 'Status / Stories';
+    whatsShareBtn.classList.toggle('is-busy', isBusy);
+    whatsShareBtn.setAttribute('aria-label', isBusy ? 'Gerando imagem...' : 'WhatsApp');
   }
 }
 

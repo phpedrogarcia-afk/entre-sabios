@@ -29,7 +29,8 @@ function updateFavoriteUi() {
   favoriteBtn.setAttribute('aria-pressed', String(active));
   favoriteBtn.setAttribute('aria-label', active ? 'Remover das favoritas' : 'Adicionar às favoritas');
   favoriteBtn.title = active ? 'Remover das favoritas' : 'Favoritar';
-  favoriteBtn.textContent = active ? '★' : '☆';
+  // Não sobrescrever o conteúdo SVG — apenas alternar classe visual
+  favoriteBtn.classList.toggle('is-active', active);
   favoritesCountEl.textContent = String(favoriteStories.length);
 }
 

@@ -1,5 +1,5 @@
 /* Media queries e ajustes responsivos.
-   Extraído de style.css na Fase 6 sem alterar regras visuais. */
+   Compatível com o layout da referência mobile noturno. */
 
 @media (max-width: 900px), (max-height: 700px), (max-width: 1100px) and (max-height: 800px) {
   html,
@@ -21,14 +21,18 @@
   .topbar {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 100;
     width: 100%;
     min-width: 0;
     gap: 10px;
     padding-left: max(12px, env(safe-area-inset-left));
     padding-right: max(12px, env(safe-area-inset-right));
-    background: rgba(251, 247, 238, 0.94);
+    background: var(--header-bg-gradient);
     backdrop-filter: blur(8px);
+  }
+
+  .daily-strip-header {
+    display: none;
   }
 
   .brand {
@@ -36,7 +40,7 @@
   }
 
   .brand-title {
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 0.06em;
     white-space: nowrap;
   }
@@ -90,24 +94,25 @@
   }
 
   .feeling {
-    min-height: 46px;
-    padding-inline: 6px;
+    min-height: 42px;
+    padding-inline: 8px;
     overflow-wrap: anywhere;
+    font-size: 12px;
   }
 
   .radio {
-    min-height: 44px;
-    padding: 8px 4px;
+    min-height: 40px;
+    padding: 7px 6px;
   }
 
   .radio input {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 
   .primary {
-    min-height: 50px;
-    font-size: 12.5px;
+    min-height: 48px;
+    font-size: 13px;
     letter-spacing: 0.04em;
     white-space: normal;
   }
@@ -115,13 +120,15 @@
   .center-top {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .center-top .ghost {
-    min-height: 44px;
+    min-height: 42px;
     min-width: 0;
     padding-inline: 8px;
     white-space: normal;
+    font-size: 12px;
   }
 
   .center-top #newBtn {
@@ -134,33 +141,56 @@
 
   .center-card {
     overflow: visible;
-    background:
-      radial-gradient(circle at 50% 20%, rgba(252, 250, 241, 0.66), rgba(239, 245, 226, 0.42) 52%, rgba(232, 240, 217, 0.58) 100%),
-      url("../assets/quote-landscape.png") center 65% / cover no-repeat;
+    background: var(--quote-card-bg);
+    border-radius: 18px;
+    padding: 18px 16px 16px;
   }
 
   .quote-stage {
-    min-height: 280px;
+    min-height: 200px;
   }
 
   .quote {
-    padding-inline: 34px;
-    font-size: clamp(21px, 7vw, 28px);
+    padding-inline: 30px;
+    font-size: clamp(16px, 4.5vw, 24px);
   }
 
-  .quote-action {
-    width: 44px;
-    height: 44px;
-    line-height: 44px;
+  .quote.invitation {
+    font-size: clamp(18px, 5vw, 24px);
+    padding: 24px 16px 8px;
+  }
+
+  .quote-like {
+    bottom: 8px;
+    right: 8px;
+    width: 34px;
+    height: 34px;
   }
 
   .quote-dislike {
-    left: -6px;
+    bottom: 8px;
+    left: 8px;
+    width: 34px;
+    height: 34px;
   }
 
-  .quote-like,
+  .quote-share {
+    top: 8px;
+    left: 8px;
+    width: 34px;
+    height: 34px;
+  }
+
   .quote-favorite {
-    right: -6px;
+    top: 8px;
+    right: 8px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .quote-action svg {
+    width: 18px;
+    height: 18px;
   }
 
   .block-text,
@@ -176,7 +206,7 @@
   }
 
   .full {
-    min-height: 48px;
+    min-height: 44px;
   }
 
   .favorites-dialog {
@@ -221,9 +251,8 @@
     background: var(--bg);
   }
 
-  .tale-dialog .favorites-head > div {
-    flex: 1 1 220px;
-    min-width: 0;
+  html[data-theme="night"] .tale-dialog .favorites-head {
+    background: #0d1f1a;
   }
 
   .tale-title-row {
@@ -256,7 +285,7 @@
   }
 
   .tale-text {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.68;
   }
 
@@ -267,6 +296,48 @@
 
   .favorites-list {
     max-height: calc(100dvh - 170px);
+  }
+
+  /* Seleção mobile */
+  .selection-preferences {
+    grid-template-columns: 1fr;
+  }
+
+  .motivation-preference {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  /* Explorar mobile */
+  .explore-card {
+    padding: 10px 12px;
+  }
+
+  /* Compartilhar mobile */
+  .share-icons-row {
+    gap: 8px;
+  }
+
+  .share-icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .share-icon-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Árvore decorativa menor em mobile */
+  .tree-decoration {
+    width: 160px;
+    height: 200px;
+  }
+
+  /* Tip mobile */
+  .tip-box {
+    font-size: 11px;
+    padding: 9px 10px;
   }
 }
 
@@ -284,12 +355,12 @@
 
   .motivation-toggle {
     width: 100%;
-    min-height: 44px;
+    min-height: 42px;
     justify-content: center;
   }
 
   .focus-feeling-btn {
-    min-height: 44px;
+    min-height: 42px;
     padding-inline: 12px;
   }
 
@@ -298,32 +369,24 @@
   }
 
   .synthesis-human-summary {
-    font-size: 13.5px;
+    font-size: 13px;
     line-height: 1.6;
-  }
-}
-
-@media (max-width: 720px) {
-  html[data-theme="night"] .center-card {
-    background:
-      linear-gradient(rgba(19, 31, 27, 0.72), rgba(22, 36, 30, 0.76)),
-      url("../assets/quote-landscape.png") center 65% / cover no-repeat;
   }
 }
 
 @media (max-width: 380px) {
   .topbar {
-    height: 60px;
+    height: 56px;
   }
 
   .brand-icon {
-    width: 30px;
-    height: 30px;
-    flex-basis: 30px;
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
   }
 
   .brand-title {
-    font-size: 11px;
+    font-size: 11.5px;
   }
 
   .live-info > span {
@@ -331,22 +394,35 @@
   }
 
   .col-center {
-    scroll-margin-top: 60px;
+    scroll-margin-top: 56px;
   }
 
   .feelings-grid {
-    gap: 7px;
+    gap: 6px;
+  }
+
+  .feelings-grid .feeling {
+    min-height: 38px;
+    font-size: 11px;
+    padding: 6px 7px;
+  }
+
+  .feelings-grid .feeling-icon {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
   }
 
   .center-fixed {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .quote-stage {
-    min-height: 250px;
+    min-height: 180px;
   }
 
   .quote {
-    padding-inline: 28px;
+    padding-inline: 24px;
+    font-size: 15px;
   }
 }

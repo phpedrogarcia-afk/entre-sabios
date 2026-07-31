@@ -21,7 +21,12 @@ function updateBookRecommendation(story) {
   story.bookSelectionReasons = reasons;
 
   bookRecommendationEl.hidden = false;
-  bookTextEl.textContent = `${book.title}, de ${book.author}`;
+  bookTextEl.textContent = book.title;
+  const bookAuthorEl = document.getElementById('bookAuthor');
+  if (bookAuthorEl) {
+    bookAuthorEl.textContent = book.author;
+    bookAuthorEl.hidden = false;
+  }
   const connection = commonThemes.slice(0, 3).map(prettifyTag);
   const connectionList = connection.length > 1
     ? `${connection.slice(0, -1).join(', ')} e ${connection.at(-1)}`
@@ -89,6 +94,19 @@ function renderStory(story) {
   adviceTitleEl.textContent = hasSpecificAdvice ? story.adviceLabel : '';
   adviceTextEl.textContent = hasSpecificAdvice ? story.advice : '';
   updateBookRecommendation(story);
+
+  // Renderizar bloco de pergunta
+  const questionBlockEl = document.getElementById('questionBlock');
+  const questionTextEl = document.getElementById('questionText');
+  const questionTitleEl = document.getElementById('questionTitle');
+  if (questionBlockEl && questionTextEl) {
+    const hasQuestion = Boolean(String(story.question || '').trim());
+    questionBlockEl.hidden = !hasQuestion;
+    if (hasQuestion) {
+      questionTitleEl.textContent = 'UMA PERGUNTA PARA LEVAR CONSIGO';
+      questionTextEl.textContent = story.question;
+    }
+  }
 
   tagsRowEl.innerHTML = '';
   story.tags.forEach((t) => {

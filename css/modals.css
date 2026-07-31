@@ -19,6 +19,10 @@
   backdrop-filter: blur(3px);
 }
 
+html[data-theme="night"] .favorites-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .favorites-head {
   display: flex;
   align-items: flex-start;
@@ -273,8 +277,8 @@
 
 /* Floresta Noturna: modais com leitura quente e discreta. */
 html[data-theme="night"] .favorites-dialog {
-  background: #14231d;
-  color: var(--ink);
+  background: #0d1f1a;
+  border-color: var(--night-border);
   box-shadow: 0 26px 90px rgba(0, 0, 0, 0.42);
 }
 

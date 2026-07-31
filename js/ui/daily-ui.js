@@ -9,4 +9,9 @@ function initDailyQuote() {
   const text = `“${quote}” — ${attribution}`;
   dailyQuoteTextEl.textContent = text;
   dailyQuoteTextCloneEl.textContent = text;
+  // Atualizar também a frase no header
+  const headerQuoteEl = document.getElementById('dailyQuoteTextHeader');
+  if (headerQuoteEl) {
+    headerQuoteEl.textContent = text;
+  }
 }
