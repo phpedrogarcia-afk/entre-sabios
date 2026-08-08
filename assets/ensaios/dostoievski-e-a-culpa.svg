@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Tribunal interior</title>
+  <desc id="desc">Ilustração minimalista de uma cadeira vazia diante de uma luz estreita, sugerindo culpa, consciência e julgamento íntimo.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f1ece2"/>
+      <stop offset="0.52" stop-color="#ded5c5"/>
+      <stop offset="1" stop-color="#b9afa1"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx="50%" cy="20%" r="48%">
+      <stop offset="0" stop-color="#fff4d8" stop-opacity="0.84"/>
+      <stop offset="0.34" stop-color="#ead7ae" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#4d4842" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff2cf" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#fff2cf" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <pattern id="grain" width="128" height="128" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="31" r="1" fill="#5d574e" opacity="0.06"/>
+      <circle cx="87" cy="77" r="1.1" fill="#ffffff" opacity="0.10"/>
+      <circle cx="112" cy="22" r="0.8" fill="#5f594e" opacity="0.045"/>
+      <path d="M9 110 C42 94 79 104 119 82" fill="none" stroke="#6c6459" stroke-width="0.7" opacity="0.045"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" rx="38" fill="url(#bg)"/>
+  <rect width="1200" height="675" rx="38" fill="url(#lamp)"/>
+  <rect width="1200" height="675" rx="38" fill="url(#grain)" opacity="0.55"/>
+
+  <path d="M510 86 L690 86 L815 565 C693 593 505 593 385 565 Z" fill="url(#beam)" opacity="0.72"/>
+  <path d="M0 510 C175 480 336 498 520 472 C754 439 949 463 1200 424 L1200 675 L0 675 Z" fill="#655d54" opacity="0.12"/>
+  <path d="M145 161 C302 126 460 135 602 171" fill="none" stroke="#70685d" stroke-width="2" opacity="0.06"/>
+  <path d="M689 163 C840 121 986 132 1083 172" fill="none" stroke="#70685d" stroke-width="2" opacity="0.05"/>
+
+  <g opacity="0.26" filter="url(#soft)">
+    <ellipse cx="600" cy="558" rx="180" ry="34" fill="#3f3a34"/>
+  </g>
+
+  <g transform="translate(600 338)" opacity="0.80">
+    <rect x="-74" y="-8" width="148" height="102" rx="9" fill="#776d60"/>
+    <rect x="-58" y="7" width="116" height="72" rx="6" fill="#998d7d" opacity="0.35"/>
+    <rect x="-91" y="93" width="182" height="23" rx="10" fill="#776d60"/>
+    <path d="M-61 115 L-92 259" stroke="#776d60" stroke-width="18" stroke-linecap="round"/>
+    <path d="M61 115 L92 259" stroke="#776d60" stroke-width="18" stroke-linecap="round"/>
+    <path d="M-45 115 L-18 248" stroke="#776d60" stroke-width="14" stroke-linecap="round" opacity="0.76"/>
+    <path d="M45 115 L18 248" stroke="#776d60" stroke-width="14" stroke-linecap="round" opacity="0.76"/>
+  </g>
+
+  <path d="M450 612 C541 595 662 596 752 612" fill="none" stroke="#70685d" stroke-width="2" opacity="0.14"/>
+  <path d="M538 85 C566 75 632 75 662 85" fill="none" stroke="#fff0cc" stroke-width="5" opacity="0.26"/>
+  <text x="82" y="566" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#4f4941" opacity="0.30">há julgamentos que não precisam de plateia</text>
+</svg>

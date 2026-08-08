@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Folha sobre a água</title>
+  <desc id="desc">Ilustração minimalista de uma folha clara suspensa sobre água tranquila, sugerindo impermanência, apego e a passagem das coisas amadas.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f3efe4"/>
+      <stop offset="0.52" stop-color="#e5dfcf"/>
+      <stop offset="1" stop-color="#c8c7b7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="47%" cy="36%" r="62%">
+      <stop offset="0" stop-color="#fffaf0" stop-opacity="0.90"/>
+      <stop offset="0.58" stop-color="#e9e2d0" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#879083" stop-opacity="0.08"/>
+    </radialGradient>
+    <linearGradient id="water" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#aab7a7" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#6f8379" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#d9d5a7"/>
+      <stop offset="1" stop-color="#879b72"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <pattern id="grain" width="130" height="130" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="31" r="1" fill="#5d5a51" opacity="0.055"/>
+      <circle cx="82" cy="73" r="1.1" fill="#ffffff" opacity="0.11"/>
+      <circle cx="112" cy="21" r="0.8" fill="#657060" opacity="0.045"/>
+      <path d="M12 113 C42 96 77 105 119 84" fill="none" stroke="#6c705f" stroke-width="0.7" opacity="0.045"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" rx="38" fill="url(#bg)"/>
+  <rect width="1200" height="675" rx="38" fill="url(#glow)"/>
+  <rect width="1200" height="675" rx="38" fill="url(#grain)" opacity="0.55"/>
+
+  <path d="M0 453 C176 426 334 447 515 421 C734 389 949 415 1200 382 L1200 675 L0 675 Z" fill="url(#water)"/>
+  <path d="M135 526 C301 494 430 528 582 501 C756 470 902 490 1068 454" fill="none" stroke="#6c7e73" stroke-width="3" opacity="0.12"/>
+  <path d="M210 585 C376 557 533 577 681 548 C826 520 971 539 1110 510" fill="none" stroke="#6c7e73" stroke-width="2" opacity="0.10"/>
+  <path d="M92 178 C247 136 402 142 551 176" fill="none" stroke="#6d6b5f" stroke-width="2" opacity="0.055"/>
+  <path d="M678 170 C830 124 984 135 1090 179" fill="none" stroke="#6d6b5f" stroke-width="2" opacity="0.05"/>
+
+  <g opacity="0.24" filter="url(#soft)">
+    <ellipse cx="603" cy="448" rx="180" ry="34" fill="#4f4b43"/>
+  </g>
+
+  <g transform="translate(601 325) rotate(-17)">
+    <path d="M-161 18 C-87 -63 22 -105 159 -29 C91 57 -13 91 -161 18 Z" fill="url(#leaf)" opacity="0.74"/>
+    <path d="M-146 13 C-56 -3 35 -20 145 -34" fill="none" stroke="#eef0c8" stroke-width="4" opacity="0.40"/>
+    <path d="M-62 -3 C-48 17 -34 31 -18 45" fill="none" stroke="#eef0c8" stroke-width="2" opacity="0.28"/>
+    <path d="M-6 -15 C10 7 27 21 47 36" fill="none" stroke="#eef0c8" stroke-width="2" opacity="0.25"/>
+    <path d="M54 -25 C73 -7 92 4 116 14" fill="none" stroke="#eef0c8" stroke-width="2" opacity="0.22"/>
+  </g>
+
+  <circle cx="602" cy="451" r="88" fill="none" stroke="#78887c" stroke-width="2" opacity="0.16"/>
+  <circle cx="602" cy="451" r="154" fill="none" stroke="#78887c" stroke-width="1.5" opacity="0.10"/>
+  <circle cx="602" cy="451" r="222" fill="none" stroke="#78887c" stroke-width="1.2" opacity="0.07"/>
+
+  <path d="M452 610 C542 594 666 595 758 611" fill="none" stroke="#6f776c" stroke-width="2" opacity="0.12"/>
+  <text x="80" y="562" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#4f4a42" opacity="0.30">amar sem tentar deter a água</text>
+</svg>

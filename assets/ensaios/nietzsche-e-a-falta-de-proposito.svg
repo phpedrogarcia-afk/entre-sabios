@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Caminho em direção ao alto</title>
+  <desc id="desc">Ilustração minimalista de um caminho estreito subindo uma montanha em direção a um céu claro, sugerindo criação de sentido e travessia solitária.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f4efe4"/>
+      <stop offset="0.50" stop-color="#e4dccb"/>
+      <stop offset="1" stop-color="#bfb7a6"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="67%" cy="24%" r="42%">
+      <stop offset="0" stop-color="#fff7df" stop-opacity="0.92"/>
+      <stop offset="0.50" stop-color="#ead8ad" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#b3a794" stop-opacity="0.04"/>
+    </radialGradient>
+    <linearGradient id="mountain" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#b2aa9a"/>
+      <stop offset="1" stop-color="#746d62"/>
+    </linearGradient>
+    <linearGradient id="path" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#efe5d0"/>
+      <stop offset="1" stop-color="#9a8f7e"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <pattern id="grain" width="125" height="125" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="38" r="1" fill="#625c52" opacity="0.055"/>
+      <circle cx="87" cy="69" r="1.1" fill="#ffffff" opacity="0.10"/>
+      <circle cx="108" cy="23" r="0.8" fill="#635d52" opacity="0.045"/>
+      <path d="M9 107 C41 93 82 101 119 81" fill="none" stroke="#6c655a" stroke-width="0.7" opacity="0.045"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" rx="38" fill="url(#bg)"/>
+  <rect width="1200" height="675" rx="38" fill="url(#sun)"/>
+  <rect width="1200" height="675" rx="38" fill="url(#grain)" opacity="0.58"/>
+
+  <circle cx="802" cy="154" r="42" fill="#f2ddb1" opacity="0.45"/>
+  <path d="M0 531 C130 486 232 496 355 440 C511 368 612 358 760 412 C928 474 1028 441 1200 392 L1200 675 L0 675 Z" fill="url(#mountain)" opacity="0.34"/>
+  <path d="M0 594 C186 532 326 554 501 487 C641 434 765 438 910 491 C1015 529 1104 520 1200 489 L1200 675 L0 675 Z" fill="#776f64" opacity="0.24"/>
+  <path d="M575 674 C598 585 618 505 642 431 C659 378 676 333 704 292 C727 353 726 418 754 489 C777 548 804 605 842 675 Z" fill="url(#path)" opacity="0.75"/>
+  <path d="M704 292 C651 366 607 477 575 674" fill="none" stroke="#f5ead6" stroke-width="3" opacity="0.35"/>
+  <path d="M704 292 C745 402 781 544 842 675" fill="none" stroke="#6f675d" stroke-width="2" opacity="0.16"/>
+
+  <g opacity="0.20" filter="url(#soft)">
+    <ellipse cx="704" cy="301" rx="84" ry="20" fill="#4f4941"/>
+  </g>
+  <g transform="translate(704 255)" opacity="0.78">
+    <circle cx="0" cy="0" r="18" fill="#776f64"/>
+    <path d="M-18 36 C-14 15 14 15 18 36 C22 58 9 77 0 88 C-9 77 -22 58 -18 36 Z" fill="#776f64"/>
+    <path d="M-13 80 C-34 101 -48 120 -60 145" fill="none" stroke="#776f64" stroke-width="11" stroke-linecap="round"/>
+    <path d="M13 80 C34 101 48 120 60 145" fill="none" stroke="#776f64" stroke-width="11" stroke-linecap="round"/>
+  </g>
+
+  <path d="M165 172 C329 129 461 148 600 185" fill="none" stroke="#746d62" stroke-width="2" opacity="0.065"/>
+  <path d="M768 214 C894 170 1018 174 1104 207" fill="none" stroke="#746d62" stroke-width="2" opacity="0.055"/>
+  <text x="82" y="566" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#504a42" opacity="0.30">o sentido não chega pronto; torna-se caminho</text>
+</svg>
