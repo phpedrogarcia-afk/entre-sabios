@@ -120,9 +120,9 @@ test('a trava cobre a transação inteira e sempre libera os controles', () => {
 test('trava de seleção não simula carregamento depois que a reflexão já foi renderizada', () => {
   assert.match(componentsCss, /\.primary\.is-selection-locked:disabled\s*\{[\s\S]*?cursor:\s*pointer;[\s\S]*?opacity:\s*1;/);
   assert.match(componentsCss, /\.primary\.is-selection-locked::after\s*\{[\s\S]*?animation:\s*generate-spinner/);
-  assert.match(html, /style\.css\?v=20260809-visual-polish-2/);
+  assert.match(html, /css\/components\.css\?v=20260809-seo-library-1/);
   assert.match(styleCss, /css\/components\.css\?v=20260809-visual-polish-2/);
-  assert.match(html, /script\.js\?v=20260808-atmosphere-icons-ticker-1/);
+  assert.match(html, /script\.js\?v=20260809-saved-tales-1/);
 });
 
 test('botões nativos possuem um único listener de seleção e não criam caminhos paralelos', () => {

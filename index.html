@@ -45,7 +45,11 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20260809-visual-polish-2" />
+    <link rel="stylesheet" href="css/base.css?v=20260809-seo-library-1" />
+  <link rel="stylesheet" href="css/layout.css?v=20260809-seo-library-1" />
+  <link rel="stylesheet" href="css/components.css?v=20260809-seo-library-1" />
+  <link rel="stylesheet" href="css/modals.css?v=20260809-seo-library-1" />
+  <link rel="stylesheet" href="css/responsive.css?v=20260809-seo-library-1" />
     <link rel="stylesheet" href="css/landscape-scroll-fix.css?v=20260730-atmosphere-v2-6" />
     <link rel="stylesheet" href="css/tablet.css?v=20260730-atmosphere-v2-6" />
     <style id="tale-mobile-scroll-fix">
@@ -137,17 +141,11 @@
         }
       }
     </style>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Entre Sábios",
-        "url": "https://entresabios.com/",
-        "description": "Escolha o que está sentindo e encontre frases, reflexões e conselhos inspirados nos grandes filósofos, escritores e pensadores da humanidade.",
-        "inLanguage": "pt-BR"
-      }
-    </script>
-  </head>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Entre Sábios","url":"https://entresabios.com/","description":"Escolha o que está sentindo e encontre frases, reflexões e conselhos inspirados nos grandes filósofos, escritores e pensadores da humanidade.","inLanguage":"pt-BR","@id":"https://entresabios.com/#website","publisher":{"@id":"https://entresabios.com/#organization"}}</script>
+    <link rel="icon" href="/assets/brand-icon.jpg" type="image/jpeg" />
+  <link rel="apple-touch-icon" href="/assets/brand-icon.jpg" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://entresabios.com/#organization","name":"Entre Sábios","url":"https://entresabios.com/sobre/","email":"ph.pedrocontato@gmail.com","logo":{"@type":"ImageObject","url":"https://entresabios.com/assets/brand-icon.jpg","width":128,"height":128}}</script>
+</head>
   <body>
     <svg class="icon-symbols" aria-hidden="true" focusable="false">
       <symbol id="observer" viewBox="0 0 24 24">
@@ -463,7 +461,7 @@
       <div class="favorites-head">
         <div>
           <div class="share-title" id="favoritesTitle">LEITURAS SALVAS</div>
-          <div class="section-subtitle">Reflexões guardadas para voltar quando quiser.</div>
+          <div class="section-subtitle">Reflexões e contos guardados para voltar quando quiser.</div>
         </div>
         <button id="closeFavoritesBtn" class="ghost" type="button" aria-label="Fechar leituras salvas">Fechar</button>
       </div>
@@ -482,6 +480,7 @@
         <p>Entre Sábios nasceu para aproximar filosofia e vida cotidiana de um jeito simples e humano.</p>
         <p>Você escolhe o que está sentindo e encontra palavras de pensadores e escritores que podem ajudar a compreender esse momento com mais calma, coragem e curiosidade.</p>
         <p>Não se trata de oferecer respostas prontas, mas de abrir boas perguntas — sobre o mundo e sobre nós mesmos.</p>
+        <p><a class="about-process-link" href="sobre/">Conheça nosso processo editorial e critérios de transparência</a></p>
         <p class="about-contact">Contato: <a href="mailto:ph.pedrocontato@gmail.com">ph.pedrocontato@gmail.com</a></p>
       </div>
     </dialog>
@@ -492,7 +491,11 @@
           <div class="share-title" id="taleDialogTitle">CONTOS FILOSÓFICOS</div>
           <div class="tale-title-row">
             <div class="section-subtitle" id="taleTitle">—</div>
-            <button id="nextTaleBtn" class="tale-refresh-btn" type="button" aria-label="Carregar outro conto" title="Carregar outro conto">↻</button>
+            <span id="taleReadStatus" class="tale-read-status" hidden>Lido</span>
+            <div class="tale-title-actions">
+              <button id="taleFavoriteBtn" class="tale-favorite-btn" type="button" aria-label="Salvar conto" aria-pressed="false" title="Salvar conto">☆</button>
+              <button id="nextTaleBtn" class="tale-refresh-btn" type="button" aria-label="Carregar outro conto" title="Carregar outro conto">↻</button>
+            </div>
           </div>
         </div>
         <button id="closeTaleTopBtn" class="ghost" type="button" aria-label="Fechar conto">Fechar</button>
@@ -524,18 +527,6 @@
     </dialog>
 
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-      import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
-      import {
-        getDatabase,
-        ref,
-        push,
-        set,
-        onDisconnect,
-        onValue,
-        serverTimestamp,
-      } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
-
       const firebaseConfig = {
         apiKey: "AIzaSyDQ9YnhiH2XfXDRsFZ3z60KXotA1hSmNIE",
         authDomain: "entre-sabios.firebaseapp.com",
@@ -544,70 +535,76 @@
         storageBucket: "entre-sabios.firebasestorage.app",
         messagingSenderId: "824380836905",
         appId: "1:824380836905:web:2eaa7e9e5b19464f952038",
-        measurementId: "G-J6LZP45KPH",
       };
 
-      const app = initializeApp(firebaseConfig);
+      async function initializePresence() {
+        const [{ initializeApp }, databaseModule] = await Promise.all([
+          import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js"),
+          import("https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js"),
+        ]);
+        const { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } = databaseModule;
+        const app = initializeApp(firebaseConfig);
+        const onlineCounterEl = document.getElementById("contador-online");
+        const database = getDatabase(app);
+        const connectedRef = ref(database, ".info/connected");
+        const presenceRef = ref(database, "presence");
+        const presenceSessionId = sessionStorage.getItem("entreSabiosPresenceId") || crypto.randomUUID();
+        sessionStorage.setItem("entreSabiosPresenceId", presenceSessionId);
+        const currentUserPresenceRef = ref(database, `presence/${presenceSessionId}`);
 
-      isSupported()
-        .then((supported) => {
-          if (supported) getAnalytics(app);
-        })
-        .catch(() => {
-          // Analytics pode não inicializar em alguns contextos locais; o contador segue funcionando.
+        onValue(connectedRef, (snapshot) => {
+          if (snapshot.val() !== true) return;
+          onDisconnect(currentUserPresenceRef)
+            .remove()
+            .then(() => set(currentUserPresenceRef, {
+              online: true,
+              startedAt: serverTimestamp(),
+              lastSeenAt: serverTimestamp(),
+            }))
+            .catch((error) => {
+              console.warn("Firebase Presence bloqueado:", error);
+              if (onlineCounterEl) {
+                onlineCounterEl.innerText = "—";
+                onlineCounterEl.title = "Permissão do Firebase bloqueada para presence.";
+              }
+            });
         });
 
-      const onlineCounterEl = document.getElementById("contador-online");
-      const database = getDatabase(app);
-      const connectedRef = ref(database, ".info/connected");
-      const presenceRef = ref(database, "presence");
-      const presenceSessionId = sessionStorage.getItem("entreSabiosPresenceId") || crypto.randomUUID();
-      sessionStorage.setItem("entreSabiosPresenceId", presenceSessionId);
-      const currentUserPresenceRef = ref(database, `presence/${presenceSessionId}`);
+        onValue(presenceRef, (snapshot) => {
+          const usersOnline = snapshot.val() || {};
+          if (onlineCounterEl) {
+            onlineCounterEl.innerText = Object.keys(usersOnline).length;
+            onlineCounterEl.title = "";
+          }
+        }, (error) => {
+          console.warn("Não foi possível ler usuários online:", error);
+          if (onlineCounterEl) {
+            onlineCounterEl.innerText = "—";
+            onlineCounterEl.title = "Permissão do Firebase bloqueada para presence.";
+          }
+        });
 
-      onValue(connectedRef, (snapshot) => {
-        if (snapshot.val() !== true) return;
+        window.addEventListener("pagehide", () => {
+          set(currentUserPresenceRef, null).catch(() => {});
+        });
+      }
 
-        onDisconnect(currentUserPresenceRef)
-          .remove()
-          .then(() => set(currentUserPresenceRef, {
-            online: true,
-            startedAt: serverTimestamp(),
-            lastSeenAt: serverTimestamp(),
-          }))
-          .catch((error) => {
-            console.warn("Firebase Presence bloqueado:", error);
-            if (onlineCounterEl) {
-              onlineCounterEl.innerText = "—";
-              onlineCounterEl.title = "Permissão do Firebase bloqueada para presence.";
-            }
-          });
-      });
+      function schedulePresence() {
+        const start = () => initializePresence().catch((error) => {
+          console.warn("Não foi possível iniciar o contador online:", error);
+        });
+        if ("requestIdleCallback" in window) window.requestIdleCallback(start, { timeout: 3000 });
+        else window.setTimeout(start, 800);
+      }
 
-      onValue(presenceRef, (snapshot) => {
-        const usersOnline = snapshot.val() || {};
-        const totalOnline = Object.keys(usersOnline).length;
-        if (onlineCounterEl) {
-          onlineCounterEl.innerText = totalOnline;
-          onlineCounterEl.title = "";
-        }
-      }, (error) => {
-        console.warn("Não foi possível ler usuários online:", error);
-        if (onlineCounterEl) {
-          onlineCounterEl.innerText = "—";
-          onlineCounterEl.title = "Permissão do Firebase bloqueada para presence.";
-        }
-      });
-
-      window.addEventListener("pagehide", () => {
-        set(currentUserPresenceRef, null).catch(() => {});
-      });
+      if (document.readyState === "complete") schedulePresence();
+      else window.addEventListener("load", schedulePresence, { once: true });
     </script>
     <script src="js/data/catalogs.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/emotional-syntheses.js?v=20260714-2"></script>
     <script src="js/data/books.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/share-themes.js?v=20260710-1"></script>
-    <script src="js/data/tales.js?v=tales-e928e3df9d48"></script>
+    <script src="js/data/tales.js?v=tales-dd2a973435f0"></script>
     <script src="js/data/emotional-taxonomy.js?v=20260712-10"></script>
     <script src="js/data/editorial-explanations.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/editorial-guidance.js?v=20260718-cache-fix-1"></script>
@@ -623,14 +620,14 @@
     <script src="js/core/matching.js?v=20260718-cache-fix-1"></script>
     <script src="js/core/book-matching.js?v=20260712-10"></script>
     <script src="js/features/feedback.js?v=20260713-4"></script>
-    <script src="js/features/favorites.js?v=20260710-1"></script>
+    <script src="js/features/favorites.js?v=20260809-saved-tales-1"></script>
     <script src="js/features/sharing.js?v=20260728-share-4x5-1"></script>
-    <script src="js/features/tales.js?v=tales-e928e3df9d48"></script>
+    <script src="js/features/tales.js?v=tales-dd2a973435f0"></script>
     <script src="js/ui/feelings-ui.js?v=20260808-atmosphere-icons-ticker-1"></script>
     <script src="js/ui/daily-ui.js?v=20260808-atmosphere-icons-ticker-1"></script>
     <script src="js/ui/reflection-ui.js?v=20260714-1"></script>
     <script src="js/ui/effects-ui.js?v=20260710-1"></script>
     <script src="js/ui/theme-ui.js?v=20260710-1"></script>
-    <script src="script.js?v=20260808-atmosphere-icons-ticker-1"></script>
+    <script src="script.js?v=20260809-saved-tales-1"></script>
   </body>
 </html>

@@ -124,6 +124,7 @@ const normalizedBookCatalog = [...additionalBookCatalog, ...bookCatalog]
 let history = []; // lista de { quote, author, reflection, advice, tags }
 let historyIndex = -1;
 let currentStory = null;
+let currentTale = null;
 let currentStoryShownAt = 0;
 let currentShareStyle = 'sage';
 
@@ -215,6 +216,8 @@ const taleLessonEl = document.getElementById('taleLesson');
 const taleRelationEl = document.getElementById('taleRelation');
 const taleQuestionEl = document.getElementById('taleQuestion');
 const taleCycleNoticeEl = document.getElementById('taleCycleNotice');
+const taleReadStatusEl = document.getElementById('taleReadStatus');
+const taleFavoriteBtn = document.getElementById('taleFavoriteBtn');
 const nextTaleBtn = document.getElementById('nextTaleBtn');
 const closeTaleBtn = document.getElementById('closeTaleBtn');
 const closeTaleTopBtn = document.getElementById('closeTaleTopBtn');
@@ -602,6 +605,7 @@ aboutDialog.addEventListener('click', (event) => {
   if (event.target === aboutDialog) aboutDialog.close();
 });
 openTaleBtn.addEventListener('click', openPhilosophicalTale);
+taleFavoriteBtn.addEventListener('click', toggleTaleFavorite);
 nextTaleBtn.addEventListener('click', () => {
   showTale({ gradualVariety: true });
 });

@@ -38,7 +38,7 @@ export function groupsForFiles(filePaths) {
       || /interface|sharing|tale-image|copy-removal|gender-preference/.test(file)) fileGroups.add('ui');
     if (file === 'script.js') ['ranking', 'rotation'].forEach((group) => fileGroups.add(group));
     if (/^(sitemap\.xml|robots\.txt|\.htaccess)$/.test(file)
-      || /^(sentimentos|pensadores|contos|ensaios)\//.test(file) || /seo/.test(name)) fileGroups.add('seo');
+      || /^(sentimentos|pensadores|contos|ensaios|sobre)\//.test(file) || /seo/.test(name)) fileGroups.add('seo');
     if (/^(index\.html|script\.js|style\.css)$/.test(file)
       || file.startsWith('css/') || file.startsWith('data/') || file.startsWith('js/')
       || file.startsWith('tests/browser/') || file === 'playwright.config.mjs') fileGroups.add('browser');

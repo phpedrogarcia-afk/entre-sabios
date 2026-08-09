@@ -1,6 +1,6 @@
 # Estado vivo do projeto — Entre Sábios
 
-> Atualizado em 25 de julho de 2026. Este documento registra o estado vigente do produto. Relatórios de fases são evidências históricas e não substituem este resumo.
+> Atualizado em 9 de agosto de 2026. Este documento registra o estado vigente do produto. Relatórios de fases são evidências históricas e não substituem este resumo.
 
 ## Como usar este documento
 
@@ -59,19 +59,19 @@ Estados admitidos: `não iniciado`, `auditado`, `em andamento`, `parcial`, `conc
 | Diversidade de autoria | aprovado com limite conhecido | `tests/runtime-selection.test.mjs` | pode ser relaxada em conjunto editorial pequeno |
 | Cadência de formatos | aprovado com limite de acervo | `tests/phase9-rotation-integration.test.mjs` | não promove nível editorial inferior |
 | Preferência pessoal de autoria/gênero | removida e aprovada | `tests/gender-preference-removal.test.mjs` | metadados editoriais permanecem; preferência não participa do ranking |
-| Leituras salvas e Gostei | aprovado | `DEC-036`, testes de interface, persistência e apresentação | estrela salva pela chave histórica; coração registra somente feedback positivo; dislike público removido e valores negativos legados preservados |
+| Leituras salvas e Gostei | aprovado e ampliado para contos | `DEC-036`, `DEC-040`, testes de interface, persistência e apresentação | estrela do cartão salva reflexão; estrela do diálogo salva conto na mesma chave histórica com entrada tipada; coração registra somente feedback positivo; dados legados permanecem intactos |
 | Quatro blocos editoriais canônicos | concluído no acervo ativo | `DEC-025`, `PADRAO_EDITORIAL_ENTRE_SABIOS.md`, `scripts/audit-four-block-coverage.mjs` | 257 IDs ativos auditados; explicações, perfis, perguntas e livros completos nos 257 conteúdos; lacunas não recebem fallback genérico |
 | Apresentação de autoria | aprovado no comportamento atual | `tests/authorship-presentation.test.mjs` | deverá usar “CONHEÇA O PENSADOR” em todo o acervo sem inventar autoria ou proveniência |
 | Pergunta editorial específica | concluído | `DEC-025`, `tests/editorial-guidance.test.mjs`, `scripts/audit-four-block-coverage.mjs` | 257 perguntas canônicas específicas, contextualizadas e sem conselho disfarçado |
 | Recomendação de livro | concluído | `DEC-009`, `DEC-025`, `tests/book-recommendations.test.mjs`, `scripts/audit-four-block-coverage.mjs` | 2.121 de 2.121 contextos possuem relação substantiva; a ausência segura continua coberta por cenário sintético sem relação confiável |
 | Compartilhamento por imagem | aprovado | `tests/share-image-layout.test.mjs`, relatório de Fase 11 | atalho sorteia um dos três estilos; escolha manual é preservada |
 | Botão “copiar mensagem” | removido e aprovado | `tests/copy-removal-sharing.test.mjs` | não deve retornar à interface |
-| Contos no diálogo | concluído | `DEC-034`, `ES-2026-004`, testes de interface e navegador | pode abrir sem sentimento, com rotação neutra; sentimentos selecionados refinam o filtro; usa intensidade moderada interna sem controle público |
+| Contos no diálogo | concluído com percurso local | `DEC-034`, `DEC-040`, `ES-2026-004`, testes de interface e navegador | pode abrir sem sentimento, com rotação neutra; sentimentos selecionados refinam o filtro; “Lido” depende de leitura explícita e ignora históricos técnicos antigos; contos podem ser salvos e reabertos integralmente |
 | Revisão editorial dos contos | 33 contos concluídos em onze lotes de três | `DEC-032`, `tests/tales-editorial-batch.test.mjs` e 33 páginas públicas sincronizadas | autorização editorial abrangente recebida em 25/07/2026; `js/data/tales.js` permanece fonte provisória; nenhuma página externa aos lotes foi alterada pela sincronização |
 | Revisão editorial dos ensaios | 12 ensaios concluídos; oito revisados e quatro preservados | páginas estáticas de `ensaios/`; registro cumulativo abaixo | ciclo autorizado em 25/07/2026 concluído localmente; dois bloqueios documentais foram pesquisados e resolvidos com ressalvas públicas; sem commit ou publicação |
 | Smartphone horizontal | aprovado em navegador real | `docs/relatorios/fases/RELATORIO_FASE_7_NAVEGADOR_REAL_ANTIRREPETICAO.md` | rolagem vertical funciona sem overflow horizontal |
 | Tablets | aprovado em regressão anterior | CSS específico e testes de wiring | manter verificação visual após mudanças de layout |
-| SEO | aprovado | `tests/seo.test.mjs` | páginas são estáticas; atualização é executada por script |
+| SEO | ampliado localmente; publicação e Search Console pendentes | `DEC-039`, `scripts/update-seo.mjs`, `tests/seo.test.mjs` | páginas estáticas com entidades, datas verificáveis, favicon e transparência; host canônico é sem `www`; propriedade correta do Search Console e 301 de `/index.html` dependem de ações externas após publicação |
 | Contratos canônicos | aprovado | `tests/canonical-contracts.test.mjs` | sentimentos, versões, loader e enums do mestre devem permanecer sincronizados |
 | Replay de diagnóstico emocional | concluído | `tests/diagnostic-replay.test.mjs` | reproduz localmente sessões JSON v1 sem participar da seleção em produção |
 | Laboratório da mistura emocional | concluído | `scripts/emotional-lab-lib.mjs`, `tests/emotional-lab.test.mjs` | modo local/exportável; métricas não participam do ranking; limites aguardam calibração na Fase 10 |

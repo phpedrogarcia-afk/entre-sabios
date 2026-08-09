@@ -109,3 +109,50 @@ test('conto abre, fecha e reabre diretamente após escolher um sentimento', asyn
   await expect(page.locator('#taleText p')).not.toHaveCount(0);
   expect(pageErrors).toEqual([]);
 });
+
+test('conto salvo aparece por resumo e reabre o texto completo com indicação de lido', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openReadyPage(page);
+
+  await page.locator('#openTaleBtn').click();
+  const savedTitle = await page.locator('#taleTitle').textContent();
+  await expect(page.locator('#taleReadStatus')).toBeHidden();
+  await page.locator('#taleFavoriteBtn').click();
+  await expect(page.locator('#taleFavoriteBtn')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('#closeTaleTopBtn').click();
+
+  await page.locator('#favoritesBtn').click();
+  const savedCard = page.locator('.favorite-item-tale');
+  await expect(savedCard).toHaveCount(1);
+  await expect(savedCard.locator('.favorite-item-title')).toHaveText(savedTitle ?? '');
+  await expect(savedCard.locator('.favorite-item-summary')).not.toHaveText('');
+  await expect(savedCard.locator('.tale-text')).toHaveCount(0);
+  await savedCard.locator('.favorite-item-open').click();
+
+  await expect(page.locator('#taleDialog')).toHaveAttribute('open', '');
+  await expect(page.locator('#taleTitle')).toHaveText(savedTitle ?? '');
+  await expect(page.locator('#taleReadStatus')).toBeVisible();
+  await expect(page.locator('#taleText p')).not.toHaveCount(0);
+  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('caixaSabedoriaFavoritas') || '[]'));
+  expect(stored).toHaveLength(1);
+  expect(stored[0]).toMatchObject({ type: 'tale', title: savedTitle });
+});
+
+test('histórico antigo de rotação não marca contos como lidos', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => {
+    const taleIds = philosophicalTales.map((tale) => tale.id);
+    localStorage.clear();
+    localStorage.setItem(
+      'entreSabiosContosVistos',
+      JSON.stringify(taleIds.map((id) => `moderada::${id}`)),
+    );
+    localStorage.setItem('entreSabiosContosRecentes', JSON.stringify(taleIds.slice(-6)));
+  });
+  await page.reload();
+  await expect(page.locator('#contentLoadStatus')).toHaveText('');
+
+  await page.locator('#openTaleBtn').click();
+  await expect(page.locator('#taleDialog')).toHaveAttribute('open', '');
+  await expect(page.locator('#taleReadStatus')).toBeHidden();
+});

@@ -133,6 +133,20 @@ html[data-theme="night"] body.essays-page > .seo-container {
   line-height: 1.42;
 }
 
+.seo-byline {
+  margin: -10px 0 28px;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.seo-byline a {
+  color: inherit;
+  font-weight: 800;
+  text-underline-offset: 3px;
+}
+
 .seo-card p {
   color: rgba(42, 35, 26, 0.78);
   font-size: 17px;

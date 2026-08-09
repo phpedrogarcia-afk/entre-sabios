@@ -134,7 +134,7 @@ test('22–23: foco, teclado e funções críticas continuam presentes', () => {
   assert.match(html, /localStorage\.getItem\('entreSabiosTheme'\)/);
 });
 
-test('24: hashes protegidos de conteúdo, runtime, core, livros e contos não mudaram', () => {
+test('24: hashes protegidos preservam conteúdo, runtime, core, livros e o controlador autorizado', () => {
   const protectedHashes = {
     'entre_sabios_acervo_mestre_final.json': '9BD7E418ABF7B96C2B74FABC3844333BD54571C6A592EF85FA514953EDC61A16',
     'data/entre_sabios_runtime.json': 'A5B310F3FC84650E5C17A63ADC1B108FB61327DC755B59B1F631EC2EA01C1151',
@@ -147,7 +147,7 @@ test('24: hashes protegidos de conteúdo, runtime, core, livros e contos não mu
     'js/core/book-matching.js': '29D2D9F1B5F4C7442116C6A6645F33F4552E9FD1D337FDDE55AFAC033CB5185C',
     'js/data/books.js': 'BD0287222903AC7481E8732E3777741EC725BA849BBAB5B38C2D33A0042309F5',
     'js/data/tales.js': '05B38F765417C5E3A7B8FDF9EF52FA975D8DA1020E9BA549EFE019DBFE79F38E',
-    'js/features/tales.js': '39916FCFF864A9D570C84500C3B4875BF076DF98E8B5052505A73F5D2D706ADD',
+    'js/features/tales.js': '84E1271A9349D6106AC7BEA306B5900AC3265A3EE49716845A49AC5D7DB315E9',
   };
   for (const [relativePath, expectedHash] of Object.entries(protectedHashes)) {
     assert.equal(sha256(relativePath), expectedHash, relativePath);

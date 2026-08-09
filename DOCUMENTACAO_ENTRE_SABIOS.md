@@ -293,7 +293,7 @@ Chaves atualmente utilizadas ou mantidas pelo código:
 - `caixaSabedoriaHistoricoVisto`: conteúdos vistos;
 - `caixaSabedoriaConteudosGerados`: quantidade gerada;
 - `entreSabiosHistoricoContextual`: histórico contextual;
-- `entreSabiosContosVistos`: contos vistos por contexto;
+- `entreSabiosContosVistos`: combinações de contos vistas por contexto e marcadores explícitos de leitura `read::<id>`;
 - `entreSabiosContosRecentes`: últimos contos;
 - `entreSabiosSinaisEditoriais`: sinais editoriais agregados.
 
@@ -378,7 +378,7 @@ Para a seleção dos contos, o estado usa internamente a intensidade `moderada`,
 
 A rotação desconta 5 pontos quando o conto já apareceu para a mesma seleção e 4 pontos quando está entre os seis mais recentes. O sistema prefere contos compatíveis ainda não vistos na sessão; ao pedir outro conto, aceita variedade temática gradual. Depois que todos forem percorridos, reinicia a jornada e informa isso na interface.
 
-O diálogo mostra título, origem, tempo aproximado, narrativa e somente três seções posteriores: **Um modo de olhar**, **O que talvez esteja pedindo para ser visto** e **Uma pergunta para levar consigo**. A antiga explicação pública do motivo da recomendação foi retirada para preservar a atmosfera e manter o mecanismo emocional nos metadados e no algoritmo. Valores editoriais são escapados antes de serem inseridos como parágrafos. O histórico contextual dos contos mantém até 120 combinações e seis IDs recentes no navegador.
+O diálogo mostra título, origem, tempo aproximado, narrativa e somente três seções posteriores: **Um modo de olhar**, **O que talvez esteja pedindo para ser visto** e **Uma pergunta para levar consigo**. A antiga explicação pública do motivo da recomendação foi retirada para preservar a atmosfera e manter o mecanismo emocional nos metadados e no algoritmo. Valores editoriais são escapados antes de serem inseridos como parágrafos. O histórico dos contos mantém no máximo 120 entradas entre combinações contextuais e marcadores explícitos `read::<id>`, além de seis IDs recentes. Somente o marcador explícito, criado depois que o conto é apresentado, exibe “Lido”; registros técnicos antigos de contexto, recência ou ciclo não são interpretados como leitura.
 
 Conforme a `DEC-032`, a revisão editorial ocorreu em onze lotes de três, todos abrangidos pela autorização editorial de 25/07/2026. Os 33 registros de `js/data/tales.js` e suas 33 páginas estáticas correspondentes usam as três seções públicas aprovadas. A fonte editorial continua provisória e a sincronização permanece manual e limitada às páginas de cada lote; esta conclusão não cria gerador, não altera a rotação e não modifica a `DEC-032`.
 
@@ -453,7 +453,7 @@ A revisão consolidada de 15 de julho de 2026 confirmou:
 - compartilhamento progressivo preservando escolha manual, sorteio no atalho, Web Share quando disponível e download como fallback;
 - estrutura editorial futura criada em `PADRAO_EDITORIAL_ENTRE_SABIOS.md`, ainda aberta à curadoria.
 
-A validação em navegador real confirmou 21 perspectivas únicas no cenário principal, persistência após recarga, proteção contra clique duplo, rolagem em smartphone retrato e paisagem e ausência de overflow horizontal. Compartilhamento nativo de arquivos e a folha final oferecida por cada sistema operacional continuam dependendo do dispositivo. A publicação também deve ser validada separadamente: o GitHub Pages e o domínio principal não usam atualmente o mesmo processo operacional.
+A validação em navegador real confirmou 21 perspectivas únicas no cenário principal, persistência após recarga, proteção contra clique duplo, rolagem em smartphone retrato e paisagem e ausência de overflow horizontal. Compartilhamento nativo de arquivos e a folha final oferecida por cada sistema operacional continuam dependendo do dispositivo. A publicação deve ser validada separadamente no GitHub Pages e no domínio principal; ambos usam o pacote público da allowlist enviado à branch `codex/github-pages-publicacao`, com `CNAME` preservado no worktree público.
 
 A imagem-piloto da caverna continua sendo o único exemplo autorizado. Novas imagens e a consolidação da identidade editorial dependem de revisão humana futura.
 

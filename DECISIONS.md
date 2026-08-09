@@ -452,6 +452,33 @@
 - **Testes:** contrato de permissões, TypeScript, testes do app, fluxo visual com redução de movimento preservada e auditoria do APK.
 - **Revisão:** ampliar o háptico para outros gestos ou alterar sua intensidade exige nova decisão explícita.
 
+### DEC-039 — SEO canônico ganha transparência, entidades e datas verificáveis
+
+- **Data:** 09/08/2026.
+- **Estado:** vigente.
+- **Decisão:** manter `https://entresabios.com/` sem `www` como origem canônica e acrescentar favicon, entidade `Organization`, idioma, autoria/edição institucional e datas visíveis nos artigos, entidade `Person` nas páginas de pensadores e a página pública `/sobre/` com propósito, responsabilidade, proveniência, uso de tecnologia e canal de correção.
+- **Sitemap:** gerar `lastmod` pela data do histórico do arquivo e usar a data atual somente quando a página estiver nova ou realmente modificada. A página de transparência entra no sitemap e na allowlist de publicação.
+- **Search Console e redirecionamento:** a propriedade antiga `https://www.entresabios.com/` não representa o host canônico e seu sitemap não deve ser reenviado. Cadastrar e verificar a propriedade sem `www`, reenviar nela o sitemap e validar a indexação são ações posteriores à publicação. Como o GitHub Pages ignora `.htaccess`, redirecionar `/index.html` com HTTP 301 depende da camada de domínio ou de hospedagem; não simular 301 com JavaScript.
+- **Desempenho:** substituir a cadeia de `@import` por folhas de estilo paralelas nas páginas e adiar o Firebase Presence para depois do carregamento, sem carregar um segundo Google Analytics. Preservar o contador online e o Google Analytics principal.
+- **Idiomas:** tradução e arquitetura multilíngue ficam fora deste ciclo por decisão explícita; nenhuma tradução automática ou `hreflang` vazio é publicada.
+- **Motivo:** melhorar compreensão, confiança, rastreamento e carregamento sem alterar acervo, algoritmo ou autoria documental.
+- **Arquivos:** páginas SEO, página inicial, `sobre/`, `seo.css`, gerador e testes SEO, manifesto de publicação e documentação viva.
+- **Testes:** SEO, referências locais, deploy, análise estática, desempenho estrutural, navegador e verificação completa.
+- **Revisão:** trocar host canônico, declarar pessoa responsável sem identificação aprovada, automatizar publicação, inventar datas, adicionar idioma ou mudar provedor de hospedagem exige decisão e autorização próprias.
+
+### DEC-040 — Contos podem ser lidos e salvos na biblioteca local
+
+- **Data:** 09/08/2026.
+- **Estado:** vigente.
+- **Decisão:** acrescentar ao diálogo de contos uma estrela discreta para salvar ou remover o conto e uma indicação dourada de leitura anterior. “Leituras salvas” mostra título, origem e somente o resumo do conto; “Abrir conto” leva ao texto completo no mesmo diálogo.
+- **Persistência:** ampliar a chave histórica `caixaSabedoriaFavoritas` com entradas tipadas de conto, sem criar nova chave e sem reescrever, migrar ou apagar as entradas antigas de reflexões. A indicação “Lido” usa um marcador explícito `read::<id>` dentro de `entreSabiosContosVistos`, gravado depois que o conto é apresentado; históricos anteriores de contexto, recência ou ciclo não equivalem a leitura e não são migrados em massa. A estrela e o coração do cartão principal mantêm integralmente a semântica da `DEC-036`.
+- **Seleção:** preservar a `DEC-032` e a `DEC-034`: contos continuam abrindo sem sentimento em rotação neutra; quando sentimentos são escolhidos, eles refinam a indicação pelo contrato editorial vigente. Salvar, reabrir ou marcar como lido não altera pontuação, elegibilidade nem conteúdo dos 33 contos.
+- **Motivo:** permitir retorno pessoal e reconhecimento sutil do percurso sem transformar a experiência em lista de tarefas ou revelar a lógica de recomendação.
+- **Alternativas rejeitadas:** nova chave de favoritos; cópia integral do conto dentro da biblioteca; exigir sentimento; marcar como lido antes da primeira visita; coração para salvar conto; migração em massa de dados locais.
+- **Arquivos:** diálogo e estilos de contos, controlador, favoritos, eventos, testes e documentação viva; nenhum texto do acervo de contos é reescrito.
+- **Testes:** compatibilidade dos favoritos legados, persistência tipada, resumo, reabertura do conto completo, filtro por sentimentos, abertura neutra, rotação, navegador e verificação completa.
+- **Revisão:** sincronizar favoritos entre dispositivos, mudar a chave, alterar o contrato de seleção ou tornar leitura/favorito público exige nova decisão explícita.
+
 Use somente quando houver uma escolha duradoura entre alternativas reais:
 
 ```text

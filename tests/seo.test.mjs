@@ -15,7 +15,7 @@ function collectIndexFiles(directory) {
   });
 }
 
-const internalFiles = ['contos', 'ensaios', 'pensadores', 'sentimentos']
+const internalFiles = ['contos', 'ensaios', 'pensadores', 'sentimentos', 'sobre']
   .flatMap((section) => collectIndexFiles(path.join(rootDir, section)));
 const htmlFiles = [path.join(rootDir, 'index.html'), ...internalFiles];
 
@@ -36,8 +36,8 @@ function schemasFrom(html, filePath) {
   });
 }
 
-test('77 páginas possuem metadados canônicos coerentes no host sem www', () => {
-  assert.equal(htmlFiles.length, 77);
+test('78 páginas possuem metadados canônicos coerentes, favicon e CSS paralelo', () => {
+  assert.equal(htmlFiles.length, 78);
   const canonicals = htmlFiles.map((filePath) => {
     const html = read(filePath);
     assert.match(html, /<title>[^<]+<\/title>/);
@@ -47,6 +47,11 @@ test('77 páginas possuem metadados canônicos coerentes no host sem www', () =>
     assert.equal(ogUrl, canonical, `og:url diferente do canonical em ${path.relative(rootDir, filePath)}`);
     assert.ok(canonical.startsWith(`${origin}/`), `Host canônico incorreto: ${canonical}`);
     assert.ok(!html.includes('https://www.entresabios.com'), `Host www remanescente em ${path.relative(rootDir, filePath)}`);
+    assert.match(html, /<link rel="icon" href="\/assets\/brand-icon\.jpg" type="image\/jpeg" \/>/);
+    assert.doesNotMatch(html, /href="(?:\.\.\/)*style\.css\?v=/);
+    for (const stylesheet of ['base', 'layout', 'components', 'modals', 'responsive']) {
+      assert.match(html, new RegExp(`css/${stylesheet}\\.css\\?v=`));
+    }
     return canonical;
   });
   assert.equal(new Set(canonicals).size, htmlFiles.length);
@@ -75,7 +80,7 @@ test('páginas internas possuem breadcrumb visual e BreadcrumbList equivalente',
   assert.equal(homeSchemas.filter((schema) => schema['@type'] === 'BreadcrumbList').length, 0);
 });
 
-test('sitemap contém somente as 77 URLs canônicas e campos permitidos', () => {
+test('sitemap contém somente as 78 URLs canônicas e datas derivadas válidas', () => {
   const sitemap = read(path.join(rootDir, 'sitemap.xml'));
   assert.match(sitemap, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
   assert.doesNotMatch(sitemap, /<priority>|<changefreq>/);
@@ -86,11 +91,14 @@ test('sitemap contém somente as 77 URLs canônicas e campos permitidos', () => 
     'Canonical',
     filePath,
   ));
-  assert.equal(sitemapUrls.length, 77);
+  assert.equal(sitemapUrls.length, 78);
   assert.deepEqual(new Set(sitemapUrls), new Set(canonicalUrls));
   const lastmods = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
+  assert.equal(lastmods.length, sitemapUrls.length);
   assert.ok(lastmods.every((date) => /^\d{4}-\d{2}-\d{2}$/.test(date)));
-  assert.deepEqual(new Set(lastmods), new Set(['2026-07-13', '2026-07-14']));
+  const today = new Date().toISOString().slice(0, 10);
+  assert.ok(lastmods.every((date) => date <= today), 'lastmod não pode estar no futuro');
+  assert.match(sitemap, /<loc>https:\/\/entresabios\.com\/sobre\/<\/loc>/);
   assert.match(sitemap, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
   assert.equal([...sitemap.matchAll(/<image:image>/g)].length, 1);
   assert.match(sitemap, /<image:loc>https:\/\/entresabios\.com\/assets\/contos\/alegoria-da-caverna-piloto\.webp<\/image:loc>/);
@@ -99,6 +107,52 @@ test('sitemap contém somente as 77 URLs canônicas e campos permitidos', () => 
   assert.match(htaccess, /AddType image\/svg\+xml \.svg \.svgz/);
   assert.match(htaccess, /RewriteCond %\{HTTP_HOST\} \^www\\\.entresabios\\\.com\$/);
   assert.match(htaccess, /RewriteRule \^ https:\/\/entresabios\.com%\{REQUEST_URI\} \[R=301,L,NE\]/);
+});
+
+test('dados estruturados identificam organização, artigos, datas e pensadores', () => {
+  const homePath = path.join(rootDir, 'index.html');
+  const homeSchemas = schemasFrom(read(homePath), homePath);
+  const website = homeSchemas.find((schema) => schema['@type'] === 'WebSite');
+  const organization = homeSchemas.find((schema) => schema['@type'] === 'Organization');
+  assert.equal(website?.['@id'], `${origin}/#website`);
+  assert.equal(website?.publisher?.['@id'], `${origin}/#organization`);
+  assert.equal(organization?.url, `${origin}/sobre/`);
+  assert.equal(organization?.logo?.url, `${origin}/assets/brand-icon.jpg`);
+
+  const articleFiles = internalFiles.filter((filePath) => /[\\/](?:contos|ensaios)[\\/]/.test(filePath)
+    && path.relative(rootDir, filePath) !== path.join('ensaios', 'index.html'));
+  assert.equal(articleFiles.length, 45);
+  for (const filePath of articleFiles) {
+    const html = read(filePath);
+    const article = schemasFrom(html, filePath).find((schema) => schema['@type'] === 'Article');
+    assert.ok(article, `Article ausente em ${path.relative(rootDir, filePath)}`);
+    assert.equal(article.inLanguage, 'pt-BR');
+    assert.equal(article.author?.['@id'], `${origin}/#organization`);
+    assert.equal(article.publisher?.url, `${origin}/sobre/`);
+    assert.match(article.datePublished, /^\d{4}-\d{2}-\d{2}$/);
+    assert.match(article.dateModified, /^\d{4}-\d{2}-\d{2}$/);
+    assert.match(html, /<p class="seo-byline">[\s\S]*?Edição editorial:[\s\S]*?<time datetime="\d{4}-\d{2}-\d{2}">/);
+  }
+
+  const thinkerFiles = internalFiles.filter((filePath) => path.relative(rootDir, filePath).startsWith(`pensadores${path.sep}`));
+  assert.equal(thinkerFiles.length, 16);
+  for (const filePath of thinkerFiles) {
+    const page = schemasFrom(read(filePath), filePath).find((schema) => schema['@type'] === 'WebPage');
+    assert.equal(page?.mainEntity?.['@type'], 'Person');
+    assert.ok(page?.mainEntity?.name);
+  }
+});
+
+test('página Sobre torna propósito, responsabilidade e correções publicamente verificáveis', () => {
+  const aboutPath = path.join(rootDir, 'sobre', 'index.html');
+  const html = read(aboutPath);
+  assert.match(html, /<h1>Sobre o Entre Sábios<\/h1>/);
+  assert.match(html, /Responsabilidade editorial/);
+  assert.match(html, /Como tratamos autoria e fontes/);
+  assert.match(html, /Uso responsável de tecnologia/);
+  assert.match(html, /mailto:ph\.pedrocontato@gmail\.com/);
+  const aboutPage = schemasFrom(html, aboutPath).find((schema) => schema['@type'] === 'AboutPage');
+  assert.equal(aboutPage?.mainEntity?.['@id'], `${origin}/#organization`);
 });
 
 test('referências internas de href e src apontam para arquivos ou âncoras existentes', () => {
