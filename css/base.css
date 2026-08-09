@@ -21,6 +21,10 @@ html[data-theme="day"] {
   --state-hover: rgba(101, 132, 101, 0.14);
   --state-disabled: 0.48;
   --decorative-texture-opacity: 0.18;
+  --glass-header: rgba(23, 58, 50, 0.88);
+  --glass-panel: rgba(255, 250, 239, 0.34);
+  --glass-highlight: rgba(255, 255, 255, 0.28);
+  --glass-blur: 5px;
 
   --bg: var(--surface-page);
   --ink: var(--text-primary);
@@ -58,6 +62,10 @@ html[data-theme="night"] {
   --state-hover: rgba(159, 190, 148, 0.16);
   --state-disabled: 0.5;
   --decorative-texture-opacity: 0.12;
+  --glass-header: rgba(7, 27, 25, 0.84);
+  --glass-panel: rgba(7, 29, 26, 0.22);
+  --glass-highlight: rgba(241, 234, 216, 0.09);
+  --glass-blur: 5px;
 
   --bg: var(--surface-page);
   --ink: var(--text-primary);
@@ -122,13 +130,15 @@ html[data-theme="night"] body {
   align-items: center;
   padding: 0;
   border-bottom: 1px solid var(--stroke);
-  background: var(--surface-header);
+  background: var(--glass-header);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(112%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(112%);
   color: var(--text-on-dark);
   box-shadow: 0 8px 28px rgba(15, 34, 28, 0.12);
 }
 
 html[data-theme="night"] .topbar {
-  background: var(--surface-header);
+  background: var(--glass-header);
 }
 
 .live-info {
@@ -209,13 +219,64 @@ html[data-theme="night"] .theme-toggle:focus-visible {
 
 /* Plano ambiental global. O z-index 0 fica abaixo de todo conteúdo funcional;
    a topbar (10) e a shell (1) formam os planos interativos. */
-.environment-layer {
+.environment-layer,
+.environment-overlay-layer {
   position: fixed;
   inset: 0;
-  z-index: 0;
   overflow: hidden;
   pointer-events: none;
   user-select: none;
+}
+
+.environment-layer {
+  z-index: 0;
+}
+
+.environment-overlay-layer {
+  z-index: auto;
+}
+
+.icon-symbols {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.environment-landscape {
+  position: absolute;
+  z-index: 0;
+  inset: 106px 0 0;
+  background-position: center, center bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% auto;
+}
+
+.environment-landscape-day {
+  display: block;
+  opacity: 0.76;
+  background-color: #f8f1e2;
+  background-image:
+    linear-gradient(180deg, rgba(255, 252, 244, 0.34), rgba(255, 252, 244, 0.08) 58%, rgba(245, 237, 214, 0.12)),
+    url("../assets/environment/landscape-day.webp");
+}
+
+.environment-landscape-night {
+  display: none;
+  opacity: 0.86;
+  background-color: #08221d;
+  background-image:
+    linear-gradient(180deg, rgba(23, 63, 52, 0.28), rgba(8, 35, 30, 0.12) 58%, rgba(2, 14, 13, 0.1)),
+    url("../assets/environment/landscape-night.webp");
+}
+
+html[data-theme="night"] .environment-landscape-day {
+  display: none;
+}
+
+html[data-theme="night"] .environment-landscape-night {
+  display: block;
 }
 
 .environment-layer::before,
@@ -227,6 +288,7 @@ html[data-theme="night"] .theme-toggle:focus-visible {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(151, 181, 139, 0.2), rgba(151, 181, 139, 0) 68%);
   filter: blur(8px);
+  z-index: 1;
 }
 
 .environment-layer::before {
@@ -257,46 +319,77 @@ html[data-theme="night"] .environment-layer::after {
 }
 
 .environment-leaf {
-  --leaf-size: 28px;
-  --leaf-color: rgba(137, 148, 101, 0.42);
+  --leaf-size: 34px;
+  --leaf-color: rgba(126, 139, 86, 0.58);
+  --leaf-vein: rgba(91, 101, 61, 0.54);
   position: absolute;
   width: var(--leaf-size);
-  height: calc(var(--leaf-size) * 0.58);
-  border-radius: 100% 0 100% 0;
-  background: linear-gradient(145deg, color-mix(in srgb, var(--leaf-color) 72%, #fff), var(--leaf-color));
-  box-shadow: inset -1px -1px 0 rgba(92, 96, 67, 0.16);
+  height: calc(var(--leaf-size) * 0.62);
+  border: 1px solid color-mix(in srgb, var(--leaf-vein) 48%, transparent);
+  border-radius: 92% 8% 92% 8%;
+  background:
+    radial-gradient(ellipse at 28% 24%, rgba(255, 252, 224, 0.42), transparent 38%),
+    repeating-linear-gradient(152deg, transparent 0 6px, color-mix(in srgb, var(--leaf-vein) 28%, transparent) 6px 7px, transparent 7px 11px),
+    linear-gradient(145deg, color-mix(in srgb, var(--leaf-color) 68%, #fff), var(--leaf-color));
+  box-shadow:
+    0 3px 8px rgba(55, 62, 37, 0.1),
+    inset -2px -2px 3px rgba(76, 84, 48, 0.16),
+    inset 2px 1px 2px rgba(255, 252, 224, 0.22);
   transform: rotate(var(--leaf-rotation));
+  z-index: 0;
+}
+
+.environment-leaf::before,
+.environment-leaf::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: var(--leaf-vein);
+}
+
+.environment-leaf::before {
+  left: 4%;
+  top: 56%;
+  width: 20%;
+  height: 1px;
+  opacity: 0.66;
+  transform: rotate(18deg);
+  transform-origin: right center;
+}
+
+.environment-leaf::after {
+  left: 16%;
+  top: 53%;
+  width: 72%;
+  height: 1px;
+  opacity: 0.72;
+  transform: rotate(-23deg);
+  transform-origin: left center;
 }
 
 html[data-theme="night"] .environment-leaf {
-  --leaf-color: rgba(185, 151, 71, 0.32);
+  --leaf-color: rgba(205, 166, 70, 0.5);
+  --leaf-vein: rgba(132, 98, 35, 0.64);
 }
 
 .environment-leaf-static {
-  opacity: 0.58;
+  opacity: 0.38;
 }
 
-.leaf-1 { top: 16%; left: 2.2%; --leaf-size: 31px; --leaf-rotation: -24deg; }
-.leaf-2 { top: 78%; left: 6%; --leaf-size: 22px; --leaf-rotation: 34deg; opacity: 0.42; }
-.leaf-3 { top: 20%; right: 4.5%; --leaf-size: 25px; --leaf-rotation: 17deg; opacity: 0.38; }
-.leaf-4 { bottom: 14%; right: 29%; --leaf-size: 20px; --leaf-rotation: -38deg; opacity: 0.3; }
-
-.environment-leaf-motion {
-  top: -8%;
-  left: var(--leaf-x);
-  opacity: 0;
-  animation: ambient-leaf-drift var(--leaf-duration) ease-in-out var(--leaf-delay) infinite;
-}
-
-.leaf-5 { --leaf-x: 3%; --leaf-size: 24px; --leaf-rotation: 18deg; --leaf-duration: 31s; --leaf-delay: -9s; }
-.leaf-6 { --leaf-x: 94%; --leaf-size: 20px; --leaf-rotation: -22deg; --leaf-duration: 37s; --leaf-delay: -24s; }
-
-@keyframes ambient-leaf-drift {
-  0%, 64%, 100% { opacity: 0; transform: translate3d(0, -6vh, 0) rotate(var(--leaf-rotation)); }
-  68% { opacity: 0.42; }
-  82% { opacity: 0.34; transform: translate3d(28px, 54vh, 0) rotate(calc(var(--leaf-rotation) + 110deg)); }
-  94% { opacity: 0; transform: translate3d(-12px, 102vh, 0) rotate(calc(var(--leaf-rotation) + 210deg)); }
-}
+.leaf-1 { top: 15%; left: 2.2%; --leaf-size: 42px; --leaf-rotation: -24deg; opacity: 0.36; }
+.leaf-2 { top: 78%; left: 6%; --leaf-size: 31px; --leaf-rotation: 34deg; opacity: 0.3; }
+.leaf-3 { top: 18%; right: 4.5%; --leaf-size: 37px; --leaf-rotation: 17deg; opacity: 0.34; }
+.leaf-4 { bottom: 14%; right: 29%; --leaf-size: 29px; --leaf-rotation: -38deg; opacity: 0.3; }
+.leaf-5 { top: 38%; left: 12%; --leaf-size: 27px; --leaf-rotation: 18deg; opacity: 0.26; }
+.leaf-6 { top: 32%; right: 2.5%; --leaf-size: 39px; --leaf-rotation: -22deg; opacity: 0.32; }
+.leaf-7 { top: 61%; left: 26%; --leaf-size: 32px; --leaf-rotation: 31deg; opacity: 0.28; }
+.leaf-8 { top: 27%; left: 48%; --leaf-size: 25px; --leaf-rotation: -16deg; opacity: 0.22; }
+.leaf-9 { bottom: 7%; left: 58%; --leaf-size: 30px; --leaf-rotation: 27deg; opacity: 0.27; }
+.leaf-10 { top: 53%; right: 15%; --leaf-size: 35px; --leaf-rotation: -34deg; opacity: 0.3; }
+.leaf-11 { top: 11%; left: 31%; --leaf-size: 28px; --leaf-rotation: 42deg; opacity: 0.24; }
+.leaf-12 { top: 44%; left: 67%; --leaf-size: 43px; --leaf-rotation: 12deg; opacity: 0.32; }
+.leaf-13 { bottom: 24%; left: 39%; --leaf-size: 26px; --leaf-rotation: -48deg; opacity: 0.23; }
+.leaf-14 { top: 69%; right: 4%; --leaf-size: 34px; --leaf-rotation: 28deg; opacity: 0.28; }
 
 .header-moon {
   position: absolute;
@@ -329,7 +422,7 @@ html[data-theme="night"] .header-moon {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .environment-leaf-motion {
+  .firefly {
     animation: none;
     opacity: 0;
   }
@@ -372,7 +465,7 @@ html[data-theme="night"] .brand-title {
   grid-column: 1;
   grid-row: 1;
   display: flex;
-  gap: 12px;
+  gap: 24px;
   align-items: center;
   min-width: 0;
   min-height: 72px;
@@ -399,6 +492,7 @@ html[data-theme="night"] .brand-title {
   max-width: none;
   height: auto;
   display: block;
+  transform: translateX(-12px);
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
 }
 

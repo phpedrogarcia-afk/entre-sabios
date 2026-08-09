@@ -70,9 +70,10 @@ html[data-theme="night"] .daily-separator {
 }
 
 .daily-viewport {
-  --daily-copy-gap: 64px;
-  --daily-loop-distance: 0px;
+  --daily-start-x: 100%;
+  --daily-end-x: -100%;
   --daily-motion-duration: 0s;
+  --daily-motion-offset: 0s;
   min-width: 0;
   overflow: hidden;
   white-space: nowrap;
@@ -110,29 +111,28 @@ html[data-theme="night"] .daily-separator {
 }
 
 @keyframes daily-quote-loop {
+  from {
+    transform: translate3d(var(--daily-start-x), 0, 0);
+  }
+
   to {
-    transform: translate3d(var(--daily-loop-distance), 0, 0);
+    transform: translate3d(var(--daily-end-x), 0, 0);
   }
 }
 
-.daily-viewport.is-overflowing {
+.daily-viewport.is-moving {
   mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent);
 }
 
-.daily-viewport.is-overflowing .daily-marquee-track {
-  display: flex;
-  gap: var(--daily-copy-gap);
+.daily-viewport.is-moving .daily-marquee-track {
+  display: block;
   animation: daily-quote-loop var(--daily-motion-duration) linear infinite;
+  animation-delay: var(--daily-motion-offset);
   will-change: transform;
 }
 
-.daily-viewport.is-overflowing #dailyQuoteTextClone {
-  display: block;
-}
-
-.daily-viewport.is-overflowing:hover .daily-marquee-track,
-.daily-viewport.is-overflowing:focus-within .daily-marquee-track {
-  animation-play-state: paused;
+.daily-viewport.is-moving #dailyQuoteTextClone {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -145,7 +145,7 @@ html[data-theme="night"] .daily-separator {
     mask-image: none;
   }
 
-  .daily-viewport.is-overflowing .daily-marquee-track,
+  .daily-viewport.is-moving .daily-marquee-track,
   .daily-marquee-track {
     display: block;
     width: auto;
@@ -155,7 +155,7 @@ html[data-theme="night"] .daily-separator {
     will-change: auto;
   }
 
-  .daily-viewport.is-overflowing #dailyQuoteText,
+  .daily-viewport.is-moving #dailyQuoteText,
   #dailyQuoteText {
     width: auto;
     min-width: 0;
@@ -165,7 +165,7 @@ html[data-theme="night"] .daily-separator {
     overflow-wrap: anywhere;
   }
 
-  .daily-viewport.is-overflowing #dailyQuoteTextClone,
+  .daily-viewport.is-moving #dailyQuoteTextClone,
   #dailyQuoteTextClone {
     display: none;
   }
@@ -181,7 +181,10 @@ html[data-theme="night"] .daily-separator {
 .col-left {
   padding: clamp(22px, 2.4vw, 38px) clamp(18px, 2.1vw, 32px) 34px;
   border-right: 1px solid var(--border-subtle);
-  background: var(--surface-panel);
+  background: var(--glass-panel);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(108%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(108%);
+  box-shadow: inset -1px 0 0 var(--glass-highlight);
 }
 
 .col-center {
@@ -203,7 +206,10 @@ html[data-theme="night"] .daily-separator {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: var(--surface-panel);
+  background: var(--glass-panel);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(108%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(108%);
+  box-shadow: inset 1px 0 0 var(--glass-highlight);
 }
 
 /* Em telas largas, a aplicação ocupa uma única viewport. A leitura inteira
@@ -243,7 +249,11 @@ html[data-theme="night"] .daily-separator {
   }
 
   .col-right {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--accent-title) 42%, transparent) transparent;
   }
 
   .col-center {

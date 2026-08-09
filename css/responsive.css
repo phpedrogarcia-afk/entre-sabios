@@ -28,8 +28,9 @@
     grid-template-rows: auto auto;
     gap: 0;
     padding: 0;
-    background: var(--surface-header);
-    backdrop-filter: blur(8px);
+    background: var(--glass-header);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(112%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(112%);
   }
 
   .header-moon {
@@ -40,9 +41,10 @@
     padding-right: 0;
   }
 
-  .environment-leaf-motion,
-  .environment-layer .leaf-3,
-  .environment-layer .leaf-4 {
+  .environment-overlay-layer .leaf-3,
+  .environment-overlay-layer .leaf-4,
+  .environment-overlay-layer .leaf-11,
+  .environment-overlay-layer .leaf-12 {
     display: none;
   }
 
@@ -341,49 +343,26 @@
     flex-basis: 40px;
   }
 
-  .environment-layer .leaf-2 {
+  .environment-overlay-layer .leaf-2,
+  .environment-overlay-layer .leaf-7,
+  .environment-overlay-layer .leaf-13,
+  .environment-overlay-layer .leaf-14 {
     display: none;
   }
 
-  .environment-layer .leaf-1 {
+  .environment-overlay-layer .leaf-1 {
     top: 88%;
     left: 3%;
     opacity: 0.26;
   }
 
   .daily-viewport {
-    overflow: visible;
-    white-space: normal;
-    mask-image: none;
-  }
-
-  .daily-viewport.is-overflowing .daily-marquee-track,
-  .daily-marquee-track {
-    display: block;
-    width: auto;
-    min-width: 0;
-    animation: none;
-    transform: none;
-    will-change: auto;
-  }
-
-  .daily-viewport.is-overflowing #dailyQuoteText,
-  #dailyQuoteText {
-    width: auto;
-    min-width: 0;
-    overflow: visible;
-    text-overflow: clip;
-    white-space: normal;
-    overflow-wrap: anywhere;
-  }
-
-  .daily-viewport.is-overflowing #dailyQuoteTextClone,
-  #dailyQuoteTextClone {
-    display: none;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .brand {
-    gap: 8px;
+    gap: 12px;
     padding-right: 6px;
   }
 
@@ -395,6 +374,7 @@
 
   .brand-raven {
     width: 64px;
+    transform: translateX(-8px);
   }
 
   .brand-title {
@@ -513,18 +493,6 @@
     font-size: 12.5px;
   }
 
-  .feeling[data-feeling-id="autoconhecimento"] .feeling-label,
-  .feeling[data-feeling-id="falta_de_proposito"] .feeling-label {
-    font-size: inherit;
-  }
-}
-
-@media (max-width: 720px) {
-  html[data-theme="night"] .center-card {
-    background:
-      linear-gradient(rgba(13, 29, 25, 0.86), rgba(18, 35, 28, 0.76)),
-      url("../assets/environment/landscape-night.webp") center bottom / 100% auto no-repeat;
-  }
 }
 
 @media (min-width: 901px) and (max-width: 1400px) {
@@ -568,9 +536,20 @@
   }
 
   .quote-ornament {
-    top: 31px;
-    left: 26px;
+    position: static;
+    width: 100%;
+    height: 22px;
+    margin: -2px 0 4px;
+    justify-self: start;
     font-size: 32px;
+    line-height: 0.86;
+  }
+
+  .firefly-7,
+  .firefly-8,
+  .firefly-9,
+  .firefly-10 {
+    display: none;
   }
 
   .quote,
@@ -678,15 +657,9 @@
 
 @media (min-width: 1101px) and (min-height: 760px) and (max-height: 959px) {
   .environment-tree {
-    right: -24px;
-    bottom: -12px;
-    width: min(108%, 390px);
-    height: min(48vh, 420px);
-  }
-
-  .firefly-5,
-  .firefly-6 {
-    display: none;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .col-left {
@@ -795,11 +768,6 @@
 
   .feeling-label {
     font-size: 12px;
-  }
-
-  .feeling[data-feeling-id="autoconhecimento"] .feeling-label,
-  .feeling[data-feeling-id="falta_de_proposito"] .feeling-label {
-    font-size: inherit;
   }
 
   .primary-feeling-control {
@@ -925,17 +893,9 @@
 
 @media (min-width: 1101px) and (max-height: 759px) {
   .environment-tree {
-    right: -28px;
-    bottom: -16px;
-    width: min(96%, 330px);
-    height: min(38vh, 300px);
-  }
-
-  .environment-leaf-motion,
-  .firefly-4,
-  .firefly-5,
-  .firefly-6 {
-    display: none;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .firefly {
@@ -1047,11 +1007,6 @@
 
   .feeling-label {
     font-size: 12px;
-  }
-
-  .feeling[data-feeling-id="autoconhecimento"] .feeling-label,
-  .feeling[data-feeling-id="falta_de_proposito"] .feeling-label {
-    font-size: inherit;
   }
 
   .primary-feeling-control {

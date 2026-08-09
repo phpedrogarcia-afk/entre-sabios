@@ -27,7 +27,7 @@ function initFeelings() {
     const icon = document.createElement('span');
     icon.className = 'feeling-icon';
     icon.setAttribute('aria-hidden', 'true');
-    icon.innerHTML = `<svg viewBox="0 0 24 24" focusable="false"><use href="assets/icons/feelings-sprite.svg#${feelingId}"></use></svg>`;
+    icon.innerHTML = `<svg viewBox="0 0 24 24" focusable="false"><use href="#${feelingId}"></use></svg>`;
 
     const text = document.createElement('span');
     text.className = 'feeling-label';

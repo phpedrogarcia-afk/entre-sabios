@@ -1,42 +1,70 @@
 // Frase do dia.
 // Extraído de script.js na Fase 5 da refatoração segura.
-// O movimento é ativado somente quando a frase ultrapassa o espaço disponível.
+// O movimento permanece contínuo quando animações são permitidas. Há uma única
+// cópia visual da frase: ela atravessa a faixa e reinicia fora da área visível.
 
 let dailyQuoteResizeObserver = null;
 let dailyQuoteSyncFrame = null;
 
 const DAILY_QUOTE_SPEED_PX_PER_SECOND = 44;
-const DAILY_QUOTE_COPY_GAP_PX = 64;
+const DAILY_QUOTE_MAX_TEXT_LENGTH = 104;
+const DAILY_QUOTE_MAX_LINE_LENGTH = 132;
+
+function getDailyQuotePool() {
+  const approvedRuntimeQuotes = (Array.isArray(runtimeContents) ? runtimeContents : [])
+    .filter((content) =>
+      content?.displayType === 'citacao_curta'
+      && ['exact_quote', 'translated_quote'].includes(content.attributionType)
+      && content.publicationEnabled !== false
+      && content.status !== 'REMOVIDO'
+      && String(content.finalText || '').trim().length <= DAILY_QUOTE_MAX_TEXT_LENGTH)
+    .map((content) => [
+      String(content.finalText || '').trim(),
+      String(content.displayedAuthor || content.author || '').trim(),
+    ])
+    .filter(([quote, attribution]) =>
+      quote
+      && attribution
+      && quote.length + attribution.length + 7 <= DAILY_QUOTE_MAX_LINE_LENGTH);
+
+  const seen = new Set();
+  return [...dailyQuotes, ...approvedRuntimeQuotes].filter(([quote, attribution]) => {
+    const key = `${String(quote).trim().toLocaleLowerCase('pt-BR')}|${String(attribution).trim().toLocaleLowerCase('pt-BR')}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
 
 function syncDailyQuoteMotion() {
   const viewport = dailyQuoteTextEl?.closest('.daily-viewport');
   const marqueeTrack = viewport?.querySelector('.daily-marquee-track');
   if (!viewport || !marqueeTrack || !dailyQuoteTextCloneEl) return;
 
-  if (dailyQuoteTextCloneEl.textContent !== dailyQuoteTextEl.textContent) {
-    dailyQuoteTextCloneEl.textContent = dailyQuoteTextEl.textContent;
-  }
-
   const textWidth = Math.ceil(dailyQuoteTextEl.getBoundingClientRect().width);
-  const combinedWidth = (textWidth * 2) + DAILY_QUOTE_COPY_GAP_PX;
-  const overflow = Math.max(0, combinedWidth - viewport.clientWidth);
-  const isOverflowing = overflow > 1;
-  const loopDistance = textWidth + DAILY_QUOTE_COPY_GAP_PX;
-  const duration = loopDistance / DAILY_QUOTE_SPEED_PX_PER_SECOND;
+  if (textWidth <= 0) return;
 
-  viewport.classList.toggle('is-overflowing', isOverflowing);
-  viewport.style.setProperty('--daily-copy-gap', `${DAILY_QUOTE_COPY_GAP_PX}px`);
-  viewport.style.setProperty('--daily-loop-distance', `${-loopDistance}px`);
-  viewport.style.setProperty('--daily-motion-duration', isOverflowing ? `${duration.toFixed(3)}s` : '0s');
+  const viewportWidth = Math.ceil(viewport.clientWidth);
+  const travelDistance = viewportWidth + textWidth;
+  const duration = travelDistance / DAILY_QUOTE_SPEED_PX_PER_SECOND;
+
+  dailyQuoteTextCloneEl.textContent = '';
+  viewport.classList.add('is-moving');
+  viewport.style.setProperty('--daily-start-x', `${viewportWidth}px`);
+  viewport.style.setProperty('--daily-end-x', `${-textWidth}px`);
+  viewport.style.setProperty('--daily-motion-duration', `${duration.toFixed(3)}s`);
+  viewport.style.setProperty('--daily-motion-offset', `${(-duration * 0.24).toFixed(3)}s`);
 }
 
 function initDailyQuote() {
+  const quotePool = getDailyQuotePool();
+  if (!quotePool.length) return;
   const now = new Date();
   const dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
-  const [quote, attribution] = dailyQuotes[dayNumber % dailyQuotes.length];
+  const [quote, attribution] = quotePool[dayNumber % quotePool.length];
   const text = `“${quote}” — ${attribution}`;
   dailyQuoteTextEl.textContent = text;
-  dailyQuoteTextCloneEl.textContent = text;
+  dailyQuoteTextCloneEl.textContent = '';
 
   const scheduleSync = () => {
     if (typeof cancelAnimationFrame === 'function' && dailyQuoteSyncFrame !== null) {

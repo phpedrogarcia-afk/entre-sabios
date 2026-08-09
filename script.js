@@ -736,6 +736,7 @@ async function init() {
     feelingsCatalog = runtime.feelings;
     runtimeContents = runtime.contents;
     initFeelings();
+    initDailyQuote();
     runtimeSelector = window.EntreSabiosRuntimeEngine.createSelector({
       version: runtime.contentVersion,
       contents: runtimeContents,

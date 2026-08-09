@@ -67,7 +67,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: color-mix(in srgb, var(--accent-title) 82%, var(--text-primary));
+  color: var(--accent-title);
 }
 
 .feeling-icon svg,
@@ -126,7 +126,7 @@
 }
 
 .feeling.selected:not(.primary-feeling) .feeling-icon {
-  color: var(--accent-primary);
+  color: var(--accent-title);
 }
 
 .feeling.primary-feeling {
@@ -471,9 +471,9 @@ html[data-theme="night"] .focus-feeling-btn {
   max-height: none;
   border-radius: 0;
   border: 0;
-  background:
-    linear-gradient(180deg, rgba(250, 247, 237, 0.88), rgba(244, 244, 228, 0.72) 48%, rgba(239, 240, 218, 0.5)),
-    url("../assets/environment/landscape-day.webp") center bottom / cover no-repeat;
+  background: linear-gradient(180deg, rgba(255, 252, 244, 0.46), rgba(255, 252, 244, 0.2));
+  -webkit-backdrop-filter: blur(3px) saturate(104%);
+  backdrop-filter: blur(3px) saturate(104%);
   box-shadow: none;
   padding: 20px clamp(14px, 2vw, 24px) 28px;
   overflow: visible;
@@ -630,8 +630,19 @@ html[data-theme="night"] .focus-feeling-btn {
 }
 
 .quote-action:focus-visible {
-  outline: 2px solid rgba(11, 85, 78, 0.72);
-  outline-offset: -2px;
+  outline: none;
+}
+
+.quote-action:focus-visible::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.78;
 }
 
 .quote-action:active {
@@ -648,8 +659,7 @@ html[data-theme="night"] .focus-feeling-btn {
 }
 
 .quote-share:focus-visible {
-  outline: 2px solid rgba(79, 125, 93, 0.4);
-  outline-offset: -2px;
+  outline: none;
 }
 
 .quote-like {
@@ -663,19 +673,21 @@ html[data-theme="night"] .focus-feeling-btn {
 .quote-action.active-like {
   color: #4f7d5d;
   background: transparent;
+  box-shadow: none;
 }
 
 .quote-action.active-like svg {
-  fill: rgba(79, 125, 93, 0.22);
+  fill: currentColor;
 }
 
 .quote-action.active-favorite {
   color: #8f6f35;
   background: transparent;
+  box-shadow: none;
 }
 
 .quote-action.active-favorite svg {
-  fill: rgba(143, 111, 53, 0.2);
+  fill: currentColor;
 }
 
 .quote.long-quote {
@@ -1226,8 +1238,8 @@ html[data-theme="night"] .focus-feeling-btn {
 
 .right-ambient-space {
   position: relative;
-  flex: 1 1 auto;
-  min-height: 24px;
+  flex: 1 1 clamp(160px, 28vh, 320px);
+  min-height: clamp(120px, 20vh, 250px);
   overflow: hidden;
   pointer-events: none;
   user-select: none;
@@ -1235,11 +1247,10 @@ html[data-theme="night"] .focus-feeling-btn {
 
 .environment-tree {
   position: absolute;
-  right: -18px;
-  bottom: -10px;
-  width: min(116%, 440px);
-  height: min(54vh, 500px);
-  background-position: right bottom;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center bottom;
   background-repeat: no-repeat;
   background-size: contain;
   transform-origin: right bottom;
@@ -1248,14 +1259,17 @@ html[data-theme="night"] .focus-feeling-btn {
 .environment-tree-day {
   display: block;
   opacity: 0.68;
-  background-image: url("../assets/environment/tree-day.webp");
+  background-image: url("../assets/environment/tree-line-art-v2.webp");
+  filter: sepia(0.62) saturate(0.92) brightness(0.78) contrast(1.1) drop-shadow(0 5px 10px rgba(111, 93, 48, 0.1));
+  mix-blend-mode: normal;
 }
 
 .environment-tree-night {
   display: none;
-  opacity: 0.64;
-  background-image: url("../assets/environment/tree-night.webp");
-  filter: drop-shadow(0 0 16px rgba(210, 176, 87, 0.1));
+  opacity: 0.45;
+  background-image: url("../assets/environment/tree-line-art-v2.webp");
+  filter: sepia(0.94) saturate(1.28) hue-rotate(352deg) brightness(1.04) contrast(0.84) drop-shadow(0 0 16px rgba(224, 187, 91, 0.16));
+  mix-blend-mode: normal;
 }
 
 html[data-theme="night"] .environment-tree-day {
@@ -1268,8 +1282,10 @@ html[data-theme="night"] .environment-tree-night {
 
 .fireflies {
   position: absolute;
+  z-index: 2;
   inset: 0;
   display: none;
+  overflow: hidden;
 }
 
 html[data-theme="night"] .fireflies {
@@ -1277,28 +1293,34 @@ html[data-theme="night"] .fireflies {
 }
 
 .firefly {
-  --firefly-size: 3px;
+  --firefly-size: 4px;
+  --firefly-x: 3px;
+  --firefly-y: -4px;
   position: absolute;
   width: var(--firefly-size);
   height: var(--firefly-size);
   border-radius: 50%;
-  background: #e8bd5b;
-  box-shadow: 0 0 5px 2px rgba(232, 189, 91, 0.3);
-  opacity: 0.35;
+  background: #f6cf68;
+  box-shadow: 0 0 5px 1.5px rgba(255, 230, 145, 0.96), 0 0 18px 5px rgba(232, 189, 91, 0.38);
+  opacity: 0.58;
   animation: firefly-breathe var(--firefly-duration) ease-in-out var(--firefly-delay) infinite alternate;
 }
 
-.firefly-1 { left: 18%; bottom: 20%; --firefly-size: 3px; --firefly-duration: 4.8s; --firefly-delay: -1.3s; }
-.firefly-2 { left: 43%; bottom: 34%; --firefly-size: 2px; --firefly-duration: 6.1s; --firefly-delay: -3.4s; }
-.firefly-3 { left: 66%; bottom: 16%; --firefly-size: 4px; --firefly-duration: 5.6s; --firefly-delay: -2.1s; }
-.firefly-4 { right: 12%; bottom: 43%; --firefly-size: 2px; --firefly-duration: 6.8s; --firefly-delay: -4.2s; }
-.firefly-5 { right: 32%; bottom: 56%; --firefly-size: 3px; --firefly-duration: 7.2s; --firefly-delay: -0.8s; }
-.firefly-6 { left: 27%; bottom: 68%; --firefly-size: 2px; --firefly-duration: 5.2s; --firefly-delay: -2.8s; }
+.firefly-1 { left: 8%; top: 18%; --firefly-size: 4.5px; --firefly-duration: 5.8s; --firefly-delay: -1.3s; }
+.firefly-2 { left: 22%; top: 52%; --firefly-size: 4px; --firefly-duration: 7.1s; --firefly-delay: -3.4s; --firefly-x: -4px; }
+.firefly-3 { left: 37%; top: 31%; --firefly-size: 3.5px; --firefly-duration: 6.6s; --firefly-delay: -2.1s; }
+.firefly-4 { left: 52%; top: 74%; --firefly-size: 4.5px; --firefly-duration: 7.8s; --firefly-delay: -4.2s; --firefly-y: -6px; }
+.firefly-5 { left: 68%; top: 18%; --firefly-size: 4px; --firefly-duration: 8.2s; --firefly-delay: -0.8s; --firefly-x: -3px; }
+.firefly-6 { left: 83%; top: 44%; --firefly-size: 5px; --firefly-duration: 6.2s; --firefly-delay: -2.8s; }
+.firefly-7 { left: 91%; top: 80%; --firefly-size: 6px; --firefly-duration: 7.4s; --firefly-delay: -5.1s; --firefly-x: -5px; }
+.firefly-8 { left: 13%; top: 84%; --firefly-size: 3.5px; --firefly-duration: 8.6s; --firefly-delay: -6.2s; --firefly-y: -3px; }
+.firefly-9 { left: 59%; top: 47%; --firefly-size: 4px; --firefly-duration: 6.9s; --firefly-delay: -1.9s; --firefly-x: 5px; }
+.firefly-10 { left: 76%; top: 68%; --firefly-size: 5.5px; --firefly-duration: 8.9s; --firefly-delay: -7.1s; --firefly-x: -2px; }
 
 @keyframes firefly-breathe {
-  0%, 22% { opacity: 0.18; transform: translate3d(0, 0, 0) scale(0.82); }
-  68% { opacity: 0.7; transform: translate3d(2px, -3px, 0) scale(1.08); }
-  100% { opacity: 0.32; transform: translate3d(-2px, 2px, 0) scale(0.92); }
+  0%, 18% { opacity: 0.54; transform: translate3d(0, 0, 0) scale(0.84); }
+  62% { opacity: 1; transform: translate3d(var(--firefly-x), var(--firefly-y), 0) scale(1.12); }
+  100% { opacity: 0.68; transform: translate3d(0, 2px, 0) scale(0.96); }
 }
 
 /* Floresta Noturna: camada visual sem alterar estrutura ou dimensões. */
@@ -1307,6 +1329,13 @@ html[data-theme="night"] .feeling {
   background: rgba(24, 39, 32, 0.66);
   color: var(--night-text-reading);
   transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 200ms ease, transform 180ms ease;
+}
+
+html[data-theme="night"] .feeling-icon,
+html[data-theme="night"] .feelings-heading-icon,
+html[data-theme="night"] .tip-icon,
+html[data-theme="night"] .share-platform-icons {
+  color: var(--night-gold);
 }
 
 html[data-theme="night"] .feeling.selected {
@@ -1356,9 +1385,7 @@ html[data-theme="night"] .center-fixed {
 }
 
 html[data-theme="night"] .center-card {
-  background:
-    linear-gradient(rgba(13, 29, 25, 0.84), rgba(18, 35, 28, 0.74)),
-    url("../assets/environment/landscape-night.webp") center bottom / cover no-repeat;
+  background: linear-gradient(180deg, rgba(7, 28, 24, 0.25), rgba(7, 28, 24, 0.1));
   border-color: transparent;
   box-shadow: none;
 }
@@ -1408,9 +1435,13 @@ html[data-theme="night"] .preference-note {
 html[data-theme="night"] .section-title,
 html[data-theme="night"] .audience-title,
 html[data-theme="night"] .share-title,
-html[data-theme="night"] .book-title,
 html[data-theme="night"] .tales-title,
 html[data-theme="night"] .block-title,
+html[data-theme="night"] .book-rec-label {
+  color: var(--night-gold);
+}
+
+html[data-theme="night"] .book-title,
 html[data-theme="night"] .book-rec-title {
   color: rgba(246, 239, 220, 0.92);
 }
@@ -1479,26 +1510,25 @@ html[data-theme="night"] .quote-action:focus-visible {
 }
 
 html[data-theme="night"] .quote-share:focus-visible {
-  outline: 2px solid rgba(199, 217, 180, 0.46);
-  outline-offset: -2px;
+  outline: none;
 }
 
 html[data-theme="night"] .quote-action.active-like {
   color: var(--night-accent-lit);
-  text-shadow: 0 0 16px rgba(159, 190, 148, 0.2);
+  text-shadow: none;
 }
 
 html[data-theme="night"] .quote-action.active-like svg {
-  fill: rgba(159, 190, 148, 0.16);
+  fill: currentColor;
 }
 
 html[data-theme="night"] .quote-action.active-favorite {
   color: var(--night-gold);
-  text-shadow: 0 0 16px rgba(216, 189, 117, 0.2);
+  text-shadow: none;
 }
 
 html[data-theme="night"] .quote-action.active-favorite svg {
-  fill: rgba(216, 189, 117, 0.14);
+  fill: currentColor;
 }
 
 html[data-theme="night"] .feedback-btn {
@@ -1601,6 +1631,35 @@ html[data-theme="night"] .share-style-option.active {
   opacity: var(--state-disabled);
 }
 
+#newBtn {
+  border-color: color-mix(in srgb, var(--accent-primary) 54%, transparent);
+  background: linear-gradient(135deg, var(--accent-primary), #24786f);
+  color: var(--text-on-dark);
+  box-shadow: 0 8px 20px rgba(23, 99, 106, 0.16);
+}
+
+#newBtn:hover,
+#newBtn:focus-visible {
+  border-color: color-mix(in srgb, var(--accent-primary) 70%, #fff);
+  background: linear-gradient(135deg, #1d6f76, #2d8177);
+  color: var(--text-on-dark);
+  box-shadow: 0 10px 24px rgba(23, 99, 106, 0.22);
+}
+
+html[data-theme="night"] #newBtn {
+  border-color: var(--border-active);
+  background: linear-gradient(135deg, var(--accent-primary), #2f7467);
+  color: var(--text-on-dark);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+html[data-theme="night"] #newBtn:hover,
+html[data-theme="night"] #newBtn:focus-visible {
+  border-color: var(--night-border-lit);
+  background: linear-gradient(135deg, #286c65, #3b8273);
+  color: var(--night-text-primary);
+}
+
 html[data-theme="night"] .primary,
 html[data-theme="night"] .primary.has-selection {
   border-color: var(--border-active);
@@ -1633,8 +1692,26 @@ html[data-theme="night"] .quote-stage .quote-ornament {
 html[data-theme="night"] .quote-stage .quote-action:hover,
 html[data-theme="night"] .quote-stage .quote-action:focus-visible {
   color: #0b554e;
-  outline: 2px solid rgba(11, 85, 78, 0.78);
-  outline-offset: -2px;
+  outline: none;
+}
+
+html[data-theme="night"] .quote-stage .quote-action.active-like {
+  color: #4f7d5d;
+  background: transparent;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+html[data-theme="night"] .quote-stage .quote-action.active-favorite {
+  color: #8f6f35;
+  background: transparent;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+html[data-theme="night"] .quote-stage .quote-action.active-like svg,
+html[data-theme="night"] .quote-stage .quote-action.active-favorite svg {
+  fill: currentColor;
 }
 
 @media (prefers-reduced-motion: reduce) {
