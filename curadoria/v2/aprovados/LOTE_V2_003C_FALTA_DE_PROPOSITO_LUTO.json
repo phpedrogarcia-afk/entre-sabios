@@ -1,0 +1,721 @@
+{
+  "batchId": "V2-2026-07-003C",
+  "approvedBy": "Pedro",
+  "approvedAt": "2026-07-28",
+  "targetContentVersion": "definitiva-2.10",
+  "title": "Lote V2-003C — Falta de propósito e Luto",
+  "status": "approved_for_integration",
+  "baselineExpected": {
+    "masterRecords": 390,
+    "activeRecords": 296,
+    "runtimeRecords": 39,
+    "runtimeCore": 32,
+    "runtimeContextual": 7,
+    "runtimeVersion": "definitiva-2.9",
+    "v1Eligible": 0,
+    "v1LibraryRecords": 351,
+    "v1LibrarySha256": "be72c04474e85ac27a26313bb23ba2dca10ab50f8fd6cf102d4e78599b46365e"
+  },
+  "expectedAfterIntegration": {
+    "masterRecords": 396,
+    "activeRecords": 302,
+    "runtimeRecords": 45,
+    "runtimeCore": 38,
+    "runtimeContextual": 7,
+    "runtimeVersion": "definitiva-2.10",
+    "newContentIds": [
+      "v2-fdp-001-marco-aurelio",
+      "v2-fdp-002-frankl",
+      "v2-fdp-003-tolstoi",
+      "v2-lut-001-cs-lewis",
+      "v2-lut-002-george-eliot",
+      "v2-lut-003-joan-didion"
+    ],
+    "primaryCoverageAdded": {
+      "falta_de_proposito": 3,
+      "luto": 3
+    },
+    "v1Eligible": 0
+  },
+  "editorialRules": {
+    "v1Role": "comparison_only",
+    "preserveAuthorTextSeparateFromEditorialBlocks": true,
+    "shareImageFieldsOnly": [
+      "finalText",
+      "displayedAuthor",
+      "source.title"
+    ],
+    "longNotesOutsideShareImage": true,
+    "specificBookBindingRequired": true,
+    "specificBookBindingPriority": "before_generic_fallback",
+    "doNotParseSourceNotesAtRuntime": true,
+    "csLewisV1Instruction": "Buscar o possível equivalente na Biblioteca V1. Se a equivalência for clara por autor, fonte e passagem central, registrar a linhagem canônica sem reativar nem apagar V1. Em caso de ambiguidade, apenas relatar candidatos.",
+    "rejectedContent": {
+      "author": "Alfred Tennyson",
+      "work": "In Memoriam A.H.H.",
+      "reason": "Recusado pelo editor porque dependia da escrita como prática e não representava a maioria dos usuários."
+    },
+    "noCommitPushMergePublish": true
+  },
+  "bookCatalogEntries": [
+    {
+      "title": "Meditações",
+      "author": "Marco Aurélio",
+      "tags": [
+        "proposito",
+        "estoicismo",
+        "responsabilidade"
+      ],
+      "feelings": [
+        "falta_de_proposito",
+        "autoconhecimento"
+      ],
+      "intensities": [
+        "fraca",
+        "moderada"
+      ],
+      "level": "entrada",
+      "depth": "alta",
+      "description": "Anotações pessoais sobre dever, finitude, convivência, adversidade e participação consciente na vida comum.",
+      "relatedAuthors": [
+        "Sêneca",
+        "Epicteto"
+      ],
+      "avoidWhen": [
+        "tristeza_intensa",
+        "luto_intenso"
+      ],
+      "bookFunction": "aprofundamento",
+      "publicationEnabled": true
+    },
+    {
+      "title": "Em busca de sentido",
+      "author": "Viktor E. Frankl",
+      "tags": [
+        "sentido",
+        "logoterapia",
+        "responsabilidade"
+      ],
+      "feelings": [
+        "falta_de_proposito",
+        "confusao"
+      ],
+      "intensities": [
+        "fraca",
+        "moderada",
+        "intensa"
+      ],
+      "level": "entrada",
+      "depth": "alta",
+      "description": "Testemunho e introdução à logoterapia sobre sentido, liberdade interior, responsabilidade e resposta a situações concretas.",
+      "relatedAuthors": [],
+      "avoidWhen": [
+        "primeira_resposta",
+        "luto_intenso"
+      ],
+      "bookFunction": "aprofundamento",
+      "publicationEnabled": true
+    },
+    {
+      "title": "Uma confissão",
+      "author": "Liev Tolstói",
+      "tags": [
+        "sentido",
+        "finitude",
+        "fe"
+      ],
+      "feelings": [
+        "falta_de_proposito",
+        "tristeza",
+        "confusao"
+      ],
+      "intensities": [
+        "fraca",
+        "moderada"
+      ],
+      "level": "intermediario",
+      "depth": "alta",
+      "description": "Relato autobiográfico e espiritual de uma crise radical de sentido, com perguntas sobre morte, razão, fé e valor da vida.",
+      "relatedAuthors": [],
+      "avoidWhen": [
+        "tristeza_intensa",
+        "luto_intenso",
+        "primeira_resposta"
+      ],
+      "bookFunction": "aprofundamento",
+      "publicationEnabled": true
+    },
+    {
+      "title": "A anatomia de um luto",
+      "author": "C. S. Lewis",
+      "tags": [
+        "luto",
+        "ausencia",
+        "medo"
+      ],
+      "feelings": [
+        "luto",
+        "medo",
+        "solidao"
+      ],
+      "intensities": [
+        "fraca",
+        "moderada",
+        "intensa"
+      ],
+      "level": "entrada",
+      "depth": "alta",
+      "description": "Testemunho pessoal sobre ausência, medo, raiva, amor e fé após a morte da esposa do autor.",
+      "relatedAuthors": [
+        "Joan Didion"
+      ],
+      "avoidWhen": [],
+      "bookFunction": "aprofundamento",
+      "publicationEnabled": true
+    },
+    {
+      "title": "Silas Marner",
+      "author": "George Eliot",
+      "tags": [
+        "isolamento",
+        "cuidado",
+        "comunidade"
+      ],
+      "feelings": [
+        "luto",
+        "solidao",
+        "tristeza"
+      ],
+      "intensities": [
+        "fraca",
+        "moderada",
+        "intensa"
+      ],
+      "level": "entrada",
+      "depth": "moderada",
+      "description": "Romance sobre perda de pertencimento, isolamento e vínculos que reabrem uma vida ao futuro.",
+      "relatedAuthors": [],
+      "avoidWhen": [],
+      "bookFunction": "aprofundamento",
+      "publicationEnabled": true
+    },
+    {
+      "title": "O ano do pensamento mágico",
+      "author": "Joan Didion",
+      "tags": [
+        "luto",
+        "memoria",
+        "ausencia"
+      ],
+      "feelings": [
+        "luto",
+        "saudade",
+        "confusao"
+      ],
+      "intensities": [
+        "fraca",
+        "moderada",
+        "intensa"
+      ],
+      "level": "entrada",
+      "depth": "alta",
+      "description": "Relato sobre choque, memória, hábitos e a lenta assimilação da ausência após uma morte súbita.",
+      "relatedAuthors": [
+        "C. S. Lewis"
+      ],
+      "avoidWhen": [],
+      "bookFunction": "aprofundamento",
+      "publicationEnabled": true
+    }
+  ],
+  "contents": [
+    {
+      "id": "v2-fdp-001-marco-aurelio",
+      "legacyIds": [],
+      "originalText": "Ao despertar, quando você não quiser se levantar, lembre-se: estou me levantando para realizar o trabalho de um ser humano.\n\nFui feito apenas para permanecer aquecido sob as cobertas? O descanso é necessário, mas também possui uma medida.\n\nAs plantas, os pássaros, as formigas, as aranhas e as abelhas cumprem sua parte na ordem do mundo. Por que eu recusaria a minha?",
+      "finalText": "Ao despertar, quando você não quiser se levantar, lembre-se: estou me levantando para realizar o trabalho de um ser humano.\n\nFui feito apenas para permanecer aquecido sob as cobertas? O descanso é necessário, mas também possui uma medida.\n\nAs plantas, os pássaros, as formigas, as aranhas e as abelhas cumprem sua parte na ordem do mundo. Por que eu recusaria a minha?",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "Marco Aurélio",
+      "authorGender": "male",
+      "filterGender": "male",
+      "displayedAuthor": "Marco Aurélio",
+      "inspirationSource": null,
+      "source": {
+        "title": "Meditações",
+        "section": "Livro V, §1",
+        "translator": "Tradução e condensação de trabalho do Entre Sábios",
+        "url": "https://classics.mit.edu/Antoninus/meditations.5.five.html",
+        "status": "Fonte primária verificada",
+        "work": "Meditações",
+        "language": "grc",
+        "publisherUrl": "https://www.companhiadasletras.com.br/livro/9788582851777/",
+        "notes": "Paráfrase traduzida e condensada da abertura do Livro V. Não apresentar como transcrição literal da edição brasileira. A ressalva sobre o descanso integra o contexto da própria passagem e deve permanecer."
+      },
+      "primaryFeeling": "falta_de_proposito",
+      "secondaryFeeling": "autoconhecimento",
+      "associations": [
+        {
+          "feeling": "falta_de_proposito",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "autoconhecimento",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "nucleo",
+      "editorialFunction": "reframing",
+      "secondaryFunction": "action",
+      "suitableIntensities": [
+        "fraca",
+        "moderada"
+      ],
+      "tone": "direto",
+      "themes": [
+        "proposito",
+        "participacao",
+        "responsabilidade",
+        "acao_cotidiana",
+        "sentido"
+      ],
+      "riskTags": [
+        "pressao_por_superacao",
+        "invalidacao_emocional",
+        "conselho_prematuro"
+      ],
+      "hardExclusions": [
+        "primeira_resposta",
+        "tristeza_intensa",
+        "luto_intenso"
+      ],
+      "status": "ATIVO_NUCLEO",
+      "publicationEnabled": true,
+      "editorialExplanation": "Marco Aurélio não responde à falta de propósito oferecendo uma missão grandiosa. Ele desloca a pergunta: em vez de procurar uma razão extraordinária para existir, olha para aquilo que um ser humano pode realizar concretamente no dia que começa.\n\nHá dias em que esperamos sentir clareza, entusiasmo ou certeza antes de agir. Mas talvez parte do sentido não apareça antes do movimento. Ele pode nascer enquanto cuidamos de alguma coisa, cumprimos uma responsabilidade, aprendemos, criamos ou participamos da vida de alguém.\n\nIsso não transforma toda obrigação em vocação. Também não significa que trabalhar mais torne uma vida mais valiosa. Marco Aurélio está falando de participação, não de produtividade: sair da imobilidade para oferecer ao mundo aquilo que realmente nos cabe — ainda que seja pequeno, silencioso e imperfeito.\n\nTalvez a pergunta pelo propósito se torne pesada quando imaginamos que precisamos descobrir uma função única capaz de justificar toda a existência. A passagem sugere outra possibilidade: o sentido pode não estar escondido numa resposta definitiva, mas no modo como comparecemos ao que está diante de nós.",
+      "editorialQuestion": "Que tarefa humana, pequena e verdadeira, espera a sua presença — não a sua empolgação?",
+      "safetyNote": "Não usar para tratar exaustão, depressão, adoecimento ou necessidade legítima de descanso como preguiça. Levantar-se não significa necessariamente trabalhar. Em determinados momentos, o ato humano necessário pode ser descansar, procurar ajuda, estabelecer um limite ou reconhecer que já não é possível continuar da mesma maneira.",
+      "bookRecommendation": {
+        "bookTitle": "Meditações",
+        "whyItMatches": "É a fonte direta da passagem e reúne exercícios pessoais sobre dever, finitude, convivência, adversidade e uso consciente das próprias ações.",
+        "whatReaderFinds": "Anotações de alguém tentando recordar diariamente como deseja viver diante do cansaço, da responsabilidade e da passagem do tempo, sem oferecer uma fórmula moderna de produtividade.",
+        "whereToStart": "Livro V, §1. Depois, Livro V, §9, sobre retornar aos próprios princípios depois de falhar."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "new_v2_content",
+      "changeReason": "Conteúdo novo aprovado para falta de propósito.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-fdp-002-frankl",
+      "legacyIds": [],
+      "originalText": "Não existe uma resposta abstrata que sirva igualmente para todas as vidas.\n\nO sentido muda de pessoa para pessoa e de momento para momento. Cada situação coloca diante de nós uma pergunta concreta.\n\nTalvez não sejamos nós que devamos perguntar continuamente o que a vida significa. Talvez seja a vida que esteja nos perguntando como responderemos ao momento que recebemos.",
+      "finalText": "Não existe uma resposta abstrata que sirva igualmente para todas as vidas.\n\nO sentido muda de pessoa para pessoa e de momento para momento. Cada situação coloca diante de nós uma pergunta concreta.\n\nTalvez não sejamos nós que devamos perguntar continuamente o que a vida significa. Talvez seja a vida que esteja nos perguntando como responderemos ao momento que recebemos.",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "Viktor E. Frankl",
+      "authorGender": "male",
+      "filterGender": "male",
+      "displayedAuthor": "Viktor E. Frankl",
+      "inspirationSource": null,
+      "source": {
+        "title": "Em busca de sentido",
+        "section": "Segunda parte — exposição da logoterapia; sentido da vida",
+        "translator": "Tradução e condensação de trabalho do Entre Sábios",
+        "url": "https://www.viktorfrankl.org/logotherapy.html",
+        "status": "Fonte institucional verificada; obra identificada",
+        "work": "Em busca de sentido",
+        "language": "de",
+        "publisherUrl": "https://www.vozes.com.br/autor/12430/viktor-e-frankl",
+        "notes": "Paráfrase da formulação segundo a qual o sentido é específico da pessoa e da situação, e a pergunta sobre a vida pode ser invertida. Não apresentar como citação literal de uma edição brasileira."
+      },
+      "primaryFeeling": "falta_de_proposito",
+      "secondaryFeeling": "confusao",
+      "associations": [
+        {
+          "feeling": "falta_de_proposito",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "confusao",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "autoconhecimento",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "nucleo",
+      "editorialFunction": "reframing",
+      "secondaryFunction": "inquiry",
+      "suitableIntensities": [
+        "fraca",
+        "moderada",
+        "intensa"
+      ],
+      "tone": "analitico",
+      "themes": [
+        "sentido",
+        "responsabilidade",
+        "momento_presente",
+        "tarefa_concreta",
+        "pergunta_existencial"
+      ],
+      "riskTags": [
+        "moralizacao",
+        "pressao_por_superacao",
+        "romantizacao_do_sofrimento",
+        "conselho_prematuro"
+      ],
+      "hardExclusions": [
+        "primeira_resposta",
+        "reconhecimento_inicial",
+        "tristeza_intensa",
+        "luto_intenso"
+      ],
+      "status": "ATIVO_NUCLEO",
+      "publicationEnabled": true,
+      "editorialExplanation": "Quando alguém pergunta qual é o propósito da própria vida, pode imaginar que exista uma resposta escondida em algum lugar: uma profissão definitiva, uma grande missão ou uma certeza capaz de organizar todo o futuro. Enquanto essa resposta não aparece, a vida presente parece suspensa.\n\nFrankl muda o lugar da pergunta. Em vez de exigir uma explicação que justifique toda a existência, ele olha para a situação concreta. O que este momento pede? O que somente esta pessoa, dentro de suas possibilidades reais, pode responder agora?\n\nEssa resposta não precisa ser grandiosa. Pode estar numa responsabilidade assumida, numa criação, num vínculo, numa decisão difícil ou na maneira como atravessamos algo que ainda não podemos transformar. O sentido deixa de ser uma ideia que possuímos e torna-se uma relação entre nós e aquilo que a vida apresenta.\n\nHá também um cuidado necessário: essa visão não significa que todo sofrimento tenha um propósito oculto. Nem toda dor precisa ensinar alguma coisa. Frankl fala especialmente sobre a atitude diante do sofrimento quando ele é inevitável; não sobre aceitar passivamente aquilo que pode e deve ser mudado.\n\nTalvez a falta de propósito se torne ainda mais pesada quando tentamos responder por toda a vida de uma só vez. Uma pergunta menor pode ser mais honesta: não “para que existo?”, mas “o que merece uma resposta minha neste momento?”.",
+      "editorialQuestion": "Antes de encontrar uma explicação para sua vida inteira, que resposta concreta este momento parece pedir de você?",
+      "safetyNote": "Não exigir que alguém encontre sentido no trauma, transformar sofrimento em obrigação de crescimento, responsabilizar uma pessoa por condições que não controla ou substituir tratamento de depressão, crise existencial grave ou ideação suicida. A ausência de sentido percebido não é falha moral. Em sofrimento intenso, a primeira necessidade pode ser proteção, presença e ajuda adequada.",
+      "bookRecommendation": {
+        "bookTitle": "Em busca de sentido",
+        "whyItMatches": "É a fonte direta da reflexão e apresenta a passagem da pergunta abstrata sobre o sentido para a responsabilidade diante de situações concretas.",
+        "whatReaderFinds": "Um testemunho sobre sobrevivência e uma introdução à logoterapia, centrada em sentido, liberdade interior e responsabilidade, com a necessária distinção entre sofrimento inevitável e sofrimento que pode ser mudado.",
+        "whereToStart": "Segunda parte, na apresentação da logoterapia e na discussão sobre o sentido da vida; depois, retornar à primeira parte."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "new_v2_content",
+      "changeReason": "Conteúdo novo aprovado para falta de propósito.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-fdp-003-tolstoi",
+      "legacyIds": [],
+      "originalText": "A pergunta que me perseguia era simples: o que resultará daquilo que faço hoje e farei amanhã? O que restará de toda a minha vida?\n\nDito de outra forma: por que viver, desejar ou realizar alguma coisa, se tudo termina?\n\nEu procurava um sentido que não fosse destruído pela morte.",
+      "finalText": "A pergunta que me perseguia era simples: o que resultará daquilo que faço hoje e farei amanhã? O que restará de toda a minha vida?\n\nDito de outra forma: por que viver, desejar ou realizar alguma coisa, se tudo termina?\n\nEu procurava um sentido que não fosse destruído pela morte.",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "Liev Tolstói",
+      "authorGender": "male",
+      "filterGender": "male",
+      "displayedAuthor": "Liev Tolstói",
+      "inspirationSource": null,
+      "source": {
+        "title": "Uma confissão",
+        "section": "Parte V — formulação da crise de sentido",
+        "translator": "Tradução e condensação de trabalho do Entre Sábios",
+        "url": "https://www.marxists.org/archive/tolstoy/1882/a-confession/part-5.html",
+        "status": "Fonte primária verificada",
+        "work": "Uma confissão",
+        "language": "ru",
+        "publisherUrl": "https://www.mundocristao.com.br/produto/uma-confissao/",
+        "notes": "Paráfrase traduzida e condensada de perguntas formuladas na mesma parte da obra. Preservar o contexto religioso posterior e a gravidade da crise narrada. Não apresentar como tradução literal da edição brasileira."
+      },
+      "primaryFeeling": "falta_de_proposito",
+      "secondaryFeeling": "tristeza",
+      "associations": [
+        {
+          "feeling": "falta_de_proposito",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "tristeza",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "confusao",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "nucleo",
+      "editorialFunction": "inquiry",
+      "secondaryFunction": "contemplation",
+      "suitableIntensities": [
+        "fraca",
+        "moderada"
+      ],
+      "tone": "introspectivo",
+      "themes": [
+        "sentido_da_vida",
+        "finitude",
+        "impermanencia",
+        "vazio_existencial",
+        "fe",
+        "realizacao"
+      ],
+      "riskTags": [
+        "desesperanca_absoluta",
+        "abstracao_elevada",
+        "romantizacao_do_sofrimento",
+        "desorientacao"
+      ],
+      "hardExclusions": [
+        "primeira_resposta",
+        "reconhecimento_inicial",
+        "tristeza_intensa",
+        "luto_intenso"
+      ],
+      "status": "ATIVO_NUCLEO",
+      "publicationEnabled": true,
+      "editorialExplanation": "A falta de propósito de Tolstói não surgiu porque ele não tivesse realizado nada. Ela apareceu justamente quando muitas coisas que costumam oferecer direção já estavam presentes: trabalho reconhecido, posição social, família e estabilidade.\n\nIsso revela uma diferença importante entre possuir objetivos e perceber sentido. Um objetivo organiza nossos próximos passos: terminar um projeto, alcançar uma condição melhor, construir alguma coisa. Mas Tolstói pergunta o que acontece quando até a conquista perde força diante da passagem do tempo e da morte.\n\nEssa pergunta pode abrir uma investigação honesta, mas também pode tornar-se uma armadilha. Quando exigimos que cada ação produza um resultado permanente, quase tudo parece inútil. Uma conversa termina, um corpo envelhece, uma obra pode ser esquecida, e nenhuma experiência permanece intacta.\n\nTalvez o valor de uma vida não dependa de derrotar a impermanência. Algo pode ser verdadeiro sem durar para sempre. Cuidar de alguém não perde todo o sentido porque o encontro termina. Criar não se torna inútil porque a obra é finita. Viver pode não oferecer a permanência que a razão exige e, ainda assim, conter relações, gestos e experiências que não são vazios enquanto acontecem.\n\nTolstói buscou sua própria resposta na fé e numa transformação de sua forma de viver. O Entre Sábios não transforma essa resposta religiosa em conclusão universal. O valor da passagem está na coragem de distinguir entre uma vida cheia de atividades e uma vida que ainda conseguimos reconhecer como significativa.",
+      "editorialQuestion": "Você está procurando algo que torne sua vida verdadeira — ou algo que garanta que nada nela será perdido?",
+      "safetyNote": "A obra inclui desesperança e pensamentos suicidas. Não usar como primeira resposta, não aprofundar ruminação sobre morte em crise, não sugerir que vínculos e conquistas são inúteis, não apresentar a fé como única saída e não romantizar o desespero como caminho necessário para a sabedoria. Em intensidade alta, manter excluído.",
+      "bookRecommendation": {
+        "bookTitle": "Uma confissão",
+        "whyItMatches": "É a fonte direta e apresenta a crise de sentido de alguém que já havia alcançado aquilo que socialmente poderia parecer uma vida bem-sucedida.",
+        "whatReaderFinds": "Um relato autobiográfico e espiritual sobre vazio, mortalidade, razão, fé, vida social e busca por uma forma de viver que não parecesse anulada pela morte.",
+        "whereToStart": "Parte V, na formulação das perguntas sobre o que resultará da vida; depois, seguir a obra integralmente para preservar o percurso religioso."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "new_v2_content",
+      "changeReason": "Conteúdo novo aprovado para falta de propósito.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-lut-001-cs-lewis",
+      "legacyIds": [],
+      "originalText": "Ninguém havia me contado que o luto se pareceria tanto com o medo.\n\nNão era exatamente estar com medo, mas sentir no corpo a mesma inquietação: o estômago suspenso, a dificuldade de permanecer parado, a sensação de que algo estava para acontecer.\n\nEm outros momentos, parecia existir uma espécie de cobertor invisível entre mim e o mundo. Eu queria que as pessoas estivessem por perto, mas não conseguia suportar que exigissem de mim conversa, atenção ou respostas.",
+      "finalText": "Ninguém havia me contado que o luto se pareceria tanto com o medo.\n\nNão era exatamente estar com medo, mas sentir no corpo a mesma inquietação: o estômago suspenso, a dificuldade de permanecer parado, a sensação de que algo estava para acontecer.\n\nEm outros momentos, parecia existir uma espécie de cobertor invisível entre mim e o mundo. Eu queria que as pessoas estivessem por perto, mas não conseguia suportar que exigissem de mim conversa, atenção ou respostas.",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "C. S. Lewis",
+      "authorGender": "male",
+      "filterGender": "male",
+      "displayedAuthor": "C. S. Lewis",
+      "inspirationSource": null,
+      "source": {
+        "title": "A Grief Observed",
+        "section": "Parte I, abertura",
+        "translator": "Tradução e condensação de trabalho do Entre Sábios",
+        "url": "https://www.gutenberg.ca/ebooks/lewiscs-agriefobserved/lewiscs-agriefobserved-00-h.html",
+        "status": "Fonte primária verificada",
+        "work": "A Grief Observed",
+        "language": "en",
+        "publisherUrl": "https://thomasnelson.com.br/products/a-anatomia-de-um-luto-cs-lewis",
+        "notes": "A primeira frase acompanha de perto a abertura; o restante reúne e condensa imagens da mesma passagem. Não apresentar como tradução literal de edição brasileira. Verificar equivalência com conteúdo C. S. Lewis existente na Biblioteca V1; manter esta versão V2 mais completa como ativa e a V1 apenas como referência comparativa."
+      },
+      "primaryFeeling": "luto",
+      "secondaryFeeling": "medo",
+      "associations": [
+        {
+          "feeling": "luto",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "medo",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "solidao",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "nucleo",
+      "editorialFunction": "recognition",
+      "secondaryFunction": "clarification",
+      "suitableIntensities": [
+        "fraca",
+        "moderada",
+        "intensa"
+      ],
+      "tone": "acolhedor",
+      "themes": [
+        "luto",
+        "medo",
+        "ausencia",
+        "irrealidade",
+        "companhia",
+        "isolamento"
+      ],
+      "riskTags": [],
+      "hardExclusions": [],
+      "status": "ATIVO_NUCLEO",
+      "publicationEnabled": true,
+      "editorialExplanation": "Lewis não começa tentando explicar a morte, encontrar consolo ou ensinar como superar a perda. Ele começa descrevendo o que acontece no corpo e na percepção de quem permanece.\n\nO luto pode ser confundido com tristeza, mas frequentemente contém também medo, inquietação, dificuldade de concentração e uma sensação estranha de irrealidade. A pessoa sabe onde está, reconhece quem está ao redor e, ainda assim, o mundo parece ter recuado alguns passos.\n\nHá também uma contradição difícil de explicar: querer companhia e, ao mesmo tempo, não conseguir conversar. Precisar que alguém permaneça próximo, mas não ter forças para responder perguntas, receber conselhos ou representar uma normalidade que já não existe.\n\nIsso não é ingratidão nem rejeição das pessoas. Pode ser apenas uma forma de presença ferida: ainda existe necessidade de vínculo, mas a mente não consegue participar do mundo com a mesma disponibilidade de antes.\n\nLewis oferece algo raro porque não apressa o luto em direção a uma solução. Antes de perguntar quando a dor passará, ele reconhece como ela altera temporariamente a relação com o corpo, com os outros e com a própria realidade.",
+      "editorialQuestion": "De que forma você precisa que alguém permaneça perto sem exigir que você pareça estar bem?",
+      "safetyNote": "Não definir uma maneira normal de sofrer, exigir conversa ou exposição emocional, prometer etapas previsíveis ou transformar isolamento prolongado e sofrimento incapacitante em algo que deva ser enfrentado sozinho. Pode ser usado em intensidade alta por ter função de reconhecimento, mas não deve ser seguido imediatamente por cobrança de superação, produtividade ou sentido.",
+      "bookRecommendation": {
+        "bookTitle": "A anatomia de um luto",
+        "whyItMatches": "É a fonte direta e registra o luto enquanto ele ainda está confuso, contraditório e sem uma conclusão confortável.",
+        "whatReaderFinds": "Um testemunho pessoal sobre ausência, memória, medo, amor, raiva e fé depois da morte da esposa do autor, sem funcionar como manual de etapas.",
+        "whereToStart": "Parte I, especialmente a abertura; depois, seguir na ordem para acompanhar a mudança de perspectiva entre as quatro partes."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "new_v2_recuration",
+      "changeReason": "Versão V2 mais completa aprovada; equivalência com Biblioteca V1 deve ser verificada e registrada sem reativar ou apagar o registro histórico.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-lut-002-george-eliot",
+      "legacyIds": [],
+      "originalText": "Nos primeiros dias da dor, talvez seja melhor guardar silêncio.\n\nPor algum tempo depois de uma grande perda, nossa companhia mais profunda ainda é a pessoa que se foi.\n\nQue o afeto dos outros possa cercar você sem pedir palavras antes que elas voltem.",
+      "finalText": "Nos primeiros dias da dor, talvez seja melhor guardar silêncio.\n\nPor algum tempo depois de uma grande perda, nossa companhia mais profunda ainda é a pessoa que se foi.\n\nQue o afeto dos outros possa cercar você sem pedir palavras antes que elas voltem.",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "George Eliot",
+      "authorGender": "female",
+      "filterGender": "female",
+      "displayedAuthor": "George Eliot",
+      "inspirationSource": null,
+      "source": {
+        "title": "Carta à Mrs. Robert Lytton",
+        "section": "25 de julho de 1871",
+        "translator": "Tradução e condensação de trabalho do Entre Sábios",
+        "url": "https://www.gutenberg.org/files/43045/43045-h/43045-h.htm",
+        "status": "Fonte primária verificada",
+        "work": "George Eliot's Life, Vol. III — correspondência",
+        "language": "en",
+        "publisherUrl": null,
+        "notes": "Paráfrase traduzida e condensada de ideias da mesma carta. Não apresentar como tradução literal integral. A recomendação de Silas Marner é temática, não a fonte direta."
+      },
+      "primaryFeeling": "luto",
+      "secondaryFeeling": "solidao",
+      "associations": [
+        {
+          "feeling": "luto",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "solidao",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "tristeza",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "nucleo",
+      "editorialFunction": "recognition",
+      "secondaryFunction": "contemplation",
+      "suitableIntensities": [
+        "fraca",
+        "moderada",
+        "intensa"
+      ],
+      "tone": "acolhedor",
+      "themes": [
+        "luto",
+        "silencio",
+        "ausencia",
+        "memoria",
+        "companhia",
+        "presenca"
+      ],
+      "riskTags": [],
+      "hardExclusions": [],
+      "status": "ATIVO_NUCLEO",
+      "publicationEnabled": true,
+      "editorialExplanation": "Quando alguém morre, as outras pessoas podem sentir pressa em trazer quem ficou de volta ao mundo. Perguntam como está, procuram palavras de conforto, oferecem explicações ou tentam preencher o silêncio.\n\nGeorge Eliot reconhece que existe um período em que nenhuma dessas coisas alcança inteiramente a pessoa enlutada. A relação com quem morreu ainda ocupa quase todo o espaço interior. A memória não é apenas lembrança do passado; ela continua sendo uma forma de convivência.\n\nNesse momento, o silêncio não significa necessariamente isolamento ou ausência de amor. Pode ser o lugar em que a pessoa começa, lentamente, a perceber o que mudou. Falar cedo demais pode exigir que ela organize uma experiência que ainda não possui forma.\n\nMas Eliot não defende abandono. Ela escreve também sobre os sinais de afeto dos amigos e sobre a importância de a pessoa saber que ainda possui um lugar no coração daqueles que permanecem. A presença mais cuidadosa talvez seja justamente aquela que não força conversa, mas também não desaparece.\n\nO luto cria uma necessidade difícil de conciliar: permanecer perto de quem morreu sem perder completamente os vínculos com quem está vivo. Esse movimento não acontece de uma vez. Aos poucos, a lembrança pode deixar de ser apenas uma ferida aberta e transformar-se num vínculo mais tranquilo — não porque a perda deixou de importar, mas porque o amor encontrou outra forma de permanecer.",
+      "editorialQuestion": "De que silêncio você precisa para permanecer com quem perdeu sem precisar explicar sua dor?",
+      "safetyNote": "Não usar para justificar abandono, isolamento prolongado ou ausência de apoio; não impor silêncio a quem deseja falar; não sugerir que procurar ajuda enfraquece o vínculo com quem morreu; não transformar o luto em experiência necessariamente serena nem prometer que toda lembrança se tornará tranquila.",
+      "bookRecommendation": {
+        "bookTitle": "Silas Marner",
+        "whyItMatches": "É uma recomendação temática: o romance acompanha perda de pertencimento, isolamento e a lenta reabertura de uma vida aos vínculos com os vivos sem apagar o passado.",
+        "whatReaderFinds": "Uma história sobre confiança quebrada, cuidado, memória, comunidade e vínculos que reabrem o futuro.",
+        "whereToStart": "Primeiros capítulos, que apresentam o afastamento de Silas; depois, capítulos XII a XIV, quando a chegada da criança altera sua relação com a comunidade."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "new_v2_content",
+      "changeReason": "Conteúdo novo aprovado para luto.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-lut-003-joan-didion",
+      "legacyIds": [],
+      "originalText": "Mesmo depois de compreendermos que alguém morreu, uma parte da mente pode continuar esperando sua volta.\n\nConservamos um objeto como se ainda fosse necessário, imaginamos algo que precisamos contar e, por um instante, esperamos ouvir os passos conhecidos.\n\nOs fatos já foram entendidos. O cotidiano é que ainda não aprendeu a ausência.",
+      "finalText": "Mesmo depois de compreendermos que alguém morreu, uma parte da mente pode continuar esperando sua volta.\n\nConservamos um objeto como se ainda fosse necessário, imaginamos algo que precisamos contar e, por um instante, esperamos ouvir os passos conhecidos.\n\nOs fatos já foram entendidos. O cotidiano é que ainda não aprendeu a ausência.",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "Joan Didion",
+      "authorGender": "female",
+      "filterGender": "female",
+      "displayedAuthor": "Joan Didion",
+      "inspirationSource": null,
+      "source": {
+        "title": "The Year of Magical Thinking",
+        "section": "Capítulos iniciais — assimilação da ausência",
+        "translator": "Tradução e condensação de trabalho do Entre Sábios",
+        "url": "https://www.penguinrandomhouse.ca/books/40771/the-year-of-magical-thinking-by-joan-didion/9781400078431/excerpt",
+        "status": "Fonte editorial oficial verificada",
+        "work": "The Year of Magical Thinking",
+        "language": "en",
+        "publisherUrl": "https://harpercollins.com.br/products/o-ano-do-pensamento-magico-joan-didion",
+        "notes": "Paráfrase traduzida e condensada da experiência de pensamento mágico descrita na obra. Não apresentar como citação literal da edição brasileira."
+      },
+      "primaryFeeling": "luto",
+      "secondaryFeeling": "saudade",
+      "associations": [
+        {
+          "feeling": "luto",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "saudade",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "confusao",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "nucleo",
+      "editorialFunction": "recognition",
+      "secondaryFunction": "clarification",
+      "suitableIntensities": [
+        "fraca",
+        "moderada",
+        "intensa"
+      ],
+      "tone": "acolhedor",
+      "themes": [
+        "luto",
+        "ausencia",
+        "habito",
+        "memoria",
+        "cotidiano",
+        "pensamento_magico"
+      ],
+      "riskTags": [],
+      "hardExclusions": [],
+      "status": "ATIVO_NUCLEO",
+      "publicationEnabled": true,
+      "editorialExplanation": "O luto não chega a todas as partes de nós ao mesmo tempo.\n\nUma parte da mente compreende o que aconteceu. Ela ouviu a notícia, esteve no funeral, viu os documentos ou retornou para uma casa diferente. Mas os hábitos foram construídos durante meses ou anos na presença daquela pessoa. Eles não desaparecem no instante em que recebemos a notícia.\n\nPor isso, alguém pode pensar em comprar aquilo de que o outro gostava, virar-se para comentar algo, estranhar um horário silencioso ou conservar um objeto como se ainda pudesse ser usado. Durante alguns segundos, a vida compartilhada continua funcionando por dentro.\n\nIsso não significa necessariamente negar a morte. Também não é sinal de fraqueza ou falta de lucidez. Pode ser apenas o tempo desigual do luto: os fatos mudaram de uma vez, mas a memória, o corpo e os hábitos ainda precisam descobrir como existir dentro dessa mudança.\n\nÀs vezes, a ausência é compreendida muitas vezes. Não porque esquecemos quem morreu, mas porque cada situação cotidiana revela novamente um lugar que aquela pessoa ocupava.",
+      "editorialQuestion": "Que hábito seu ainda continua procurando por quem não está mais aqui?",
+      "safetyNote": "Não chamar a pessoa enlutada de irracional, exigir que descarte objetos, pressioná-la a aceitar de uma vez, interpretar toda lembrança como negação da realidade ou impor prazo para deixar de esperar ou sentir a presença de quem morreu. Guardar ou desfazer-se de objetos são escolhas pessoais e não medem a profundidade do amor.",
+      "bookRecommendation": {
+        "bookTitle": "O ano do pensamento mágico",
+        "whyItMatches": "É a fonte direta da reflexão e acompanha como a mente tenta ajustar-se à morte súbita enquanto o cotidiano ainda conserva a forma da relação que existia.",
+        "whatReaderFinds": "Um relato sobre choque, memória, hábitos, casamento, ausência e pensamentos aparentemente contraditórios que surgem depois de uma perda.",
+        "whereToStart": "Capítulos iniciais, nos quais Didion reconstrói os acontecimentos e percebe que saber da morte não significa que toda a mente já assimilou a ausência."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "new_v2_content",
+      "changeReason": "Conteúdo novo aprovado para luto, substituindo a proposta recusada de Tennyson.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    }
+  ]
+}

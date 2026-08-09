@@ -110,7 +110,7 @@ test('falha no envio direto baixa a imagem sem reintroduzir cópia', async () =>
 });
 
 test('geração da imagem permanece ligada ao canvas PNG em formato Stories', () => {
-  assert.match(sharing, /drawShareCard\(\{\s*width\s*=\s*1080,\s*height\s*=\s*1920/);
+  assert.match(sharing, /drawShareCard\(\{\s*width\s*=\s*1080,\s*height\s*=\s*1350/);
   assert.match(sharing, /canvas\.toBlob\([^]*?'image\/png'/);
   assert.match(sharing, /entre-sabios-\$\{resolvedStyleKey\}-stories\.png/);
 });

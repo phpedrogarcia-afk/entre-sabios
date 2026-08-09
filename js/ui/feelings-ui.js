@@ -1,4 +1,4 @@
-// Interface de sentimentos e intensidade.
+// Interface de sentimentos e síntese emocional.
 // Extraído de script.js na Fase 5 da refatoração segura.
 // Não alterar comportamento nem aparência nesta fase.
 
@@ -12,12 +12,29 @@ function initFeelings() {
     const input = document.createElement('input');
     input.type = 'checkbox';
     const feelingId = normalizeTheme(f.id);
+    card.dataset.feelingId = feelingId;
     input.value = feelingId;
+    input.name = 'feelings';
+    const hasRuntimeCoverage = runtimeContents.length === 0 || runtimeContents.some((content) =>
+      content.associations?.some((association) => association.feeling === feelingId));
+    input.disabled = !hasRuntimeCoverage;
+    if (!hasRuntimeCoverage) {
+      card.classList.add('unavailable');
+      card.title = `${f.label}: em construção na Biblioteca V2`;
+      card.setAttribute('aria-disabled', 'true');
+    }
+
+    const icon = document.createElement('span');
+    icon.className = 'feeling-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.innerHTML = `<svg viewBox="0 0 24 24" focusable="false"><use href="#${feelingId}"></use></svg>`;
 
     const text = document.createElement('span');
-    text.textContent = f.label;
+    text.className = 'feeling-label';
+    text.textContent = hasRuntimeCoverage ? f.label : `${f.label} · em construção`;
 
     card.appendChild(input);
+    card.appendChild(icon);
     card.appendChild(text);
 
     input.addEventListener('change', () => {
@@ -52,8 +69,6 @@ function syncSelectedCards() {
   });
 
   renderPrimaryFeelingControl();
-  syncMotivationPreference();
-
   generateBtn.classList.toggle('has-selection', selectedFeelingIds.size > 0);
   if (selectedFeelingIds.size > 0) {
     selectionHintEl.textContent = '';
@@ -114,7 +129,6 @@ function renderEmotionalSynthesis() {
     emotionalSynthesisSummaryEl.hidden = true;
     synthesisSecondaryFeelingsEl.textContent = '';
     synthesisHumanSummaryEl.textContent = '';
-    synthesisMotivationDirectionEl.hidden = true;
     return;
   }
 
@@ -127,10 +141,10 @@ function renderEmotionalSynthesis() {
   synthesisSecondaryFeelingsEl.textContent = contract.secondaryFeelings
     .map(getFeelingLabel)
     .join(contract.secondaryFeelings.length === 2 ? ' e ' : '');
-  synthesisHumanSummaryEl.textContent = synthesis.profile.humanSummary;
-  synthesisMotivationDirectionEl.hidden = !contract.needsMotivation;
+  const isSpecificSynthesis = synthesis.fallbackLevel <= 2;
+  synthesisHumanSummaryEl.textContent = isSpecificSynthesis ? synthesis.profile.humanSummary : '';
   emotionalSynthesisSummaryEl.classList.toggle('is-ambiguous', synthesis.profile.ambiguity === 'high');
-  emotionalSynthesisSummaryEl.hidden = false;
+  emotionalSynthesisSummaryEl.hidden = !isSpecificSynthesis;
 }
 
 function showSelectionHint(message = 'Escolha pelo menos um sentimento antes de gerar sua reflexão.') {
@@ -139,34 +153,4 @@ function showSelectionHint(message = 'Escolha pelo menos um sentimento antes de 
   void feelingsGridEl.offsetWidth;
   feelingsGridEl.classList.add('needs-selection');
   window.setTimeout(() => feelingsGridEl.classList.remove('needs-selection'), 420);
-}
-
-function initIntensity() {
-  currentIntensity = intensityRadioEls.find((radio) => radio.checked)?.value || null;
-  intensityRadioEls.forEach((r) => {
-    r.addEventListener('change', () => {
-      currentIntensity = r.value;
-      lastSelectionSignature = null;
-      if (selectedFeelingIds.size > 0) selectionHintEl.textContent = '';
-    });
-  });
-}
-
-function syncMotivationPreference() {
-  const hasEmotionalSelection = selectedFeelingIds.size > 0;
-  if (!hasEmotionalSelection) needsMotivation = false;
-  motivationToggleEl.disabled = !hasEmotionalSelection;
-  motivationToggleEl.setAttribute('aria-pressed', String(needsMotivation));
-  motivationToggleEl.classList.toggle('is-active', needsMotivation);
-}
-
-function initMotivationPreference() {
-  needsMotivation = false;
-  syncMotivationPreference();
-  motivationToggleEl.addEventListener('click', () => {
-    if (motivationToggleEl.disabled) return;
-    needsMotivation = !needsMotivation;
-    syncMotivationPreference();
-    renderEmotionalSynthesis();
-  });
 }

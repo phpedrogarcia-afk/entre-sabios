@@ -21,7 +21,7 @@ test('laboratório exporta métricas estruturadas sem alterar o acervo', () => {
   const scenario = report.scenarios[0];
   assert.equal(report.schemaVersion, 1);
   assert.equal(report.developmentOnly, true);
-  assert.equal(report.runtimeContentVersion, 'definitiva-2.4');
+  assert.equal(report.runtimeContentVersion, 'definitiva-2.12');
   assert.equal(scenario.selections.length, 12);
   for (const metric of [
     'primaryRetention', 'secondaryInfluence', 'secondaryDominanceRisk', 'synthesisSpecificity',
@@ -41,8 +41,8 @@ test('laboratório simula mudança, reload, motivação e fallback sem criar cam
   const report = runEmotionalLab({
     scenarios: [{
       id: 'transicoes',
-      primaryFeeling: 'luto',
-      secondaryFeelings: ['saudade'],
+      primaryFeeling: 'medo',
+      secondaryFeelings: ['ansiedade'],
       intensity: 'intensa',
       needsMotivation: false,
       selections: 8,
@@ -50,14 +50,14 @@ test('laboratório simula mudança, reload, motivação e fallback sem criar cam
       changes: [
         { at: 3, needsMotivation: true },
         { at: 5, intensity: 'moderada', reload: true },
-        { at: 7, primaryFeeling: 'saudade', secondaryFeelings: ['luto'] },
+        { at: 7, primaryFeeling: 'ansiedade', secondaryFeelings: ['medo'] },
       ],
     }],
   }, { rootDir, generatedAt: '2026-07-16T00:00:00.000Z' });
   const scenario = report.scenarios[0];
   assert.equal(scenario.selections[2].state.needsMotivation, true);
   assert.equal(scenario.selections[4].state.intensity, 'moderada');
-  assert.equal(scenario.selections[6].state.primaryFeeling, 'saudade');
+  assert.equal(scenario.selections[6].state.primaryFeeling, 'ansiedade');
   assert.ok(scenario.selections.every((entry) => [3, 4, 5, null].includes(entry.fallbackLevel)));
   assert.equal(scenario.alerts.some((alert) => alert.id.startsWith('avoidable_repeat')), false);
 });

@@ -1,9 +1,10 @@
 // Contos filosóficos: seleção, ciclo e modal.
 // Extraído de script.js na Fase 4 da refatoração segura.
 
-function resolveTaleIntensity(explicitIntensity = currentIntensity) {
-  if (VALID_INTENSITIES.has(explicitIntensity)) return explicitIntensity;
-  return explicitIntensity == null || explicitIntensity === '' ? 'moderada' : null;
+const taleSelectionContract = globalThis.EntreSabiosTaleSelectionContract;
+
+function resolveTaleIntensity() {
+  return 'moderada';
 }
 
 function normalizeTaleList(list = []) {
@@ -11,11 +12,7 @@ function normalizeTaleList(list = []) {
 }
 
 function getStateEditorialThemes(state) {
-  return Array.from(new Set([
-    ...(state.rootThemeDefinitions || []).map((definition) => definition.theme),
-    ...(state.secondaryThemes || []),
-    ...(state.combinationThemes || []),
-  ].map(normalizeTheme)));
+  return taleSelectionContract.getEditorialThemes(state, normalizeTheme);
 }
 
 function getTaleParagraphHtml(paragraphs = []) {
@@ -41,41 +38,11 @@ function getTaleQuestionFallback(tale) {
 }
 
 function scoreTaleForState(tale, state) {
-  let score = 0;
-  const selectedThemes = new Set(getStateEditorialThemes(state));
-  const taleFeelings = normalizeTaleList(tale.sentimentosRelacionados);
-  const taleThemes = normalizeTaleList(tale.temas);
-  const taleKeywords = normalizeTaleList(tale.palavrasChave);
-
-  if (state.primaryFeeling && taleFeelings.includes(normalizeTheme(state.primaryFeeling))) score += 8;
-
-  (state.secondaryFeelings || []).forEach((feeling) => {
-    if (taleFeelings.includes(normalizeTheme(feeling))) score += 4;
-  });
-
-  taleThemes.forEach((theme) => {
-    if (selectedThemes.has(theme)) score += 2;
-  });
-
-  taleKeywords.forEach((keyword) => {
-    if (selectedThemes.has(keyword)) score += 1.5;
-  });
-
-  if (currentStory) {
-    const currentStoryThemes = new Set([...(currentStory.rawTags || []), ...(currentStory.temas || [])].map(normalizeTheme));
-    taleThemes.forEach((theme) => {
-      if (currentStoryThemes.has(theme)) score += 1.2;
-    });
-  }
-
-  return score;
+  return taleSelectionContract.scoreTale(tale, state, currentStory, normalizeTheme);
 }
 
 function getTaleSelectionKey(state) {
-  return [
-    ...(state.feelings || []),
-    state.intensity || currentIntensity,
-  ].map(normalizeTheme).sort().join('|') || 'sem_sentimento';
+  return taleSelectionContract.selectionKey(state, normalizeTheme);
 }
 
 function markTaleAsViewed(tale, state) {
@@ -89,76 +56,38 @@ function markTaleAsViewed(tale, state) {
 }
 
 function getRankedTalesForState(state) {
-  const selectionKey = getTaleSelectionKey(state);
-  return philosophicalTales
-    .map((tale) => {
-      const baseScore = scoreTaleForState(tale, state);
-      const viewedForSelection = viewedTaleKeys.includes(`${selectionKey}::${tale.id}`);
-      const recentlyViewed = recentTaleKeys.includes(tale.id);
-      const viewedInSession = contosJaVistos.includes(tale.id);
-      const rotationPenalty = (viewedForSelection ? 5 : 0) + (recentlyViewed ? 4 : 0);
-      return {
-        tale,
-        baseScore,
-        score: baseScore - rotationPenalty,
-        viewedForSelection,
-        recentlyViewed,
-        viewedInSession,
-      };
-    })
-    .sort((a, b) => {
-      if (b.score !== a.score) return b.score - a.score;
-      if (b.baseScore !== a.baseScore) return b.baseScore - a.baseScore;
-      return a.tale.titulo.localeCompare(b.tale.titulo);
-    });
+  return taleSelectionContract.rankTales({
+    tales: philosophicalTales,
+    state,
+    currentStory,
+    viewedTaleKeys,
+    recentTaleKeys,
+    sessionViewedIds: contosJaVistos,
+    normalizeTheme,
+  });
 }
 
 function getNearbyThemeScore(tale, state) {
-  const selectedThemes = new Set(getStateEditorialThemes(state));
-  const taleThemes = normalizeTaleList(tale.temas);
-  const taleKeywords = normalizeTaleList(tale.palavrasChave);
-  return [...taleThemes, ...taleKeywords].reduce((total, theme) => total + (selectedThemes.has(theme) ? 1 : 0), 0);
+  return taleSelectionContract.nearbyThemeScore(tale, state, normalizeTheme);
 }
 
 function pickBestTale({ gradualVariety = false } = {}) {
-  const state = interpretEmotionalState(resolveTaleIntensity(currentIntensity));
-  let restartedJourney = false;
-
-  if (contosJaVistos.length >= philosophicalTales.length) {
-    contosJaVistos = [];
-    restartedJourney = true;
-  }
-
-  const ranked = getRankedTalesForState(state);
-  const notSeenInSession = ranked.filter((candidate) => !candidate.viewedInSession);
-  const compatible = notSeenInSession.filter((candidate) => candidate.baseScore > 0);
-  const bestCompatibleScore = compatible[0]?.baseScore || 0;
-  const compatiblePool = gradualVariety
-    ? compatible
-    : compatible.filter((candidate) => candidate.baseScore >= Math.max(1, bestCompatibleScore - 4));
-
-  const nearbyPool = notSeenInSession
-    .map((candidate) => ({
-      ...candidate,
-      nearbyThemeScore: getNearbyThemeScore(candidate.tale, state),
-    }))
-    .filter((candidate) => candidate.nearbyThemeScore > 0)
-    .sort((a, b) => {
-      if (b.nearbyThemeScore !== a.nearbyThemeScore) return b.nearbyThemeScore - a.nearbyThemeScore;
-      if (b.baseScore !== a.baseScore) return b.baseScore - a.baseScore;
-      return a.tale.titulo.localeCompare(b.tale.titulo);
-    });
-
-  const pick = compatiblePool[0]
-    || nearbyPool[0]
-    || notSeenInSession[0]
-    || ranked[0];
-
-  markTaleAsViewed(pick?.tale, state);
-  return {
-    tale: pick?.tale || philosophicalTales[0],
-    restartedJourney,
-  };
+  const state = interpretEmotionalState(resolveTaleIntensity());
+  const selected = taleSelectionContract.selectTale({
+    tales: philosophicalTales,
+    state,
+    currentStory,
+    viewedTaleKeys,
+    recentTaleKeys,
+    sessionViewedIds: contosJaVistos,
+    gradualVariety,
+    normalizeTheme,
+  });
+  contosJaVistos = selected.history.sessionViewedIds;
+  viewedTaleKeys = selected.history.viewedTaleKeys;
+  recentTaleKeys = selected.history.recentTaleKeys;
+  saveViewedTaleKeys();
+  return { tale: selected.tale, restartedJourney: selected.restartedJourney };
 }
 
 function showTale({ gradualVariety = false } = {}) {

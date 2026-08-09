@@ -3,16 +3,20 @@ import path from 'node:path';
 
 export const EXPECTED = Object.freeze({
   schemaVersion: '1.1.0',
-  contentVersion: 'definitiva-2.4',
-  historical: 351,
-  active: 257,
+  contentVersion: 'definitiva-2.12',
+  historical: 408,
+  active: 314,
   removed: 92,
   moved: 1,
   quarantine: 1,
-  nucleus: 41,
-  contextual: 150,
+  nucleus: 78,
+  contextual: 170,
   general: 66,
   pending: 18,
+  runtimeActive: 57,
+  runtimeNucleus: 37,
+  runtimeContextual: 20,
+  runtimeGeneral: 0,
 });
 
 export const ACTIVE_STATUSES = new Set([
@@ -23,8 +27,13 @@ export const ACTIVE_STATUSES = new Set([
 ]);
 
 export const REQUIRED_INSECURITY_IDS = Object.freeze([
-  'batch02-quote-040',
-  'batch04-quote-038',
+  'v2-ins-001-epicteto',
+  'v2-ins-002-dostoievski',
+  'v2-ins-003-marco-aurelio',
+]);
+
+export const WEAK_INSECURITY_IDS = Object.freeze([
+  'v2-ins-003-marco-aurelio',
 ]);
 
 export function readJson(filePath) {
@@ -33,6 +42,16 @@ export function readJson(filePath) {
 
 export function isActive(content) {
   return content.publicationEnabled === true && ACTIVE_STATUSES.has(content.status);
+}
+
+export function isV2Content(content) {
+  return /^v2-/.test(String(content.id || ''))
+    && /^V2-\d{4}-\d{2}-\d{3}$/.test(String(content.originalCollection || ''))
+    && String(content.historicalOrigin || '').includes('Biblioteca V2');
+}
+
+export function isRuntimeEligible(content) {
+  return isActive(content) && isV2Content(content);
 }
 
 function normalizeText(value) {
@@ -111,6 +130,15 @@ export function validateMaster(master) {
   for (const key of ['historical', 'active', 'removed', 'moved', 'quarantine', 'nucleus', 'contextual', 'general', 'pending']) {
     assert(truth[key] === EXPECTED[key], `${key}: esperado ${EXPECTED[key]}, encontrado ${truth[key]}`);
   }
+  const runtimeEligible = master.contents.filter(isRuntimeEligible);
+  assert(runtimeEligible.length === EXPECTED.runtimeActive,
+    `runtimeActive: esperado ${EXPECTED.runtimeActive}, encontrado ${runtimeEligible.length}`);
+  assert(runtimeEligible.filter((content) => content.placement === 'nucleo').length === EXPECTED.runtimeNucleus,
+    `runtimeNucleus: esperado ${EXPECTED.runtimeNucleus}`);
+  assert(runtimeEligible.filter((content) => content.placement === 'contextual').length === EXPECTED.runtimeContextual,
+    `runtimeContextual: esperado ${EXPECTED.runtimeContextual}`);
+  assert(runtimeEligible.filter((content) => content.placement === 'geral').length === EXPECTED.runtimeGeneral,
+    `runtimeGeneral: esperado ${EXPECTED.runtimeGeneral}`);
   assert(truth.duplicateIds.length === 0, `IDs duplicados: ${truth.duplicateIds.join(', ')}`);
   assert(truth.duplicateActiveTexts.length === 0, 'Existem textos ativos exatamente duplicados.');
   assert(truth.activeWithNullPlacement.length === 0, `Ativos sem placement: ${truth.activeWithNullPlacement.join(', ')}`);
@@ -169,7 +197,7 @@ export function validateMaster(master) {
     }
   }
 
-  const active = master.contents.filter(isActive);
+  const active = master.contents.filter(isRuntimeEligible);
   const insecurity = active.filter((content) => content.associations?.some(
     (association) => association.feeling === 'inseguranca' && association.placement === 'nucleo',
   ));
@@ -178,7 +206,10 @@ export function validateMaster(master) {
     const content = insecurity.find((item) => item.id === id);
     assert(content, `Núcleo obrigatório de Insegurança ausente: ${id}`);
     assert(content.publicationEnabled === true, `Núcleo de Insegurança não publicável: ${id}`);
-    assert(content.suitableIntensities.includes('fraca'), `Núcleo de Insegurança incompatível com intensidade fraca: ${id}`);
+  }
+  for (const id of WEAK_INSECURITY_IDS) {
+    const content = insecurity.find((item) => item.id === id);
+    assert(content?.suitableIntensities.includes('fraca'), `Núcleo de Insegurança fraca incompatível: ${id}`);
   }
   return truth;
 }
@@ -205,9 +236,15 @@ function compactContent(content) {
     hardExclusions: content.hardExclusions || [],
     status: content.status,
     publicationEnabled: true,
+    editorialExplanation: content.editorialExplanation || '',
+    editorialQuestion: content.editorialQuestion || '',
+    bookRecommendation: content.bookRecommendation || null,
     filterGender: content.filterGender || content.authorGender || 'neutral',
     source: {
       title: content.source?.title || '',
+      section: content.source?.section || '',
+      translator: content.source?.translator || '',
+      url: content.source?.url || '',
       status: content.source?.status || '',
     },
   };
@@ -218,7 +255,7 @@ export function buildRuntime(master) {
   const feelings = master.catalog.feelings
     .filter((feeling) => feeling.selectable !== false)
     .map(({ id, label }) => ({ id, label }));
-  const contents = master.contents.filter(isActive).map(compactContent).sort((a, b) => a.id.localeCompare(b.id, 'pt-BR'));
+  const contents = master.contents.filter(isRuntimeEligible).map(compactContent).sort((a, b) => a.id.localeCompare(b.id, 'pt-BR'));
   const byFeeling = Object.fromEntries(feelings.map(({ id }) => [id, contents.filter((content) =>
     content.associations.some((association) => association.feeling === id)).length]));
   return {
@@ -226,11 +263,11 @@ export function buildRuntime(master) {
     contentVersion: master.contentVersion,
     generatedFrom: 'entre_sabios_acervo_mestre_final.json',
     summary: {
-      activeTotal: truth.active,
-      nucleusTotal: truth.nucleus,
-      contextualTotal: truth.contextual,
-      generalTotal: truth.general,
-      referencePendingTotal: truth.pending,
+      activeTotal: contents.length,
+      nucleusTotal: contents.filter((content) => content.placement === 'nucleo').length,
+      contextualTotal: contents.filter((content) => content.placement === 'contextual').length,
+      generalTotal: contents.filter((content) => content.placement === 'geral').length,
+      referencePendingTotal: contents.filter((content) => content.status === 'ATIVO_REFERENCIA_PENDENTE').length,
       byFeeling,
     },
     feelings,

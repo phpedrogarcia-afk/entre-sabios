@@ -78,7 +78,8 @@ for (const scenario of scenarios) {
     const { sandbox, canvas, calls } = createCanvasHarness(scenario.story);
     sandbox.drawShareCard();
     assert.equal(canvas.width, 1080);
-    assert.equal(canvas.height, 1920);
+    assert.equal(canvas.height, 1350);
+    assert.equal(canvas.width / canvas.height, 4 / 5);
     assert.ok(calls.length > 3);
     assert.ok(calls.every((call) => call.x - call.width / 2 >= 0 && call.x + call.width / 2 <= canvas.width));
     assert.ok(calls.every((call) => call.y >= 0 && call.y <= canvas.height));
@@ -145,6 +146,6 @@ test('todo o acervo ativo e todas as categorias cabem nas três variações sem 
   }
   assert.deepEqual(
     [...seenTypes].sort(),
-    ['exact_quote', 'inspired', 'original', 'paraphrase', 'traditional', 'translated_quote'],
+    ['exact_quote', 'paraphrase', 'traditional', 'translated_quote'],
   );
 });

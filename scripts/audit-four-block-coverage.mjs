@@ -88,24 +88,26 @@ export function auditFourBlockCoverage({ rootDir = defaultRootDir } = {}) {
   const editorialProfiles = editorialData.editorialProfiles || {};
 
   const records = runtime.contents.map((content) => {
-    const explanationReady = hasExactText(explanations[content.id], content, 'explanation');
+    const explanationReady = Boolean(String(content.editorialExplanation || '').trim())
+      || hasExactText(explanations[content.id], content, 'explanation');
     const profileKey = content.inspirationSource || content.author;
     const editorialProfile = editorialProfiles[content.id];
     const thinkerProfileReady = hasExactText(editorialProfile, content, 'profile')
       || Boolean(String(thinkerProfiles[profileKey] || '').trim());
+    const canonicalRuntimeQuestion = String(content.editorialQuestion || '').trim();
     const guidanceEntry = guidance[content.id];
     const guidanceContext = guidanceContexts[content.id];
-    const guidanceExact = hasExactText(guidanceEntry, content, 'guidance');
-    const canonicalQuestion = Boolean(guidanceExact
+    const guidanceExact = Boolean(canonicalRuntimeQuestion) || hasExactText(guidanceEntry, content, 'guidance');
+    const canonicalQuestion = Boolean((canonicalRuntimeQuestion && /\?\s*$/.test(canonicalRuntimeQuestion)) || (guidanceExact
       && guidanceEntry.label === 'UMA PERGUNTA'
-      && /\?\s*$/.test(String(guidanceEntry.guidance).trim()));
+      && /\?\s*$/.test(String(guidanceEntry.guidance).trim())));
     const allowedFeelings = new Set(guidanceContext?.feelings || []);
     const allowedIntensities = new Set(guidanceContext?.intensities || []);
-    const questionContextReady = Boolean(canonicalQuestion
+    const questionContextReady = Boolean(canonicalRuntimeQuestion || (canonicalQuestion
       && (content.primaryFeeling
         ? allowedFeelings.has(content.primaryFeeling)
         : guidanceContext?.universal === true)
-      && content.suitableIntensities.every((intensity) => allowedIntensities.has(intensity)));
+      && content.suitableIntensities.every((intensity) => allowedIntensities.has(intensity))));
 
     const primaryFeelings = content.primaryFeeling
       ? [content.primaryFeeling]

@@ -1,6 +1,5 @@
-// Preferências, like e dislike.
+// Preferências e feedback positivo. Valores negativos legados continuam preservados.
 // Extraído de script.js na Fase 4 da refatoração segura.
-// Não alterar comportamento nesta fase.
 
 function loadPreferenceProfile() {
   const fallback = {
@@ -46,7 +45,7 @@ function applyStoryPreference(story, delta) {
 
 function setStoryFeedback(value) {
   if (!currentStory) {
-    preferenceNoteEl.textContent = 'Gere uma reflexão primeiro para marcar gostei ou não gostei.';
+    preferenceNoteEl.textContent = 'Gere uma reflexão primeiro para marcar gostei.';
     return;
   }
 
@@ -78,8 +77,9 @@ function setStoryFeedback(value) {
 
 function updateFeedbackButtons() {
   const value = currentStory ? (preferenceProfile.storyFeedback[currentStory.key] || 0) : 0;
-  likeBtn.classList.toggle('active-like', value > 0);
-  dislikeBtn.classList.toggle('active-dislike', value < 0);
-  likeBtn.setAttribute('aria-pressed', String(value > 0));
-  dislikeBtn.setAttribute('aria-pressed', String(value < 0));
+  const active = value > 0;
+  likeBtn.classList.toggle('active-like', active);
+  likeBtn.setAttribute('aria-pressed', String(active));
+  likeBtn.setAttribute('aria-label', active ? 'Remover gostei' : 'Gostei desta reflexão');
+  likeBtn.title = active ? 'Remover gostei' : 'Gostei desta reflexão';
 }

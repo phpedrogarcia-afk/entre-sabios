@@ -16,6 +16,8 @@
     "audit:provenance": "node scripts/audit-complete-provenance.mjs",
     "build:provenance-map": "node scripts/build-historical-provenance-map.mjs",
     "check:provenance-map": "node scripts/build-historical-provenance-map.mjs --check",
+    "import:v2": "node scripts/import-v2-batch.mjs",
+    "report:editorial-v2": "node scripts/report-editorial-v2.mjs",
     "test:state": "node scripts/run-tests.mjs state",
     "test:synthesis": "node scripts/run-tests.mjs synthesis",
     "test:motivation": "node scripts/run-tests.mjs motivation",

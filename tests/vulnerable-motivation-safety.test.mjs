@@ -109,12 +109,17 @@ test('intensidade, publicação, status e sentimento principal continuam soberan
   assert.equal(ranked[0].level, 1);
 });
 
-test('acervo real motivado permanece seguro após a primeira resposta nas três intensidades', () => {
+test('cobertura V2 vulnerável disponível permanece segura após a primeira resposta nas três intensidades', () => {
   for (const feeling of sensitiveFeelings) {
     for (const intensity of ['fraca', 'moderada', 'intensa']) {
       const currentState = state(feeling, intensity);
       const ranked = rank(runtime.contents, currentState, false);
-      assert.ok(ranked.length > 0, `${feeling}:${intensity} sem cobertura`);
+      if (!ranked.length) {
+        assert.equal(runtime.contents.some((content) => content.suitableIntensities.includes(intensity)
+          && content.associations.some((association) => association.feeling === feeling
+            && ['nucleo', 'contextual'].includes(association.placement))), false, `${feeling}:${intensity} perdeu conteúdo elegível`);
+        continue;
+      }
       assert.ok(ranked.every(({ content }) => (
         content.suitableIntensities.includes(intensity)
         && engine.classifyEditorialEffects(content, currentState, { firstResponse: false }).safe

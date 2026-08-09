@@ -31,7 +31,7 @@ test('replay informa divergência sem alterar o motor ou o arquivo de entrada', 
   const report = replayDiagnosticSession(changed, { rootDir });
   assert.equal(report.success, false);
   assert.equal(report.mismatched, 1);
-  assert.equal(report.selections[0].actualId, 'Michel de Montaigne-1');
+  assert.equal(report.selections[0].actualId, 'v2-ans-001-seneca');
   assert.equal(JSON.stringify(changed), before);
 });
 

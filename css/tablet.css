@@ -41,9 +41,8 @@
     top: 0;
     z-index: 10;
     width: 100%;
-    height: auto;
-    min-height: 68px;
-    background: rgba(251, 247, 238, 0.94);
+    min-height: 102px;
+    background: var(--surface-header);
     backdrop-filter: blur(8px);
   }
 
@@ -96,11 +95,7 @@
   }
 
   .center-top #newBtn {
-    grid-column: 1 / -1;
-  }
-
-  .favorite-library {
-    margin-left: 0;
+    grid-column: auto;
   }
 
   .center-card {
@@ -110,7 +105,7 @@
   }
 
   .quote-stage {
-    min-height: 320px;
+    min-height: 0;
   }
 
   .block-text,

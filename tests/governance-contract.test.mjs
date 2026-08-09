@@ -32,7 +32,7 @@ test('verificador rejeita marcador de estado obsoleto', () => {
   fs.rmSync(temp, { recursive: true, force: true });
 });
 
-test('decisões aprovadas preservam quatro blocos e sorteio neutro de intensidade', () => {
+test('decisões aprovadas preservam quatro blocos e registram a trajetória interna', () => {
   const decisions = fs.readFileSync(path.join(rootDir, 'DECISIONS.md'), 'utf8');
   const editorialStandard = fs.readFileSync(path.join(rootDir, 'PADRAO_EDITORIAL_ENTRE_SABIOS.md'), 'utf8');
   const projectStatus = fs.readFileSync(path.join(rootDir, 'PROJECT_STATUS.md'), 'utf8');
@@ -41,8 +41,9 @@ test('decisões aprovadas preservam quatro blocos e sorteio neutro de intensidad
   assert.match(decisions, /DEC-023[\s\S]*?\*\*Estado:\*\* substituída[\s\S]*?\*\*Substituída por:\*\* `DEC-026`/);
   assert.match(decisions, /DEC-025[\s\S]*?\*\*Estado:\*\* vigente/);
   assert.match(decisions, /DEC-026[\s\S]*?\*\*Estado:\*\* substituída[\s\S]*?\*\*Substituída por:\*\* `DEC-027`/);
-  assert.match(decisions, /DEC-027[\s\S]*?\*\*Estado:\*\* vigente/);
-  assert.match(decisions, /DEC-028[\s\S]*?\*\*Estado:\*\* vigente/);
+  assert.match(decisions, /DEC-027[\s\S]*?\*\*Estado:\*\* substituída[\s\S]*?\*\*Substituída por:\*\* `DEC-034`/);
+  assert.match(decisions, /DEC-028[\s\S]*?\*\*Estado:\*\* substituída[\s\S]*?\*\*Substituída por:\*\* `DEC-034`/);
+  assert.match(decisions, /DEC-034[\s\S]*?\*\*Estado:\*\* vigente/);
 
   for (const heading of [
     'O QUE ESSA FRASE QUER DIZER',
@@ -54,11 +55,9 @@ test('decisões aprovadas preservam quatro blocos e sorteio neutro de intensidad
     assert.ok(editorialStandard.includes(heading));
   }
 
-  assert.match(decisions, /cada geração e cada pedido de outra perspectiva sorteiam novamente uma das três intensidades/);
-  assert.match(decisions, /o motor existente continua determinístico para o estado resolvido/);
-  assert.match(decisions, /Sem escolha, usa internamente `moderada` \(`Equilibrado`\)/);
-  assert.match(projectStatus, /ausência sorteia `fraca`, `moderada` ou `intensa` a cada geração/);
-  assert.match(projectStatus, /sem escolha de intensidade, usa `Equilibrado` internamente sem marcar a interface/);
+  assert.match(decisions, /a abertura favorece intensidade fraca/);
+  assert.match(decisions, /mesmos filtros e no mesmo motor/);
+  assert.match(projectStatus, /sem controle público; abertura fraca, progressão moderada/);
   assert.doesNotMatch(projectStatus, /código ainda exige escolha explícita/);
   assert.match(projectStatus, /257 IDs ativos auditados; explicações, perfis, perguntas e livros completos nos 257 conteúdos/);
   assert.match(decisions, /DEC-029 — Antologia do Silêncio sai do acervo ativo por proveniência artificial confirmada/);

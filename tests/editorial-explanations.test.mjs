@@ -18,9 +18,12 @@ function normalizeText(value) {
   return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
-test('257 conteúdos ativos exigem explicação prioritária com correspondência exata', () => {
-  assert.ok(Object.keys(explanations).length >= runtime.contents.length);
+test('33 conteúdos V2 ativos exigem explicação prioritária com correspondência exata', () => {
   for (const content of runtime.contents) {
+    if (content.editorialExplanation) {
+      assert.ok(content.editorialExplanation.length >= 35, `${content.id} possui explicação canônica insuficiente`);
+      continue;
+    }
     const id = content.id;
     const entry = explanations[id];
     assert.ok(entry, `${id} não possui explicação`);
@@ -61,7 +64,10 @@ test('34 perfis editoriais específicos não inventam pensador nem autoria', () 
     const historicalContent = master.contents.find((item) => item.id === id);
     assert.equal(entry.finalText, historicalContent?.finalText, id);
     if (!content) {
-      assert.equal(historicalContent?.status, 'REMOVIDO', `${id} só pode permanecer no perfil como registro histórico removido`);
+      assert.ok(
+        !historicalContent?.id.startsWith('v2-') || historicalContent?.status === 'REMOVIDO',
+        `${id} ausente do runtime deve pertencer à V1 histórica ou estar removido`,
+      );
     }
     assert.equal(entry.title, 'SOBRE ESTA REFLEXÃO', id);
     assert.ok(entry.profile.length >= 80, id);

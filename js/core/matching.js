@@ -133,7 +133,7 @@ function recordEditorialSignal(event, state, details = {}) {
   }
 }
 
-function pickRuntimeContent({ eventTrigger = 'unknown', currentContentId = null, intensity = currentIntensity } = {}) {
+function pickRuntimeContent({ eventTrigger = 'unknown', currentContentId = null, intensity = null } = {}) {
   if (!runtimeSelector) return null;
   const state = interpretEmotionalState(intensity);
   const signature = getSelectionSignature(state);

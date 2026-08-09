@@ -1,6 +1,5 @@
-// Favoritos e biblioteca de frases salvas.
+// Leituras salvas e sua biblioteca local (chave legada preservada).
 // Extraído de script.js na Fase 4 da refatoração segura.
-// Não alterar comportamento nesta fase.
 
 function loadFavoriteStories() {
   try {
@@ -27,22 +26,21 @@ function updateFavoriteUi() {
   const active = isCurrentStoryFavorite();
   favoriteBtn.classList.toggle('active-favorite', active);
   favoriteBtn.setAttribute('aria-pressed', String(active));
-  favoriteBtn.setAttribute('aria-label', active ? 'Remover das favoritas' : 'Adicionar às favoritas');
-  favoriteBtn.title = active ? 'Remover das favoritas' : 'Favoritar';
-  favoriteBtn.textContent = active ? '★' : '☆';
+  favoriteBtn.setAttribute('aria-label', active ? 'Remover leitura salva' : 'Salvar leitura');
+  favoriteBtn.title = active ? 'Remover leitura salva' : 'Salvar leitura';
   favoritesCountEl.textContent = String(favoriteStories.length);
 }
 
 function toggleFavorite() {
   if (!currentStory) {
-    preferenceNoteEl.textContent = 'Gere uma reflexão primeiro para favoritar.';
+    preferenceNoteEl.textContent = 'Gere uma reflexão primeiro para salvar a leitura.';
     return;
   }
   const index = favoriteStories.findIndex((story) => story.key === currentStory.key);
 
   if (index >= 0) {
     favoriteStories.splice(index, 1);
-    preferenceNoteEl.textContent = 'Frase removida das favoritas.';
+    preferenceNoteEl.textContent = 'Leitura removida das salvas.';
   } else {
     favoriteStories.unshift({
       key: currentStory.key,
@@ -51,7 +49,7 @@ function toggleFavorite() {
       source: currentStory.source || '',
       savedAt: new Date().toISOString(),
     });
-    preferenceNoteEl.textContent = 'Frase guardada discretamente nas suas favoritas.';
+    preferenceNoteEl.textContent = 'Leitura salva para você voltar quando quiser.';
   }
 
   saveFavoriteStories();

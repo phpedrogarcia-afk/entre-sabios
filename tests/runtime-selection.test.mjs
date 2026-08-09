@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { REQUIRED_INSECURITY_IDS, buildFromFiles } from '../scripts/content-build-lib.mjs';
+import { buildFromFiles } from '../scripts/content-build-lib.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const { runtime } = buildFromFiles({ rootDir, write: false });
@@ -23,7 +23,7 @@ function normalizeText(value) {
   return String(value).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
-test('42 cenários respeitam hierarquia, intensidade e exclusões', () => {
+test('42 cenários respeitam disponibilidade V2, hierarquia, intensidade e exclusões', () => {
   let scenarios = 0;
   for (const feeling of runtime.feelings.map((item) => item.id)) {
     for (const intensity of ['fraca', 'moderada', 'intensa']) {
@@ -31,11 +31,14 @@ test('42 cenários respeitam hierarquia, intensidade e exclusões', () => {
       const state = { primaryFeeling: feeling, secondaryFeelings: [], intensity };
       const selector = engine.createSelector({ version: runtime.contentVersion, contents: runtime.contents });
       const inspection = selector.inspect(state, { firstResponse: false });
-      assert.ok(inspection.eligibleAtLevel.length > 0, `${feeling}/${intensity} sem cobertura`);
       assert.ok(inspection.ranked.every((candidate) => candidate.content.suitableIntensities.includes(intensity)));
       assert.ok(inspection.ranked.every((candidate) => candidate.content.publicationEnabled));
       assert.ok(inspection.ranked.every((candidate) => !['REMOVIDO', 'MOVER_PARA_TEXTOS'].includes(candidate.content.status)));
       assert.ok(inspection.ranked.every((candidate, index, list) => index === 0 || list[index - 1].level <= candidate.level));
+      if (!inspection.eligibleAtLevel.length) {
+        assert.equal(selector.select(state, { firstResponse: false }), null, `${feeling}/${intensity} deveria ficar em construção`);
+        continue;
+      }
       const selected = selector.select(state, { firstResponse: false });
       assert.equal(selected.level, inspection.bestLevel);
       assert.ok(runtime.contents.some((content) => content.id === selected.content.id));
@@ -57,15 +60,15 @@ test('hardExclusions respeitam primeira resposta e intensidade intensa', () => {
   }
 });
 
-test('Insegurança fraca percorre os dois núcleos remanescentes antes de repetir', () => {
+test('Insegurança fraca percorre o núcleo V2 compatível antes de repetir', () => {
   const state = { primaryFeeling: 'inseguranca', secondaryFeelings: [], intensity: 'fraca' };
   const selector = engine.createSelector({ version: runtime.contentVersion, contents: runtime.contents });
   const inspection = selector.inspect(state, { firstResponse: false });
   assert.equal(inspection.bestLevel, 1);
-  assert.equal(inspection.eligibleAtLevel.length, 2);
-  const selected = Array.from({ length: 2 }, () => selector.select(state, { firstResponse: false }));
+  assert.deepEqual(inspection.eligibleAtLevel.map(({ content }) => content.id), ['v2-ins-003-marco-aurelio']);
+  const selected = Array.from({ length: inspection.eligibleAtLevel.length }, () => selector.select(state, { firstResponse: false }));
   assert.ok(selected.every((item) => item.level === 1 && !item.fallback));
-  assert.deepEqual([...new Set(selected.map((item) => item.content.id))].sort(), [...REQUIRED_INSECURITY_IDS].sort());
+  assert.deepEqual([...new Set(selected.map((item) => item.content.id))], ['v2-ins-003-marco-aurelio']);
 });
 
 test('transição da primeira resposta não repete imediatamente e percorre o ciclo', () => {
@@ -77,11 +80,14 @@ test('transição da primeira resposta não repete imediatamente e percorre o ci
   assert.notEqual(selected[0].content.id, selected[1].content.id);
 });
 
-test('Insegurança intensa usa somente compatíveis e mantém núcleo antes de contextual', () => {
+test('Insegurança intensa usa somente compatíveis no melhor nível V2 disponível', () => {
   const state = { primaryFeeling: 'inseguranca', secondaryFeelings: [], intensity: 'intensa' };
   const selector = engine.createSelector({ version: runtime.contentVersion, contents: runtime.contents });
   const inspection = selector.inspect(state, { firstResponse: false });
-  assert.equal(inspection.bestLevel, 1);
+  assert.equal(inspection.bestLevel, 2);
+  assert.ok(inspection.eligibleAtLevel.every(({ content }) => content.associations.some(
+    (association) => association.feeling === 'inseguranca' && association.placement === 'contextual',
+  )));
   assert.ok(inspection.eligibleAtLevel.every(({ content }) => content.suitableIntensities.includes('intensa')));
 });
 

@@ -13,7 +13,7 @@
 | Sentimentos | 14 |
 | Seletor | esquema de fila `2`; política de rotação `2` |
 | Sínteses | catálogo `1.2.0`: 29 pares direcionais revisados e 1 tríade explícita |
-| Testes desta verificação | 257 testes Node e 7 testes Playwright aprovados; o navegador foi reexecutado após a escolha explícita de intensidade |
+| Testes desta verificação | estado histórico anterior à `DEC-034`; a validação atual está registrada nos testes e relatórios V2 |
 | Escopo | estado emocional, elegibilidade, segurança, ranking, síntese, motivação, trajetória, rotação, persistência, acervo ativo e apresentação |
 | Alterações funcionais | nenhuma |
 
@@ -112,7 +112,7 @@ flowchart TD
 
 ### 4.1 Seleção e estado normalizado
 
-- **Entrada:** sentimentos selecionados, principal explícito, intensidade e `needsMotivation`.
+- **Entrada atual:** sentimentos selecionados, principal explícito e intensidade resolvida pela progressão interna da `DEC-034`; motivação não participa do fluxo ativo.
 - **Saída:** principal, até dois secundários, intensidade válida, chave direcional estável e contrato de seleção.
 - **Regra:** o primeiro sentimento vira principal; depois ele só muda por remoção ou ação explícita de foco. A ordem dos secundários é normalizada para a chave, sem trocar o principal.
 - **Fallback:** intensidade ausente ou inválida permanece `null`, sem elegibilidade, temas ou tons; motivação é desligada se não há principal.
@@ -151,7 +151,7 @@ Há uma distinção decisiva: os cinco níveis existem como **representação e 
 
 O resolvedor de síntese procura, nesta ordem: tríade exata, par direcional exato, perfil do principal com modificadores, fallback cauteloso e estado sem síntese. O adaptador converte apenas sinais estruturados em vetor `[tema, função, tom]`; não lê o resumo humano para pontuar.
 
-Motivação é uma direção opcional, não um sentimento. O adaptador exige ao menos duas dimensões independentes e só desempata depois da síntese. Se não existe sinal forte, registra fallback e mantém o ranking normal. Em nenhum caso cria elegibilidade ou resgata conteúdo inseguro.
+O adaptador histórico de motivação permanece como evidência isolada, mas não é carregado nem passado ao seletor de produção desde a `DEC-034`.
 
 ### 4.6 Ranking lexicográfico
 

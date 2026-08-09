@@ -234,13 +234,11 @@ test('diagnóstico informa preferência e fallback sem expor conteúdo novo', ()
   );
 });
 
-test('arquivos ativos carregam dados e adaptador locais antes do script principal', () => {
+test('adaptador histórico permanece isolado e não é carregado no fluxo ativo', () => {
   const html = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
   const script = fs.readFileSync(path.join(rootDir, 'script.js'), 'utf8');
-  assert.match(html, /js\/data\/motivation-profiles\.js/);
-  assert.match(html, /js\/core\/motivation-ranking-adapter\.js/);
-  assert.ok(html.indexOf('motivation-profiles.js') < html.indexOf('motivation-ranking-adapter.js'));
-  assert.ok(html.indexOf('motivation-ranking-adapter.js') < html.indexOf('script.js?v='));
-  assert.match(script, /motivationAdapter:\s*motivationRankingAdapter/);
+  assert.doesNotMatch(html, /js\/data\/motivation-profiles\.js/);
+  assert.doesNotMatch(html, /js\/core\/motivation-ranking-adapter\.js/);
+  assert.doesNotMatch(script, /motivationAdapter:\s*motivationRankingAdapter/);
   assert.doesNotMatch(script, /fetch\([^)]*motivation|openai|chatgpt/i);
 });

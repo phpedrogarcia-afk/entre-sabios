@@ -43,7 +43,7 @@ test('perguntas editoriais prioritárias exigem correspondência exata com o run
     const historicalContent = master.contents.find((item) => item.id === id);
     assert.ok(historicalContent, `${id} não existe no mestre`);
     assert.equal(entry.finalText, historicalContent.finalText, `${id} mudou de texto`);
-    if (!content) assert.equal(historicalContent.status, 'REMOVIDO', `${id} ausente do runtime não está removido`);
+    if (!content) assert.ok(!id.startsWith('v2-'), `${id} V2 aprovado está ausente do runtime`);
     assert.ok(entry.guidance.length >= 35, `${id} possui orientação insuficiente`);
   }
 });
@@ -92,7 +92,7 @@ test('trava contextual respeita o sentimento principal e as intensidades permiti
   for (const [id, context] of Object.entries(contexts)) {
     const content = runtime.contents.find((item) => item.id === id);
     if (!content) {
-      assert.equal(master.contents.find((item) => item.id === id)?.status, 'REMOVIDO', `${id} ausente do runtime não está removido`);
+      assert.ok(!id.startsWith('v2-'), `${id} V2 aprovado está ausente do runtime`);
       continue;
     }
     const matchesPrimary = content.primaryFeeling
@@ -118,7 +118,7 @@ test('função real recusa texto, sentimento ou intensidade fora do contexto cur
   };
   vm.createContext(functionSandbox);
   vm.runInContext(source, functionSandbox);
-  const content = runtime.contents.find((item) => item.id === 'batch04-quote-021');
+  const content = master.contents.find((item) => item.id === 'batch04-quote-021');
 
   const valid = functionSandbox.getSpecificEditorialGuidance(content, { primaryFeeling: 'luto', intensity: 'intensa' });
   assert.equal(valid.guidance, guidance['batch04-quote-021'].guidance);

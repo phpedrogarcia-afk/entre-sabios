@@ -6,9 +6,11 @@ import { fileURLToPath } from 'node:url';
 import {
   EXPECTED,
   REQUIRED_INSECURITY_IDS,
+  WEAK_INSECURITY_IDS,
   buildFromFiles,
   calculateMasterTruth,
   isActive,
+  isRuntimeEligible,
   validateMaster,
 } from '../scripts/content-build-lib.mjs';
 
@@ -19,11 +21,11 @@ const { master, runtime, serialized, serializedScript } = first;
 
 test('mestre e runtime possuem os totais editoriais congelados', () => {
   const truth = validateMaster(master);
-  assert.equal(truth.historical, 351);
-  assert.equal(runtime.contents.length, 257);
+  assert.equal(truth.historical, 408);
+  assert.equal(runtime.contents.length, 57);
   assert.deepEqual(
     [runtime.summary.nucleusTotal, runtime.summary.contextualTotal, runtime.summary.generalTotal],
-    [41, 150, 66],
+    [37, 20, 0],
   );
 });
 
@@ -35,8 +37,8 @@ test('runtime contém somente ativos publicáveis', () => {
   const queuedPendingIds = master.pendingReferences.map((reference) => reference.contentId).sort();
   assert.ok(runtime.contents.every((content) => content.publicationEnabled));
   assert.ok(runtime.contents.every((content) => !['REMOVIDO', 'MOVER_PARA_TEXTOS', 'QUARENTENA_DOCUMENTAL'].includes(content.status)));
-  assert.equal(statusPendingIds.length, 18);
-  assert.deepEqual(queuedPendingIds, statusPendingIds);
+  assert.equal(statusPendingIds.length, 0);
+  assert.equal(queuedPendingIds.length, 18);
 });
 
 test('IDs, textos, placements, intensidades e associações são válidos', () => {
@@ -57,30 +59,30 @@ test('catálogo oficial contém Insegurança e não contém Coragem', () => {
   assert.ok(!ids.includes('coragem'));
 });
 
-test('os dois núcleos remanescentes de Insegurança estão presentes', () => {
+test('os três núcleos V2 de Insegurança estão presentes', () => {
   const insecurity = runtime.contents.filter((content) => content.associations.some(
     (association) => association.feeling === 'inseguranca' && association.placement === 'nucleo',
   ));
-  assert.equal(insecurity.length, 2);
+  assert.equal(insecurity.length, 3);
   assert.deepEqual(insecurity.map((content) => content.id).sort(), [...REQUIRED_INSECURITY_IDS].sort());
-  assert.ok(insecurity.every((content) => content.suitableIntensities.includes('fraca')));
+  assert.deepEqual(insecurity.filter((content) => content.suitableIntensities.includes('fraca')).map((content) => content.id).sort(), [...WEAK_INSECURITY_IDS].sort());
 });
 
-test('autoria, inspiração e adaptação permanecem separadas da curadoria', () => {
-  const pilot = new Map(runtime.contents.filter((content) => content.id.startsWith('TXT-MED-')).map((content) => [content.id, content]));
+test('autoria, inspiração e adaptação históricas permanecem preservadas no mestre', () => {
+  const pilot = new Map(master.contents.filter((content) => content.id.startsWith('TXT-MED-')).map((content) => [content.id, content]));
   assert.equal(pilot.size, 4);
   assert.equal(pilot.get('TXT-MED-001')?.author, 'Autoria não identificada');
   assert.equal(pilot.get('TXT-MED-002')?.author, 'Autoria preservada');
   assert.equal(pilot.get('TXT-MED-003')?.displayedAuthor, 'Autoria não identificada');
   assert.equal(pilot.get('TXT-MED-004')?.attributionType, 'paraphrase');
-  const protectedRelationship = runtime.contents.find((content) => content.id === 'TXT-CUL-001');
+  const protectedRelationship = master.contents.find((content) => content.id === 'TXT-CUL-001');
   assert.equal(protectedRelationship?.author, 'Autoria preservada');
   assert.equal(protectedRelationship?.displayedAuthor, 'Adaptação de texto de autoria preservada');
-  const protectedHope = runtime.contents.find((content) => content.id === 'TXT-ESP-002');
+  const protectedHope = master.contents.find((content) => content.id === 'TXT-ESP-002');
   assert.equal(protectedHope?.author, 'Autoria preservada');
   assert.equal(protectedHope?.inspirationSource, 'Richard Dawkins');
   assert.match(protectedHope?.displayedAuthor || '', /^Autoria preservada/);
-  assert.ok(runtime.contents.filter((content) => content.attributionType === 'inspired')
+  assert.ok(master.contents.filter((content) => content.attributionType === 'inspired' && content.publicationEnabled)
     .every((content) => String(content.inspirationSource || '').trim()));
 });
 
@@ -90,7 +92,7 @@ test('duplicateOf e derivedFromId apontam para IDs existentes no mestre', () => 
   assert.ok(master.contents.every((content) => !content.derivedFromId || ids.has(content.derivedFromId)));
 });
 
-test('runtime usa a versão definitiva-2.4 e é reproduzível', () => {
+test('runtime usa a versão definitiva-2.12 e é reproduzível', () => {
   assert.equal(runtime.contentVersion, EXPECTED.contentVersion);
   assert.equal(first.serialized, second.serialized);
   assert.equal(serialized, fs.readFileSync(path.join(rootDir, 'data', 'entre_sabios_runtime.json'), 'utf8'));
@@ -101,6 +103,7 @@ test('runtime usa a versão definitiva-2.4 e é reproduzível', () => {
 test('verdade calculada não depende dos números declarados no resumo', () => {
   const truth = calculateMasterTruth(master);
   assert.equal(truth.active, master.contents.filter(isActive).length);
+  assert.equal(runtime.contents.length, master.contents.filter(isRuntimeEligible).length);
   assert.equal(truth.duplicateIds.length, 0);
   assert.equal(truth.duplicateActiveTexts.length, 0);
 });

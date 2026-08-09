@@ -369,8 +369,11 @@ test('fallbacks cauteloso e sem síntese preservam a rotação e o principal', (
   const invalidSelector = engine.createSelector({
     version: 'phase6-fallback-5', contents: runtime.contents, synthesisAdapter: invalidAdapter, motivationAdapter,
   });
-  const cautious = Array.from({ length: 30 }, () => cautiousSelector.select(state, { firstResponse: false }));
-  const withoutSynthesis = Array.from({ length: 30 }, () => invalidSelector.select(state, { firstResponse: false }));
+  const territorySize = cautiousSelector.inspect(state, { firstResponse: false }).ranked
+    .filter(({ level }) => level <= 2).length;
+  assert.equal(territorySize, 31);
+  const cautious = Array.from({ length: territorySize }, () => cautiousSelector.select(state, { firstResponse: false }));
+  const withoutSynthesis = Array.from({ length: territorySize }, () => invalidSelector.select(state, { firstResponse: false }));
 
   assert.ok(cautious.every((result) => result.synthesis?.fallbackLevel === 4 && result.level <= 2));
   assert.equal(invalidAdapter.resolveState(state).resolution.fallbackLevel, 5);

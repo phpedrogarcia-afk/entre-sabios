@@ -18,7 +18,7 @@ Estados admitidos: `não iniciado`, `auditado`, `em andamento`, `parcial`, `conc
 
 | Item | Estado vigente |
 | --- | --- |
-| Acervo-mestre | `entre_sabios_acervo_mestre_final.json`, versão `definitiva-2.3` |
+| Acervo-mestre | `entre_sabios_acervo_mestre_final.json`, versão `definitiva-2.12` |
 | Runtime local gerado | 257 conteúdos ativos, 14 sentimentos; integrações locais aguardam publicação separada |
 | Runtime derivado | `data/entre_sabios_runtime.json` e `.js`, sincronizados com o mestre |
 | Suíte automatizada | 286 testes Node + 7 testes de navegador aprovados em 18/07/2026 |
@@ -29,16 +29,16 @@ Estados admitidos: `não iniciado`, `auditado`, `em andamento`, `parcial`, `conc
 | Pacote de publicação | `deploy-manifest.json`; allowlist verificável exclui mestre, testes, relatórios e versões paralelas |
 | Interface principal | `index.html` + `script.js` + scripts globais carregados na ordem declarada no HTML |
 | Tema padrão | modo claro (`Luz do Dia`) |
-| Publicação GitHub Pages | automática a partir de `main`; build `3ea62f8` aprovado |
-| Domínio principal | hospedagem separada; requer sincronização operacional com o pacote aprovado |
+| Publicação GitHub Pages | automática a partir de `codex/github-pages-publicacao`; pacote público verificado e enviado no commit `d3da7eb` em 09/08/2026 |
+| Domínio principal | `entresabios.com` servido pelo GitHub Pages com HTTPS obrigatório e `CNAME` preservado |
 
 ## Estado das funcionalidades
 
 | Funcionalidade | Estado | Evidência principal | Regra vigente / pendência |
 | --- | --- | --- | --- |
-| Acervo definitivo | aprovado | `tests/content-runtime.test.mjs` | versão `definitiva-2.4`; mestre é canônico; runtime é gerado |
+| Acervo definitivo | demonstração V2 ativa | `DEC-035`, `tests/content-runtime.test.mjs`, `tests/v2-batch-004b-reachability.test.mjs` | versão `definitiva-2.12`; mestre canônico com 408 registros; runtime derivado contém somente os 57 conteúdos V2 aprovados, em 37 núcleos e 20 contextuais; Biblioteca V1 permanece somente leitura para comparação e auditoria |
 | Constituição Editorial Canônica | concluída em governança | `DEC-033`, `PADRAO_EDITORIAL_ENTRE_SABIOS.md` | autoridade editorial consolidada sem alteração de acervo, runtime, algoritmo, interface, autoria, metadados ou contagens; preserva integralmente a `DEC-024` e o cadastro separado do Núcleo |
-| Inventário histórico e mapa de proveniência | concluído, sem aplicação editorial | `docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.md`, `.json`, `scripts/build-historical-provenance-map.mjs` | 350 IDs mapeados e 49 artefatos externos preservados como evidência; nenhuma recuperação, reclassificação, migração, publicação ou mudança de acervo/runtime foi autorizada |
+| Inventário histórico e mapa de proveniência | concluído, sem aplicação editorial | `docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.md`, `.json`, `scripts/build-historical-provenance-map.mjs` | 351 IDs mapeados e 49 artefatos externos preservados como evidência; nenhuma recuperação, reclassificação, migração, publicação ou mudança de acervo/runtime foi autorizada |
 | Autoria e proteção nominal | concluído em governança | `DEC-024`, `PADRAO_EDITORIAL_ENTRE_SABIOS.md`, `NUCLEO_PRESERVACAO_EDITORIAL.md` | não atribuir autoria desconhecida ao projeto; proteção não implica publicação |
 | Antologia do Silêncio | retirada do acervo ativo | `DEC-029`, `docs/ARQUIVO_REJEITADOS_ANTOLOGIA_IA.md`, mestre e runtime gerado | 28 IDs preservados historicamente como `REMOVIDO`; confirmação humana de geração integral por IA; adaptações recentes e conteúdos baseados em autores não foram abrangidos |
 | Auditoria completa de autenticidade e proveniência | concluída | `DEC-030`, `DEC-031`, dossiê A–J, 13 lotes e teste de cobertura | 350 IDs classificados individualmente; ativos: A 3, B 15, C 1, D 3, E 76 e G 159; os 32 itens I históricos são a Antologia e quatro originais artificiais sem base, todos retirados |
@@ -50,23 +50,23 @@ Estados admitidos: `não iniciado`, `auditado`, `em andamento`, `parcial`, `conc
 | Conteúdo protegido de Luto | integrado no mestre sob quarentena | `TXT-LUT-003`, `NUCLEO_PRESERVACAO_EDITORIAL.md`, lote editorial 01 | adaptação preservada integralmente como `QUARENTENA_DOCUMENTAL`, sem runtime ou publicação externa; autoria da adaptação não identificada; direitos, crise aguda e ideação suicida permanecem bloqueios documentados |
 | Prioridade do sentimento principal | aprovado | `tests/principal-focus-control.test.mjs`, `tests/behavioral-selection.test.mjs` | só muda por ação explícita do usuário |
 | Até dois sentimentos secundários | aprovado | `tests/emotional-state-contract.test.mjs` | refinam, mas não dominam o principal |
-| Intensidade opcional com sorteio neutro | concluído | `DEC-027`; testes de estado, interface e navegador | começa sem seleção visual; ausência sorteia `fraca`, `moderada` ou `intensa` a cada geração; escolha explícita prevalece e valor inválido é rejeitado |
-| Síntese emocional | aprovado | `tests/emotional-synthesis.test.mjs`, `tests/synthesis-ranking.test.mjs` | influencia apenas dentro da elegibilidade segura |
+| Intensidade editorial interna | concluído | `DEC-034`; testes de estado, interface e navegador | sem controle público; abertura fraca, progressão moderada e maior profundidade posterior, sempre sob elegibilidade e segurança |
+| Síntese emocional | aprovado | `DEC-034`, `tests/emotional-synthesis.test.mjs`, `tests/synthesis-ranking.test.mjs` | aparece com dois ou três sentimentos e somente quando existe síntese editorial específica |
 | Contrato da analogia das cores | aprovado | `tests/color-analogy-contract.test.mjs` | `relationType` interno somente nos perfis existentes; fallback `context`; nenhum novo par ou tríade |
-| Motivação opcional | aprovado | `tests/motivation-control.test.mjs`, `tests/motivation-ranking.test.mjs` | desligada é neutra; não cria elegibilidade |
+| Motivação na interface e no fluxo ativo | removida | `DEC-034` | controle, estado e adaptador foram retirados da produção; evidências históricas permanecem |
 | Segurança em estados vulneráveis | aprovado | `tests/vulnerable-motivation-safety.test.mjs` | ação, pressão e confronto não podem superar bloqueios |
 | Antirrepetição exata e canônica | aprovado | `tests/repetition-stress.test.mjs`, `tests/repetition-real-path-regression.test.mjs` | repetição só após esgotamento do conjunto seguro disponível |
 | Diversidade de autoria | aprovado com limite conhecido | `tests/runtime-selection.test.mjs` | pode ser relaxada em conjunto editorial pequeno |
 | Cadência de formatos | aprovado com limite de acervo | `tests/phase9-rotation-integration.test.mjs` | não promove nível editorial inferior |
 | Preferência pessoal de autoria/gênero | removida e aprovada | `tests/gender-preference-removal.test.mjs` | metadados editoriais permanecem; preferência não participa do ranking |
-| Favoritos e feedback | aprovado | testes de interface e apresentação | feedback não domina a seleção de reflexões |
+| Leituras salvas e Gostei | aprovado | `DEC-036`, testes de interface, persistência e apresentação | estrela salva pela chave histórica; coração registra somente feedback positivo; dislike público removido e valores negativos legados preservados |
 | Quatro blocos editoriais canônicos | concluído no acervo ativo | `DEC-025`, `PADRAO_EDITORIAL_ENTRE_SABIOS.md`, `scripts/audit-four-block-coverage.mjs` | 257 IDs ativos auditados; explicações, perfis, perguntas e livros completos nos 257 conteúdos; lacunas não recebem fallback genérico |
 | Apresentação de autoria | aprovado no comportamento atual | `tests/authorship-presentation.test.mjs` | deverá usar “CONHEÇA O PENSADOR” em todo o acervo sem inventar autoria ou proveniência |
 | Pergunta editorial específica | concluído | `DEC-025`, `tests/editorial-guidance.test.mjs`, `scripts/audit-four-block-coverage.mjs` | 257 perguntas canônicas específicas, contextualizadas e sem conselho disfarçado |
 | Recomendação de livro | concluído | `DEC-009`, `DEC-025`, `tests/book-recommendations.test.mjs`, `scripts/audit-four-block-coverage.mjs` | 2.121 de 2.121 contextos possuem relação substantiva; a ausência segura continua coberta por cenário sintético sem relação confiável |
 | Compartilhamento por imagem | aprovado | `tests/share-image-layout.test.mjs`, relatório de Fase 11 | atalho sorteia um dos três estilos; escolha manual é preservada |
 | Botão “copiar mensagem” | removido e aprovado | `tests/copy-removal-sharing.test.mjs` | não deve retornar à interface |
-| Contos no diálogo | concluído | `DEC-028`, `ES-2026-004`, testes de interface e navegador | pode abrir sem sentimento, com rotação neutra; sentimentos selecionados refinam o filtro; sem escolha de intensidade, usa `Equilibrado` internamente sem marcar a interface; abertura, reabertura, rolagem móvel e coerência de cache protegidas |
+| Contos no diálogo | concluído | `DEC-034`, `ES-2026-004`, testes de interface e navegador | pode abrir sem sentimento, com rotação neutra; sentimentos selecionados refinam o filtro; usa intensidade moderada interna sem controle público |
 | Revisão editorial dos contos | 33 contos concluídos em onze lotes de três | `DEC-032`, `tests/tales-editorial-batch.test.mjs` e 33 páginas públicas sincronizadas | autorização editorial abrangente recebida em 25/07/2026; `js/data/tales.js` permanece fonte provisória; nenhuma página externa aos lotes foi alterada pela sincronização |
 | Revisão editorial dos ensaios | 12 ensaios concluídos; oito revisados e quatro preservados | páginas estáticas de `ensaios/`; registro cumulativo abaixo | ciclo autorizado em 25/07/2026 concluído localmente; dois bloqueios documentais foram pesquisados e resolvidos com ressalvas públicas; sem commit ou publicação |
 | Smartphone horizontal | aprovado em navegador real | `docs/relatorios/fases/RELATORIO_FASE_7_NAVEGADOR_REAL_ANTIRREPETICAO.md` | rolagem vertical funciona sem overflow horizontal |
@@ -106,12 +106,21 @@ Estados admitidos: `não iniciado`, `auditado`, `em andamento`, `parcial`, `conc
 - Lote 4: `nisargadatta-maharaj-e-a-identidade` e `tilopa-e-a-identidade`. Os bloqueios foram retirados após pesquisa localizada: <em>I Am That</em> foi identificado como edição de conversas em marathi mediada por Maurice Frydman e Sudhakar S. Dikshit; as instruções de Tilopa foram conferidas no texto catalogado como Toh 2303 e nas traduções das “seis palavras” de Ken McLeod. As páginas declaram a mediação textual, a variação de tradução e o caráter editorial das aproximações psicológicas.
 - Auditoria comparativa final: os oito ensaios revisados mantêm aberturas, movimentos, extensões e perguntas diferentes; nenhum usa o pensador como autoridade decorativa ou transforma espiritualidade em diagnóstico. Os quatro classificados como fortes permaneceram sem reescrita. Não restam ensaios bloqueados, mas as ressalvas de transmissão de Kabir, tradução de Nisargadatta e linhagem/tradução de Tilopa permanecem documentadas.
 
+## Aplicativo Android
+
+- Base ativa: `app-android/`, em Expo/React Native, com projeto nativo gerado em `app-android/android/`.
+- Fonte editorial: o mestre e o runtime canônicos do website; `app-android/src/generated/manifest.json` registra versão, totais e hashes do snapshot móvel.
+- Fluxo: seleção de um principal e até dois secundários, transição para reflexão, `Outra perspectiva` no mesmo contexto e retorno com seleção preservada.
+- Interface: motivação e intensidade não são exibidas; símbolos usam a família vetorial aprovada; temas claro/noturno, animações reduzíveis, contos, ensaios, leituras salvas, Gostei e compartilhamento estão presentes. A seleção usa entrada escalonada somente por opacidade, o fluxo seleção-reflexão usa fade simples, o CTA muda de opacidade e o tema faz crossfade sem rotação.
+- Contratos validados: 57 conteúdos V2, 14 sentimentos, soberania do principal, snapshot byte a byte, manifesto sem armazenamento amplo/sobreposição e com vibração restrita ao toque longo aprovado pela `DEC-038`, além de responsividade em 390 × 844 e 320 × 568.
+- Build local: Java 17, Android SDK/API 36, Build Tools 36.0.0 e NDK 27.1 estão disponíveis. O APK autônomo universal com as animações foi gerado em `app-android/artifacts/entre-sabios-teste-animacoes.apk`, assinado apenas com a chave debug e auditado com somente internet e vibração entre as permissões Android públicas. Nenhuma assinatura definitiva ou publicação foi realizada.
+
 ## Pendências vigentes
 
 | Pendência | Estado | Próxima decisão necessária |
 | --- | --- | --- |
 | Contrato dos metadados de proveniência | semântica documentada, implementação não iniciada | aprovar separadamente o contrato entre mestre, build, runtime e algoritmo antes de criar campos ou migrar conteúdos |
-| Próxima etapa editorial | inventário concluído; aplicação não iniciada | qualquer investigação adicional, recuperação, peneira, reclassificação ou aplicação editorial exige autorização própria; o mapa não decide publicação |
+| Próxima etapa editorial | V2-004B concluído e validado | preparar, em lote próprio e mediante autorização específica, as 10 recuperações aprovadas da Biblioteca V1; não há reinserção adicional de Rilke nesta continuidade |
 | Referências documentais não conclusivas | classificação final B/C | `DEC-030`, `DEC-031`, dossiê completo e campos `source` do mestre | manter com referência pendente, sem inventar edição, página, passagem ou tradutor; inspirações em autores permanecem preservadas |
 | Integração dos conteúdos nominalmente protegidos | parcial | Duna, Gaiola, Culpa e Dawkins integrados individualmente; Schmidt foi auditado e continua protegido sem integração até regularização de direitos |
 | Lista canônica dos 28 conteúdos do Núcleo Ativo | pendente documental | recuperar o inventário aprovado; não reconstruir por memória nem substituir a proposta anterior |
@@ -121,7 +130,7 @@ Estados admitidos: `não iniciado`, `auditado`, `em andamento`, `parcial`, `conc
 | Históricos legados em `script.js` | auditado | provar ausência de consumidor antes de remover |
 | Arquivos legados em `js/data/quotes/` e correlatos | auditado | classificar/arquivar; não editar como fonte publicada |
 | Fonte canônica entre `tales.js` e páginas estáticas | provisória conforme `DEC-032` | `js/data/tales.js` é a fonte editorial provisória; sincronizar manualmente apenas as páginas do lote aprovado até existir gerador próprio |
-| Sincronização entre GitHub Pages e domínio principal | bloqueado operacionalmente | escolher um único fluxo de publicação |
+| Sincronização entre GitHub Pages e domínio principal | concluída operacionalmente | `entresabios.com` usa a branch pública `codex/github-pages-publicacao`; manter o pacote gerado pela allowlist como único fluxo de deploy |
 
 ## Arquivos locais protegidos nesta linha de trabalho
 

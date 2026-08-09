@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <!-- Google tag (gtag.js) -->
@@ -45,9 +45,9 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20260718-cache-fix-1" />
-    <link rel="stylesheet" href="css/landscape-scroll-fix.css?v=20260713-1" />
-    <link rel="stylesheet" href="css/tablet.css?v=20260713-1" />
+    <link rel="stylesheet" href="style.css?v=20260809-visual-polish-2" />
+    <link rel="stylesheet" href="css/landscape-scroll-fix.css?v=20260730-atmosphere-v2-6" />
+    <link rel="stylesheet" href="css/tablet.css?v=20260730-atmosphere-v2-6" />
     <style id="tale-mobile-scroll-fix">
       /* Correção crítica inline: prevalece mesmo quando o servidor retém CSS antigo. */
       #taleDialog.tale-dialog {
@@ -149,50 +149,140 @@
     </script>
   </head>
   <body>
+    <svg class="icon-symbols" aria-hidden="true" focusable="false">
+      <symbol id="observer" viewBox="0 0 24 24">
+        <circle cx="12" cy="7" r="3.25"/>
+        <path d="M5 20c.8-4.2 3.1-6.4 7-6.4s6.2 2.2 7 6.4M8.8 8.5c.8 1.3 1.9 2 3.2 2s2.4-.7 3.2-2M7.2 3.8 4.5 2.5M16.8 3.8l2.7-1.3"/>
+      </symbol>
+      <symbol id="feather" viewBox="0 0 24 24">
+        <path d="M5 20c2.6-5.7 6.4-10.1 13.7-15.6.8 4.7-.5 9.2-4.3 12-2.6 1.9-5.5 1.8-8.2.8M5 20l7.8-7.8M9 16l-.2-4.1M12.7 12.3l4.1-.2"/>
+      </symbol>
+      <symbol id="ansiedade" viewBox="0 0 24 24">
+        <path d="M3 7c2.2-2 4.4-2 6.6 0s4.4 2 6.6 0 3.7-1.8 4.8-1M3 12c2.2-2 4.4-2 6.6 0s4.4 2 6.6 0 3.7-1.8 4.8-1M3 17c2.2-2 4.4-2 6.6 0s4.4 2 6.6 0 3.7-1.8 4.8-1"/>
+      </symbol>
+      <symbol id="medo" viewBox="0 0 24 24">
+        <path d="M12 2.5c2.2 1.5 4.6 2.2 7 2.3v5.6c0 4.7-2.3 8.4-7 11.1-4.7-2.7-7-6.4-7-11.1V4.8c2.4-.1 4.8-.8 7-2.3Z"/>
+        <path d="m13.5 6.7-3.2 5h3l-1.8 5.6"/>
+      </symbol>
+      <symbol id="amor" viewBox="0 0 24 24">
+        <path d="M20.7 5.8c-2.3-2.4-6.1-2.4-8.4 0L12 6l-.3-.2c-2.3-2.4-6.1-2.4-8.4 0s-2.3 6.3 0 8.7L12 22l8.7-7.5c2.3-2.4 2.3-6.3 0-8.7Z"/>
+      </symbol>
+      <symbol id="saudade" viewBox="0 0 24 24">
+        <path d="M20.7 5.8c-2.3-2.4-6.1-2.4-8.4 0L12 6l-.3-.2c-2.3-2.4-6.1-2.4-8.4 0s-2.3 6.3 0 8.7L12 22l8.7-7.5c2.3-2.4 2.3-6.3 0-8.7Z"/>
+        <path d="M8.5 11.3c1.2-1.6 2.4-1.6 3.6 0s2.4 1.6 3.6 0"/>
+      </symbol>
+      <symbol id="esperanca" viewBox="0 0 24 24">
+        <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8"/>
+        <circle cx="12" cy="12" r="3.2"/>
+      </symbol>
+      <symbol id="solidao" viewBox="0 0 24 24">
+        <circle cx="12" cy="6.5" r="3.2"/>
+        <path d="M5.3 21v-2.4c0-4.2 2.5-6.4 6.7-6.4s6.7 2.2 6.7 6.4V21Z"/>
+      </symbol>
+      <symbol id="autoconhecimento" viewBox="0 0 24 24">
+        <path d="M12 20c-4.8 0-7.8-2.4-8.8-6.8 3.9-.8 6.8.3 8.8 3.2 2-2.9 4.9-4 8.8-3.2-1 4.4-4 6.8-8.8 6.8Z"/>
+        <path d="M12 16.4c-2.8-2.3-3.3-5.2-1.5-8.7.6-1.2 1.1-2.3 1.5-3.7.4 1.4.9 2.5 1.5 3.7 1.8 3.5 1.3 6.4-1.5 8.7ZM6.4 14.2c-1.9-1-3-2.7-3.4-5 3.2-.2 5.6 1 7.1 3.7M17.6 14.2c1.9-1 3-2.7 3.4-5-3.2-.2-5.6 1-7.1 3.7"/>
+      </symbol>
+      <symbol id="confusao" viewBox="0 0 24 24">
+        <path d="M12 3c5.2 0 9 3.9 9 9s-3.9 9-9 9-9-3.9-9-9 3.9-8 8-8 7 3.1 7 7-3 6-6 6-5-2.4-5-5 2-4 4-4 3 1.4 3 3-1.2 2-2 2-1 0-1-.8"/>
+      </symbol>
+      <symbol id="inseguranca" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M9.6 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.1 1-1.1 2M12 17.5h.01"/>
+      </symbol>
+      <symbol id="raiva" viewBox="0 0 24 24"><path d="m14 2-9 12h6l-1 8 9-12h-6Z"/></symbol>
+      <symbol id="culpa" viewBox="0 0 24 24">
+        <path d="M12 3v16M8.5 6h7M5 12H2.5M21.5 12H19M4 12c0 4.5 3.1 7 8 7s8-2.5 8-7M12 3a1.7 1.7 0 1 0 0-3.4A1.7 1.7 0 0 0 12 3Z"/>
+      </symbol>
+      <symbol id="luto" viewBox="0 0 24 24">
+        <path d="M12 2.5S5 10.3 5 15a7 7 0 0 0 14 0c0-4.7-7-12.5-7-12.5Z"/>
+        <path d="M9 17.2c.9.8 1.9 1.2 3 1.2s2.1-.4 3-1.2"/>
+      </symbol>
+      <symbol id="tristeza" viewBox="0 0 24 24">
+        <path d="M6 15.5h11.2a4.3 4.3 0 0 0 .4-8.6A6.4 6.4 0 0 0 5.5 9 3.3 3.3 0 0 0 6 15.5Z"/>
+        <path d="m8 18-1 3M13 18l-1 3M18 18l-1 3"/>
+      </symbol>
+      <symbol id="falta_de_proposito" viewBox="0 0 24 24">
+        <path d="M20.5 3.5C12 3.6 6.3 7.1 5.2 14.1c-.5 3.1 1.3 5.7 4.4 5.7 7 0 10.5-6.2 10.9-16.3Z"/>
+        <path d="M3 21c3.1-5.2 7.5-9.3 13.2-12.3M11.7 12.3l.2-4M8.2 16.1l4 .2"/>
+      </symbol>
+    </svg>
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Entre Sábios, página inicial">
-        <div class="brand-icon" aria-hidden="true"></div>
+        <div class="brand-icon" aria-hidden="true">
+          <img class="brand-raven" src="assets/brand-raven-transparent-v2.png" alt="" width="1433" height="1098" decoding="async" />
+        </div>
         <div class="brand-text">
           <div class="brand-title">ENTRE SÁBIOS</div>
           <div class="brand-subtitle">Reflexões para a vida</div>
         </div>
       </a>
+      <div class="header-moon" aria-hidden="true">
+        <img src="assets/moon-night-transparent-v2.png" alt="" width="1536" height="1024" decoding="async" />
+      </div>
+      <div class="daily-strip" aria-label="Frase do dia">
+        <div class="daily-track">
+          <span class="daily-label">FRASE DO DIA</span>
+          <span class="daily-viewport" tabindex="0">
+            <span class="daily-marquee-track">
+              <span id="dailyQuoteText">A sabedoria começa quando prestamos atenção ao momento presente.</span>
+              <span id="dailyQuoteTextClone" aria-hidden="true">A sabedoria começa quando prestamos atenção ao momento presente.</span>
+            </span>
+          </span>
+        </div>
+      </div>
       <div class="live-info" aria-label="Informações do site">
         <p class="online-counter">Presentes: <span id="contador-online">0</span></p>
         <button id="themeToggleBtn" class="theme-toggle" type="button" aria-label="Ativar Floresta Noturna" title="Ativar Floresta Noturna">☾</button>
-        <a class="about-trigger essays-trigger" href="ensaios/">Ensaios</a>
         <button id="aboutBtn" class="about-trigger" type="button">Sobre</button>
       </div>
     </header>
 
-    <div class="leaf-layer" aria-hidden="true">
-      <span class="falling-leaf leaf-1"></span>
-      <span class="falling-leaf leaf-2"></span>
-      <span class="falling-leaf leaf-3"></span>
-      <span class="falling-leaf leaf-4"></span>
-      <span class="falling-leaf leaf-5"></span>
-      <span class="falling-leaf leaf-6"></span>
-      <span class="falling-leaf leaf-7"></span>
-      <span class="falling-leaf leaf-8"></span>
-      <span class="falling-leaf leaf-9"></span>
-      <span class="falling-leaf leaf-10"></span>
+    <div class="environment-layer" aria-hidden="true">
+      <div class="environment-landscape environment-landscape-day"></div>
+      <div class="environment-landscape environment-landscape-night"></div>
     </div>
-
-    <div class="daily-strip" aria-label="Frase do dia">
-      <div class="daily-track">
-        <span class="daily-label">FRASE DO DIA</span>
-        <span id="dailyQuoteText">A sabedoria começa quando prestamos atenção ao momento presente.</span>
-        <span class="daily-separator" aria-hidden="true">✦</span>
-        <span class="daily-label">FRASE DO DIA</span>
-        <span id="dailyQuoteTextClone" aria-hidden="true">A sabedoria começa quando prestamos atenção ao momento presente.</span>
+    <div class="environment-overlay-layer" aria-hidden="true">
+      <span class="environment-leaf environment-leaf-static leaf-1"></span>
+      <span class="environment-leaf environment-leaf-static leaf-2"></span>
+      <span class="environment-leaf environment-leaf-static leaf-3"></span>
+      <span class="environment-leaf environment-leaf-static leaf-4"></span>
+      <span class="environment-leaf environment-leaf-static leaf-5"></span>
+      <span class="environment-leaf environment-leaf-static leaf-6"></span>
+      <span class="environment-leaf environment-leaf-static leaf-7"></span>
+      <span class="environment-leaf environment-leaf-static leaf-8"></span>
+      <span class="environment-leaf environment-leaf-static leaf-9"></span>
+      <span class="environment-leaf environment-leaf-static leaf-10"></span>
+      <span class="environment-leaf environment-leaf-static leaf-11"></span>
+      <span class="environment-leaf environment-leaf-static leaf-12"></span>
+      <span class="environment-leaf environment-leaf-static leaf-13"></span>
+      <span class="environment-leaf environment-leaf-static leaf-14"></span>
+      <div class="fireflies">
+        <span class="firefly firefly-1"></span>
+        <span class="firefly firefly-2"></span>
+        <span class="firefly firefly-3"></span>
+        <span class="firefly firefly-4"></span>
+        <span class="firefly firefly-5"></span>
+        <span class="firefly firefly-6"></span>
+        <span class="firefly firefly-7"></span>
+        <span class="firefly firefly-8"></span>
+        <span class="firefly firefly-9"></span>
+        <span class="firefly firefly-10"></span>
       </div>
     </div>
 
     <main class="shell" aria-label="Entre Sábios">
       <!-- COLUNA ESQUERDA -->
       <aside class="col-left">
-        <div class="section-title">COMO VOCÊ ESTÁ SE SENTINDO?</div>
-        <div class="section-subtitle">Selecione um ou mais e escolha qual deve orientar a reflexão.</div>
+        <div class="feelings-heading">
+          <svg class="feelings-heading-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <use href="#observer"></use>
+          </svg>
+          <div>
+            <div class="section-title">COMO VOCÊ ESTÁ SE SENTINDO?</div>
+            <div class="section-subtitle">Selecione um ou mais e escolha qual deve orientar a reflexão.</div>
+          </div>
+        </div>
 
         <div class="feelings-grid" id="feelingsGrid" aria-label="Sentimentos">
           <!-- Itens gerados via JS -->
@@ -205,85 +295,55 @@
           <div id="primaryFeelingAnnouncement" class="primary-feeling-announcement" role="status" aria-live="polite" aria-atomic="true"></div>
           <div id="emotionalSynthesisSummary" class="emotional-synthesis-summary" role="status" aria-live="polite" aria-atomic="true" hidden>
             <div class="synthesis-secondary-line">Também presentes: <span id="synthesisSecondaryFeelings"></span></div>
-            <div class="synthesis-title">O que isso pode estar revelando:</div>
+            <div class="synthesis-title">Quando esses sentimentos se encontram</div>
             <p id="synthesisHumanSummary" class="synthesis-human-summary"></p>
-            <p id="synthesisMotivationDirection" class="synthesis-motivation-direction" hidden>Você também busca: um impulso para continuar.</p>
           </div>
         </div>
 
-        <div class="selection-preferences">
-          <div class="audience intensity-control">
-            <div class="audience-title">Como você quer receber esta reflexão?</div>
-            <div class="audience-options" role="radiogroup" aria-label="Como você quer receber esta reflexão?">
-              <label class="radio">
-                <input type="radio" name="intensity" value="fraca" />
-                <span>Delicado</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="intensity" value="moderada" />
-                <span>Equilibrado</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="intensity" value="intensa" />
-                <span>Profundo</span>
-              </label>
-            </div>
-          </div>
-          <div class="motivation-preference">
-            <button
-              id="motivationToggle"
-              class="motivation-toggle"
-              type="button"
-              aria-pressed="false"
-              aria-describedby="motivationPreferenceHelp"
-              disabled
-            >
-              <span class="motivation-dot" aria-hidden="true"></span>
-              <span>Preciso de motivação</span>
-            </button>
-            <span id="motivationPreferenceHelp" class="visually-hidden">Preferência opcional de direção para a reflexão. Não altera o sentimento nem a intensidade.</span>
-          </div>
-        </div>
-
-        <button id="generateBtn" class="primary" disabled>ENCONTRAR UMA REFLEXÃO</button>
+        <button id="generateBtn" class="primary" aria-busy="false" disabled>ENCONTRAR UMA REFLEXÃO</button>
         <div id="contentLoadStatus" class="content-load-status" role="status" aria-live="polite">Carregando o acervo de reflexões…</div>
         <div id="selectionHint" class="selection-hint" role="alert" aria-live="assertive"></div>
 
         <div class="tip">
           <div class="tip-box">
-            Quanto mais sinceramente você escolher seus sentimentos, mais significativa será sua reflexão.
+            <svg class="tip-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <use href="#feather"></use>
+            </svg>
+            <span>Quanto mais sinceramente você escolher seus sentimentos, mais significativa será sua reflexão.</span>
           </div>
         </div>
       </aside>
 
       <!-- COLUNA CENTRAL -->
-      <section class="col-center">
+      <section class="col-center" tabindex="0" aria-label="Leitura e reflexão">
         <h1 class="center-fixed">Encontre uma reflexão filosófica para o momento que você está vivendo.</h1>
 
         <div class="center-top">
           <button id="backBtn" class="ghost" type="button" aria-label="Voltar">← Voltar</button>
-          <button id="favoritesBtn" class="ghost favorite-library" type="button" aria-label="Abrir frases favoritas">
-            ♡ Favoritas <span id="favoritesCount">0</span>
-          </button>
           <button id="newBtn" class="ghost" type="button" aria-label="Consultar outra perspectiva">↻ Outra perspectiva</button>
         </div>
 
         <div class="center-card" role="region" aria-label="Reflexão">
+          <div class="paper-texture" aria-hidden="true"></div>
           <div class="quote-stage">
-            <button id="quoteShareBtn" class="quote-action quote-share" type="button" aria-label="Compartilhar esta reflexão" title="Compartilhar esta reflexão">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c2.8-5.6 7.3-8.4 14-8.4m-4.2-4.1L18.5 7.6l-4.7 4.1"/></svg>
-            </button>
-            <button id="dislikeBtn" class="quote-action quote-dislike" type="button" aria-label="Não gostei desta frase" aria-pressed="false" title="Não gostei">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v11m0-11H4.8A1.8 1.8 0 0 0 3 4.8v7.4A1.8 1.8 0 0 0 4.8 14H7m0-11h8.3a2 2 0 0 1 1.9 1.4l2.3 7A2 2 0 0 1 17.6 14H14l.8 3.2a3 3 0 0 1-2.9 3.8L7 14"/></svg>
-            </button>
-            <button id="favoriteBtn" class="quote-action quote-favorite" type="button" aria-label="Adicionar às favoritas" aria-pressed="false" title="Favoritar">☆</button>
-            <div class="quote invitation" id="quoteText">Como você está se sentindo hoje? Escolha um ou mais sentimentos e gere uma reflexão para este momento.</div>
-            <button id="likeBtn" class="quote-action quote-like" type="button" aria-label="Gostei desta frase" aria-pressed="false" title="Gostei">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 21V10m0 11H4.8A1.8 1.8 0 0 1 3 19.2v-7.4A1.8 1.8 0 0 1 4.8 10H7m0 11h8.3a2 2 0 0 0 1.9-1.4l2.3-7A2 2 0 0 0 17.6 10H14l.8-3.2A3 3 0 0 0 11.9 3L7 10"/></svg>
-            </button>
+            <div class="quote-actions" aria-label="Ações da reflexão">
+              <button id="quoteShareBtn" class="quote-action quote-share" type="button" aria-label="Compartilhar esta reflexão" title="Compartilhar esta reflexão">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c2.8-5.6 7.3-8.4 14-8.4m-4.2-4.1L18.5 7.6l-4.7 4.1"/></svg>
+              </button>
+              <button id="favoriteBtn" class="quote-action quote-favorite" type="button" aria-label="Salvar leitura" aria-pressed="false" title="Salvar leitura">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z"/></svg>
+              </button>
+              <button id="likeBtn" class="quote-action quote-like" type="button" aria-label="Gostei desta reflexão" aria-pressed="false" title="Gostei desta reflexão">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 5.9c-1.8-2-4.9-2-6.8-.1L12 7.9l-2-2.1a4.7 4.7 0 0 0-6.8.1 5 5 0 0 0 .1 6.9L12 21l8.7-8.2a5 5 0 0 0 .1-6.9Z"/></svg>
+              </button>
+            </div>
+            <div class="quote-content">
+              <span class="quote-ornament" aria-hidden="true">“</span>
+              <div class="quote invitation" id="quoteText">Como você está se sentindo hoje? Escolha um ou mais sentimentos e gere uma reflexão para este momento.</div>
+              <div class="quote-author" id="quoteAuthor"></div>
+              <div class="quote-author quote-source" id="quoteSource" hidden></div>
+            </div>
           </div>
-          <div class="quote-author" id="quoteAuthor">Sua reflexão começa com uma escolha sincera.</div>
-          <div class="quote-author" id="quoteSource" hidden></div>
 
           <div class="divider" aria-hidden="true"></div>
 
@@ -298,7 +358,7 @@
           </section>
 
           <section class="block" id="adviceBlock" aria-labelledby="adviceTitle">
-            <div class="block-title" id="adviceTitle">CONSELHO</div>
+            <div class="block-title" id="adviceTitle">UMA PERGUNTA PARA LEVAR CONSIGO</div>
             <div class="block-text small" id="adviceText">—</div>
           </section>
 
@@ -318,13 +378,56 @@
 
       <!-- COLUNA DIREITA -->
       <aside class="col-right">
-        <div class="share-block">
-          <div class="share-title">COMPARTILHAR</div>
-          <div class="share-style-picker" aria-label="Escolha o estilo da imagem de compartilhamento">
-            <button class="share-style-option cream" type="button" data-share-style="cream" aria-label="Fundo creme"></button>
-            <button class="share-style-option sage active" type="button" data-share-style="sage" aria-label="Fundo verde" aria-pressed="true"></button>
-            <button class="share-style-option blue" type="button" data-share-style="blue" aria-label="Fundo azul"></button>
-          </div>
+        <div class="right-panel-content">
+          <section class="explore-section" aria-labelledby="exploreTitle">
+            <h2 class="share-title side-section-title" id="exploreTitle">EXPLORAR</h2>
+            <div class="explore-cards">
+              <button id="openTaleBtn" class="explore-card" type="button">
+                <span class="explore-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M19.5 4.5c-5.4.2-9.3 2.5-11.6 6.8-1.2 2.3-1.5 4.7-1.6 7.2M19.5 4.5c-.3 5.2-2.7 9-7.1 11.2-2 1-4.1 1.3-6.1 1.4M8.7 14.8l4-4"/></svg>
+                </span>
+                <span class="explore-card-copy">
+                  <span class="explore-card-title" id="talesTitle">Contos Filosóficos</span>
+                  <span class="explore-card-description">Histórias antigas que ainda iluminam o presente.</span>
+                </span>
+                <span class="explore-card-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+                </span>
+              </button>
+
+              <a class="explore-card essays-trigger" href="ensaios/">
+                <span class="explore-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 5.5c2.7-.7 5.3-.2 8 1.5v12c-2.7-1.7-5.3-2.2-8-1.5v-12Zm16 0c-2.7-.7-5.3-.2-8 1.5v12c2.7-1.7 5.3-2.2 8-1.5v-12Z"/></svg>
+                </span>
+                <span class="explore-card-copy">
+                  <span class="explore-card-title">Ensaios</span>
+                  <span class="explore-card-description">Textos que aprofundam ideias e expandem o olhar.</span>
+                </span>
+                <span class="explore-card-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+                </span>
+              </a>
+
+              <button id="favoritesBtn" class="explore-card" type="button" aria-label="Abrir leituras salvas">
+                <span class="explore-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z"/></svg>
+                </span>
+                <span class="explore-card-copy">
+                  <span class="explore-card-title">Leituras salvas</span>
+                  <span class="explore-card-description">Suas reflexões favoritas guardadas para voltar.</span>
+                </span>
+                <span class="explore-card-count" aria-label="Quantidade de leituras salvas"><span id="favoritesCount">0</span></span>
+                <span class="explore-card-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+                </span>
+              </button>
+            </div>
+            <div id="taleHint" class="share-status" role="status" aria-live="polite"></div>
+          </section>
+
+          <section class="share-block" aria-labelledby="sharePanelTitle">
+            <h2 class="share-title side-section-title" id="sharePanelTitle">COMPARTILHAR</h2>
+            <p class="share-guidance">Leve esta reflexão para alguém.</p>
           <div class="share-actions">
             <button id="whatsShareBtn" class="full share-main-action" type="button">Status / Stories</button>
             <div class="share-platform-icons" aria-label="Compatível com WhatsApp, Instagram e Facebook">
@@ -339,29 +442,30 @@
               </span>
             </div>
           </div>
+          <div class="share-style-picker" aria-label="Escolha o estilo da imagem de compartilhamento">
+            <button class="share-style-option cream" type="button" data-share-style="cream" aria-label="Estilo creme" aria-pressed="false"></button>
+            <button class="share-style-option sage active" type="button" data-share-style="sage" aria-label="Estilo verde-sálvia" aria-pressed="true"></button>
+            <button class="share-style-option blue" type="button" data-share-style="blue" aria-label="Estilo azul" aria-pressed="false"></button>
+          </div>
           <p class="share-compatibility-note">O envio direto depende dos aplicativos disponíveis no dispositivo.</p>
-
-          <section class="tales-block" aria-labelledby="talesTitle">
-            <div class="share-title" id="talesTitle">📖 CONTOS FILOSÓFICOS</div>
-            <p class="tales-intro">Histórias que atravessaram séculos e ainda falam sobre nós.</p>
-            <button id="openTaleBtn" class="full" type="button">Ler um conto</button>
-            <div id="taleHint" class="share-status" role="status" aria-live="polite"></div>
-          </section>
-
           <div id="shareStatus" class="share-status" role="status" aria-live="polite"></div>
+          </section>
         </div>
 
-        <div class="footer-note">&nbsp;</div>
+        <div class="right-ambient-space" aria-hidden="true">
+          <div class="environment-tree environment-tree-day"></div>
+          <div class="environment-tree environment-tree-night"></div>
+        </div>
       </aside>
     </main>
 
     <dialog id="favoritesDialog" class="favorites-dialog" aria-labelledby="favoritesTitle">
       <div class="favorites-head">
         <div>
-          <div class="share-title" id="favoritesTitle">FRASES FAVORITAS</div>
-          <div class="section-subtitle">Sua pequena coleção de sabedoria.</div>
+          <div class="share-title" id="favoritesTitle">LEITURAS SALVAS</div>
+          <div class="section-subtitle">Reflexões guardadas para voltar quando quiser.</div>
         </div>
-        <button id="closeFavoritesBtn" class="ghost" type="button" aria-label="Fechar favoritas">Fechar</button>
+        <button id="closeFavoritesBtn" class="ghost" type="button" aria-label="Fechar leituras salvas">Fechar</button>
       </div>
       <div id="favoritesList" class="favorites-list"></div>
     </dialog>
@@ -501,32 +605,32 @@
     </script>
     <script src="js/data/catalogs.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/emotional-syntheses.js?v=20260714-2"></script>
-    <script src="js/data/motivation-profiles.js?v=20260714-1"></script>
     <script src="js/data/books.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/share-themes.js?v=20260710-1"></script>
-    <script src="js/data/tales.js?v=tales-da55893a6099"></script>
+    <script src="js/data/tales.js?v=tales-e928e3df9d48"></script>
     <script src="js/data/emotional-taxonomy.js?v=20260712-10"></script>
     <script src="js/data/editorial-explanations.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/editorial-guidance.js?v=20260718-cache-fix-1"></script>
     <script src="js/core/normalization.js?v=20260710-1"></script>
     <script src="js/core/runtime-engine.js?v=20260715-repetition-fix-1"></script>
-    <script src="data/entre_sabios_runtime.js?v=definitiva-2.4"></script>
-    <script src="js/core/runtime-loader.js?v=definitiva-2.4"></script>
-    <script src="js/core/emotional-state.js?v=20260718-cache-fix-1"></script>
+    <script src="data/entre_sabios_runtime.js?v=definitiva-2.12"></script>
+    <script src="js/core/runtime-loader.js?v=definitiva-2.12"></script>
+  <script src="js/core/emotional-selection-contract.js?v=20260801-app-shared-1"></script>
+  <script src="js/core/tale-selection-contract.js?v=20260801-app-shared-1"></script>
+    <script src="js/core/emotional-state.js?v=20260801-app-shared-1"></script>
     <script src="js/core/emotional-synthesis.js?v=20260714-2"></script>
     <script src="js/core/synthesis-ranking-adapter.js?v=20260714-1"></script>
-    <script src="js/core/motivation-ranking-adapter.js?v=20260714-1"></script>
     <script src="js/core/matching.js?v=20260718-cache-fix-1"></script>
     <script src="js/core/book-matching.js?v=20260712-10"></script>
     <script src="js/features/feedback.js?v=20260713-4"></script>
     <script src="js/features/favorites.js?v=20260710-1"></script>
-    <script src="js/features/sharing.js?v=20260713-4"></script>
-    <script src="js/features/tales.js?v=tales-da55893a6099"></script>
-    <script src="js/ui/feelings-ui.js?v=20260718-cache-fix-1"></script>
-    <script src="js/ui/daily-ui.js?v=20260712-1"></script>
+    <script src="js/features/sharing.js?v=20260728-share-4x5-1"></script>
+    <script src="js/features/tales.js?v=tales-e928e3df9d48"></script>
+    <script src="js/ui/feelings-ui.js?v=20260808-atmosphere-icons-ticker-1"></script>
+    <script src="js/ui/daily-ui.js?v=20260808-atmosphere-icons-ticker-1"></script>
     <script src="js/ui/reflection-ui.js?v=20260714-1"></script>
     <script src="js/ui/effects-ui.js?v=20260710-1"></script>
     <script src="js/ui/theme-ui.js?v=20260710-1"></script>
-    <script src="script.js?v=20260718-cache-fix-1"></script>
+    <script src="script.js?v=20260808-atmosphere-icons-ticker-1"></script>
   </body>
 </html>

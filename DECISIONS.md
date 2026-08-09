@@ -52,7 +52,8 @@
 ### DEC-005 — Motivação é uma direção opcional e segura
 
 - **Data:** 14/07/2026
-- **Estado:** vigente
+- **Estado:** substituída
+- **Substituída por:** `DEC-034`.
 - **Decisão:** desligada é neutra; ligada exige sinais independentes e permanece subordinada a sentimento, intensidade, segurança e publicação.
 - **Motivo:** oferecer impulso sem converter sofrimento em pressão por superação.
 - **Arquivos:** `js/data/motivation-profiles.js`, `js/core/motivation-ranking-adapter.js`.
@@ -281,7 +282,8 @@
 ### DEC-027 — Neutralidade visual sorteia a intensidade a cada geração
 
 - **Data:** 17/07/2026
-- **Estado:** vigente.
+- **Estado:** substituída.
+- **Substituída por:** `DEC-034`.
 - **Decisão:** o controle exibe `Delicado`, `Equilibrado` e `Profundo`, mapeados internamente para `fraca`, `moderada` e `intensa`. Nenhuma opção começa selecionada. Sem escolha explícita, cada geração e cada pedido de outra perspectiva sorteiam novamente uma das três intensidades com igual possibilidade; o resultado não é exibido nem persistido como escolha da pessoa. Uma escolha explícita sempre prevalece.
 - **Arquitetura:** o sorteio resolve somente a intensidade de entrada. Depois disso, o motor existente continua determinístico para o estado resolvido, sem segundo ranking, trajetória ou seletor paralelo.
 - **Segurança:** a intensidade sorteada passa pelos mesmos filtros rígidos de elegibilidade, exclusão e segurança. O sorteio não pode tornar conteúdo inadequado elegível nem superar o sentimento principal.
@@ -296,7 +298,8 @@
 ### DEC-028 — Contos usam Equilibrado quando a intensidade não foi escolhida
 
 - **Data:** 17/07/2026
-- **Estado:** vigente.
+- **Estado:** substituída.
+- **Substituída por:** `DEC-034`.
 - **Decisão:** a seleção de contos respeita `Delicado`, `Equilibrado` ou `Profundo` quando houver escolha explícita. Sem escolha, usa internamente `moderada` (`Equilibrado`) e abre o conto sem marcar qualquer opção na interface.
 - **Compatibilidade:** esta regra é exclusiva dos contos. A reflexão continua sorteando sua intensidade a cada geração conforme a `DEC-027`; abrir um conto não altera, persiste ou representa uma escolha de intensidade da pessoa.
 - **Motivo:** manter o acesso aos contos estável e cauteloso mesmo quando a pessoa prefere deixar o controle de intensidade neutro.
@@ -378,6 +381,76 @@
 - **Revisão:** alterar a autoridade da Constituição, reduzir a proteção da `DEC-024`, admitir remoção sem histórico, conceder autoria institucional automática ou autorizar peneira em massa exige nova decisão explícita do editor-chefe.
 
 ## Como registrar uma nova decisão
+
+### DEC-034 — A intensidade é interna e o conteúdo novo entra pela Biblioteca V2
+
+- **Data:** 25/07/2026.
+- **Estado:** vigente.
+- **Decisão:** remover da interface e do fluxo ativo os controles de intensidade e motivação. Preservar `suitableIntensities`, exclusões e segurança; a abertura favorece intensidade fraca, as respostas seguintes usam intensidade moderada e a intensa só aparece posteriormente, sob os mesmos filtros e no mesmo motor.
+- **Síntese:** reutilizar a seção existente com o título `Quando esses sentimentos se encontram`, somente com dois ou três sentimentos. Exibir apenas sínteses editoriais específicas; fallbacks genéricos permanecem disponíveis internamente, mas não são apresentados como interpretação específica.
+- **Bibliotecas:** congelar a fotografia atual como Biblioteca V1 e receber conteúdo novo em `curadoria/v2/`. O mestre da raiz continua sendo a única fonte publicada e o runtime continua derivado. Nenhum conteúdo filosófico é criado ou importado por esta decisão.
+- **Compatibilidade:** substitui integralmente a `DEC-005`, a `DEC-027` e a parte de escolha explícita da `DEC-028`. Preserva as decisões de soberania do principal, segurança, proveniência, quatro blocos editoriais e Constituição Editorial.
+- **Migração:** controles, listeners, estado e estilos exclusivos são removidos. A progressão interna é mantida somente na sessão e por combinação emocional; recarregar reinicia a abertura cautelosa. A motivação deixa de participar do seletor de produção, sem apagar catálogos ou evidências históricas.
+- **Importação V2:** lotes devem estar em `curadoria/v2/aprovados/`, registrar aprovação humana, validar campos e duplicidades e alterar somente o mestre. O build continua sendo a única forma de gerar runtime.
+- **Arquivos:** interface, estado emocional, seletor ativo, contos, documentação viva, `curadoria/biblioteca_v1/`, `curadoria/v2/`, scripts, relatórios e testes.
+- **Testes:** grupos selecionados pelo diff, build e conferência do runtime, regressão completa e navegador com um, dois e três sentimentos, recarga e outra perspectiva.
+- **Revisão:** reintroduzir controles públicos, motivação ativa, sorteio de intensidade, segundo motor ou segunda fonte publicada exige nova decisão explícita.
+
+### DEC-035 — Somente a Biblioteca V2 é elegível no runtime
+
+- **Data:** 26/07/2026.
+- **Estado:** vigente.
+- **Decisão:** preservar integralmente a Biblioteca V1 e os registros históricos do mestre, mas limitar o runtime derivado a conteúdos ativos com ID e linhagem explícitos da Biblioteca V2.
+- **Motivo:** separar a biblioteca histórica de comparação do conjunto demonstrável, sem apagar proveniência, equivalências ou evidências editoriais.
+- **Biblioteca V1:** permanece somente leitura em `curadoria/biblioteca_v1/` e pode ser consultada por ferramentas de duplicidade, equivalência, cobertura e futura recuração; não participa de fallback, seleção, rotação, ranking, síntese ou interface.
+- **Biblioteca V2:** é o único conjunto elegível. A entrada futura continua dependendo de lote aprovado, importação no mesmo mestre e linhagem registrada conforme a `DEC-034`.
+- **Arquitetura:** o mestre da raiz continua sendo a única fonte canônica; o build aplica a fronteira V2 ao gerar `data/entre_sabios_runtime.*`. Não existe segunda fonte publicada nem segundo motor.
+- **Compatibilidade:** complementa a `DEC-034` e preserva integralmente intensidade interna, exclusões, segurança, proveniência, autoria e quatro blocos editoriais.
+- **Interface:** sentimentos permanecem no catálogo definitivo; cobertura insuficiente pode ficar indisponível no modo de demonstração até novos lotes V2.
+- **Arquivos:** `scripts/content-build-lib.mjs`, mestre canônico, runtime derivado, loader, documentação viva e testes.
+- **Testes:** hash da V1, 57 IDs V2 aprovados, zero V1 no runtime, consulta comparativa V1 × V2, build/check, seleção coberta, “Outra perspectiva” e regressão estrutural.
+- **Revisão:** reintroduzir qualquer V1 no runtime exige aprovação editorial como novo conteúdo V2, com linhagem registrada e decisão explícita.
+
+### DEC-036 — Estrela salva a leitura e coração registra somente Gostei
+
+- **Data:** 29/07/2026.
+- **Estado:** vigente.
+- **Decisão:** manter `#favoriteBtn` no alto à direita do cartão como estrela vazia/destacada para “Salvar leitura” e “Remover leitura salva”, ligada somente a `toggleFavorite()` e à chave histórica `caixaSabedoriaFavoritas`. Manter `#likeBtn` no canto inferior direito como coração vazio/destacado para “Gostei desta reflexão” e “Remover gostei”, ligado somente a `setStoryFeedback(1)`. O compartilhamento aprovado permanece no alto à esquerda.
+- **Dislike:** retirar `#dislikeBtn` e toda oferta pública de avaliação negativa. Valores `-1` já existentes em `caixaSabedoriaPreferencias.storyFeedback`, pesos históricos e `entreSabiosSinaisEditoriais` permanecem intactos; nenhuma migração, limpeza ou recálculo é autorizado.
+- **Compatibilidade:** preserva IDs, funções, formatos e chaves persistentes de favoritos e feedback. A estrela não registra feedback, o coração não salva leituras e nenhum novo caminho público produz `-1`. Favoritos antigos continuam disponíveis em “Leituras salvas”.
+- **Relação com o plano visual:** substitui somente a proposta transitória do `RELATORIO_MIGRACAO_VISUAL_LAYOUT_V2.md` de representar a leitura salva por marcador de página. O relatório não era uma decisão canônica; suas regras de separação semântica e preservação de dados continuam válidas.
+- **Motivo:** consolidar três ações inequívocas no cartão — compartilhar, salvar e Gostei — com iconografia editorial leve e sem oferecer feedback negativo novo.
+- **Alternativas rejeitadas:** marcador de página no cartão principal; coração como favorito; estrela como feedback; elemento oculto de dislike; nova chave de leituras salvas; apagamento ou recálculo de avaliações negativas históricas.
+- **Arquivos:** interface, estilos, favoritos, feedback, documentação viva e testes V2/navegador; nenhum acervo, runtime, motor, livro ou conto.
+- **Testes:** contratos V2, iconografia dos sentimentos, feedback, favoritos, compartilhamento, persistência, interface, rotação, navegador e verificação completa.
+- **Revisão:** trocar a semântica de estrela/coração, reintroduzir dislike público, renomear chaves ou migrar dados históricos exige nova decisão explícita do editor-chefe.
+
+### DEC-037 — O aplicativo Android reutiliza o motor e o runtime canônicos
+
+- **Data:** 01/08/2026.
+- **Estado:** substituída.
+- **Decisão:** manter o aplicativo em `app-android/` como interface Expo/React Native isolada, sem criar segundo acervo ou segundo motor. O app consome um snapshot mecânico e verificável das fontes canônicas do website, gerado por `npm run sync:canonical`; `src/generated/` nunca é editado manualmente.
+- **Experiência:** preservar duas etapas — seleção de um sentimento principal e até dois secundários, seguida pela transição para a reflexão. `Voltar` preserva a seleção e `Outra perspectiva` mantém o contexto. Intensidade permanece interna e progressiva; motivação não participa da interface nem do seletor ativo.
+- **Compatibilidade:** preservar a soberania do principal, filtros, ranking, trajetória, antirrepetição, síntese, 57 conteúdos V2 elegíveis, blocos editoriais e chaves históricas de favoritos e Gostei. O app não pode usar pontuação paralela, `Math.random()` ou cópia editorial independente.
+- **Android:** usar o package ID `com.entresabios.app`, bloquear permissões de armazenamento, sobreposição e vibração, e manter somente a permissão de internet necessária a links externos. Build, assinatura e publicação continuam etapas separadas.
+- **Motivo:** obter uma experiência nativa e animada sem congelar a versão antiga do GitHub nem criar divergência editorial entre website e aplicativo.
+- **Alternativas rejeitadas:** usar o motor simplificado do ZIP; duplicar manualmente acervo e algoritmo; reintroduzir intensidade ou motivação; transformar o website inteiro em segunda fonte do app; publicar o protótipo antigo.
+- **Arquivos:** `app-android/`, `js/core/emotional-selection-contract.js`, carregamento correspondente em `index.html`, testes de estado e documentação viva.
+- **Testes:** sincronização byte a byte, seleção nos 14 sentimentos, soberania do principal, ausência de motivação pública, progressão interna, permissões do manifesto, checagem TypeScript, Expo Doctor e fluxo visual em 390 × 844 e 320 × 568.
+- **Revisão:** alterar tecnologia, motor, fonte editorial, package ID, permissões ou contrato seleção-reflexão exige nova decisão explícita.
+
+### DEC-038 — O aplicativo preserva o contrato canônico e permite háptico mínimo
+
+- **Data:** 07/08/2026.
+- **Estado:** vigente.
+- **Decisão:** incorporar integralmente a arquitetura, experiência, compatibilidade, fonte editorial, package ID e separação entre build, assinatura e publicação definidos pela `DEC-037`. A única alteração é permitir `android.permission.VIBRATE` exclusivamente para uma vibração breve e leve quando o toque longo torna um sentimento principal. Nenhum outro gesto, tela, alerta ou rotina pode acionar vibração sem nova autorização.
+- **Experiência:** o toque longo combina o retorno háptico com atenuação visual a 85% durante a pressão; o ponto do sentimento principal aparece por fade de 150 ms, sem escala ou bounce.
+- **Compatibilidade:** substitui formalmente a `DEC-037`, preservando sem alteração todas as suas cláusulas exceto a proibição de vibração. Permanecem bloqueadas as permissões de armazenamento amplo e sobreposição, assim como todas as decisões anteriores de arquitetura, acervo, algoritmo, fluxo, seleção e responsividade.
+- **Motivo:** oferecer confirmação tátil discreta para um gesto menos evidente, sem transformar o aplicativo em uma experiência ruidosa ou gamificada.
+- **Alternativas rejeitadas:** vibração em todo toque; feedback forte ou prolongado; pacote de hápticos adicional; som; animação com bounce; remoção das demais barreiras de permissões.
+- **Arquivos:** configuração Expo e manifesto Android, tela de sentimentos, constantes de movimento, testes, documentação viva; nenhum acervo, runtime ou motor.
+- **Testes:** contrato de permissões, TypeScript, testes do app, fluxo visual com redução de movimento preservada e auditoria do APK.
+- **Revisão:** ampliar o háptico para outros gestos ou alterar sua intensidade exige nova decisão explícita.
 
 Use somente quando houver uma escolha duradoura entre alternativas reais:
 

@@ -129,8 +129,7 @@ let currentShareStyle = 'sage';
 
 let selectedFeelingIds = new Set();
 let primaryFeelingId = null;
-let currentIntensity = null;
-let needsMotivation = false;
+const internalIntensityProgression = new Map();
 let runtimeSelector = null;
 let lastSelectionSignature = null;
 let primaryFeelingAnnouncementTimer = null;
@@ -157,8 +156,6 @@ const secondaryFeelingActionsEl = document.getElementById('secondaryFeelingActio
 const emotionalSynthesisSummaryEl = document.getElementById('emotionalSynthesisSummary');
 const synthesisSecondaryFeelingsEl = document.getElementById('synthesisSecondaryFeelings');
 const synthesisHumanSummaryEl = document.getElementById('synthesisHumanSummary');
-const synthesisMotivationDirectionEl = document.getElementById('synthesisMotivationDirection');
-const motivationToggleEl = document.getElementById('motivationToggle');
 const emotionalSynthesisResolver = window.EntreSabiosEmotionalSynthesis.createResolver(
   window.EntreSabiosData.emotionalSyntheses
 );
@@ -166,9 +163,6 @@ const synthesisRankingAdapter = window.EntreSabiosSynthesisRankingAdapter.create
   catalog: window.EntreSabiosData.emotionalSyntheses,
   resolver: emotionalSynthesisResolver,
 });
-const motivationRankingAdapter = window.EntreSabiosMotivationRankingAdapter.createAdapter(
-  window.EntreSabiosData.motivationProfiles
-);
 const generateBtn = document.getElementById('generateBtn');
 const backBtn = document.getElementById('backBtn');
 const newBtn = document.getElementById('newBtn');
@@ -180,6 +174,7 @@ const quoteShareBtn = document.getElementById('quoteShareBtn');
 const quoteTextEl = document.getElementById('quoteText');
 const quoteAuthorEl = document.getElementById('quoteAuthor');
 const quoteSourceEl = document.getElementById('quoteSource');
+const centerCardEl = document.querySelector('.center-card');
 const explanationBlockEl = document.getElementById('explanationBlock');
 const reflectionTextEl = document.getElementById('reflectionText');
 const philosophyBlockEl = document.getElementById('philosophyBlock');
@@ -193,7 +188,6 @@ const bookTextEl = document.getElementById('bookText');
 const bookReasonEl = document.getElementById('bookReason');
 const tagsRowEl = document.getElementById('tagsRow');
 const likeBtn = document.getElementById('likeBtn');
-const dislikeBtn = document.getElementById('dislikeBtn');
 const favoriteBtn = document.getElementById('favoriteBtn');
 const favoritesBtn = document.getElementById('favoritesBtn');
 const favoritesCountEl = document.getElementById('favoritesCount');
@@ -225,7 +219,6 @@ const nextTaleBtn = document.getElementById('nextTaleBtn');
 const closeTaleBtn = document.getElementById('closeTaleBtn');
 const closeTaleTopBtn = document.getElementById('closeTaleTopBtn');
 
-const intensityRadioEls = Array.from(document.querySelectorAll('input[name="intensity"]'));
 const contentLoadStatusEl = document.getElementById('contentLoadStatus');
 
 const decorCanvas = document.getElementById('decorCanvas');
@@ -335,12 +328,16 @@ function getSelectedThemes() {
 
 const authorBookAliases = window.EntreSabiosData.authorBookAliases;
 function getSpecificEditorialExplanation(content) {
+  const canonical = String(content.editorialExplanation || '').trim();
+  if (canonical) return canonical;
   const entry = window.EntreSabiosData.editorialExplanations?.[content.id];
   if (!entry || entry.finalText !== content.finalText) return '';
   return String(entry.explanation || '').trim();
 }
 
 function getSpecificEditorialGuidance(content, state) {
+  const canonical = String(content.editorialQuestion || '').trim();
+  if (canonical) return { guidance: canonical, label: 'UMA PERGUNTA PARA LEVAR CONSIGO' };
   const entry = window.EntreSabiosData.editorialGuidance?.[content.id];
   if (!entry || entry.finalText !== content.finalText) return null;
   const context = window.EntreSabiosData.editorialGuidanceContexts?.[content.id];
@@ -372,7 +369,13 @@ function buildRuntimeStory(selection, selectedThemes) {
   ]);
   const source = content.source?.status !== 'not_applicable'
     && String(content.source?.title || '').trim()
-    ? { title: String(content.source.title).trim(), status: content.source.status }
+    ? {
+      title: String(content.source.title).trim(),
+      section: String(content.source.section || '').trim(),
+      translator: String(content.source.translator || '').trim(),
+      url: String(content.source.url || '').trim(),
+      status: content.source.status,
+    }
     : null;
   const reflection = getSpecificEditorialExplanation(content);
   const editorialGuidance = getSpecificEditorialGuidance(content, selection.state);
@@ -387,6 +390,7 @@ function buildRuntimeStory(selection, selectedThemes) {
     displayAuthor: content.displayedAuthor,
     quoteType: content.attributionType,
     source,
+    bookRecommendation: content.bookRecommendation || null,
     philosophy,
     philosophyLabel: traditionOrigins.has(inspiration) ? 'CONHEÇA A TRADIÇÃO' : 'CONHEÇA O PENSADOR',
     reflection,
@@ -423,13 +427,29 @@ function getSelectedFeelingLabels() {
     .filter(Boolean);
 }
 
+function getInternalIntensityContextKey() {
+  return [primaryFeelingId, ...getSelectedFeelingIds()
+    .filter((feeling) => feeling !== primaryFeelingId)
+    .sort()].filter(Boolean).join('|');
+}
+
+function getInternalGenerationIntensity() {
+  const key = getInternalIntensityContextKey();
+  return resolveGenerationIntensity(internalIntensityProgression.get(key) || 0);
+}
+
+function advanceInternalIntensityProgression() {
+  const key = getInternalIntensityContextKey();
+  internalIntensityProgression.set(key, (internalIntensityProgression.get(key) || 0) + 1);
+}
+
 function generateReflection({ keepHistory = true } = {}) {
   if (!ensureSelectionMin()) {
     reflectionTextEl.textContent = 'Selecione pelo menos 1 sentimento.';
     showSelectionHint();
     return false;
   }
-  const generationIntensity = resolveGenerationIntensity(currentIntensity);
+  const generationIntensity = getInternalGenerationIntensity();
   const selectedThemes = getSelectedThemes();
   const selection = pickRuntimeContent({
     eventTrigger: 'generate_reflection_click',
@@ -440,6 +460,7 @@ function generateReflection({ keepHistory = true } = {}) {
     reflectionTextEl.textContent = 'Ainda não há uma correspondência editorial segura para esta combinação.';
     return false;
   }
+  advanceInternalIntensityProgression();
   const story = buildRuntimeStory(selection, selectedThemes);
 
   if (!keepHistory) {
@@ -477,7 +498,7 @@ function newPhrase() {
     showSelectionHint();
     return false;
   }
-  const generationIntensity = resolveGenerationIntensity(currentIntensity);
+  const generationIntensity = getInternalGenerationIntensity();
   if (currentStory && currentStoryShownAt && Date.now() - currentStoryShownAt < 5000) {
     applyStoryPreference(currentStory, -0.5);
     savePreferenceProfile();
@@ -494,6 +515,7 @@ function newPhrase() {
     intensity: generationIntensity,
   });
   if (!selection) return false;
+  advanceInternalIntensityProgression();
 
   const story = buildRuntimeStory(selection, selectedThemes);
 
@@ -523,6 +545,8 @@ function runReflectionSelectionAction(action) {
   if (reflectionSelectionLocked) return false;
   reflectionSelectionLocked = true;
   generateBtn.classList.add('is-selection-locked');
+  generateBtn.setAttribute('aria-busy', 'true');
+  if (typeof centerCardEl !== 'undefined') centerCardEl?.classList.add('is-reflection-loading');
   generateBtn.disabled = true;
   newBtn.disabled = true;
   try {
@@ -531,6 +555,8 @@ function runReflectionSelectionAction(action) {
     window.setTimeout(() => {
       reflectionSelectionLocked = false;
       generateBtn.classList.remove('is-selection-locked');
+      generateBtn.setAttribute('aria-busy', 'false');
+      if (typeof centerCardEl !== 'undefined') centerCardEl?.classList.remove('is-reflection-loading');
       const contentUnavailable = !runtimeSelector;
       generateBtn.disabled = contentUnavailable;
       newBtn.disabled = contentUnavailable;
@@ -557,7 +583,6 @@ newBtn.addEventListener('click', () => {
 });
 
 likeBtn.addEventListener('click', () => setStoryFeedback(1));
-dislikeBtn.addEventListener('click', () => setStoryFeedback(-1));
 favoriteBtn.addEventListener('click', toggleFavorite);
 favoritesBtn.addEventListener('click', () => {
   renderFavorites();
@@ -693,8 +718,6 @@ async function init() {
   // Assim, continuam visíveis mesmo em conexão lenta ou quando o JSON falha.
   if (typeof initThemeToggle === 'function') initThemeToggle();
   initFeelings();
-  initIntensity();
-  initMotivationPreference();
   initDailyQuote();
   drawDecor();
 
@@ -712,12 +735,13 @@ async function init() {
     const runtime = await window.EntreSabiosRuntimeLoader.loadRuntimeContent();
     feelingsCatalog = runtime.feelings;
     runtimeContents = runtime.contents;
+    initFeelings();
+    initDailyQuote();
     runtimeSelector = window.EntreSabiosRuntimeEngine.createSelector({
       version: runtime.contentVersion,
       contents: runtimeContents,
       storage: window.localStorage,
       synthesisAdapter: synthesisRankingAdapter,
-      motivationAdapter: motivationRankingAdapter,
     });
     contentLoadStatusEl.textContent = '';
     generateBtn.disabled = false;

@@ -1,0 +1,10 @@
+{
+  "library": "Biblioteca V1",
+  "frozenAt": "2026-07-25",
+  "contentVersion": "definitiva-2.4",
+  "sourceCommit": "e3cb1fd4d15fc9143c2ce002bb8713bd2c9f9add",
+  "masterFile": "entre_sabios_acervo_mestre_final_v1.json",
+  "totalHistoricalRecords": 351,
+  "totalPublishedContents": 257,
+  "policy": "Fotografia pesquisável e imutável. O acervo publicado continua tendo como fonte única o mestre na raiz."
+}

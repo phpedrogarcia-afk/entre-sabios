@@ -11,15 +11,17 @@ const feelingIds = [
   'autoconhecimento', 'inseguranca', 'raiva', 'culpa', 'luto', 'tristeza', 'falta_de_proposito',
 ];
 const sandbox = {
-  window: { EntreSabiosData: {} },
+  EntreSabiosData: {},
   feelingsCatalog: feelingIds.map((id) => ({ id })),
   normalizeTheme: (value) => String(value || '').trim().toLowerCase(),
 };
+sandbox.window = sandbox;
 vm.createContext(sandbox);
 for (const relativePath of [
   'js/data/emotional-syntheses.js',
   'js/core/emotional-synthesis.js',
   'js/core/synthesis-ranking-adapter.js',
+  'js/core/emotional-selection-contract.js',
   'js/core/emotional-state.js',
 ]) vm.runInContext(fs.readFileSync(path.join(rootDir, relativePath), 'utf8'), sandbox, { filename: relativePath });
 

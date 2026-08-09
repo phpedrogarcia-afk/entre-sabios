@@ -1,0 +1,499 @@
+{
+  "batchId": "V2-2026-07-003B",
+  "approvedBy": "Pedro",
+  "approvedAt": "2026-07-28",
+  "targetContentVersion": "definitiva-2.9",
+  "title": "Lote V2-003B — Esperança e Autoconhecimento",
+  "status": "aprovado_para_integracao",
+  "baselineExpected": {
+    "masterRecords": 384,
+    "runtimeRecords": 33,
+    "runtimeVersion": "definitiva-2.8",
+    "v1Eligible": 0,
+    "v1LibraryRecords": 351,
+    "v1LibrarySha256": "be72c04474e85ac27a26313bb23ba2dca10ab50f8fd6cf102d4e78599b46365e"
+  },
+  "expectedAfterIntegration": {
+    "masterRecords": 390,
+    "runtimeRecords": 39,
+    "runtimeVersion": "definitiva-2.9",
+    "newContentIds": [
+      "v2-esp-001-dickinson",
+      "v2-esp-002-havel",
+      "v2-esp-003-camus",
+      "v2-aut-001-krishnamurti",
+      "v2-aut-002-seneca",
+      "v2-aut-003-agostinho"
+    ],
+    "primaryCoverage": {
+      "esperança": 3,
+      "autoconhecimento": 3
+    },
+    "v1Eligible": 0
+  },
+  "editorialRules": {
+    "v1Role": "biblioteca_comparativa_somente",
+    "preserveAuthorTextSeparateFromEditorialText": true,
+    "shareImageFieldsOnly": [
+      "text",
+      "displayAuthor",
+      "source.work"
+    ],
+    "longNotesInMetadataOnly": true,
+    "bookBindingMustBeStructuredAndFunctional": true,
+    "bookBindingPriority": "recomendacao_especifica_antes_do_fallback_geral",
+    "doNotParseSourceNotesAtRuntime": true,
+    "noCommitPushMergePublish": true
+  },
+  "contents": [
+    {
+      "id": "v2-esp-001-dickinson",
+      "legacyIds": [],
+      "originalText": "A esperança é a coisa com penas\nque pousa na alma,\ncanta a melodia sem palavras\ne nunca para — jamais.\n\nMais doce se ouve na tempestade;\ne muito severa teria de ser a tormenta\ncapaz de constranger a pequena ave\nque aqueceu tanta gente.",
+      "finalText": "A esperança é a coisa com penas\nque pousa na alma,\ncanta a melodia sem palavras\ne nunca para — jamais.\n\nMais doce se ouve na tempestade;\ne muito severa teria de ser a tormenta\ncapaz de constranger a pequena ave\nque aqueceu tanta gente.",
+      "displayType": "citacao_longa",
+      "attributionType": "translated_quote",
+      "author": "Emily Dickinson",
+      "authorGender": "female",
+      "filterGender": "female",
+      "displayedAuthor": "Emily Dickinson",
+      "inspirationSource": "Emily Dickinson",
+      "source": {
+        "title": "Poesia completa, vol. 1 — Os fascículos",
+        "section": "F314/J254, c. 1862",
+        "translator": "Tradução de trabalho: Entre Sábios",
+        "url": "https://poets.org/anthology/emily-dickinson-26",
+        "status": "verified",
+        "work": "Poesia completa, vol. 1 — Os fascículos",
+        "language": "inglês",
+        "publisherUrl": "",
+        "latinSourceUrl": "",
+        "notes": "Poema em domínio público; numeração Franklin 314 / Johnson 254. tradução de trabalho do Entre Sábios; preservar a indicação sem ocupar a imagem compartilhável Não usar para exigir esperança de alguém em crise, luto agudo ou sofrimento intenso. A ausência momentânea de esperança não é falha moral."
+      },
+      "primaryFeeling": "esperanca",
+      "secondaryFeeling": "tristeza",
+      "associations": [
+        {
+          "feeling": "esperanca",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "tristeza",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "medo",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "solidao",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "nucleo",
+      "editorialFunction": "recognition",
+      "secondaryFunction": "contemplation",
+      "suitableIntensities": [
+        "fraca",
+        "moderada"
+      ],
+      "tone": "contemplativo",
+      "themes": [],
+      "riskTags": [],
+      "hardExclusions": [],
+      "status": "ATIVO_NUCLEO",
+      "publicationEnabled": true,
+      "editorialExplanation": "Dickinson não descreve a esperança como certeza barulhenta nem como explicação para o sofrimento. Ela a imagina como uma pequena ave que permanece pousada na alma e continua cantando mesmo quando não existem palavras capazes de dizer por que ainda vale a pena continuar.\n\nA imagem é delicada, mas não frágil. O canto se torna mais perceptível justamente na tempestade. Isso não significa que toda pessoa encontrará esperança em qualquer situação, nem que a dor deva produzir força. A passagem apenas reconhece uma capacidade que às vezes continua viva antes mesmo de conseguirmos defendê-la com argumentos.\n\nTalvez esperança não seja prever que tudo terminará bem. Pode ser perceber que alguma parte de nós ainda não entregou completamente o futuro ao sofrimento presente.",
+      "editorialQuestion": "Que parte de você continua cantando, mesmo sem encontrar palavras para explicar por quê?",
+      "safetyNote": "Não usar para exigir esperança de alguém em crise, luto agudo ou sofrimento intenso. A ausência momentânea de esperança não é falha moral.",
+      "bookRecommendation": {
+        "bookTitle": "Poesia completa, vol. 1 — Os fascículos",
+        "whyItMatches": "O volume contém o poema e permite acompanhar como Dickinson transforma abstrações como esperança, morte, ausência e fé em imagens concretas e inesperadas.",
+        "whatReaderFinds": "Edição bilíngue dos fascículos, com variantes, notas e poemas sobre esperança, mortalidade, natureza, perda e consciência.",
+        "whereToStart": "Poema F314/J254 — “Hope” is the thing with feathers."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2 — lote V2-003B aprovado",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "v2_approved_import",
+      "changeReason": "Poema em domínio público; numeração Franklin 314 / Johnson 254.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-esp-002-havel",
+      "legacyIds": [],
+      "originalText": "A esperança não é a convicção de que algo terminará bem, mas a certeza de que algo faz sentido, independentemente de como termine.",
+      "finalText": "A esperança não é a convicção de que algo terminará bem, mas a certeza de que algo faz sentido, independentemente de como termine.",
+      "displayType": "citacao_curta",
+      "attributionType": "translated_quote",
+      "author": "Václav Havel",
+      "authorGender": "male",
+      "filterGender": "male",
+      "displayedAuthor": "Václav Havel",
+      "inspirationSource": "Václav Havel",
+      "source": {
+        "title": "Entrevista à distância",
+        "section": "passagem sobre esperança; pp. 181–182 na edição inglesa citada pelo Václav Havel Center",
+        "translator": "Tradução de trabalho: Entre Sábios",
+        "url": "https://havelcenter.org/2015/05/04/disturbing-the-peace/",
+        "status": "verified",
+        "work": "Entrevista à distância",
+        "language": "tcheco; versão consultada em inglês",
+        "publisherUrl": "",
+        "latinSourceUrl": "",
+        "notes": "Edição em português registrada pela Biblioteca Václav Havel: tradução de Lya Luft, 1991. tradução de trabalho do Entre Sábios a partir da formulação publicada pelo Václav Havel Center Não usar para pressionar alguém a permanecer em luta impossível, relação abusiva ou situação perigosa. Sentido não elimina limites, proteção nem necessidade de recuar."
+      },
+      "primaryFeeling": "esperanca",
+      "secondaryFeeling": "falta_de_proposito",
+      "associations": [
+        {
+          "feeling": "esperanca",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "falta_de_proposito",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "medo",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "confusao",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "contextual",
+      "editorialFunction": "reframing",
+      "secondaryFunction": "action",
+      "suitableIntensities": [
+        "moderada",
+        "intensa"
+      ],
+      "tone": "analitico",
+      "themes": [],
+      "riskTags": [],
+      "hardExclusions": [],
+      "status": "ATIVO_CONTEXTUAL",
+      "publicationEnabled": true,
+      "editorialExplanation": "Havel separa esperança de previsão. O otimismo observa as possibilidades e acredita que o resultado será favorável. A esperança que ele descreve pode existir mesmo quando as circunstâncias oferecem poucos motivos para esperar vitória.\n\nIsso não significa agir de maneira cega. Significa que o valor de uma escolha não depende inteiramente de ela produzir o resultado desejado. Há ações que merecem ser realizadas porque preservam dignidade, verdade ou responsabilidade, mesmo quando não conseguimos controlar o desfecho.\n\nEssa esperança não promete proteção contra o fracasso. Ela impede apenas que o fracasso possível se torne a única medida do que vale a pena fazer.",
+      "editorialQuestion": "O que continuaria fazendo sentido para você mesmo sem a garantia de terminar bem?",
+      "safetyNote": "Não usar para pressionar alguém a permanecer em luta impossível, relação abusiva ou situação perigosa. Sentido não elimina limites, proteção nem necessidade de recuar.",
+      "bookRecommendation": {
+        "bookTitle": "Entrevista à distância",
+        "whyItMatches": "A passagem nasce desta longa entrevista e aparece no contexto da vida de um escritor e dissidente que precisou agir sem garantia de sucesso.",
+        "whatReaderFinds": "Reflexões autobiográficas e políticas sobre responsabilidade, sentido, esperança, criação, prisão e resistência ao totalitarismo.",
+        "whereToStart": "Trecho em que Havel distingue esperança de otimismo; na edição inglesa citada, pp. 181–182."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2 — lote V2-003B aprovado",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "v2_approved_import",
+      "changeReason": "Edição em português registrada pela Biblioteca Václav Havel: tradução de Lya Luft, 1991.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-esp-003-camus",
+      "legacyIds": [],
+      "originalText": "Voltei a Tipasa e compreendi que, nos piores anos, a lembrança daquela luz nunca me abandonara. Era isso que, no fim, me impedira de desesperar.\n\nNo meio do inverno, descobri enfim que havia em mim um verão invencível.",
+      "finalText": "Voltei a Tipasa e compreendi que, nos piores anos, a lembrança daquela luz nunca me abandonara. Era isso que, no fim, me impedira de desesperar.\n\nNo meio do inverno, descobri enfim que havia em mim um verão invencível.",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "Albert Camus",
+      "authorGender": "male",
+      "filterGender": "male",
+      "displayedAuthor": "Albert Camus",
+      "inspirationSource": "Albert Camus",
+      "source": {
+        "title": "O verão; reunido no Brasil em Bodas em Tipasa",
+        "section": "parágrafo final de “Retorno a Tipasa”",
+        "translator": "",
+        "url": "https://tipaza.typepad.fr/mon_weblog/2019/08/return-to-tipasa-albert-camus.html",
+        "status": "verified",
+        "work": "O verão; reunido no Brasil em Bodas em Tipasa",
+        "language": "francês",
+        "publisherUrl": "https://www.record.com.br/products/bodas-em-tipasa",
+        "latinSourceUrl": "",
+        "notes": "Passagem traduzida e condensada; não usar a continuação apócrifa frequentemente compartilhada na internet. passagem traduzida e condensada, preservando a imagem final do verão invencível Não transformar sofrimento em prova obrigatória de força nem afirmar que todos possuem uma reserva invencível acessível a qualquer momento."
+      },
+      "primaryFeeling": "esperanca",
+      "secondaryFeeling": "tristeza",
+      "associations": [
+        {
+          "feeling": "esperanca",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "tristeza",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "luto",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "falta_de_proposito",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "contextual",
+      "editorialFunction": "reframing",
+      "secondaryFunction": "contemplation",
+      "suitableIntensities": [
+        "moderada"
+      ],
+      "tone": "contemplativo",
+      "themes": [],
+      "riskTags": [],
+      "hardExclusions": [],
+      "status": "ATIVO_CONTEXTUAL",
+      "publicationEnabled": true,
+      "editorialExplanation": "Camus não encontra esse verão antes de atravessar o inverno. A imagem surge depois de anos marcados por guerra, exílio, violência e desencanto, quando ele retorna a Tipasa e reconhece que a lembrança de determinada luz havia permanecido dentro dele.\n\nO verão invencível não é uma personalidade sempre positiva. Também não é uma promessa de que nada conseguirá ferir a pessoa. É a descoberta tardia de que o sofrimento não ocupou tudo. Alguma capacidade de alegria, beleza e ligação com o mundo continuou existindo, mesmo sem aparecer claramente durante os anos mais difíceis.\n\nÀs vezes, só reconhecemos aquilo que nos sustentou depois de já termos atravessado parte da escuridão.",
+      "editorialQuestion": "O que permaneceu vivo em você durante um período em que parecia que tudo havia sido tomado pelo inverno?",
+      "safetyNote": "Não transformar sofrimento em prova obrigatória de força nem afirmar que todos possuem uma reserva invencível acessível a qualquer momento.",
+      "bookRecommendation": {
+        "bookTitle": "Bodas em Tipasa",
+        "whyItMatches": "A edição brasileira reúne Bodas e O verão, livro em que está o ensaio “Retorno a Tipasa” e a imagem do verão invencível.",
+        "whatReaderFinds": "Ensaios líricos sobre luz, corpo, paisagem mediterrânea, absurdo, justiça, exílio e retorno à beleza sem negar o sofrimento.",
+        "whereToStart": "Ensaio “Retorno a Tipasa”, em O verão."
+      },
+      "duplicateOf": "batch01-quote-031",
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2 — lote V2-003B aprovado",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "v2_approved_import",
+      "changeReason": "Passagem traduzida e condensada; não usar a continuação apócrifa frequentemente compartilhada na internet.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-aut-001-krishnamurti",
+      "legacyIds": [],
+      "originalText": "Conhecer a si mesmo é o começo da sabedoria. Isso não pode ser comprado num livro, obtido seguindo alguém ou adotando um sistema. Conhecer-se exige investigar diretamente o movimento da própria mente.",
+      "finalText": "Conhecer a si mesmo é o começo da sabedoria. Isso não pode ser comprado num livro, obtido seguindo alguém ou adotando um sistema. Conhecer-se exige investigar diretamente o movimento da própria mente.",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "Jiddu Krishnamurti",
+      "authorGender": "male",
+      "filterGender": "male",
+      "displayedAuthor": "Jiddu Krishnamurti",
+      "inspirationSource": "Jiddu Krishnamurti",
+      "source": {
+        "title": "Conversa pública",
+        "section": "San Francisco, 20 de março de 1975",
+        "translator": "",
+        "url": "https://www.krishnamurti.org/transcript/freedom-is-necessary-to-investigate-into-oneself/",
+        "status": "verified",
+        "work": "Conversa pública",
+        "language": "inglês",
+        "publisherUrl": "",
+        "latinSourceUrl": "",
+        "notes": "Passagem traduzida e condensada a partir da transcrição oficial. passagem traduzida e condensada; não apresentar como transcrição literal integral Não desvalorizar livros, terapia, diagnóstico profissional ou orientação confiável. A investigação direta complementa essas formas de ajuda; não as substitui."
+      },
+      "primaryFeeling": "autoconhecimento",
+      "secondaryFeeling": "confusao",
+      "associations": [
+        {
+          "feeling": "autoconhecimento",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "confusao",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "inseguranca",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "medo",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "nucleo",
+      "editorialFunction": "inquiry",
+      "secondaryFunction": "clarification",
+      "suitableIntensities": [
+        "fraca",
+        "moderada",
+        "intensa"
+      ],
+      "tone": "introspectivo",
+      "themes": [],
+      "riskTags": [],
+      "hardExclusions": [],
+      "status": "ATIVO_NUCLEO",
+      "publicationEnabled": true,
+      "editorialExplanation": "É possível acumular muitas explicações sobre si: tipos de personalidade, diagnósticos informais, ideias filosóficas e histórias repetidas durante anos. Tudo isso pode oferecer linguagem, mas também pode tornar-se uma nova camada entre a pessoa e aquilo que realmente acontece dentro dela.\n\nKrishnamurti distingue conhecimento sobre si de observação de si. Uma definição é algo que já sabemos. A observação encontra o movimento vivo: a comparação aparecendo, o medo procurando segurança, a raiva construindo justificativas ou o desejo transformando o outro em promessa.\n\nConhecer-se não significa chegar a uma descrição final. Significa aprender a ver sem depender inteiramente das respostas que alguém preparou antes de nós.",
+      "editorialQuestion": "O que você sabe sobre si apenas como definição — e o que consegue observar acontecendo agora?",
+      "safetyNote": "Não desvalorizar livros, terapia, diagnóstico profissional ou orientação confiável. A investigação direta complementa essas formas de ajuda; não as substitui.",
+      "bookRecommendation": {
+        "bookTitle": "A Primeira e Última Liberdade",
+        "whyItMatches": "A fonte direta é uma conversa; o livro desenvolve de forma ampla a relação entre autoconhecimento, condicionamento, medo, autoridade e liberdade.",
+        "whatReaderFinds": "Investigações sobre observação, crença, medo, desejo, relacionamento e a diferença entre seguir um método e compreender a si mesmo.",
+        "whereToStart": "Capítulos e perguntas dedicados ao autoconhecimento."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2 — lote V2-003B aprovado",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "v2_approved_import",
+      "changeReason": "Passagem traduzida e condensada a partir da transcrição oficial.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-aut-002-seneca",
+      "legacyIds": [],
+      "originalText": "Você se surpreende porque tantas viagens e mudanças de cenário não afastaram o peso de sua mente. Mas é a alma que precisa mudar, não o clima. Você pode atravessar mares e deixar cidades para trás: aquilo de que foge continuará acompanhando você.",
+      "finalText": "Você se surpreende porque tantas viagens e mudanças de cenário não afastaram o peso de sua mente. Mas é a alma que precisa mudar, não o clima. Você pode atravessar mares e deixar cidades para trás: aquilo de que foge continuará acompanhando você.",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "Sêneca",
+      "authorGender": "male",
+      "filterGender": "male",
+      "displayedAuthor": "Sêneca",
+      "inspirationSource": "Sêneca",
+      "source": {
+        "title": "Cartas a Lucílio",
+        "section": "Carta 28 — Sobre viajar como cura para o descontentamento",
+        "translator": "",
+        "url": "https://en.wikisource.org/wiki/Moral_letters_to_Lucilius/Letter_28",
+        "status": "verified",
+        "work": "Cartas a Lucílio",
+        "language": "latim",
+        "publisherUrl": "",
+        "latinSourceUrl": "https://latin.packhum.org/loc/1017/15/27/2966-2972",
+        "notes": "Passagem traduzida e condensada a partir da Carta 28. passagem traduzida e condensada; preservar a formulação central “mudar a alma, não o clima” Não usar para desencorajar mudança de ambiente, afastamento de violência, viagem, tratamento ou transformação de condições externas realmente prejudiciais."
+      },
+      "primaryFeeling": "autoconhecimento",
+      "secondaryFeeling": "falta_de_proposito",
+      "associations": [
+        {
+          "feeling": "autoconhecimento",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "falta_de_proposito",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "ansiedade",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "confusao",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "contextual",
+      "editorialFunction": "clarification",
+      "secondaryFunction": "confrontation",
+      "suitableIntensities": [
+        "moderada"
+      ],
+      "tone": "analitico",
+      "themes": [],
+      "riskTags": [],
+      "hardExclusions": [],
+      "status": "ATIVO_CONTEXTUAL",
+      "publicationEnabled": true,
+      "editorialExplanation": "Mudar de lugar pode ser necessário e profundamente benéfico. Existem ambientes que adoecem, relações das quais precisamos sair e condições materiais que realmente precisam ser transformadas. Sêneca não apaga essa realidade.\n\nA passagem aponta para outro fenômeno: a expectativa de que um novo cenário resolva sozinho um conflito que continua sendo produzido pela mesma maneira de pensar, desejar ou fugir. A cidade muda, mas a comparação retorna. A relação termina, mas o mesmo medo organiza o vínculo seguinte. Surge um novo projeto, e a antiga sensação de insuficiência passa a habitá-lo.\n\nAutoconhecimento começa quando deixamos de atribuir ao cenário tudo aquilo que também viaja conosco.",
+      "editorialQuestion": "O que você espera deixar para trás mudando de lugar, embora talvez continue carregando dentro de si?",
+      "safetyNote": "Não usar para desencorajar mudança de ambiente, afastamento de violência, viagem, tratamento ou transformação de condições externas realmente prejudiciais.",
+      "bookRecommendation": {
+        "bookTitle": "Cartas a Lucílio",
+        "whyItMatches": "A passagem pertence à Carta 28 e integra uma obra ampla sobre exame de si, medo, tempo, desejo, morte e modo de viver.",
+        "whatReaderFinds": "Cartas filosóficas de caráter prático sobre hábitos, serenidade, amizade, liberdade, sofrimento e responsabilidade.",
+        "whereToStart": "Carta 28."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2 — lote V2-003B aprovado",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "v2_approved_import",
+      "changeReason": "Passagem traduzida e condensada a partir da Carta 28.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    },
+    {
+      "id": "v2-aut-003-agostinho",
+      "legacyIds": [],
+      "originalText": "Grande é a força da memória, vasto santuário sem fronteiras. Ela pertence à minha própria natureza e, ainda assim, não consigo abarcar tudo o que sou.\n\nOs homens viajam para admirar montanhas, mares, rios e estrelas — e passam por si mesmos sem se admirar.",
+      "finalText": "Grande é a força da memória, vasto santuário sem fronteiras. Ela pertence à minha própria natureza e, ainda assim, não consigo abarcar tudo o que sou.\n\nOs homens viajam para admirar montanhas, mares, rios e estrelas — e passam por si mesmos sem se admirar.",
+      "displayType": "citacao_longa",
+      "attributionType": "paraphrase",
+      "author": "Agostinho de Hipona",
+      "authorGender": "male",
+      "filterGender": "male",
+      "displayedAuthor": "Santo Agostinho",
+      "inspirationSource": "Agostinho de Hipona",
+      "source": {
+        "title": "Confissões",
+        "section": "Livro X, 8.15",
+        "translator": "",
+        "url": "https://www.augustinus.it/spagnolo/confessioni/conf_10_libro.htm",
+        "status": "verified",
+        "work": "Confissões",
+        "language": "latim",
+        "publisherUrl": "",
+        "latinSourceUrl": "",
+        "notes": "Passagem traduzida e condensada; o contexto explicitamente religioso deve ser preservado. passagem traduzida e condensada a partir do Livro X Preservar o contexto cristão da obra e não apresentar a passagem como tradição neutra ou secular. Não transformar introspecção em obrigação de compreender tudo sobre si."
+      },
+      "primaryFeeling": "autoconhecimento",
+      "secondaryFeeling": "confusao",
+      "associations": [
+        {
+          "feeling": "autoconhecimento",
+          "placement": "nucleo"
+        },
+        {
+          "feeling": "confusao",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "falta_de_proposito",
+          "placement": "contextual"
+        },
+        {
+          "feeling": "solidao",
+          "placement": "contextual"
+        }
+      ],
+      "placement": "contextual",
+      "editorialFunction": "contemplation",
+      "secondaryFunction": "inquiry",
+      "suitableIntensities": [
+        "fraca",
+        "moderada"
+      ],
+      "tone": "contemplativo",
+      "themes": [],
+      "riskTags": [],
+      "hardExclusions": [],
+      "status": "ATIVO_CONTEXTUAL",
+      "publicationEnabled": true,
+      "editorialExplanation": "Agostinho volta-se para a memória e encontra algo que deveria ser íntimo, mas permanece imenso e parcialmente desconhecido. Ele consegue recordar lugares, sensações e acontecimentos; ainda assim, não consegue abarcar completamente a própria mente que os conserva.\n\nA passagem interrompe uma ideia confortável de autoconhecimento: a de que olhar para dentro é encontrar um espaço pequeno, privado e facilmente explicável. O interior também possui distâncias, regiões esquecidas e movimentos que não obedecem inteiramente à vontade.\n\nAdmiramos aquilo que parece vasto fora de nós. Agostinho pergunta por que atravessamos a própria existência sem o mesmo espanto.",
+      "editorialQuestion": "Que parte de sua vida interior você tratou como conhecida apenas porque sempre esteve com você?",
+      "safetyNote": "Preservar o contexto cristão da obra e não apresentar a passagem como tradição neutra ou secular. Não transformar introspecção em obrigação de compreender tudo sobre si.",
+      "bookRecommendation": {
+        "bookTitle": "Confissões de santo Agostinho",
+        "whyItMatches": "A passagem está no Livro X, onde Agostinho investiga memória, identidade, desejo e a dificuldade de compreender completamente a si mesmo diante de Deus.",
+        "whatReaderFinds": "Uma autobiografia filosófica e religiosa sobre memória, vontade, tempo, conversão, desejo e observação dos movimentos interiores.",
+        "whereToStart": "Livro X, especialmente 8.15."
+      },
+      "duplicateOf": null,
+      "derivedFromId": null,
+      "historicalOrigin": "Biblioteca V2 — lote V2-003B aprovado",
+      "originalCollection": "V2-2026-07-003",
+      "changeType": "v2_approved_import",
+      "changeReason": "Passagem traduzida e condensada; o contexto explicitamente religioso deve ser preservado.",
+      "humanReviewRequired": false,
+      "lastReviewedAt": "2026-07-28"
+    }
+  ]
+}

@@ -18,10 +18,10 @@ O fluxo atual da página inicial é:
 
 1. A pessoa escolhe um ou mais sentimentos.
 2. O primeiro sentimento selecionado torna-se o sentimento principal; outro sentimento selecionado pode ser promovido manualmente a principal.
-3. A pessoa pode escolher como deseja receber a reflexão: delicado, equilibrado ou profundo. Nenhuma opção começa marcada; sem escolha, uma das três intensidades é sorteada novamente a cada geração antes da seleção determinística do conteúdo.
+3. A intensidade não é escolhida na interface. O mesmo motor usa uma trajetória interna cautelosa: abertura fraca, aprofundamento moderado e intensidade maior somente depois, quando segura.
 4. Ao acionar **Encontrar uma reflexão**, o sistema consulta o acervo runtime e escolhe um conteúdo elegível.
 5. A interface apresenta o texto principal, a autoria exibida, uma explicação editorial, um conselho, uma indicação de livro e etiquetas temáticas.
-6. A pessoa pode gostar, não gostar, favoritar, voltar no histórico da sessão, pedir outra frase, gerar uma imagem para compartilhar ou abrir um conto relacionado.
+6. A pessoa pode marcar Gostei, salvar uma leitura, voltar no histórico da sessão, pedir outra frase, gerar uma imagem para compartilhar ou abrir um conto relacionado.
 
 No smartphone, depois da geração, a coluna da reflexão é trazida para a área visível. A página também contém uma frase do dia, calculada localmente pela data, e elementos decorativos discretos.
 
@@ -35,7 +35,7 @@ O arquivo `index.html` reúne:
 
 - cabeçalho com marca, contador de presença, alternância de tema, acesso às favoritas e seção Sobre;
 - seletor de sentimentos;
-- seletor opcional de intensidade, apresentado como forma de receber a reflexão;
+- intensidade editorial interna, sem controle público;
 - botão de geração;
 - área central com frase ou texto, autoria e ações de feedback;
 - explicação da reflexão;
@@ -110,8 +110,8 @@ Existem 14 páginas públicas em `sentimentos/<slug>/index.html`, correspondente
 
 ### 4.4 Funcionalidades e interface
 
-- `js/features/feedback.js`: gostei, não gostei e preferências locais.
-- `js/features/favorites.js`: persistência e diálogo de favoritas.
+- `js/features/feedback.js`: Gostei, preservação de avaliações legadas e preferências locais.
+- `js/features/favorites.js`: persistência e diálogo de Leituras salvas.
 - `js/features/sharing.js`: desenho da imagem, criação do PNG, Web Share e download.
 - `js/features/tales.js`: pontuação, rotação, renderização e diálogo dos contos.
 - `js/ui/feelings-ui.js`: sentimentos, foco principal e intensidade.
@@ -205,9 +205,9 @@ Os 14 sentimentos selecionáveis são:
 - tristeza;
 - falta de propósito.
 
-É necessário escolher pelo menos um. O sentimento principal tem prioridade na seleção; os demais são secundários. Trocar sentimentos, foco principal ou intensidade recalcula o contexto, mas não apaga o histórico recente global nem libera conteúdos recém-exibidos.
+É necessário escolher pelo menos um. O sentimento principal tem prioridade na seleção; os demais são secundários. Trocar sentimentos ou foco principal recalcula o contexto, mas não apaga o histórico recente global nem libera conteúdos recém-exibidos.
 
-As intensidades são `fraca`, `moderada` e `intensa`. Nenhuma começa presumida: a pessoa precisa escolher uma delas antes de gerar a reflexão. Ausência ou valor inválido permanece neutro e não produz elegibilidade, temas ou tons de intensidade. Cada conteúdo declara explicitamente em quais intensidades pode aparecer. O estado intenso também gera sinais de contexto específicos para ansiedade, medo, raiva, tristeza e luto. Esses sinais podem bloquear conteúdos por meio de `hardExclusions`.
+As intensidades editoriais internas são `fraca`, `moderada` e `intensa`. A interface não apresenta escolha de intensidade. Cada combinação começa em `fraca`, avança por `moderada` e admite `intensa` somente em respostas posteriores; a progressão reinicia após recarga e não é uma preferência persistida. Cada conteúdo declara explicitamente em quais intensidades pode aparecer. O estado intenso também gera sinais de contexto específicos para ansiedade, medo, raiva, tristeza e luto, capazes de bloquear conteúdos por meio de `hardExclusions`.
 
 A taxonomia emocional também produz:
 
@@ -218,7 +218,7 @@ A taxonomia emocional também produz:
 
 ### 6.1 Contrato da analogia das cores
 
-O contrato técnico mantém responsabilidades separadas: o sentimento principal é a cor dominante e define o território; até dois secundários refinam essa direção; a intensidade regula profundidade e segurança; a síntese interpreta somente combinações existentes; e a motivação permanece uma direção opcional, nunca uma nova emoção.
+O contrato técnico mantém responsabilidades separadas: o sentimento principal é a cor dominante e define o território; até dois secundários refinam essa direção; a intensidade interna regula profundidade e segurança; a síntese interpreta somente combinações existentes. A motivação não participa mais da interface nem do seletor ativo.
 
 Os 29 pares direcionais e a única tríade já aprovados possuem um `relationType` interno. Os valores permitidos são `reinforcement`, `tension`, `ambivalence`, `masking`, `transition` e `context`. A classificação não aparece ao usuário e não é inferida a partir de `humanSummary` ou `editorialRationale`. O adaptador consulta apenas sinais estruturados de tema, função editorial e tom, sempre depois da elegibilidade, do sentimento principal, da intensidade e da segurança. Combinações sem perfil específico usam `context` como fallback cauteloso; nenhum novo par ou tríade é criado automaticamente.
 
@@ -238,7 +238,7 @@ Antes da ordenação, o motor mantém somente conteúdos que:
 
 - possuem `publicationEnabled: true`;
 - têm um status ativo reconhecido;
-- aceitam a intensidade escolhida;
+- aceitam a intensidade interna resolvida pela trajetória;
 - não violam exclusões rígidas do contexto;
 - pertencem a um dos cinco níveis de seleção.
 
@@ -285,8 +285,8 @@ As preferências são armazenadas em `localStorage`; não há conta de usuário 
 Chaves atualmente utilizadas ou mantidas pelo código:
 
 - `entreSabiosTheme`: tema visual;
-- `caixaSabedoriaPreferencias`: gostei/não gostei e pesos locais;
-- `caixaSabedoriaFavoritas`: frases favoritas;
+- `caixaSabedoriaPreferencias`: Gostei, avaliações históricas e pesos locais;
+- `caixaSabedoriaFavoritas`: Leituras salvas (nome histórico da chave preservado);
 - `entreSabiosRuntimeQueues:definitiva-2.3`: filas do seletor;
 - `entreSabiosRecentContent:definitiva-2.3`: histórico global recente usado contra repetições;
 - `entreSabiosContextHistory:definitiva-2.3`: trajetória, autoria e formato recentes por contexto;
@@ -297,13 +297,13 @@ Chaves atualmente utilizadas ou mantidas pelo código:
 - `entreSabiosContosRecentes`: últimos contos;
 - `entreSabiosSinaisEditoriais`: sinais editoriais agregados.
 
-O gostei/não gostei preserva a avaliação por conteúdo e ajusta pesos locais de temas e livros. O peso de livros influencia a recomendação de leitura; esses sinais não alteram a seleção runtime das reflexões. Preferências de autor ou gênero não são carregadas, atualizadas nem salvas novamente, inclusive quando uma instalação possui campos antigos como `authors`, `gender` ou `genderPreference` no armazenamento local. O gênero permanece somente como metadado editorial do acervo e não participa de filtros, pesos, filas, cache, analytics ou ordenação.
+Conforme a `DEC-036`, o coração público registra somente Gostei por conteúdo e ajusta pesos locais de temas e livros. Valores negativos históricos continuam legíveis e preservados, mas não existe nova ação pública de dislike. O peso de livros influencia a recomendação de leitura; esses sinais não alteram a seleção runtime das reflexões. Preferências de autor ou gênero não são carregadas, atualizadas nem salvas novamente, inclusive quando uma instalação possui campos antigos como `authors`, `gender` ou `genderPreference` no armazenamento local. O gênero permanece somente como metadado editorial do acervo e não participa de filtros, pesos, filas, cache, analytics ou ordenação.
 
 ## 11. Favoritos
 
-Uma reflexão pode ser adicionada ou removida das favoritas. O registro salvo contém ID, texto, atribuição, fonte e data. A biblioteca é exibida em um diálogo e permite remoção individual.
+Uma reflexão pode ser salva ou removida pela estrela do cartão, sempre por `toggleFavorite()`. O registro salvo contém ID, texto, atribuição, fonte e data. A biblioteca “Leituras salvas” é exibida em um diálogo e permite remoção individual.
 
-As favoritas existem somente no navegador atual. Limpar os dados do site, usar navegação privada ou trocar de dispositivo pode apagar ou tornar indisponível essa coleção.
+As leituras salvas continuam na chave histórica `caixaSabedoriaFavoritas` e existem somente no navegador atual. Limpar os dados do site, usar navegação privada ou trocar de dispositivo pode apagar ou tornar indisponível essa coleção.
 
 ## 12. Recomendação de livros
 
@@ -354,7 +354,7 @@ Os símbolos de WhatsApp, Instagram e Facebook continuam informativos. O site us
 
 ## 15. Geração da imagem compartilhável
 
-`js/features/sharing.js` cria um `canvas` de 1080 × 1920 pixels, proporção 9:16, desenha fundo em gradiente, brilho, textura de papel, ramos, folhas, frase, autoria, assinatura `entresabios.com` e ícone de compartilhamento. Em seguida, converte o canvas para PNG com `toBlob` e qualidade declarada de 0,96.
+`js/features/sharing.js` cria um `canvas` de 1080 × 1350 pixels, proporção 4:5, desenha fundo em gradiente, brilho, textura de papel, ramos, folhas, frase, autoria, assinatura `entresabios.com` e ícone de compartilhamento. Em seguida, converte o canvas para PNG com `toBlob` e qualidade declarada de 0,96.
 
 A imagem usa a reflexão atual; os controles orientam a pessoa a gerar uma reflexão antes de compartilhar. O tamanho da fonte é reduzido progressivamente até o bloco caber em metade da altura útil, respeitando um tamanho mínimo. A autoria pode ocupar até duas linhas.
 
@@ -368,7 +368,7 @@ Limitações atuais:
 
 O diálogo de contos pode ser aberto diretamente, sem sentimento selecionado. Nesse modo, percorre o acervo com rotação neutra e antirrepetição. Quando há um ou mais sentimentos selecionados, eles funcionam como filtro editorial e refinam a pontuação, sem se tornarem requisito de leitura. A pontuação de cada conto soma:
 
-Para a seleção dos contos, uma escolha explícita de intensidade é respeitada. Quando nenhuma opção está marcada, o conto usa internamente a intensidade moderada (`Equilibrado`), sem marcar o controle e sem alterar o sorteio independente da intensidade da reflexão.
+Para a seleção dos contos, o estado usa internamente a intensidade `moderada`, sem controle público e sem alterar a progressão independente das reflexões.
 
 - 8 pontos por correspondência com o sentimento principal;
 - 4 pontos por sentimento secundário correspondente;
@@ -567,3 +567,6 @@ O destino deve estar vazio e ser informado explicitamente. O pacote exclui acerv
 Este documento deve ser atualizado quando mudar qualquer contrato importante: versão ou formato do runtime, hierarquia de seleção, catálogo de sentimentos, persistência local, fluxo de compartilhamento, estrutura de páginas, SEO, contos, recomendação de livros ou integrações externas.
 
 Comportamentos planejados devem permanecer separados dos comportamentos ativos. Se um arquivo legado não for carregado pela página, suas regras não devem ser descritas como parte do algoritmo em produção.
+# Fronteira entre Biblioteca V1 e runtime V2
+
+Conforme a `DEC-035`, o mestre da raiz continua preservando o histórico editorial completo, mas o build publica no runtime somente conteúdos ativos com ID `v2-*`, `originalCollection` no formato `V2-AAAA-MM-NNN` e origem declarada na Biblioteca V2. A fotografia em `curadoria/biblioteca_v1/` permanece somente leitura e fora de seleção, rotação, ranking, combinações e fallbacks. Ferramentas editoriais podem lê-la para comparar cobertura, detectar duplicidades, registrar equivalências e preparar futuras propostas de recuração.

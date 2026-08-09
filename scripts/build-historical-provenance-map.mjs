@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const masterRelative = 'entre_sabios_acervo_mestre_final.json';
+const frozenMasterRelative = 'curadoria/biblioteca_v1/entre_sabios_acervo_mestre_final_v1.json';
+const libraryManifestRelative = 'curadoria/biblioteca_v1/MANIFESTO_BIBLIOTECA_V1.json';
 const auditRelative = 'docs/AUDITORIA_PROVENIENCIA_COMPLETA_2026-07-18.json';
 const nucleusRelative = 'NUCLEO_PRESERVACAO_EDITORIAL.md';
 const patchRelative = 'curadoria-rigida-3.1/0001-Integra-curadoria-r-gida-de-microtextos.patch';
@@ -98,16 +100,21 @@ function gitHistory() {
   });
 }
 
-function gitMasterAt(commit) {
+function gitTextAt(commit, relativePath) {
   try {
-    return JSON.parse(execFileSync('git', ['show', `${commit}:${masterRelative}`], {
+    return execFileSync('git', ['show', `${commit}:${relativePath}`], {
       cwd: rootDir,
       encoding: 'utf8',
       maxBuffer: 20 * 1024 * 1024,
-    }));
+    });
   } catch {
     return null;
   }
+}
+
+function gitMasterAt(commit) {
+  const text = gitTextAt(commit, masterRelative);
+  return text ? JSON.parse(text) : null;
 }
 
 function markdownTable(object) {
@@ -137,14 +144,16 @@ function compactChangeEntries(value, contentId, source, trail = [], result = [])
   return result;
 }
 
-const masterText = read(masterRelative);
+const masterText = read(frozenMasterRelative);
 const master = JSON.parse(masterText);
 const auditText = read(auditRelative);
 const audit = JSON.parse(auditText);
 const nucleusText = read(nucleusRelative);
 const patchText = fs.existsSync(path.join(rootDir, patchRelative)) ? read(patchRelative) : '';
-const runtimeJsonText = read('data/entre_sabios_runtime.json');
-const runtimeJsText = read('data/entre_sabios_runtime.js');
+const libraryManifest = JSON.parse(read(libraryManifestRelative));
+const runtimeJsonText = gitTextAt(libraryManifest.sourceCommit, 'data/entre_sabios_runtime.json');
+const runtimeJsText = gitTextAt(libraryManifest.sourceCommit, 'data/entre_sabios_runtime.js');
+if (!runtimeJsonText || !runtimeJsText) throw new Error('Runtime congelado da Biblioteca V1 não foi localizado no commit de origem.');
 const runtime = JSON.parse(runtimeJsonText);
 
 const history = gitHistory();

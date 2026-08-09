@@ -6,6 +6,10 @@ import vm from 'node:vm';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const emotionalSelectionContractScript = fs.readFileSync(
+  path.join(rootDir, 'js', 'core', 'emotional-selection-contract.js'),
+  'utf8',
+);
 const emotionalStateScript = fs.readFileSync(path.join(rootDir, 'js', 'core', 'emotional-state.js'), 'utf8');
 const matchingScript = fs.readFileSync(path.join(rootDir, 'js', 'core', 'matching.js'), 'utf8');
 const mainScript = fs.readFileSync(path.join(rootDir, 'script.js'), 'utf8');
@@ -42,6 +46,7 @@ function createStateSandbox(overrides = {}) {
     ...overrides,
   };
   vm.createContext(sandbox);
+  vm.runInContext(emotionalSelectionContractScript, sandbox);
   vm.runInContext(emotionalStateScript, sandbox);
   return sandbox;
 }
@@ -140,13 +145,13 @@ test('intensidade ausente permanece neutra no contrato até o momento da geraç�
   assert.deepEqual(engine.rankEligibleContents(runtime.contents, state), []);
 });
 
-test('ausência sorteia as três intensidades e escolha explícita sempre prevalece', () => {
+test('trajetória interna começa fraca, aprofunda com moderação e só depois admite intensidade', () => {
   const sandbox = createStateSandbox();
-  assert.equal(sandbox.resolveGenerationIntensity(null, () => 0), 'fraca');
-  assert.equal(sandbox.resolveGenerationIntensity(null, () => 0.34), 'moderada');
-  assert.equal(sandbox.resolveGenerationIntensity(null, () => 0.99), 'intensa');
-  assert.equal(sandbox.resolveGenerationIntensity('fraca', () => 0.99), 'fraca');
-  assert.equal(sandbox.resolveGenerationIntensity('extrema', () => 0.5), null);
+  assert.equal(sandbox.resolveGenerationIntensity(0), 'fraca');
+  assert.equal(sandbox.resolveGenerationIntensity(1), 'moderada');
+  assert.equal(sandbox.resolveGenerationIntensity(2), 'moderada');
+  assert.equal(sandbox.resolveGenerationIntensity(3), 'intensa');
+  assert.equal(sandbox.resolveGenerationIntensity(4), 'moderada');
 });
 
 test('estado visual neutro não herda perfil antes do sorteio da geração', () => {
@@ -168,25 +173,24 @@ test('estado visual neutro não herda perfil antes do sorteio da geração', () 
   assert.deepEqual(Array.from(state.suitableTones), []);
 });
 
-test('limpeza total desliga motivação e uma nova sessão começa sem persistência', () => {
+test('contrato ativo não recebe preferência de motivação', () => {
   const firstSession = createStateSandbox({
     selectedFeelingIds: new Set(['tristeza']),
     primaryFeelingId: 'tristeza',
     needsMotivation: true,
   });
-  assert.equal(firstSession.getCurrentSelectionContract().needsMotivation, true);
+  assert.equal(firstSession.getCurrentSelectionContract().needsMotivation, false);
   firstSession.selectedFeelingIds.clear();
   const cleared = firstSession.getCurrentSelectionContract();
   assert.equal(cleared.primaryFeeling, null);
   assert.equal(cleared.needsMotivation, false);
-  assert.equal(firstSession.needsMotivation, false);
 
   const reloadedSession = createStateSandbox({
     selectedFeelingIds: new Set(['tristeza']),
     primaryFeelingId: 'tristeza',
   });
   assert.equal(reloadedSession.getCurrentSelectionContract().needsMotivation, false);
-  assert.doesNotMatch(mainScript, /localStorage[^\n]*needsMotivation|needsMotivation[^\n]*localStorage/);
+  assert.doesNotMatch(mainScript, /needsMotivation|motivationAdapter/);
 });
 
 test('troca de intensidade não altera a chave direcional', () => {

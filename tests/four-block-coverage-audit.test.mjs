@@ -8,7 +8,7 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 
 test('auditoria cobre todo o runtime sem declarar lacunas como conteúdo concluído', () => {
   const audit = auditFourBlockCoverage({ rootDir });
-  assert.equal(audit.total, 257);
+  assert.equal(audit.total, 57);
   assert.equal(audit.records.length, audit.total);
   assert.equal(new Set(audit.records.map((record) => record.id)).size, audit.total);
   assert.equal(audit.summary.explanationReady + audit.missing.explanation.length, audit.total);

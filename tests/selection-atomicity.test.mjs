@@ -21,9 +21,12 @@ function createSandbox() {
   let clickHandler = null;
   const scheduled = [];
   const generateButtonClasses = new Set();
+  const generateButtonAttributes = new Map();
   const sandbox = {
     generateBtn: {
       disabled: false,
+      setAttribute(name, value) { generateButtonAttributes.set(name, String(value)); },
+      getAttribute(name) { return generateButtonAttributes.get(name); },
       classList: {
         add(className) { generateButtonClasses.add(className); },
         remove(className) { generateButtonClasses.delete(className); },
@@ -97,10 +100,12 @@ test('a trava cobre a transação inteira e sempre libera os controles', () => {
   assert.equal(concurrent, false);
   assert.deepEqual(order, ['read-state', 'select-and-persist', 'update-history', 'render']);
   assert.equal(environment.sandbox.generateBtn.disabled, true);
+  assert.equal(environment.sandbox.generateBtn.getAttribute('aria-busy'), 'true');
   assert.equal(environment.sandbox.generateBtn.classList.contains('is-selection-locked'), true);
   assert.equal(environment.sandbox.newBtn.disabled, true);
   environment.scheduled[0].callback();
   assert.equal(environment.sandbox.generateBtn.disabled, false);
+  assert.equal(environment.sandbox.generateBtn.getAttribute('aria-busy'), 'false');
   assert.equal(environment.sandbox.generateBtn.classList.contains('is-selection-locked'), false);
   assert.equal(environment.sandbox.newBtn.disabled, false);
 
@@ -114,9 +119,10 @@ test('a trava cobre a transação inteira e sempre libera os controles', () => {
 
 test('trava de seleção não simula carregamento depois que a reflexão já foi renderizada', () => {
   assert.match(componentsCss, /\.primary\.is-selection-locked:disabled\s*\{[\s\S]*?cursor:\s*pointer;[\s\S]*?opacity:\s*1;/);
-  assert.match(html, /style\.css\?v=20260718-cache-fix-1/);
-  assert.match(styleCss, /css\/components\.css\?v=20260718-cache-fix-1/);
-  assert.match(html, /script\.js\?v=20260718-cache-fix-1/);
+  assert.match(componentsCss, /\.primary\.is-selection-locked::after\s*\{[\s\S]*?animation:\s*generate-spinner/);
+  assert.match(html, /style\.css\?v=20260809-visual-polish-2/);
+  assert.match(styleCss, /css\/components\.css\?v=20260809-visual-polish-2/);
+  assert.match(html, /script\.js\?v=20260808-atmosphere-icons-ticker-1/);
 });
 
 test('botões nativos possuem um único listener de seleção e não criam caminhos paralelos', () => {

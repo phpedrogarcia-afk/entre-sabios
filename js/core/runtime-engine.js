@@ -205,7 +205,6 @@
       invalidacao_emocional: 'confirms_harmful_belief',
       culpabilizacao: 'risks_negative_reinforcement',
       desesperanca_absoluta: 'confirms_harmful_belief',
-      romantizacao_do_sofrimento: 'romanticizes_suffering',
       moralizacao: 'risks_negative_reinforcement',
       conselho_prematuro: 'risks_negative_reinforcement',
       pressao_por_superacao: 'risks_negative_reinforcement',
@@ -215,7 +214,7 @@
     });
 
     if (/(inseguranca|medo).*(prova|mostra).*(incapaz|inadequad)/.test(text)) tags.add('confirms_harmful_belief');
-    if (/(vinganca|vingar|faca (todos|alguem|quem).*(pagar|sofrer))/.test(text)) tags.add('justifies_resentment');
+    if (/(vinganca (e|esta) justa|deve se vingar|devem se vingar|vingue se|busque vinganca|procure vinganca|faca (todos|alguem|quem).*(pagar|sofrer))/.test(text)) tags.add('justifies_resentment');
     if (/(afaste se de todos|ninguem merece sua companhia|sozinho e (sempre )?melhor)/.test(text)) tags.add('encourages_isolation');
     if (/(nao ha esperanca|nada (vai|pode) mudar|nao existe saida)/.test(text)) tags.add('confirms_harmful_belief');
     if (/(tristeza|dor|sofrimento).*(define quem voce e|e quem voce e|sua identidade)/.test(text)) tags.add('turns_emotion_into_identity');
@@ -748,6 +747,19 @@
         const developedShare = recentDeveloped / recentFormats.length;
         if (developedShare < 0.2 && developedCandidates.length) candidates = developedCandidates;
         if (developedShare >= 0.3 && conciseCandidates.length) candidates = conciseCandidates;
+      }
+
+      const lastTwoAuthors = recentSelections.slice(-2).map((item) => item.authorKey);
+      if (lastTwoAuthors.length === 2 && lastTwoAuthors[0] === lastTwoAuthors[1]) {
+        const differentAuthorCandidates = queuedCandidates.filter(
+          ({ content }) => getContentAuthorKey(content) !== lastTwoAuthors[0],
+        );
+        if (differentAuthorCandidates.length) {
+          const cadenceCompatible = candidates.filter(
+            ({ content }) => getContentAuthorKey(content) !== lastTwoAuthors[0],
+          );
+          candidates = cadenceCompatible.length ? cadenceCompatible : differentAuthorCandidates;
+        }
       }
 
       const recentAuthors = recentSelections.slice(-(RECENT_AUTHOR_WINDOW - 1));

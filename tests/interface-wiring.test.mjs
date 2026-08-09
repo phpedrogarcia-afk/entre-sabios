@@ -14,6 +14,7 @@ const emotionalStateScript = fs.readFileSync(path.join(rootDir, 'js', 'core', 'e
 const matchingScript = fs.readFileSync(path.join(rootDir, 'js', 'core', 'matching.js'), 'utf8');
 const feedbackScript = fs.readFileSync(path.join(rootDir, 'js', 'features', 'feedback.js'), 'utf8');
 const talesScript = fs.readFileSync(path.join(rootDir, 'js', 'features', 'tales.js'), 'utf8');
+const taleSelectionContractScript = fs.readFileSync(path.join(rootDir, 'js', 'core', 'tale-selection-contract.js'), 'utf8');
 const feelingsScript = fs.readFileSync(path.join(rootDir, 'js', 'ui', 'feelings-ui.js'), 'utf8');
 const reflectionUiScript = fs.readFileSync(path.join(rootDir, 'js', 'ui', 'reflection-ui.js'), 'utf8');
 const sharingScript = fs.readFileSync(path.join(rootDir, 'js', 'features', 'sharing.js'), 'utf8');
@@ -24,7 +25,7 @@ const tabletCss = fs.readFileSync(path.join(rootDir, 'css', 'tablet.css'), 'utf8
 
 test('HTML carrega runtime e não carrega bancos editoriais legados', () => {
   assert.match(html, /runtime-engine\.js/);
-  assert.match(html, /data\/entre_sabios_runtime\.js\?v=definitiva-2\.4/);
+  assert.match(html, /data\/entre_sabios_runtime\.js\?v=definitiva-2\.12/);
   assert.match(html, /runtime-loader\.js/);
   for (const legacy of ['authors.js', 'quotes/base.js', 'quotes/batch-', 'perspectives.js', 'content-normalizer.js']) {
     assert.ok(!html.includes(legacy), `Script legado ainda carregado: ${legacy}`);
@@ -46,31 +47,26 @@ test('interface possui estado de carregamento e não exibe preferência pessoal 
   assert.doesNotMatch(feedbackScript, /preferenceProfile\.authors/);
 });
 
-test('intensidade começa neutra e sorteia uma opção por geração sem marcar a interface', () => {
+test('intensidade saiu da interface e segue trajetória editorial interna', () => {
   const intensityInputs = [...html.matchAll(/<input[^>]+name="intensity"[^>]*>/g)].map(([input]) => input);
-  assert.equal(intensityInputs.length, 3);
-  assert.ok(intensityInputs.every((input) => !/\schecked(?:\s|\/|>)/.test(input)));
-  assert.match(html, /Como você quer receber esta reflexão\?/);
-  assert.match(html, />Delicado</);
-  assert.match(html, />Equilibrado</);
-  assert.match(html, />Profundo</);
-  assert.doesNotMatch(html, /aria-required="true"/);
-  assert.match(script, /let currentIntensity = null;/);
-  assert.match(emotionalStateScript, /function resolveGenerationIntensity\(explicitIntensity, randomSource = Math\.random\)/);
+  assert.equal(intensityInputs.length, 0);
+  assert.doesNotMatch(html, /Como você quer receber esta reflexão\?|>Delicado<|>Equilibrado<|>Profundo</);
+  assert.match(script, /const internalIntensityProgression = new Map\(\)/);
+  assert.match(emotionalStateScript, /function resolveGenerationIntensity\(progressionStep = 0\)/);
   const generationBlock = script.slice(script.indexOf('function generateReflection'), script.indexOf('function goBack'));
   const newPhraseBlock = script.slice(script.indexOf('function newPhrase'), script.indexOf('// =========================\n// Compartilhamento como imagem'));
-  assert.match(generationBlock, /resolveGenerationIntensity\(currentIntensity\)/);
+  assert.match(generationBlock, /getInternalGenerationIntensity\(\)/);
   assert.match(generationBlock, /intensity: generationIntensity/);
-  assert.match(newPhraseBlock, /resolveGenerationIntensity\(currentIntensity\)/);
+  assert.match(newPhraseBlock, /getInternalGenerationIntensity\(\)/);
   assert.match(newPhraseBlock, /intensity: generationIntensity/);
   assert.doesNotMatch(generationBlock, /hasExplicitIntensity|showIntensityHint/);
   assert.doesNotMatch(newPhraseBlock, /hasExplicitIntensity|showIntensityHint/);
 });
 
-test('conto usa Equilibrado como fallback sem marcar intensidade na interface', () => {
-  assert.match(talesScript, /function resolveTaleIntensity\(explicitIntensity = currentIntensity\)/);
-  assert.match(talesScript, /explicitIntensity == null \|\| explicitIntensity === '' \? 'moderada' : null/);
-  assert.match(talesScript, /interpretEmotionalState\(resolveTaleIntensity\(currentIntensity\)\)/);
+test('conto usa intensidade moderada interna sem controle público', () => {
+  assert.match(talesScript, /function resolveTaleIntensity\(\)/);
+  assert.match(talesScript, /return 'moderada'/);
+  assert.match(talesScript, /interpretEmotionalState\(resolveTaleIntensity\(\)\)/);
   assert.doesNotMatch(talesScript, /escolha a intensidade/i);
 });
 
@@ -79,9 +75,10 @@ test('conto abre sem sentimento e usa a seleção emocional somente como filtro 
   assert.ok(openTaleBlock, 'função de abertura do conto não encontrada');
   assert.doesNotMatch(openTaleBlock, /ensureSelectionMin|showSelectionHint|Selecione um sentimento/i);
   assert.match(openTaleBlock, /showTale\(\{ gradualVariety: false \}\)/);
-  assert.match(talesScript, /state\.primaryFeeling && taleFeelings\.includes/);
-  assert.match(talesScript, /\(state\.secondaryFeelings \|\| \[\]\)\.forEach/);
-  assert.match(talesScript, /\|\| 'sem_sentimento'/);
+  assert.match(talesScript, /taleSelectionContract\.selectTale/);
+  assert.match(taleSelectionContractScript, /state\.primaryFeeling && taleFeelings\.includes/);
+  assert.match(taleSelectionContractScript, /\(state\.secondaryFeelings \|\| \[\]\)\.forEach/);
+  assert.match(taleSelectionContractScript, /\|\| 'sem_sentimento'/);
 });
 
 test('sentimentos são montados antes do carregamento assíncrono do acervo', () => {
@@ -98,9 +95,16 @@ test('acervo incorporado habilita a reflexão sem depender de fetch local', asyn
   vm.runInNewContext(embeddedRuntimeScript, sandbox);
   vm.runInNewContext(runtimeLoaderScript, sandbox);
   const loaded = await sandbox.EntreSabiosRuntimeLoader.loadRuntimeContent();
-  assert.equal(loaded.contentVersion, 'definitiva-2.4');
-  assert.equal(loaded.contents.length, 257);
+  assert.equal(loaded.contentVersion, 'definitiva-2.12');
+  assert.equal(loaded.contents.length, 57);
   assert.equal(loaded.feelings.length, 14);
+});
+
+test('sentimentos sem cobertura V2 ficam indisponíveis como em construção', () => {
+  assert.match(feelingsScript, /input\.disabled = !hasRuntimeCoverage/);
+  assert.match(feelingsScript, /em construção na Biblioteca V2/);
+  const initBlock = script.slice(script.indexOf('async function init()'));
+  assert.ok(initBlock.lastIndexOf('initFeelings();') > initBlock.indexOf('runtimeContents = runtime.contents'));
 });
 
 test('troca de sentimento ou intensidade não apaga a rotação recente', () => {
@@ -152,7 +156,6 @@ test('renderização alterna orientação presente e ausente sem ocultar o livro
     currentStoryShownAt: 0,
     quoteTextEl: makeElement(),
     likeBtn: makeElement(),
-    dislikeBtn: makeElement(),
     favoriteBtn: makeElement(),
     explanationTitleEl: makeElement(),
     quoteAuthorEl: makeElement(),
@@ -233,7 +236,6 @@ test('apresentação de autoria, fonte e perfil evita fallbacks editoriais engan
     currentStoryShownAt: 0,
     quoteTextEl: makeElement(),
     likeBtn: makeElement(),
-    dislikeBtn: makeElement(),
     favoriteBtn: makeElement(),
     explanationTitleEl: makeElement(),
     quoteAuthorEl: makeElement(),
@@ -304,7 +306,6 @@ test('livro usa o recomendador existente e oculta somente o subbloco quando não
 });
 
 test('sentimento principal só muda por seleção inicial, remoção ou ação explícita de foco', () => {
-  const listeners = new Map();
   const selectedFeelingIds = new Set(['tristeza', 'inseguranca', 'medo']);
   const sandbox = {
     selectedFeelingIds,
@@ -312,7 +313,6 @@ test('sentimento principal só muda por seleção inicial, remoção ou ação e
     primaryFeelingAnnouncementTimer: null,
     lastSelectionSignature: 'assinatura-atual',
     currentStory: null,
-    currentIntensity: 'moderada',
     feelingsCatalog: [
       { id: 'tristeza', label: 'Tristeza' },
       { id: 'inseguranca', label: 'Insegurança' },
@@ -331,27 +331,19 @@ test('sentimento principal só muda por seleção inicial, remoção ou ação e
       appendChild(button) { this.children.push(button); },
     },
     generateBtn: { classList: { toggle() {} } },
-    motivationToggleEl: {
-      disabled: false,
-      setAttribute() {},
-      classList: { toggle() {} },
-    },
     emotionalSynthesisSummaryEl: { hidden: true, classList: { toggle() {} } },
     synthesisSecondaryFeelingsEl: { textContent: '' },
     synthesisHumanSummaryEl: { textContent: '' },
-    synthesisMotivationDirectionEl: { hidden: true },
     emotionalSynthesisResolver: {
       resolve: () => ({ profile: { humanSummary: 'Síntese de teste.', ambiguity: 'medium' } }),
     },
-    needsMotivation: false,
     selectionHintEl: { textContent: '' },
     taleHintEl: null,
-    intensityRadioEls: [{ value: 'intensa', addEventListener: (type, listener) => listeners.set(type, listener) }],
     getSelectedFeelingIds: () => [...selectedFeelingIds],
     getCurrentSelectionContract: () => ({
       primaryFeeling: sandbox.primaryFeelingId,
       secondaryFeelings: [...selectedFeelingIds].filter((id) => id !== sandbox.primaryFeelingId).slice(0, 2),
-      needsMotivation: sandbox.needsMotivation,
+      needsMotivation: false,
     }),
     normalizeTheme: (value) => value,
     window: { setTimeout: () => 1, clearTimeout() {} },
@@ -372,10 +364,6 @@ test('sentimento principal só muda por seleção inicial, remoção ou ação e
   sandbox.syncSelectedCards();
   assert.equal(sandbox.primaryFeelingId, 'tristeza', 'adicionar ou reordenar secundários mudou o principal');
 
-  sandbox.initIntensity();
-  listeners.get('change')();
-  assert.equal(sandbox.primaryFeelingId, 'tristeza', 'mudar intensidade mudou o principal');
-
   const insecurityFocus = sandbox.secondaryFeelingActionsEl.children.find((button) => button.textContent.startsWith('Insegurança'));
   insecurityFocus.click();
   assert.equal(sandbox.primaryFeelingId, 'inseguranca', 'a ação explícita de foco não mudou o principal');
@@ -392,7 +380,10 @@ test('ajustes discretos de presença, assinatura e compartilhamento da frase est
   assert.match(script, /quoteShareBtn\.addEventListener\('click',[\s\S]*?shareReflectionImage\(/);
   assert.match(sharingScript, /fillText\('entresabios\.com'/);
   assert.match(sharingScript, /fillText\('ENTRE SÁBIOS'/);
-  assert.match(componentsCss, /\.quote-share\s*\{[\s\S]*?top:\s*8px;[\s\S]*?left:\s*8px;/);
+  assert.match(html, /class="quote-actions"[\s\S]*?id="quoteShareBtn"[\s\S]*?id="favoriteBtn"[\s\S]*?id="likeBtn"/);
+  assert.match(componentsCss, /\.quote-actions\s*\{[\s\S]*?min-height:\s*54px;[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) auto auto;/);
+  assert.match(componentsCss, /\.quote-action\s*\{[\s\S]*?position:\s*relative;/);
+  assert.doesNotMatch(componentsCss, /\.quote-share\s*\{[\s\S]{0,120}?position:\s*absolute/);
   assert.match(componentsCss, /\.quote-share:focus-visible\s*\{[\s\S]*?outline:/);
 });
 
@@ -402,7 +393,7 @@ test('compartilhamento preserva escolha manual e sorteia apenas no atalho da fra
   assert.match(sharingScript, /function getRandomShareStyle\(\)[\s\S]*?Object\.keys\(shareCardThemes\)[\s\S]*?Math\.random\(\)/);
   assert.match(script, /quoteShareBtn\.addEventListener\('click',[\s\S]*?styleKey:\s*getRandomShareStyle\(\)/);
   assert.match(script, /whatsShareBtn\.addEventListener\('click',[\s\S]*?styleKey:\s*currentShareStyle/);
-  assert.match(sharingScript, /drawShareCard\(\{\s*width\s*=\s*1080,\s*height\s*=\s*1920/);
+  assert.match(sharingScript, /drawShareCard\(\{\s*width\s*=\s*1080,\s*height\s*=\s*1350/);
 });
 
 test('compartilhamento possui Web Share progressivo e download sem botão de copiar mensagem', () => {

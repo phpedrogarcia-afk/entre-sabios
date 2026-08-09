@@ -1,12 +1,12 @@
 (function initRuntimeLoader(root) {
-  const EXPECTED_VERSION = 'definitiva-2.4';
+  const EXPECTED_VERSION = 'definitiva-2.12';
   const RUNTIME_CACHE_VERSION = '20260718-cache-fix-1';
   const RUNTIME_URL = `data/entre_sabios_runtime.json?v=${encodeURIComponent(`${EXPECTED_VERSION}-${RUNTIME_CACHE_VERSION}`)}`;
 
   function validateRuntimeContent(runtime) {
     if (runtime.schemaVersion !== '1.1.0') throw new Error(`Schema incompatível: ${runtime.schemaVersion}`);
     if (runtime.contentVersion !== EXPECTED_VERSION) throw new Error(`Versão incompatível: ${runtime.contentVersion}`);
-    if (!Array.isArray(runtime.contents) || runtime.contents.length !== 257) throw new Error('Quantidade de conteúdos ativos incompatível.');
+    if (!Array.isArray(runtime.contents) || runtime.contents.length !== 57) throw new Error('Quantidade de conteúdos ativos incompatível.');
     if (!Array.isArray(runtime.feelings) || runtime.feelings.length !== 14) throw new Error('Catálogo de sentimentos incompatível.');
     if (runtime.feelings.some((feeling) => feeling.id === 'coragem')) throw new Error('Coragem não pode ser um sentimento selecionável.');
     root.EntreSabiosRuntime = runtime;

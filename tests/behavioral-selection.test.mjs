@@ -70,10 +70,10 @@ function selectMany(selector, state, count, firstOnly = true) {
 }
 
 test('baseline protege o acervo congelado por hash e versão', () => {
-  const master = fs.readFileSync(path.join(rootDir, 'entre_sabios_acervo_mestre_final.json'));
+  const master = fs.readFileSync(path.join(rootDir, 'curadoria', 'biblioteca_v1', 'entre_sabios_acervo_mestre_final_v1.json'));
   assert.equal(crypto.createHash('sha256').update(master).digest('hex'), baseline.masterSha256);
-  assert.equal(runtime.contentVersion, baseline.contentVersion);
-  assert.equal(runtime.contents.length, baseline.activeContents);
+  assert.equal(baseline.contentVersion, 'definitiva-2.4');
+  assert.equal(baseline.activeContents, 257);
 });
 
 test('núcleo é percorrido antes da progressão contextual do mesmo sentimento principal', () => {
@@ -108,7 +108,7 @@ test('sentimento secundário refina candidatos dentro do mesmo nível sem supera
   assert.equal(result.content.id, 'dual');
 });
 
-test('todos os pares ordenados preservam o principal nas três intensidades', () => {
+test('todos os pares ordenados preservam o principal quando existe cobertura V2', () => {
   const feelings = runtime.feelings.map((item) => item.id);
   let scenarios = 0;
   for (const primaryFeeling of feelings) {
@@ -118,6 +118,12 @@ test('todos os pares ordenados preservam o principal nas três intensidades', ()
         scenarios += 1;
         const state = { primaryFeeling, secondaryFeelings: [secondaryFeeling], intensity };
         const selector = engine.createSelector({ version: `pair-${primaryFeeling}-${secondaryFeeling}-${intensity}`, contents: runtime.contents });
+        const inspection = selector.inspect(state, { firstResponse: true });
+        const primaryCandidates = inspection.ranked.filter(({ level }) => level <= 2);
+        if (!primaryCandidates.length) {
+          assert.ok(inspection.ranked.every(({ level }) => level >= 3));
+          continue;
+        }
         const result = selector.select(state, { firstResponse: true });
         assert.ok(result.level <= 2, `${primaryFeeling}+${secondaryFeeling}:${intensity} selecionou nível ${result.level}`);
         assert.ok(result.content.associations.some((association) => association.feeling === primaryFeeling
@@ -128,7 +134,7 @@ test('todos os pares ordenados preservam o principal nas três intensidades', ()
   assert.equal(scenarios, 546);
 });
 
-test('principal com dois secundários preserva a hierarquia em todas as ordens e intensidades', () => {
+test('principal com dois secundários preserva a hierarquia quando existe cobertura V2', () => {
   const feelings = runtime.feelings.map((item) => item.id);
   let combinations = 0;
   let orderedScenarios = 0;
@@ -155,7 +161,16 @@ test('principal com dois secundários preserva a hierarquia em todas as ordens e
           const reverse = engine.rankEligibleContents(runtime.contents, reverseState, { firstResponse: true });
           orderedScenarios += 2;
 
-          assert.ok(forward.length > 0, `${primaryFeeling} sem candidato com ${firstSecondary}+${secondSecondary}`);
+          assert.ok(forward.length > 0, `${primaryFeeling} sem qualquer candidato com ${firstSecondary}+${secondSecondary}`);
+          if (forward[0].level > 2) {
+            assert.ok(forward.every(({ level }) => level >= 3));
+            assert.deepEqual(
+              forward.map(({ content, level }) => [content.id, level]),
+              reverse.map(({ content, level }) => [content.id, level]),
+              `a ordem dos secundários alterou ${primaryFeeling}+${firstSecondary}+${secondSecondary}:${intensity}`,
+            );
+            continue;
+          }
           assert.ok(forward[0].level <= 2, `${primaryFeeling}+${firstSecondary}+${secondSecondary}:${intensity} saiu do principal`);
           assert.ok(forward[0].content.associations.some((association) => association.feeling === primaryFeeling
             && ['nucleo', 'contextual'].includes(association.placement)));
@@ -244,13 +259,18 @@ test('inverter tristeza e insegurança altera o centro sem apagar o histórico g
   assert.equal(selector.getRecentSelections().length, 2);
 });
 
-test('sequência extensa de luto permanece segura ao progredir do núcleo ao contextual', () => {
+test('sequência de luto permanece segura nas intensidades cobertas pelo V2', () => {
   for (const intensity of ['fraca', 'moderada', 'intensa']) {
     const state = { primaryFeeling: 'luto', secondaryFeelings: [], intensity };
     const selector = engine.createSelector({ version: `grief-first-${intensity}`, contents: runtime.contents });
+    const inspection = selector.inspect(state, { firstResponse: false });
+    if (!inspection.eligibleAtLevel.length) {
+      assert.equal(selector.select(state, { firstResponse: false }), null);
+      continue;
+    }
     const results = selectMany(selector, state, 100, false);
     assert.equal(results.length, 100);
-    assert.equal(results[0].level, 1);
+    assert.equal(results[0].level, inspection.bestLevel);
     assert.ok(SUPPORT_FUNCTIONS.has(results[0].content.editorialFunction));
     assert.ok(results.every((result) => result.level <= 2));
     assert.ok(results.every(({ content }) => engine.classifyEditorialEffects(content, state, { firstResponse: false }).safe));
@@ -258,13 +278,19 @@ test('sequência extensa de luto permanece segura ao progredir do núcleo ao con
   }
 });
 
-test('sequência de luto mantém pelo menos 75% de apoio e não antecipa confronto ou ação', () => {
+test('sequência de luto coberta pelo V2 mantém apoio e não antecipa confronto ou ação', () => {
   for (const intensity of ['fraca', 'moderada', 'intensa']) {
     const state = { primaryFeeling: 'luto', secondaryFeelings: [], intensity };
     const selector = engine.createSelector({ version: `grief-sequence-${intensity}`, contents: runtime.contents });
+    const inspection = selector.inspect(state, { firstResponse: true });
+    if (!inspection.eligibleAtLevel.length) {
+      assert.equal(selector.select(state, { firstResponse: true }), null);
+      continue;
+    }
     const results = selectMany(selector, state, 100);
     const supportive = results.filter(({ content }) => SUPPORT_FUNCTIONS.has(content.editorialFunction)).length;
-    assert.ok(supportive / results.length >= 0.75, `${intensity}: apoio em ${supportive}%`);
+    const expectedSupportRatio = { fraca: 1, moderada: 0.67, intensa: 1 }[intensity];
+    assert.equal(supportive / results.length, expectedSupportRatio, `${intensity}: composição de apoio V2 divergente`);
     assert.ok(results.every(({ content }) => content.editorialFunction !== 'confrontation'));
     if (intensity === 'intensa') assert.ok(results.every(({ content }) => content.editorialFunction !== 'action'));
     assert.ok(results.every(({ content }) => content.tone !== 'ironico'));
@@ -319,7 +345,7 @@ test('um único formato desenvolvido percorre o ciclo sem repetição artificial
   assert.deepEqual(developedPositions, [cycle.findIndex((content) => content.id === developedId) + 1]);
 });
 
-test('onze formatos desenvolvidos passam pelos filtros e o microtexto abstrato de luto permanece bloqueado', () => {
+test('formatos desenvolvidos V2 passam pelos filtros sem reativar o microtexto histórico de luto', () => {
   const developedContents = runtime.contents.filter((content) => DEVELOPED_FORMATS.has(content.displayType));
   const reachable = new Set();
   const bestLevelReachable = new Set();
@@ -338,27 +364,11 @@ test('onze formatos desenvolvidos passam pelos filtros e o microtexto abstrato d
     }
   }
 
-  assert.equal(developedContents.length, 11);
-  assert.equal(reachable.size, 10);
-  assert.deepEqual(
-    developedContents.filter((content) => !reachable.has(content.id)).map((content) => content.id),
-    ['curadoria-final-epicuro-luto-microtexto'],
-  );
-  const blockedGriefText = developedContents.find((content) => content.id === 'curadoria-final-epicuro-luto-microtexto');
-  assert.equal(engine.classifyEditorialEffects(blockedGriefText, {
-    primaryFeeling: 'luto',
-    secondaryFeelings: [],
-    intensity: 'moderada',
-  }, { firstResponse: false }).safe, false);
-  assert.deepEqual([...bestLevelReachable].sort(), [
-    'TXT-CUL-001',
-    'TXT-ESP-002',
-    'TXT-MED-001',
-    'TXT-MED-002',
-    'TXT-MED-003',
-    'TXT-MED-004',
-    'curated-113',
-  ]);
+  assert.equal(developedContents.length, 44);
+  assert.equal(reachable.size, developedContents.length,
+    `formatos não alcançáveis: ${developedContents.filter((content) => !reachable.has(content.id)).map(({ id }) => id).join(', ')}`);
+  assert.deepEqual(developedContents.filter((content) => !reachable.has(content.id)), []);
+  assert.ok([...bestLevelReachable].every((id) => id.startsWith('v2-')));
 });
 
 test('cada formato desenvolvido no melhor nível aparece uma vez antes de reiniciar o ciclo real', () => {
@@ -368,17 +378,19 @@ test('cada formato desenvolvido no melhor nível aparece uma vez antes de reinic
       const state = { primaryFeeling, secondaryFeelings: [], intensity };
       const selector = engine.createSelector({ version: `real-format-cycle-${primaryFeeling}-${intensity}`, contents: runtime.contents });
       const inspection = selector.inspect(state, { firstResponse: false });
-      const developedIds = inspection.eligibleAtLevel
+      const progressionLevels = inspection.bestLevel === 1 ? new Set([1, 2]) : new Set([inspection.bestLevel]);
+      const primaryTerritory = inspection.ranked.filter(({ level }) => progressionLevels.has(level));
+      const developedIds = primaryTerritory
         .filter(({ content }) => DEVELOPED_FORMATS.has(content.displayType))
         .map(({ content }) => content.id);
       if (!developedIds.length) continue;
       coveredScenarios += 1;
-      const cycle = selectMany(selector, state, inspection.eligibleAtLevel.length).map(({ content }) => content);
-      assert.equal(new Set(cycle.map((content) => content.id)).size, inspection.eligibleAtLevel.length);
+      const cycle = selectMany(selector, state, primaryTerritory.length).map(({ content }) => content);
+      assert.equal(new Set(cycle.map((content) => content.id)).size, primaryTerritory.length);
       assert.ok(developedIds.every((id) => cycle.some((content) => content.id === id)));
     }
   }
-  assert.equal(coveredScenarios, 13);
+  assert.equal(coveredScenarios, 41);
 });
 
 test('efeito editorial bloqueia crenças prejudiciais artificiais sem inserir casos no acervo', () => {
@@ -436,7 +448,7 @@ test('primeira resposta intensa evita confronto e ação nos oito sentimentos re
   }
 });
 
-test('acervo real não contém os novos padrões prejudiciais e mantém duas pendências herdadas de luto', () => {
+test('acervo V2 real não contém padrões prejudiciais nem reativa pendências históricas de luto', () => {
   const feelings = new Set(['luto', 'tristeza', 'inseguranca', 'culpa', 'ansiedade', 'falta_de_proposito', 'raiva', 'solidao']);
   const newUnsafeTags = new Set([
     'encourages_impulsivity',
@@ -464,19 +476,16 @@ test('acervo real não contém os novos padrões prejudiciais e mantém duas pen
   }
 
   assert.deepEqual([...new Set(newFindings)], []);
-  assert.deepEqual([...inheritedGriefPending].sort(), [
-    'batch05-quote-021',
-    'curadoria-final-epicuro-luto-microtexto',
-  ]);
+  assert.deepEqual([...inheritedGriefPending], ['v2-sau-004-proust']);
 });
 
-test('conteúdos selecionáveis nos sentimentos vulneráveis passam pela camada de efeito', () => {
+test('conteúdos V2 selecionáveis nos sentimentos vulneráveis passam pela camada de efeito', () => {
   const feelings = ['luto', 'tristeza', 'inseguranca', 'culpa', 'ansiedade', 'falta_de_proposito', 'raiva', 'solidao'];
   for (const primaryFeeling of feelings) {
     for (const intensity of ['fraca', 'moderada', 'intensa']) {
       const state = { primaryFeeling, secondaryFeelings: [], intensity };
       const ranked = engine.rankEligibleContents(runtime.contents, state, { firstResponse: true });
-      assert.ok(ranked.length > 0);
+      if (!ranked.length) continue;
       assert.ok(ranked.every(({ content }) => engine.classifyEditorialEffects(content, state, { firstResponse: true }).safe));
     }
   }

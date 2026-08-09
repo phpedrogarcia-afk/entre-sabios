@@ -5,7 +5,7 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const master = JSON.parse(fs.readFileSync(path.join(rootDir, 'entre_sabios_acervo_mestre_final.json'), 'utf8'));
+const master = JSON.parse(fs.readFileSync(path.join(rootDir, 'curadoria', 'biblioteca_v1', 'entre_sabios_acervo_mestre_final_v1.json'), 'utf8'));
 const audit = JSON.parse(fs.readFileSync(path.join(rootDir, 'docs', 'AUDITORIA_PROVENIENCIA_COMPLETA_2026-07-18.json'), 'utf8'));
 
 test('auditoria de proveniência cobre individualmente os 351 IDs históricos', () => {

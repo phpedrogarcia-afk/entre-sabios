@@ -20,11 +20,11 @@ test('fluxo principal carrega sentimentos e gera outra perspectiva sem erro', as
   page.on('pageerror', (error) => pageErrors.push(error.message));
   await openReadyPage(page);
 
-  await expect(page.locator('input[name="intensity"]:checked')).toHaveCount(0);
+  await expect(page.locator('input[name="intensity"]')).toHaveCount(0);
+  await expect(page.getByText('Preciso de motivação')).toHaveCount(0);
   await page.locator('#feelingsGrid .feeling').first().click();
   await expect(page.locator('#generateBtn')).toBeEnabled();
   await page.locator('#generateBtn').click();
-  await expect(page.locator('input[name="intensity"]:checked')).toHaveCount(0);
 
   const quote = page.locator('#quoteText');
   await expect(quote).not.toContainText('Como você está se sentindo hoje?');
@@ -32,6 +32,21 @@ test('fluxo principal carrega sentimentos e gera outra perspectiva sem erro', as
   await page.locator('#newBtn').click();
   await expect(quote).not.toHaveText(firstText ?? '');
   expect(pageErrors).toEqual([]);
+});
+
+test('um, dois e três sentimentos preservam síntese específica e recarga', async ({ page }) => {
+  await openReadyPage(page);
+  const feelings = page.locator('#feelingsGrid .feeling');
+  await feelings.nth(0).click();
+  await expect(page.locator('#emotionalSynthesisSummary')).toBeHidden();
+  await feelings.nth(1).click();
+  await expect(page.locator('#emotionalSynthesisSummary .synthesis-title'))
+    .toHaveText('Quando esses sentimentos se encontram');
+  await feelings.nth(2).click();
+  await expect(page.locator('#primaryFeelingControl')).toBeVisible();
+  await page.reload();
+  await expect(page.locator('input[name="intensity"]')).toHaveCount(0);
+  await expect(page.getByText('Preciso de motivação')).toHaveCount(0);
 });
 
 for (const viewport of viewports) {
@@ -50,11 +65,10 @@ test('conto abre sem sentimento no smartphone e possui área rolável até o fin
   await page.setViewportSize({ width: 390, height: 844 });
   await openReadyPage(page);
   await expect(page.locator('#feelingsGrid .feeling[aria-pressed="true"]')).toHaveCount(0);
-  await expect(page.locator('input[name="intensity"]:checked')).toHaveCount(0);
+  await expect(page.locator('input[name="intensity"]')).toHaveCount(0);
   await page.locator('#openTaleBtn').click();
   await expect(page.locator('#taleDialog')).toHaveAttribute('open', '');
   await expect(page.locator('#feelingsGrid .feeling[aria-pressed="true"]')).toHaveCount(0);
-  await expect(page.locator('input[name="intensity"]:checked')).toHaveCount(0);
   await expect(page.locator('#taleTitle')).not.toHaveText('—');
   await expect(page.locator('#taleText p')).not.toHaveCount(0);
   await expect(page.locator('#taleLesson p')).not.toHaveCount(0);

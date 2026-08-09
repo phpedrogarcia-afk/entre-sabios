@@ -14,7 +14,7 @@ function updateBookRecommendation(story) {
     bookReasonEl.textContent = '';
     return;
   }
-  const { book, score, reasons, commonThemes = [] } = recommendation;
+  const { book, score, reasons, commonThemes = [], specificLink } = recommendation;
   story.book = book;
   story.livro = book.title;
   story.bookCompatibilityScore = score;
@@ -34,7 +34,15 @@ function updateBookRecommendation(story) {
   const authorText = recommendation.sameAuthor
     ? `A obra é do próprio autor associado ao conteúdo, mas foi indicada também por essa relação temática.`
     : '';
-  bookReasonEl.textContent = [book.description, connectionText, authorText].filter(Boolean).join(' ');
+  const editorialConnection = specificLink
+    ? [
+      specificLink.whyItMatches && `Por que este livro? ${specificLink.whyItMatches}`,
+      specificLink.whatReaderFinds && `O que o leitor encontrará? ${specificLink.whatReaderFinds}`,
+      specificLink.whereToStart && `Por onde começar? ${specificLink.whereToStart}`,
+    ].filter(Boolean).join(' ')
+    : '';
+  bookReasonEl.textContent = editorialConnection
+    || [book.description, connectionText, authorText].filter(Boolean).join(' ');
 }
 
 function prettifyTag(s) {
@@ -59,24 +67,47 @@ function getPhilosophyHeading(story) {
     : 'CONHEÇA O PENSADOR';
 }
 
+function renderQuoteCopy(story, isLongText) {
+  const copy = isLongText ? story.quote : `“${story.quote}”`;
+  const paragraphs = copy.split(/\r?\n[ \t]*\r?\n/).filter((paragraph) => paragraph.trim());
+  quoteTextEl.classList.toggle('has-paragraphs', paragraphs.length > 1);
+
+  if (paragraphs.length <= 1) {
+    quoteTextEl.textContent = copy;
+    return;
+  }
+
+  quoteTextEl.textContent = '';
+  paragraphs.forEach((paragraph) => {
+    const paragraphEl = document.createElement('span');
+    paragraphEl.className = 'quote-paragraph';
+    paragraphEl.textContent = paragraph;
+    quoteTextEl.appendChild(paragraphEl);
+  });
+}
+
 function renderStory(story) {
   currentStory = story;
   currentStoryShownAt = Date.now();
   quoteTextEl.classList.remove('invitation');
   likeBtn.disabled = false;
-  dislikeBtn.disabled = false;
   favoriteBtn.disabled = false;
   const isLongText = story.contentType === 'text';
-  quoteTextEl.textContent = isLongText ? story.quote : `“${story.quote}”`;
+  renderQuoteCopy(story, isLongText);
   quoteTextEl.classList.toggle('long-quote', story.quote.length > 180);
+  quoteTextEl.classList.toggle('quote-microtext', isLongText);
   explanationTitleEl.textContent = isLongText
     ? 'O QUE ESTE TEXTO QUER DIZER'
     : 'O QUE ESSA FRASE QUER DIZER';
   story.attribution = buildStoryAttribution(story);
   quoteAuthorEl.textContent = `— ${story.attribution}`;
   const sourceTitle = String(story.source?.title || '').trim();
+  const sourceSection = String(story.source?.section || '').trim();
+  const sourceTranslator = String(story.source?.translator || '').trim();
   quoteSourceEl.hidden = !sourceTitle;
-  quoteSourceEl.textContent = sourceTitle ? `Fonte: ${sourceTitle}` : '';
+  quoteSourceEl.textContent = sourceTitle
+    ? `Fonte: ${[sourceTitle, sourceSection, sourceTranslator].filter(Boolean).join(' · ')}`
+    : '';
   const hasSpecificExplanation = Boolean(String(story.reflection || '').trim());
   explanationBlockEl.hidden = !hasSpecificExplanation;
   reflectionTextEl.textContent = hasSpecificExplanation ? story.reflection : '';

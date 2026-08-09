@@ -1,0 +1,1066 @@
+{
+  "generatedAt": "2026-07-26T02:21:59.802Z",
+  "contentVersion": "definitiva-2.4",
+  "synthesis": {
+    "specificPairs": [
+      "amor__inseguranca",
+      "amor__medo",
+      "amor__saudade",
+      "ansiedade__autoconhecimento",
+      "ansiedade__medo",
+      "autoconhecimento__ansiedade",
+      "autoconhecimento__confusao",
+      "autoconhecimento__inseguranca",
+      "confusao__autoconhecimento",
+      "confusao__falta_de_proposito",
+      "culpa__raiva",
+      "culpa__tristeza",
+      "esperanca__falta_de_proposito",
+      "esperanca__luto",
+      "falta_de_proposito__confusao",
+      "falta_de_proposito__esperanca",
+      "falta_de_proposito__inseguranca",
+      "inseguranca__amor",
+      "inseguranca__autoconhecimento",
+      "luto__esperanca",
+      "luto__saudade",
+      "medo__amor",
+      "medo__ansiedade",
+      "raiva__culpa",
+      "saudade__amor",
+      "saudade__luto",
+      "solidao__tristeza",
+      "tristeza__culpa",
+      "tristeza__solidao"
+    ],
+    "specificTriads": [
+      "autoconhecimento__confusao__inseguranca"
+    ],
+    "fallbackPairs": [
+      "amor__ansiedade",
+      "amor__autoconhecimento",
+      "amor__confusao",
+      "amor__culpa",
+      "amor__esperanca",
+      "amor__falta_de_proposito",
+      "amor__luto",
+      "amor__raiva",
+      "amor__solidao",
+      "amor__tristeza",
+      "ansiedade__amor",
+      "ansiedade__confusao",
+      "ansiedade__culpa",
+      "ansiedade__esperanca",
+      "ansiedade__falta_de_proposito",
+      "ansiedade__inseguranca",
+      "ansiedade__luto",
+      "ansiedade__raiva",
+      "ansiedade__saudade",
+      "ansiedade__solidao",
+      "ansiedade__tristeza",
+      "autoconhecimento__amor",
+      "autoconhecimento__culpa",
+      "autoconhecimento__esperanca",
+      "autoconhecimento__falta_de_proposito",
+      "autoconhecimento__luto",
+      "autoconhecimento__medo",
+      "autoconhecimento__raiva",
+      "autoconhecimento__saudade",
+      "autoconhecimento__solidao",
+      "autoconhecimento__tristeza",
+      "confusao__amor",
+      "confusao__ansiedade",
+      "confusao__culpa",
+      "confusao__esperanca",
+      "confusao__inseguranca",
+      "confusao__luto",
+      "confusao__medo",
+      "confusao__raiva",
+      "confusao__saudade",
+      "confusao__solidao",
+      "confusao__tristeza",
+      "culpa__amor",
+      "culpa__ansiedade",
+      "culpa__autoconhecimento",
+      "culpa__confusao",
+      "culpa__esperanca",
+      "culpa__falta_de_proposito",
+      "culpa__inseguranca",
+      "culpa__luto",
+      "culpa__medo",
+      "culpa__saudade",
+      "culpa__solidao",
+      "esperanca__amor",
+      "esperanca__ansiedade",
+      "esperanca__autoconhecimento",
+      "esperanca__confusao",
+      "esperanca__culpa",
+      "esperanca__inseguranca",
+      "esperanca__medo",
+      "esperanca__raiva",
+      "esperanca__saudade",
+      "esperanca__solidao",
+      "esperanca__tristeza",
+      "falta_de_proposito__amor",
+      "falta_de_proposito__ansiedade",
+      "falta_de_proposito__autoconhecimento",
+      "falta_de_proposito__culpa",
+      "falta_de_proposito__luto",
+      "falta_de_proposito__medo",
+      "falta_de_proposito__raiva",
+      "falta_de_proposito__saudade",
+      "falta_de_proposito__solidao",
+      "falta_de_proposito__tristeza",
+      "inseguranca__ansiedade",
+      "inseguranca__confusao",
+      "inseguranca__culpa",
+      "inseguranca__esperanca",
+      "inseguranca__falta_de_proposito",
+      "inseguranca__luto",
+      "inseguranca__medo",
+      "inseguranca__raiva",
+      "inseguranca__saudade",
+      "inseguranca__solidao",
+      "inseguranca__tristeza",
+      "luto__amor",
+      "luto__ansiedade",
+      "luto__autoconhecimento",
+      "luto__confusao",
+      "luto__culpa",
+      "luto__falta_de_proposito",
+      "luto__inseguranca",
+      "luto__medo",
+      "luto__raiva",
+      "luto__solidao",
+      "luto__tristeza",
+      "medo__autoconhecimento",
+      "medo__confusao",
+      "medo__culpa",
+      "medo__esperanca",
+      "medo__falta_de_proposito",
+      "medo__inseguranca",
+      "medo__luto",
+      "medo__raiva",
+      "medo__saudade",
+      "medo__solidao",
+      "medo__tristeza",
+      "raiva__amor",
+      "raiva__ansiedade",
+      "raiva__autoconhecimento",
+      "raiva__confusao",
+      "raiva__esperanca",
+      "raiva__falta_de_proposito",
+      "raiva__inseguranca",
+      "raiva__luto",
+      "raiva__medo",
+      "raiva__saudade",
+      "raiva__solidao",
+      "raiva__tristeza",
+      "saudade__ansiedade",
+      "saudade__autoconhecimento",
+      "saudade__confusao",
+      "saudade__culpa",
+      "saudade__esperanca",
+      "saudade__falta_de_proposito",
+      "saudade__inseguranca",
+      "saudade__medo",
+      "saudade__raiva",
+      "saudade__solidao",
+      "saudade__tristeza",
+      "solidao__amor",
+      "solidao__ansiedade",
+      "solidao__autoconhecimento",
+      "solidao__confusao",
+      "solidao__culpa",
+      "solidao__esperanca",
+      "solidao__falta_de_proposito",
+      "solidao__inseguranca",
+      "solidao__luto",
+      "solidao__medo",
+      "solidao__raiva",
+      "solidao__saudade",
+      "tristeza__amor",
+      "tristeza__ansiedade",
+      "tristeza__autoconhecimento",
+      "tristeza__confusao",
+      "tristeza__esperanca",
+      "tristeza__falta_de_proposito",
+      "tristeza__inseguranca",
+      "tristeza__luto",
+      "tristeza__medo",
+      "tristeza__raiva",
+      "tristeza__saudade"
+    ],
+    "fallbackPolicy": "Combinações sem síntese específica ficam ocultas na interface."
+  },
+  "gapsByFeeling": {
+    "ansiedade": {
+      "totalEligible": 27,
+      "nucleus": 3,
+      "contextual": 24,
+      "formats": {
+        "frase": 24,
+        "citacao_curta": 2,
+        "citacao_longa": 0,
+        "microtexto": 1,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "clarification": 8,
+        "contemplation": 12,
+        "grounding": 2,
+        "recognition": 2,
+        "reframing": 3
+      },
+      "authors": [
+        "Autoria preservada — inspirado na Litania contra o Medo, de Frank Herbert",
+        "Autoria preservada — inspirado nos temas de treinamento mental e disciplina da água em Duna, de Frank Herbert",
+        "Entre Sábios, inspirado em Alan Watts",
+        "Entre Sábios, inspirado em Bardo Thodol",
+        "Entre Sábios, inspirado em Bayo Akomolafe",
+        "Entre Sábios, inspirado em Clarice Lispector",
+        "Entre Sábios, inspirado em Confúcio",
+        "Entre Sábios, inspirado em Dhammapada",
+        "Entre Sábios, inspirado em Epicteto",
+        "Entre Sábios, inspirado em Henry David Thoreau",
+        "Entre Sábios, inspirado em Heráclito",
+        "Entre Sábios, inspirado em Jean-Paul Sartre",
+        "Entre Sábios, inspirado em Jiddu Krishnamurti",
+        "Entre Sábios, inspirado em Katha Upanishad",
+        "Entre Sábios, inspirado em Krishnamurti",
+        "Entre Sábios, inspirado em Lao-Tsé",
+        "Entre Sábios, inspirado em Marco Aurélio",
+        "Entre Sábios, inspirado em Michel de Montaigne",
+        "Entre Sábios, inspirado em Nisargadatta Maharaj",
+        "Epicteto",
+        "Kierkegaard"
+      ],
+      "intensityCoverage": {
+        "fraca": 24,
+        "moderada": 27,
+        "intensa": 8
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "amor",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        },
+        {
+          "secondary": "esperanca",
+          "territory": 0
+        },
+        {
+          "secondary": "luto",
+          "territory": 0
+        },
+        {
+          "secondary": "raiva",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 8
+    },
+    "medo": {
+      "totalEligible": 18,
+      "nucleus": 6,
+      "contextual": 12,
+      "formats": {
+        "frase": 12,
+        "citacao_curta": 1,
+        "citacao_longa": 1,
+        "microtexto": 4,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "action": 1,
+        "clarification": 5,
+        "confrontation": 2,
+        "contemplation": 6,
+        "recognition": 4
+      },
+      "authors": [
+        "Adaptação de trecho de Rubem Alves, em Religião e Repressão",
+        "Autoria não identificada",
+        "Autoria preservada — inspirado na Litania contra o Medo, de Frank Herbert",
+        "Entre Sábios, inspirado em Aristóteles",
+        "Entre Sábios, inspirado em Audre Lorde",
+        "Entre Sábios, inspirado em Buda — Sutta Nipata",
+        "Entre Sábios, inspirado em Jiddu Krishnamurti",
+        "Entre Sábios, inspirado em Kierkegaard",
+        "Entre Sábios, inspirado em Michel de Montaigne",
+        "Entre Sábios, inspirado em Rainer Maria Rilke",
+        "Entre Sábios, inspirado em Ramana Maharshi",
+        "Entre Sábios, inspirado em Thich Nhat Hanh",
+        "Epicuro",
+        "François de La Rochefoucauld",
+        "Inspirado em Søren Kierkegaard — autoria não identificada"
+      ],
+      "intensityCoverage": {
+        "fraca": 12,
+        "moderada": 18,
+        "intensa": 7
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "autoconhecimento",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        },
+        {
+          "secondary": "raiva",
+          "territory": 0
+        },
+        {
+          "secondary": "saudade",
+          "territory": 0
+        },
+        {
+          "secondary": "solidao",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 7
+    },
+    "amor": {
+      "totalEligible": 27,
+      "nucleus": 5,
+      "contextual": 22,
+      "formats": {
+        "frase": 25,
+        "citacao_curta": 1,
+        "citacao_longa": 0,
+        "microtexto": 1,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "action": 3,
+        "clarification": 3,
+        "contemplation": 4,
+        "recognition": 9,
+        "reframing": 8
+      },
+      "authors": [
+        "Adaptação de texto de autoria preservada",
+        "Entre Sábios, inspirado em Audre Lorde",
+        "Entre Sábios, inspirado em bell hooks",
+        "Entre Sábios, inspirado em Buda — Sutta Nipata",
+        "Entre Sábios, inspirado em C. S. Lewis",
+        "Entre Sábios, inspirado em Clarice Lispector",
+        "Entre Sábios, inspirado em Erich Fromm",
+        "Entre Sábios, inspirado em Khalil Gibran",
+        "Entre Sábios, inspirado em Luce Irigaray",
+        "Entre Sábios, inspirado em Machado de Assis",
+        "Entre Sábios, inspirado em Mary Oliver",
+        "Entre Sábios, inspirado em Milan Kundera",
+        "Entre Sábios, inspirado em Mirabai",
+        "Entre Sábios, inspirado em Rainer Maria Rilke",
+        "Entre Sábios, inspirado em Rumi",
+        "Entre Sábios, inspirado em Schopenhauer",
+        "Entre Sábios, inspirado em Simone Weil",
+        "François de La Rochefoucauld"
+      ],
+      "intensityCoverage": {
+        "fraca": 15,
+        "moderada": 27,
+        "intensa": 19
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "ansiedade",
+          "territory": 0
+        },
+        {
+          "secondary": "confusao",
+          "territory": 0
+        },
+        {
+          "secondary": "esperanca",
+          "territory": 0
+        },
+        {
+          "secondary": "falta_de_proposito",
+          "territory": 0
+        },
+        {
+          "secondary": "luto",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 15
+    },
+    "saudade": {
+      "totalEligible": 12,
+      "nucleus": 7,
+      "contextual": 5,
+      "formats": {
+        "frase": 10,
+        "citacao_curta": 0,
+        "citacao_longa": 0,
+        "microtexto": 1,
+        "reflexao_curta": 1
+      },
+      "editorialFunctions": {
+        "clarification": 1,
+        "contemplation": 1,
+        "recognition": 10
+      },
+      "authors": [
+        "Entre Sábios, inspirado em C. S. Lewis",
+        "Entre Sábios, inspirado em Emily Dickinson",
+        "Entre Sábios, inspirado em Fernando Pessoa",
+        "Entre Sábios, inspirado em Heráclito",
+        "Entre Sábios, inspirado em Joan Didion",
+        "Entre Sábios, inspirado em Mia Couto",
+        "Entre Sábios, inspirado em Rumi"
+      ],
+      "intensityCoverage": {
+        "fraca": 12,
+        "moderada": 12,
+        "intensa": 10
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "ansiedade",
+          "territory": 0
+        },
+        {
+          "secondary": "autoconhecimento",
+          "territory": 0
+        },
+        {
+          "secondary": "confusao",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        },
+        {
+          "secondary": "esperanca",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 10
+    },
+    "esperanca": {
+      "totalEligible": 18,
+      "nucleus": 3,
+      "contextual": 15,
+      "formats": {
+        "frase": 14,
+        "citacao_curta": 3,
+        "citacao_longa": 0,
+        "microtexto": 1,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "clarification": 3,
+        "contemplation": 7,
+        "recognition": 2,
+        "reframing": 6
+      },
+      "authors": [
+        "Autoria preservada — inspirado em reflexão de Richard Dawkins, em Desvendando o arco-íris",
+        "Entre Sábios, inspirado em Clarice Lispector",
+        "Entre Sábios, inspirado em Confúcio",
+        "Entre Sábios, inspirado em Dostoiévski",
+        "Entre Sábios, inspirado em Emily Dickinson",
+        "Entre Sábios, inspirado em Henry David Thoreau",
+        "Entre Sábios, inspirado em Kierkegaard",
+        "Entre Sábios, inspirado em Maya Angelou",
+        "Entre Sábios, inspirado em Mia Couto",
+        "Entre Sábios, inspirado em Ralph Waldo Emerson",
+        "Entre Sábios, inspirado em Sabedoria suméria",
+        "Entre Sábios, inspirado em Thich Nhat Hanh",
+        "Entre Sábios, inspirado em Viktor Frankl",
+        "François de La Rochefoucauld",
+        "Friedrich Nietzsche"
+      ],
+      "intensityCoverage": {
+        "fraca": 14,
+        "moderada": 18,
+        "intensa": 4
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "amor",
+          "territory": 0
+        },
+        {
+          "secondary": "ansiedade",
+          "territory": 0
+        },
+        {
+          "secondary": "autoconhecimento",
+          "territory": 0
+        },
+        {
+          "secondary": "confusao",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 4
+    },
+    "solidao": {
+      "totalEligible": 7,
+      "nucleus": 2,
+      "contextual": 5,
+      "formats": {
+        "frase": 7,
+        "citacao_curta": 0,
+        "citacao_longa": 0,
+        "microtexto": 0,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "clarification": 2,
+        "contemplation": 1,
+        "recognition": 2,
+        "reframing": 2
+      },
+      "authors": [
+        "Entre Sábios, inspirado em Clarice Lispector",
+        "Entre Sábios, inspirado em Epicuro",
+        "Entre Sábios, inspirado em Joan Didion",
+        "Entre Sábios, inspirado em Malidoma Somé",
+        "Entre Sábios, inspirado em Milan Kundera",
+        "Entre Sábios, inspirado em Schopenhauer",
+        "Entre Sábios, inspirado em Simone Weil"
+      ],
+      "intensityCoverage": {
+        "fraca": 7,
+        "moderada": 7,
+        "intensa": 4
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "ansiedade",
+          "territory": 0
+        },
+        {
+          "secondary": "autoconhecimento",
+          "territory": 0
+        },
+        {
+          "secondary": "confusao",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        },
+        {
+          "secondary": "esperanca",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 4
+    },
+    "autoconhecimento": {
+      "totalEligible": 43,
+      "nucleus": 4,
+      "contextual": 39,
+      "formats": {
+        "frase": 39,
+        "citacao_curta": 3,
+        "citacao_longa": 0,
+        "microtexto": 1,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "action": 4,
+        "clarification": 5,
+        "confrontation": 3,
+        "contemplation": 23,
+        "inquiry": 1,
+        "recognition": 3,
+        "reframing": 4
+      },
+      "authors": [
+        "Adaptação de texto de autoria preservada",
+        "Autoria preservada — inspirado nos temas de sobrevivência e consciência do ciclo de Duna, de Frank Herbert",
+        "Entre Sábios, inspirado em Aristóteles",
+        "Entre Sábios, inspirado em Audre Lorde",
+        "Entre Sábios, inspirado em Bardo Thodol",
+        "Entre Sábios, inspirado em Carl Jung",
+        "Entre Sábios, inspirado em Confúcio",
+        "Entre Sábios, inspirado em Dhammapada",
+        "Entre Sábios, inspirado em Fernando Pessoa",
+        "Entre Sábios, inspirado em Hannah Arendt",
+        "Entre Sábios, inspirado em Heráclito",
+        "Entre Sábios, inspirado em Jiddu Krishnamurti",
+        "Entre Sábios, inspirado em Katha Upanishad",
+        "Entre Sábios, inspirado em Kierkegaard",
+        "Entre Sábios, inspirado em Krishnamurti",
+        "Entre Sábios, inspirado em Michel de Montaigne",
+        "Entre Sábios, inspirado em Milarepa",
+        "Entre Sábios, inspirado em Nisargadatta Maharaj",
+        "Entre Sábios, inspirado em Platão",
+        "Entre Sábios, inspirado em Ptahhotep",
+        "Entre Sábios, inspirado em Rainer Maria Rilke",
+        "Entre Sábios, inspirado em Ralph Waldo Emerson",
+        "Entre Sábios, inspirado em Ramana Maharshi",
+        "Entre Sábios, inspirado em Rumi",
+        "Entre Sábios, inspirado em Simone Weil",
+        "Entre Sábios, inspirado em Sócrates",
+        "Entre Sábios, inspirado em Virginia Woolf",
+        "Epicteto",
+        "Fórmula de Píndaro retomada por Friedrich Nietzsche",
+        "François de La Rochefoucauld",
+        "Friedrich Nietzsche"
+      ],
+      "intensityCoverage": {
+        "fraca": 34,
+        "moderada": 43,
+        "intensa": 8
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "esperanca",
+          "territory": 0
+        },
+        {
+          "secondary": "falta_de_proposito",
+          "territory": 0
+        },
+        {
+          "secondary": "luto",
+          "territory": 0
+        },
+        {
+          "secondary": "medo",
+          "territory": 0
+        },
+        {
+          "secondary": "raiva",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 8
+    },
+    "confusao": {
+      "totalEligible": 20,
+      "nucleus": 1,
+      "contextual": 19,
+      "formats": {
+        "frase": 19,
+        "citacao_curta": 1,
+        "citacao_longa": 0,
+        "microtexto": 0,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "clarification": 2,
+        "confrontation": 1,
+        "contemplation": 14,
+        "recognition": 1,
+        "reframing": 2
+      },
+      "authors": [
+        "Entre Sábios, inspirado em Alan Watts",
+        "Entre Sábios, inspirado em Aristóteles",
+        "Entre Sábios, inspirado em Bardo Thodol",
+        "Entre Sábios, inspirado em Clarice Lispector",
+        "Entre Sábios, inspirado em Confúcio",
+        "Entre Sábios, inspirado em Fernando Pessoa",
+        "Entre Sábios, inspirado em Henry David Thoreau",
+        "Entre Sábios, inspirado em Heráclito",
+        "Entre Sábios, inspirado em Jean-Paul Sartre",
+        "Entre Sábios, inspirado em Katha Upanishad",
+        "Entre Sábios, inspirado em Lao-Tsé",
+        "Entre Sábios, inspirado em Lev Shestov",
+        "Entre Sábios, inspirado em Marco Aurélio",
+        "Entre Sábios, inspirado em Michel de Montaigne",
+        "Entre Sábios, inspirado em Nelson Rodrigues",
+        "Entre Sábios, inspirado em Platão",
+        "Entre Sábios, inspirado em Rainer Maria Rilke",
+        "Entre Sábios, inspirado em Schopenhauer",
+        "Friedrich Nietzsche"
+      ],
+      "intensityCoverage": {
+        "fraca": 18,
+        "moderada": 20,
+        "intensa": 4
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "amor",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        },
+        {
+          "secondary": "esperanca",
+          "territory": 0
+        },
+        {
+          "secondary": "inseguranca",
+          "territory": 0
+        },
+        {
+          "secondary": "luto",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 4
+    },
+    "inseguranca": {
+      "totalEligible": 9,
+      "nucleus": 2,
+      "contextual": 7,
+      "formats": {
+        "frase": 5,
+        "citacao_curta": 1,
+        "citacao_longa": 0,
+        "microtexto": 3,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "clarification": 2,
+        "confrontation": 2,
+        "contemplation": 2,
+        "recognition": 3
+      },
+      "authors": [
+        "Adaptação de trecho de Rubem Alves, em Religião e Repressão",
+        "Autoria não identificada",
+        "Entre Sábios, inspirado em Epicteto",
+        "Entre Sábios, inspirado em Jiddu Krishnamurti",
+        "Entre Sábios, inspirado em Katha Upanishad",
+        "Entre Sábios, inspirado em Machado de Assis",
+        "Entre Sábios, inspirado em Simone Weil",
+        "François de La Rochefoucauld",
+        "Inspirado em Søren Kierkegaard — autoria não identificada"
+      ],
+      "intensityCoverage": {
+        "fraca": 8,
+        "moderada": 9,
+        "intensa": 4
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "confusao",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        },
+        {
+          "secondary": "esperanca",
+          "territory": 0
+        },
+        {
+          "secondary": "luto",
+          "territory": 0
+        },
+        {
+          "secondary": "raiva",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 4
+    },
+    "raiva": {
+      "totalEligible": 12,
+      "nucleus": 2,
+      "contextual": 10,
+      "formats": {
+        "frase": 11,
+        "citacao_curta": 0,
+        "citacao_longa": 0,
+        "microtexto": 0,
+        "reflexao_curta": 1
+      },
+      "editorialFunctions": {
+        "clarification": 3,
+        "contemplation": 4,
+        "recognition": 2,
+        "reframing": 3
+      },
+      "authors": [
+        "Entre Sábios, inspirado em Albert Camus",
+        "Entre Sábios, inspirado em Aristóteles",
+        "Entre Sábios, inspirado em Audre Lorde",
+        "Entre Sábios, inspirado em Buda — Sutta Nipata",
+        "Entre Sábios, inspirado em Carl Jung",
+        "Entre Sábios, inspirado em Dhammapada",
+        "Entre Sábios, inspirado em Epicteto",
+        "Entre Sábios, inspirado em Hannah Arendt",
+        "Entre Sábios, inspirado em Henry David Thoreau",
+        "Entre Sábios, inspirado em Thich Nhat Hanh"
+      ],
+      "intensityCoverage": {
+        "fraca": 8,
+        "moderada": 12,
+        "intensa": 7
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "amor",
+          "territory": 0
+        },
+        {
+          "secondary": "ansiedade",
+          "territory": 0
+        },
+        {
+          "secondary": "autoconhecimento",
+          "territory": 0
+        },
+        {
+          "secondary": "confusao",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 7
+    },
+    "culpa": {
+      "totalEligible": 12,
+      "nucleus": 2,
+      "contextual": 10,
+      "formats": {
+        "frase": 11,
+        "citacao_curta": 0,
+        "citacao_longa": 0,
+        "microtexto": 1,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "clarification": 3,
+        "contemplation": 6,
+        "recognition": 2,
+        "reframing": 1
+      },
+      "authors": [
+        "Adaptação de texto de autoria preservada",
+        "Entre Sábios, inspirado em Dostoiévski",
+        "Entre Sábios, inspirado em Epicteto",
+        "Entre Sábios, inspirado em Gabor Maté",
+        "Entre Sábios, inspirado em Maya Angelou",
+        "Entre Sábios, inspirado em Nelson Mandela",
+        "Entre Sábios, inspirado em Sabedoria suméria",
+        "Entre Sábios, inspirado em Simone Weil"
+      ],
+      "intensityCoverage": {
+        "fraca": 11,
+        "moderada": 12,
+        "intensa": 4
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "ansiedade",
+          "territory": 0
+        },
+        {
+          "secondary": "confusao",
+          "territory": 0
+        },
+        {
+          "secondary": "esperanca",
+          "territory": 0
+        },
+        {
+          "secondary": "falta_de_proposito",
+          "territory": 0
+        },
+        {
+          "secondary": "inseguranca",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 4
+    },
+    "luto": {
+      "totalEligible": 8,
+      "nucleus": 4,
+      "contextual": 4,
+      "formats": {
+        "frase": 4,
+        "citacao_curta": 0,
+        "citacao_longa": 1,
+        "microtexto": 2,
+        "reflexao_curta": 1
+      },
+      "editorialFunctions": {
+        "clarification": 2,
+        "contemplation": 1,
+        "recognition": 5
+      },
+      "authors": [
+        "Entre Sábios, inspirado em C. S. Lewis",
+        "Entre Sábios, inspirado em Emily Dickinson",
+        "Entre Sábios, inspirado em Epicuro",
+        "Entre Sábios, inspirado em Joan Didion",
+        "Entre Sábios, inspirado em Malidoma Somé",
+        "Entre Sábios, inspirado em Mia Couto",
+        "Epicuro"
+      ],
+      "intensityCoverage": {
+        "fraca": 8,
+        "moderada": 8,
+        "intensa": 5
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "amor",
+          "territory": 0
+        },
+        {
+          "secondary": "ansiedade",
+          "territory": 0
+        },
+        {
+          "secondary": "autoconhecimento",
+          "territory": 0
+        },
+        {
+          "secondary": "confusao",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 5
+    },
+    "tristeza": {
+      "totalEligible": 12,
+      "nucleus": 0,
+      "contextual": 12,
+      "formats": {
+        "frase": 12,
+        "citacao_curta": 0,
+        "citacao_longa": 0,
+        "microtexto": 0,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "clarification": 1,
+        "contemplation": 7,
+        "recognition": 1,
+        "reframing": 3
+      },
+      "authors": [
+        "Entre Sábios, inspirado em Anandamayi Ma",
+        "Entre Sábios, inspirado em Dhammapada",
+        "Entre Sábios, inspirado em Dostoiévski",
+        "Entre Sábios, inspirado em Fernando Pessoa",
+        "Entre Sábios, inspirado em Gabor Maté",
+        "Entre Sábios, inspirado em Khalil Gibran",
+        "Entre Sábios, inspirado em Mary Oliver",
+        "Entre Sábios, inspirado em Maya Angelou",
+        "Entre Sábios, inspirado em Pema Chödrön",
+        "Entre Sábios, inspirado em Rainer Maria Rilke",
+        "Entre Sábios, inspirado em Thich Nhat Hanh"
+      ],
+      "intensityCoverage": {
+        "fraca": 12,
+        "moderada": 12,
+        "intensa": 2
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "amor",
+          "territory": 0
+        },
+        {
+          "secondary": "ansiedade",
+          "territory": 0
+        },
+        {
+          "secondary": "autoconhecimento",
+          "territory": 0
+        },
+        {
+          "secondary": "falta_de_proposito",
+          "territory": 0
+        },
+        {
+          "secondary": "inseguranca",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 2
+    },
+    "falta_de_proposito": {
+      "totalEligible": 14,
+      "nucleus": 0,
+      "contextual": 14,
+      "formats": {
+        "frase": 10,
+        "citacao_curta": 1,
+        "citacao_longa": 0,
+        "microtexto": 3,
+        "reflexao_curta": 0
+      },
+      "editorialFunctions": {
+        "clarification": 2,
+        "confrontation": 2,
+        "contemplation": 4,
+        "reframing": 6
+      },
+      "authors": [
+        "Adaptação de trecho de Rubem Alves, em Religião e Repressão",
+        "Autoria preservada — inspirado em reflexão de Richard Dawkins, em Desvendando o arco-íris",
+        "Autoria preservada — inspirado nos temas de treinamento mental e disciplina da água em Duna, de Frank Herbert",
+        "Entre Sábios, inspirado em Alan Watts",
+        "Entre Sábios, inspirado em Albert Camus",
+        "Entre Sábios, inspirado em Henry David Thoreau",
+        "Entre Sábios, inspirado em Lev Shestov",
+        "Entre Sábios, inspirado em Platão",
+        "Entre Sábios, inspirado em Rumi",
+        "Entre Sábios, inspirado em Sêneca",
+        "Entre Sábios, inspirado em Viktor Frankl",
+        "Friedrich Nietzsche",
+        "Inspirado em Søren Kierkegaard — autoria não identificada"
+      ],
+      "intensityCoverage": {
+        "fraca": 10,
+        "moderada": 14,
+        "intensa": 4
+      },
+      "priorityCombinations": [
+        {
+          "secondary": "amor",
+          "territory": 0
+        },
+        {
+          "secondary": "autoconhecimento",
+          "territory": 0
+        },
+        {
+          "secondary": "culpa",
+          "territory": 0
+        },
+        {
+          "secondary": "luto",
+          "territory": 0
+        },
+        {
+          "secondary": "raiva",
+          "territory": 0
+        }
+      ],
+      "availableBeforeRepeat": 4
+    }
+  }
+}

@@ -11,7 +11,7 @@ const parse = (relative) => JSON.parse(read(relative));
 const hash = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const map = parse('docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.json');
 const report = read('docs/INVENTARIO_HISTORICO_MAPA_PROVENIENCIA_2026-07-22.md');
-const masterText = read('entre_sabios_acervo_mestre_final.json');
+const masterText = read('curadoria/biblioteca_v1/entre_sabios_acervo_mestre_final_v1.json');
 const master = JSON.parse(masterText);
 const audit = parse('docs/AUDITORIA_PROVENIENCIA_COMPLETA_2026-07-18.json');
 
@@ -48,9 +48,12 @@ test('relatório expõe as seções de preservação e a condição de parada', 
 });
 
 test('mapa preserva estado atual e impressões digitais sem editar o acervo', () => {
+  const manifest = parse('curadoria/biblioteca_v1/MANIFESTO_BIBLIOTECA_V1.json');
+  const frozenRuntimeJson = execFileSync('git', ['show', `${manifest.sourceCommit}:data/entre_sabios_runtime.json`], { cwd: rootDir, encoding: 'utf8' });
+  const frozenRuntimeJs = execFileSync('git', ['show', `${manifest.sourceCommit}:data/entre_sabios_runtime.js`], { cwd: rootDir, encoding: 'utf8' });
   assert.equal(map.fingerprints.masterSha256, hash(masterText));
-  assert.equal(map.fingerprints.runtimeJsonSha256, hash(read('data/entre_sabios_runtime.json')));
-  assert.equal(map.fingerprints.runtimeJsSha256, hash(read('data/entre_sabios_runtime.js')));
+  assert.equal(map.fingerprints.runtimeJsonSha256, hash(frozenRuntimeJson));
+  assert.equal(map.fingerprints.runtimeJsSha256, hash(frozenRuntimeJs));
   const currentById = new Map(master.contents.map((content) => [content.id, content]));
   for (const record of map.records) {
     const current = currentById.get(record.id);

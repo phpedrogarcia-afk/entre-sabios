@@ -53,7 +53,7 @@ test('contrato do build, mestre, runtime e loader permanece sincronizado', () =>
   assert.equal(master.contentVersion, EXPECTED.contentVersion);
   assert.equal(runtime.schemaVersion, EXPECTED.schemaVersion);
   assert.equal(runtime.contentVersion, EXPECTED.contentVersion);
-  assert.equal(runtime.contents.length, EXPECTED.active);
+  assert.equal(runtime.contents.length, EXPECTED.runtimeActive);
 
   const context = loadBrowserData('js/core/runtime-loader.js');
   assert.equal(context.EntreSabiosRuntimeLoader.EXPECTED_VERSION, EXPECTED.contentVersion);

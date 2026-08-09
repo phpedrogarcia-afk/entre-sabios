@@ -1,0 +1,339 @@
+{
+  "packageId": "CORRECAO-V2-001",
+  "title": "Recomendações dos 27 conteúdos V2 iniciais e recuração de Krishnamurti",
+  "status": "aprovado_para_integracao_tecnica",
+  "operationMode": "patch_existing_records_only",
+  "baseline": {
+    "masterRecordsExpected": 384,
+    "runtimeRecordsExpected": 33,
+    "runtimeVersionExpected": "definitiva-2.8",
+    "v1EligibleExpected": 0,
+    "v1LibraryRecordsExpected": 351,
+    "v1LibrarySha256Expected": "be72c04474e85ac27a26313bb23ba2dca10ab50f8fd6cf102d4e78599b46365e"
+  },
+  "constraints": {
+    "preserveIds": true,
+    "createNewContent": false,
+    "createBooks": false,
+    "modifyBookCatalog": false,
+    "changeCounts": false,
+    "changeRuntimeVersion": false,
+    "changeAlgorithm": false,
+    "changeRanking": false,
+    "changeSafety": false,
+    "changeInterface": false,
+    "changeRecommender": false,
+    "commitPushMergePublish": false
+  },
+  "bookRecommendations": [
+    {
+      "contentId": "v2-tri-001-rilke",
+      "bookTitle": "Cartas a um jovem poeta",
+      "bookAuthor": "Rainer Maria Rilke",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A passagem nasce das cartas em que Rilke acompanha tristeza, solidão, medo e amadurecimento interior sem consolo automático.",
+      "whatReaderFinds": "Cartas sobre criação, espera, solidão, sofrimento e formação interior.",
+      "whereToStart": "Carta de 12 de agosto de 1904.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-tri-002-tagore",
+      "bookTitle": "Fruit-Gathering",
+      "bookAuthor": "Rabindranath Tagore",
+      "relationType": "fonte_direta",
+      "whyItMatches": "O poema transforma sofrimento em pedido de força para atravessá-lo, sem negar a dor.",
+      "whatReaderFinds": "Poemas espirituais e contemplativos sobre perda, entrega, coragem e relação com a existência.",
+      "whereToStart": "Poema LXXIX.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-tri-003-nietzsche",
+      "bookTitle": "Aurora",
+      "bookAuthor": "Friedrich Nietzsche",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A imagem da manhã e da libertação prolonga a passagem aprovada sobre atravessar a escuridão sem tratá-la como destino final.",
+      "whatReaderFinds": "Aforismos sobre moral, hábitos, liberdade, consciência e transformação dos valores.",
+      "whereToStart": "Prefácio, seção 1.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-sol-001-pessoa",
+      "bookTitle": "O Livro do Desassossego",
+      "bookAuthor": "Fernando Pessoa / Bernardo Soares",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A obra desenvolve a solidão de quem observa a própria vida à distância e não encontra repouso nem na companhia nem no isolamento.",
+      "whatReaderFinds": "Fragmentos sobre consciência, rotina, sonho, solidão, cansaço e multiplicidade interior.",
+      "whereToStart": "Fragmento 234 na organização usada pela fonte.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-sol-002-krishnamurti",
+      "bookTitle": "Comentários sobre o Viver",
+      "bookAuthor": "Jiddu Krishnamurti",
+      "relationType": "recomendacao_tematica",
+      "whyItMatches": "A fonte direta é uma conversa; o livro reúne investigações semelhantes sobre isolamento, relacionamento e dependência psicológica.",
+      "whatReaderFinds": "Diálogos e observações sobre medo, solidão, comparação, relacionamento e autoconhecimento.",
+      "whereToStart": "Entradas sobre solidão, isolamento e relacionamento.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-sol-003-rilke",
+      "bookTitle": "Cartas a um jovem poeta",
+      "bookAuthor": "Rainer Maria Rilke",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A passagem pertence à defesa rilkeana da solidão como espaço de amadurecimento, não apenas como abandono.",
+      "whatReaderFinds": "Uma reflexão continuada sobre solidão, criação, paciência e formação interior.",
+      "whereToStart": "Carta de 16 de julho de 1903.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-ans-001-seneca",
+      "bookTitle": "Cartas a Lucílio",
+      "bookAuthor": "Sêneca",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A obra desenvolve a diferença entre o acontecimento presente e o sofrimento produzido pela antecipação.",
+      "whatReaderFinds": "Cartas sobre medo, tempo, morte, amizade, disciplina e serenidade prática.",
+      "whereToStart": "Carta 13.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-ans-002-krishnamurti",
+      "bookTitle": "O Livro da Vida",
+      "bookAuthor": "Jiddu Krishnamurti",
+      "relationType": "recomendacao_tematica",
+      "whyItMatches": "A fonte direta é uma conversa; o livro oferece investigações breves sobre pensamento, futuro, medo e ansiedade.",
+      "whatReaderFinds": "Meditações diárias sobre atenção, medo, pensamento, relacionamento e liberdade interior.",
+      "whereToStart": "Textos sobre medo, pensamento e tempo psicológico.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-ans-003-gita",
+      "bookTitle": "Bhagavad Gita",
+      "bookAuthor": "Bhagavad Gita",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A recomendação mantém o verso dentro do diálogo entre ação, dever, apego ao resultado e discernimento.",
+      "whatReaderFinds": "Um diálogo sobre ação, conflito, conhecimento, disciplina e libertação do apego aos frutos.",
+      "whereToStart": "Capítulo 2, especialmente o verso 47 e seu contexto.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-med-001-montaigne",
+      "bookTitle": "Ensaios",
+      "bookAuthor": "Michel de Montaigne",
+      "relationType": "fonte_direta",
+      "whyItMatches": "O ensaio investiga como o medo altera percepção, conduta e julgamento antes mesmo de o perigo agir.",
+      "whatReaderFinds": "Investigações pessoais sobre medo, morte, costume, experiência e contradição humana.",
+      "whereToStart": "Livro I, capítulo XVII — Do medo.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-med-002-krishnamurti",
+      "bookTitle": "A Primeira e Última Liberdade",
+      "bookAuthor": "Jiddu Krishnamurti",
+      "relationType": "recomendacao_tematica",
+      "whyItMatches": "A fonte direta é uma conversa; o livro amplia a investigação sobre fuga, condicionamento e observação do medo.",
+      "whatReaderFinds": "Reflexões sobre medo, crença, autoridade, autoconhecimento e liberdade psicológica.",
+      "whereToStart": "Seções dedicadas ao medo e ao autoconhecimento.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-med-003-epicteto",
+      "bookTitle": "Manual de Epicteto",
+      "bookAuthor": "Epicteto",
+      "relationType": "fonte_direta",
+      "whyItMatches": "O livro desenvolve a distinção entre fatos, julgamentos e aquilo que depende ou não de nós.",
+      "whatReaderFinds": "Ensinamentos concisos sobre julgamento, perda, liberdade, medo e domínio de si.",
+      "whereToStart": "Seção V.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-med-004-rilke-dragoes",
+      "bookTitle": "Cartas a um jovem poeta",
+      "bookAuthor": "Rainer Maria Rilke",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A carta contém a imagem dos dragões e a interpretação do medo como algo que talvez também peça compreensão.",
+      "whatReaderFinds": "Cartas sobre criação, solidão, medo, amor e amadurecimento.",
+      "whereToStart": "Carta de 12 de agosto de 1904.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-med-005-epicuro",
+      "bookTitle": "Carta a Meneceu",
+      "bookAuthor": "Epicuro",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A recomendação preserva o argumento sobre a morte no contexto de uma vida serena e de desejos examinados.",
+      "whatReaderFinds": "Uma exposição breve sobre prazer, prudência, desejos, deuses e medo da morte.",
+      "whereToStart": "Seções 124–125.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-med-006-nietzsche",
+      "bookTitle": "Assim Falou Zaratustra",
+      "bookAuthor": "Friedrich Nietzsche",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A passagem sobre coragem pertence ao movimento da obra que confronta medo, abismo, criação e superação de antigas medidas.",
+      "whatReaderFinds": "Uma obra poético-filosófica sobre transformação, coragem, valores, solidão e criação.",
+      "whereToStart": "Quarta parte, 'Do homem superior', §4; o Prólogo ajuda a compreender a voz de Zaratustra.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-ins-001-epicteto",
+      "bookTitle": "Manual de Epicteto",
+      "bookAuthor": "Epicteto",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A seção aprovada trabalha o medo de parecer incapaz enquanto se aprende.",
+      "whatReaderFinds": "Exercícios de discernimento sobre opinião alheia, liberdade, aprendizagem e responsabilidade.",
+      "whereToStart": "Seção XIII.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-ins-002-dostoievski",
+      "bookTitle": "Memórias do Subsolo",
+      "bookAuthor": "Fiódor Dostoiévski",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A obra desenvolve a consciência excessiva que observa, contradiz e paralisa a própria ação.",
+      "whatReaderFinds": "Uma voz ficcional marcada por ressentimento, autoengano, humilhação, lucidez e contradição.",
+      "whereToStart": "Parte I, capítulo II.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-ins-003-marco-aurelio",
+      "bookTitle": "Meditações",
+      "bookAuthor": "Marco Aurélio",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A passagem questiona por que damos à opinião externa mais autoridade do que ao próprio julgamento.",
+      "whatReaderFinds": "Anotações sobre opinião, dever, mortalidade, atenção e governo de si.",
+      "whereToStart": "Livro XII, seção 4.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-con-001-rilke",
+      "bookTitle": "Cartas a um jovem poeta",
+      "bookAuthor": "Rainer Maria Rilke",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A carta sustenta a paciência diante de perguntas ainda não resolvidas, sem fabricar resposta prematura.",
+      "whatReaderFinds": "Reflexões sobre espera, dúvida, criação, amor e solidão.",
+      "whereToStart": "Carta de 16 de julho de 1903.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-con-002-gita",
+      "bookTitle": "Bhagavad Gita",
+      "bookAuthor": "Bhagavad Gita",
+      "relationType": "fonte_direta",
+      "whyItMatches": "O verso está no momento em que Arjuna admite que já não consegue discernir sozinho o caminho correto.",
+      "whatReaderFinds": "Um diálogo sobre conflito moral, ação, conhecimento e responsabilidade.",
+      "whereToStart": "Capítulo 2, verso 7, lendo também os versos anteriores.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-con-003-krishnamurti",
+      "bookTitle": "Comentários sobre o Viver",
+      "bookAuthor": "Jiddu Krishnamurti",
+      "relationType": "recomendacao_tematica",
+      "whyItMatches": "A fonte direta é a conversa de Saanen; o livro reúne investigações semelhantes sobre confusão, observação e ação sem clareza.",
+      "whatReaderFinds": "Diálogos sobre medo, escolha, conflito, relacionamento e observação da mente.",
+      "whereToStart": "Entradas sobre confusão, escolha e observação; consultar também a conversa-fonte de 31 de julho de 1970.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-cul-001-dhammapada",
+      "bookTitle": "Dhammapada",
+      "bookAuthor": "Dhammapada",
+      "relationType": "fonte_direta",
+      "whyItMatches": "Os versos ligam arrependimento à transformação das ações, em vez de autopunição interminável.",
+      "whatReaderFinds": "Versos sobre atenção, ação, mente, sofrimento, responsabilidade e transformação.",
+      "whereToStart": "Versos 172–173.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-cul-002-nietzsche",
+      "bookTitle": "Genealogia da Moral",
+      "bookAuthor": "Friedrich Nietzsche",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A obra investiga historicamente a culpa e a má consciência como forças voltadas para dentro.",
+      "whatReaderFinds": "Uma crítica genealógica da culpa, punição, promessa, ressentimento e moralidade.",
+      "whereToStart": "Segunda dissertação, seção 16.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-cul-003-arendt",
+      "bookTitle": "A Condição Humana",
+      "bookAuthor": "Hannah Arendt",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A passagem situa o perdão como resposta à irreversibilidade da ação e à possibilidade de alguém ficar preso a um único ato.",
+      "whatReaderFinds": "Uma investigação sobre trabalho, obra, ação, pluralidade, promessa e perdão.",
+      "whereToStart": "Parte V, seção 33.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-rai-001-seneca",
+      "bookTitle": "Sobre a Ira",
+      "bookAuthor": "Sêneca",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A obra desenvolve a ideia de interromper a reação antes que a raiva se converta em ação e hábito.",
+      "whatReaderFinds": "Uma análise da origem, crescimento, consequências e possíveis freios da ira.",
+      "whereToStart": "Livro II, capítulo XXIX.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-rai-002-aristoteles",
+      "bookTitle": "Retórica",
+      "bookAuthor": "Aristóteles",
+      "relationType": "fonte_direta",
+      "whyItMatches": "A obra define a raiva em relação à dor, à ofensa percebida e ao desejo de retribuição.",
+      "whatReaderFinds": "Uma análise de emoções, persuasão, caráter e julgamento em situações públicas.",
+      "whereToStart": "Livro II, capítulo 2.",
+      "catalogAction": "reutilizar"
+    },
+    {
+      "contentId": "v2-rai-003-gita",
+      "bookTitle": "Bhagavad Gita",
+      "bookAuthor": "Bhagavad Gita",
+      "relationType": "fonte_direta",
+      "whyItMatches": "O verso integra a raiva numa sequência que mostra a perda progressiva de memória e discernimento.",
+      "whatReaderFinds": "Um diálogo sobre desejo, apego, raiva, ação e clareza.",
+      "whereToStart": "Capítulo 2, verso 63, lendo a sequência iniciada no verso 62.",
+      "catalogAction": "reutilizar"
+    }
+  ],
+  "recurations": [
+    {
+      "contentId": "v2-con-003-krishnamurti",
+      "matchBeforePatch": {
+        "text": "Qualquer movimento que nasce da confusão conduz a mais confusão.",
+        "sourceTitle": "How do you know you are confused?"
+      },
+      "replace": {
+        "text": "Quando você percebe que está perdido numa floresta, a primeira coisa a fazer é parar, olhar ao redor e observar. Continuar correndo de um caminho para outro apenas aumenta a desorientação.\n\nCom a confusão interior acontece o mesmo: toda ação que nasce dela tende a produzir mais confusão. Primeiro, pare e observe.",
+        "editorialExplanation": "Talvez você esteja tentando decidir depressa porque não suporta continuar sem resposta. Uma escolha pode oferecer alívio imediato: finalmente existe uma direção e a sensação de paralisia diminui. Mas movimento não é necessariamente clareza.\n\nVocê pode trocar de caminho e carregar consigo a mesma pressa, o mesmo medo e as mesmas contradições que tornavam a escolha confusa.\n\nParar não significa abandonar responsabilidades nem esperar passivamente que a vida resolva tudo. Significa não transformar a urgência de escapar da dúvida em autoridade para decidir.\n\nNa floresta, você para para recuperar referências: de onde veio, quais caminhos já percorreu, onde está a luz, que sons consegue ouvir e o que realmente existe ao redor.\n\nInteriormente, observar pode signific reconhecer o que você teme perder, qual resposta deseja ouvir, que pressão está tornando tudo urgente, quais escolhas são reais e quais foram criadas apenas pelo medo de permanecer sem solução.\n\nA clareza não nasce porque alguém ordenou que a mente ficasse quieta. Ela pode surgir quando a mente percebe, por si mesma, que continuar correndo apenas prolongará a desorientação.",
+        "editorialQuestion": "Você precisa realmente decidir agora — ou precisa primeiro parar de correr entre respostas?",
+        "safetyNote": "Não incentivar passividade em urgências, perigos concretos ou decisões com prazo real. Parar significa recuperar referências antes de agir, não abandonar responsabilidades.",
+        "source": {
+          "title": "How do you know you are confused?",
+          "location": "Segunda conversa com estudantes, Saanen, 31 de julho de 1970",
+          "url": "https://www.krishnamurti.org/transcript/how-do-you-know-you-are-confused/",
+          "verificationStatus": "verificada",
+          "editorialNote": "Passagem traduzida e condensada a partir da analogia da floresta. Não apresentar como transcrição literal integral."
+        },
+        "attributionHandling": {
+          "preserveValidSchemaEnum": true,
+          "requiredDisclosure": "traduzida e condensada",
+          "doNotPresentAsExactFullQuotation": true
+        },
+        "bookRecommendationTitle": "Comentários sobre o Viver"
+      }
+    }
+  ],
+  "acceptance": {
+    "bookRecommendationLinksExpected": 27,
+    "recuratedIdsExpected": [
+      "v2-con-003-krishnamurti"
+    ],
+    "masterRecordsAfter": 384,
+    "runtimeRecordsAfter": 33,
+    "runtimeVersionAfter": "definitiva-2.8",
+    "v1EligibleAfter": 0,
+    "verifyMustPass": true
+  }
+}

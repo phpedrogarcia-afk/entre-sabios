@@ -1,6 +1,6 @@
 // Recomendação hierárquica de livros alinhada ao conteúdo e ao sentimento principal.
 function getStoryIntensity(story) {
-  return story.emotionalState?.intensity || currentIntensity || 'moderada';
+  return story.emotionalState?.intensity || 'moderada';
 }
 
 function getStoryFeelings(story) {
@@ -78,6 +78,25 @@ function getRecentRecommendedBookTitles(limit = 4) {
 }
 
 function recommendBookForStory(story) {
+  const specificLink = story.bookRecommendation;
+  if (specificLink?.bookTitle) {
+    const linkedBooks = normalizedBookCatalog.filter(
+      (book) => normalizeTheme(book.title) === normalizeTheme(specificLink.bookTitle),
+    );
+    if (linkedBooks.length === 1) {
+      const linked = evaluateBookCandidate(linkedBooks[0], story);
+      return {
+        ...linked,
+        isEligible: true,
+        hasSubstantiveRelation: true,
+        score: null,
+        commonThemes: Array.from(new Set([...linked.rootThemeMatches, ...linked.contentThemeMatches])),
+        specificLink,
+      };
+    } else {
+      console.error(`[Entre Sabios] Livro vinculado ausente ou ambiguo para ${story.key || 'conteudo sem id'}: ${specificLink.bookTitle}`);
+    }
+  }
   const ranked = normalizedBookCatalog
     .map((book) => evaluateBookCandidate(book, story))
     .filter((candidate) => candidate.isEligible)

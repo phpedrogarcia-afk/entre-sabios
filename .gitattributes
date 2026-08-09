@@ -1,0 +1,12 @@
+# Textual sources and generated inventories are hashed byte-for-byte by tests.
+* text=auto eol=lf
+
+# Raster assets and archives must never receive line-ending conversion.
+*.gif -text
+*.ico -text
+*.jpeg -text
+*.jpg -text
+*.pdf -text
+*.png -text
+*.webp -text
+*.zip -text

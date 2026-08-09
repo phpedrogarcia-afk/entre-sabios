@@ -33,7 +33,6 @@ function createInterfaceSandbox(initialContract) {
   const sandbox = {
     selectedFeelingIds: new Set([contract.primaryFeeling, ...(contract.secondaryFeelings || [])].filter(Boolean)),
     primaryFeelingId: contract.primaryFeeling,
-    needsMotivation: contract.needsMotivation === true,
     feelingsCatalog: Object.entries(labels).map(([id, label]) => ({ id, label })),
     emotionalSynthesisResolver: resolver,
     emotionalSynthesisSummaryEl: {
@@ -42,14 +41,12 @@ function createInterfaceSandbox(initialContract) {
     },
     synthesisSecondaryFeelingsEl: { textContent: '' },
     synthesisHumanSummaryEl: { textContent: '' },
-    synthesisMotivationDirectionEl: { hidden: true },
     classes,
     normalizeTheme: (value) => value,
     getCurrentSelectionContract: () => ({ ...contract }),
     setContract(next) {
       contract = { ...next };
       this.primaryFeelingId = contract.primaryFeeling;
-      this.needsMotivation = contract.needsMotivation === true;
     },
   };
   vm.createContext(sandbox);
@@ -60,8 +57,8 @@ function createInterfaceSandbox(initialContract) {
 test('bloco possui semântica própria e não se confunde com a explicação da frase', () => {
   assert.match(html, /id="emotionalSynthesisSummary"[^>]*role="status"[^>]*aria-live="polite"[^>]*aria-atomic="true"[^>]*hidden/);
   assert.match(html, /Também presentes:\s*<span id="synthesisSecondaryFeelings">/);
-  assert.match(html, /O que isso pode estar revelando:/);
-  assert.match(html, /Você também busca: um impulso para continuar\./);
+  assert.match(html, /Quando esses sentimentos se encontram/);
+  assert.doesNotMatch(html, /Você também busca: um impulso para continuar\./);
   assert.ok(html.indexOf('id="emotionalSynthesisSummary"') < html.indexOf('id="generateBtn"'));
   assert.notEqual(html.indexOf('id="emotionalSynthesisSummary"'), html.indexOf('id="explanationBlock"'));
 });
@@ -79,15 +76,7 @@ test('par aprovado mostra secundário e descrição humana sem termos técnicos'
   assert.equal(sandbox.emotionalSynthesisSummaryEl.hidden, false);
   assert.equal(sandbox.synthesisSecondaryFeelingsEl.textContent, 'Saudade');
   assert.equal(sandbox.synthesisHumanSummaryEl.textContent, catalog.directionalPairs.luto__saudade.humanSummary);
-  assert.equal(sandbox.synthesisMotivationDirectionEl.hidden, true);
   assert.doesNotMatch(sandbox.synthesisHumanSummaryEl.textContent, /fallback|confiança|ambiguidade|tema|score|algoritmo/i);
-});
-
-test('motivação acrescenta somente a linha discreta da escolha do usuário', () => {
-  const sandbox = createInterfaceSandbox({ primaryFeeling: 'amor', secondaryFeelings: ['medo'], needsMotivation: true });
-  sandbox.renderEmotionalSynthesis();
-  assert.equal(sandbox.synthesisMotivationDirectionEl.hidden, false);
-  assert.equal(sandbox.synthesisHumanSummaryEl.textContent, catalog.directionalPairs.amor__medo.humanSummary);
 });
 
 test('troca do principal recalcula direção sem alterar os demais sentimentos', () => {
@@ -115,11 +104,11 @@ test('tríade usa os dois secundários e independe da ordem entre eles', () => {
   assert.equal(first.synthesisHumanSummaryEl.textContent, inverted.synthesisHumanSummaryEl.textContent);
 });
 
-test('combinação sem par específico apresenta fallback cauteloso com menor autoridade', () => {
+test('combinação sem par específico não apresenta fallback como síntese específica', () => {
   const sandbox = createInterfaceSandbox({ primaryFeeling: 'raiva', secondaryFeelings: ['amor'], needsMotivation: false });
   sandbox.renderEmotionalSynthesis();
-  assert.equal(sandbox.emotionalSynthesisSummaryEl.hidden, false);
-  assert.equal(sandbox.synthesisHumanSummaryEl.textContent, catalog.fallbackProfiles.cautious.humanSummary);
+  assert.equal(sandbox.emotionalSynthesisSummaryEl.hidden, true);
+  assert.equal(sandbox.synthesisHumanSummaryEl.textContent, '');
   assert.ok(sandbox.classes.has('is-ambiguous'));
 });
 

@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const runtime = JSON.parse(fs.readFileSync(path.join(rootDir, 'data', 'entre_sabios_runtime.json'), 'utf8'));
 const master = JSON.parse(fs.readFileSync(path.join(rootDir, 'entre_sabios_acervo_mestre_final.json'), 'utf8'));
+const activeMasterContents = master.contents.filter((content) => content.publicationEnabled);
 const script = fs.readFileSync(path.join(rootDir, 'script.js'), 'utf8');
 const reflectionUi = fs.readFileSync(path.join(rootDir, 'js', 'ui', 'reflection-ui.js'), 'utf8');
 const catalogSandbox = { window: {} };
@@ -29,7 +30,7 @@ test('originais artificiais sem base saem do runtime e inspirações em sábios 
   const masterById = new Map(master.contents.map((content) => [content.id, content]));
   const entreSabiosOriginals = originals.filter((content) => content.displayedAuthor === 'Entre Sábios');
   assert.equal(entreSabiosOriginals.length, 0);
-  assert.equal(originals.length, 1);
+  assert.equal(originals.length, 0);
   const retiredUnbased = ['Reflexão contemporânea-1', 'Reflexão contemporânea-2', 'ES-INS-VERGONHA-001', 'Reflexão contemporânea-4'];
   for (const id of retiredUnbased) {
     const content = masterById.get(id);
@@ -38,11 +39,11 @@ test('originais artificiais sem base saem do runtime e inspirações em sábios 
     assert.equal(content?.changeType, 'unbased_ai_original_removal');
     assert.match(content?.changeReason || '', /IA sem base autoral/);
   }
-  const machado = runtime.contents.find((content) => content.id === 'batch04-quote-038');
+  const machado = activeMasterContents.find((content) => content.id === 'batch04-quote-038');
   assert.equal(machado?.finalText, 'O ciúme costuma escrever romances inteiros com meia linha de realidade.');
   assert.equal(machado?.attributionType, 'inspired');
   assert.equal(machado?.displayedAuthor, 'Entre Sábios, inspirado em Machado de Assis');
-  const unidentified = originals.find((content) => content.id === 'TXT-MED-003');
+  const unidentified = activeMasterContents.find((content) => content.id === 'TXT-MED-003');
   assert.equal(unidentified?.author, 'Autoria não identificada');
   assert.equal(unidentified?.displayedAuthor, 'Autoria não identificada');
   assert.doesNotMatch(masterById.get('TXT-MED-003')?.source?.notes || '', /original do Entre Sábios/i);
@@ -53,7 +54,7 @@ test('originais artificiais sem base saem do runtime e inspirações em sábios 
 });
 
 test('frase transformada de Duna preserva essência, autoria e fonte sem virar citação', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch07-quote-011');
+  const content = activeMasterContents.find((item) => item.id === 'batch07-quote-011');
   const masterContent = master.contents.find((item) => item.id === 'batch07-quote-011');
   assert.equal(content?.finalText, 'O medo não precisa desaparecer para perder autoridade; basta ser visto sem trono.');
   assert.equal(content?.attributionType, 'inspired');
@@ -66,7 +67,7 @@ test('frase transformada de Duna preserva essência, autoria e fonte sem virar c
 });
 
 test('síntese de profecia e destino em Duna permanece inspiração temática sem passagem inventada', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch07-quote-012');
+  const content = activeMasterContents.find((item) => item.id === 'batch07-quote-012');
   const masterContent = master.contents.find((item) => item.id === 'batch07-quote-012');
   assert.equal(content?.finalText, 'Quem confunde profecia com destino entrega o futuro à primeira história convincente.');
   assert.equal(content?.attributionType, 'inspired');
@@ -79,7 +80,7 @@ test('síntese de profecia e destino em Duna permanece inspiração temática se
 });
 
 test('síntese de sobrevivência e consciência em Duna preserva o texto e não inventa passagem', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch07-quote-014');
+  const content = activeMasterContents.find((item) => item.id === 'batch07-quote-014');
   const masterContent = master.contents.find((item) => item.id === 'batch07-quote-014');
   assert.equal(content?.finalText, 'A sobrevivência sem consciência pode transformar a pessoa naquilo de que tentava escapar.');
   assert.equal(content?.attributionType, 'inspired');
@@ -92,7 +93,7 @@ test('síntese de sobrevivência e consciência em Duna preserva o texto e não 
 });
 
 test('síntese de mente, deserto e água em Duna permanece inspiração temática composta', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch07-quote-015');
+  const content = activeMasterContents.find((item) => item.id === 'batch07-quote-015');
   const masterContent = master.contents.find((item) => item.id === 'batch07-quote-015');
   assert.equal(content?.finalText, 'A mente treinada não elimina o deserto; aprende a não desperdiçar água com ilusões.');
   assert.equal(content?.attributionType, 'inspired');
@@ -106,7 +107,7 @@ test('síntese de mente, deserto e água em Duna permanece inspiração temátic
 });
 
 test('citação traduzida de Alan Watts confirma a obra sem inventar a proveniência em português', () => {
-  const content = runtime.contents.find((item) => item.id === 'curated-03');
+  const content = activeMasterContents.find((item) => item.id === 'curated-03');
   const masterContent = master.contents.find((item) => item.id === 'curated-03');
   assert.equal(content?.finalText, 'A única maneira de compreender a mudança é entrar nela, mover-se com ela e participar da dança.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -122,7 +123,7 @@ test('citação traduzida de Alan Watts confirma a obra sem inventar a proveniê
 });
 
 test('aforismo de Nietzsche confirma o original sem inventar a tradução portuguesa', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-007');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-007');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-007');
   assert.equal(content?.finalText, 'Quem tem um porquê suporta quase qualquer como.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -142,7 +143,7 @@ test('aforismo de Nietzsche confirma o original sem inventar a tradução portug
 });
 
 test('fórmula de Píndaro preserva a retomada de Nietzsche sem fundir as fontes', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-008');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-008');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-008');
   assert.equal(content?.finalText, 'Torna-te quem tu és.');
   assert.equal(content?.attributionType, 'traditional');
@@ -162,7 +163,7 @@ test('fórmula de Píndaro preserva a retomada de Nietzsche sem fundir as fontes
 });
 
 test('estrela dançante de Nietzsche confirma a passagem sem inventar a tradução portuguesa', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-009');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-009');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-009');
   assert.equal(content?.finalText, 'É preciso ainda ter caos dentro de si para dar à luz uma estrela dançante.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -182,7 +183,7 @@ test('estrela dançante de Nietzsche confirma a passagem sem inventar a traduç�
 });
 
 test('adaptação de Clarice preserva o texto sem fingir citação literal', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-014');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-014');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-014');
   assert.equal(content?.finalText, 'Que ninguém se engane: só se consegue a simplicidade através de muito trabalho.');
   assert.equal(content?.attributionType, 'paraphrase');
@@ -200,7 +201,7 @@ test('adaptação de Clarice preserva o texto sem fingir citação literal', () 
 });
 
 test('epígrafe de La Rochefoucauld não é confundida com a máxima 1 nem com tradução identificada', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-025');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-025');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-025');
   assert.equal(content?.finalText, 'Nossas virtudes são, quase sempre, vícios disfarçados.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -220,7 +221,7 @@ test('epígrafe de La Rochefoucauld não é confundida com a máxima 1 nem com t
 });
 
 test('máxima 2 de La Rochefoucauld identifica a tradução brasileira sem reescrever o texto', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-026');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-026');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-026');
   assert.equal(content?.finalText, 'O amor-próprio é o maior de todos os aduladores.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -238,7 +239,7 @@ test('máxima 2 de La Rochefoucauld identifica a tradução brasileira sem reesc
 });
 
 test('máxima 218 de La Rochefoucauld identifica a tradução de Alcântara Silveira sem reescrever o texto', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-027');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-027');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-027');
   assert.equal(content?.finalText, 'A hipocrisia é uma homenagem que o vício presta à virtude.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -257,7 +258,7 @@ test('máxima 218 de La Rochefoucauld identifica a tradução de Alcântara Silv
 });
 
 test('máxima 19 de La Rochefoucauld documenta o original sem inventar a proveniência da tradução', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-028');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-028');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-028');
   assert.equal(content?.finalText, 'Temos todos força bastante para suportar os males dos outros.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -278,7 +279,7 @@ test('máxima 19 de La Rochefoucauld documenta o original sem inventar a proveni
 });
 
 test('máxima 361 de La Rochefoucauld identifica a tradução de Brito Broca e Wilson Lousada', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-029');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-029');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-029');
   assert.equal(content?.finalText, 'O ciúme nasce sempre com o amor, mas nem sempre morre com ele.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -298,7 +299,7 @@ test('máxima 361 de La Rochefoucauld identifica a tradução de Brito Broca e W
 });
 
 test('máxima 38 de La Rochefoucauld documenta o original sem atribuir traduções divergentes', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-030');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-030');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-030');
   assert.equal(content?.finalText, 'Prometemos conforme nossas esperanças; cumprimos conforme nossos temores.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -320,7 +321,7 @@ test('máxima 38 de La Rochefoucauld documenta o original sem atribuir traduçõ
 });
 
 test('Retorno a Tipasa documenta o original sem atribuir a redação portuguesa a uma tradução divergente', () => {
-  const content = runtime.contents.find((item) => item.id === 'batch01-quote-031');
+  const content = activeMasterContents.find((item) => item.id === 'batch01-quote-031');
   const masterContent = master.contents.find((item) => item.id === 'batch01-quote-031');
   assert.equal(content?.finalText, 'No meio do inverno, aprendi enfim que havia em mim um verão invencível.');
   assert.equal(content?.attributionType, 'translated_quote');
@@ -354,14 +355,14 @@ test('perfil só é apresentado quando existe texto editorial específico', () =
   assert.doesNotMatch(reflectionUi, /philosophyTitleEl\.textContent[^;]*story\.adviceLabel/);
 });
 
-test('somente as 27 fontes documentais específicas são encaminhadas à interface', () => {
+test('somente as 57 fontes documentais V2 são encaminhadas à interface', () => {
   const specificSources = runtime.contents.filter((content) => content.source?.status !== 'not_applicable');
   const genericSources = runtime.contents.filter((content) => content.source?.status === 'not_applicable');
-  assert.equal(specificSources.length, 27);
-  assert.equal(genericSources.length, 230);
+  assert.equal(specificSources.length, 57);
+  assert.equal(genericSources.length, 0);
   assert.ok(specificSources.every((content) => String(content.source.title || '').trim()));
   assert.match(script, /content\.source\?\.status !== 'not_applicable'/);
-  assert.match(reflectionUi, /quoteSourceEl\.textContent = sourceTitle \? `Fonte: \$\{sourceTitle\}` : ''/);
+  assert.match(reflectionUi, /sourceTitle, sourceSection, sourceTranslator/);
 });
 
 test('ausência inesperada de displayedAuthor não atribui conteúdo automaticamente ao site', () => {

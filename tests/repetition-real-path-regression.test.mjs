@@ -134,13 +134,13 @@ test('sequência real não reinicia o núcleo enquanto há alternativa segura e 
   assert.equal(repeated, false, `repetição evitável reproduzida: ${JSON.stringify(evidence)}`);
 });
 
-test('Luto + Saudade percorre todo o território principal permitido antes de repetir', () => {
+test('Medo + Insegurança percorre todo o território principal permitido antes de repetir', () => {
   assertPrimaryTerritoryCyclesBeforeRepeat({
-    version: 'phase1-grief-long-cycle',
+    version: 'v2-fear-long-cycle',
     state: {
-      primaryFeeling: 'luto',
-      secondaryFeelings: ['saudade'],
-      intensity: 'intensa',
+      primaryFeeling: 'medo',
+      secondaryFeelings: ['inseguranca'],
+      intensity: 'moderada',
       needsMotivation: false,
     },
   });
@@ -265,6 +265,7 @@ test('duplo clique em Outra perspectiva produz somente uma seleção', () => {
   const eventSandbox = {
     generateBtn: {
       disabled: false,
+      setAttribute() {},
       classList: { add() {}, remove() {} },
     },
     newBtn: {

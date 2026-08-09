@@ -200,7 +200,7 @@ function fitShareCredit(ctx, text, maxWidth, maxHeight, scale, quoteFont) {
   return { fontSize, lines, lineHeight, blockHeight: lines.length * lineHeight };
 }
 
-function drawShareCard({ width = 1080, height = 1920, styleKey = currentShareStyle } = {}) {
+function drawShareCard({ width = 1080, height = 1350, styleKey = currentShareStyle } = {}) {
   const payload = getSharePayload();
   const theme = shareCardThemes[styleKey] || shareCardThemes.sage;
   const canvas = document.createElement('canvas');
