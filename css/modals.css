@@ -49,6 +49,20 @@
   line-height: 1.4;
 }
 
+.favorite-item-title {
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.favorite-item-summary {
+  margin-top: 8px;
+  color: rgba(42, 35, 26, 0.76);
+  font-family: var(--font);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
 .favorite-item-meta {
   margin-top: 7px;
   color: var(--muted);
@@ -57,8 +71,14 @@
 
 .favorite-item-actions {
   display: flex;
+  gap: 8px;
   justify-content: flex-end;
   margin-top: 8px;
+}
+
+.favorite-item-open {
+  border-color: rgba(171, 132, 45, 0.34);
+  color: #795d20;
 }
 
 .empty-favorites {
@@ -90,6 +110,12 @@
 .about-contact a {
   color: var(--ink);
   text-underline-offset: 3px;
+}
+
+.about-process-link {
+  color: #795d20;
+  font-weight: 700;
+  text-underline-offset: 4px;
 }
 
 .tale-dialog {
@@ -130,7 +156,34 @@
   gap: 8px;
 }
 
-.tale-refresh-btn {
+.tale-title-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.tale-read-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 2px 7px;
+  border: 1px solid rgba(171, 132, 45, 0.28);
+  border-radius: 999px;
+  color: #8b6b25;
+  background: rgba(214, 179, 94, 0.08);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.tale-read-status[hidden] {
+  display: none;
+}
+
+.tale-refresh-btn,
+.tale-favorite-btn {
   width: 26px;
   height: 26px;
   padding: 0;
@@ -144,13 +197,24 @@
   transition: color 140ms ease, background 140ms ease, transform 140ms ease;
 }
 
-.tale-refresh-btn:hover {
+.tale-refresh-btn:hover,
+.tale-favorite-btn:hover {
   color: rgba(42, 35, 26, 0.78);
   background: rgba(42, 35, 26, 0.055);
 }
 
 .tale-refresh-btn:active {
   transform: rotate(24deg) scale(0.96);
+}
+
+.tale-favorite-btn {
+  color: #9a772f;
+  font-size: 20px;
+}
+
+.tale-favorite-btn.active-favorite {
+  color: #b48b34;
+  background: rgba(214, 179, 94, 0.12);
 }
 
 .tale-content {
@@ -293,13 +357,27 @@ html[data-theme="night"] .tale-question {
 }
 
 html[data-theme="night"] .about-content,
+html[data-theme="night"] .favorite-item-summary,
 html[data-theme="night"] .tale-lesson div,
 html[data-theme="night"] .tale-question div {
   color: var(--night-text-reading);
 }
 
-html[data-theme="night"] .tale-refresh-btn {
+html[data-theme="night"] .tale-refresh-btn,
+html[data-theme="night"] .tale-favorite-btn {
   color: rgba(241, 234, 216, 0.72);
+}
+
+html[data-theme="night"] .tale-read-status,
+html[data-theme="night"] .tale-favorite-btn.active-favorite,
+html[data-theme="night"] .about-process-link,
+html[data-theme="night"] .favorite-item-open {
+  color: var(--night-gold, #d8bd75);
+}
+
+html[data-theme="night"] .tale-read-status {
+  border-color: rgba(216, 189, 117, 0.32);
+  background: rgba(216, 189, 117, 0.08);
 }
 
 html[data-theme="night"] .tale-meta,
@@ -308,7 +386,9 @@ html[data-theme="night"] .tale-cycle-notice {
 }
 
 html[data-theme="night"] .tale-refresh-btn:hover,
-html[data-theme="night"] .tale-refresh-btn:focus-visible {
+html[data-theme="night"] .tale-refresh-btn:focus-visible,
+html[data-theme="night"] .tale-favorite-btn:hover,
+html[data-theme="night"] .tale-favorite-btn:focus-visible {
   color: var(--night-text-primary);
   background: rgba(190, 211, 178, 0.1);
   outline: none;
