@@ -19,17 +19,17 @@ Estados admitidos: `não iniciado`, `auditado`, `em andamento`, `parcial`, `conc
 | Item | Estado vigente |
 | --- | --- |
 | Acervo-mestre | `entre_sabios_acervo_mestre_final.json`, versão `definitiva-2.12` |
-| Runtime local gerado | 257 conteúdos ativos, 14 sentimentos; integrações locais aguardam publicação separada |
+| Runtime local gerado | 57 conteúdos V2 ativos, 14 sentimentos; runtime sincronizado e publicado |
 | Runtime derivado | `data/entre_sabios_runtime.json` e `.js`, sincronizados com o mestre |
-| Suíte automatizada | 286 testes Node + 7 testes de navegador aprovados em 18/07/2026 |
+| Suíte automatizada | 444 testes Node + 118 cenários de navegador aprovados em 09/08/2026 |
 | Validação local | `npm run verify` confere runtime sem escrita e executa a regressão completa |
 | CI | `verify.yml` para regressão completa e `browser-smoke.yml` para mudanças visuais/runtime |
-| Análise estática leve | `npm run check:static` valida 112 arquivos JS/MJS, 12 JSON e imports relativos |
+| Análise estática leve | `npm run check:static` valida 169 arquivos JS/MJS, 44 JSON e imports relativos |
 | Governança assistida por IA | `AGENTS.md` + `DECISIONS.md` + verificação automática; conflitos com decisões vigentes exigem confirmação explícita |
 | Pacote de publicação | `deploy-manifest.json`; allowlist verificável exclui mestre, testes, relatórios e versões paralelas |
 | Interface principal | `index.html` + `script.js` + scripts globais carregados na ordem declarada no HTML |
 | Tema padrão | modo claro (`Luz do Dia`) |
-| Publicação GitHub Pages | automática a partir de `codex/github-pages-publicacao`; pacote público verificado e enviado no commit `d3da7eb` em 09/08/2026 |
+| Publicação GitHub Pages | automática a partir de `codex/github-pages-publicacao`; pacote público de 148 arquivos verificado e enviado no commit `17aec8f` em 09/08/2026, a partir do commit-fonte `15a0893` |
 | Domínio principal | `entresabios.com` servido pelo GitHub Pages com HTTPS obrigatório e `CNAME` preservado |
 
 ## Estado das funcionalidades
@@ -71,7 +71,7 @@ Estados admitidos: `não iniciado`, `auditado`, `em andamento`, `parcial`, `conc
 | Revisão editorial dos ensaios | 12 ensaios concluídos; oito revisados e quatro preservados | páginas estáticas de `ensaios/`; registro cumulativo abaixo | ciclo autorizado em 25/07/2026 concluído localmente; dois bloqueios documentais foram pesquisados e resolvidos com ressalvas públicas; sem commit ou publicação |
 | Smartphone horizontal | aprovado em navegador real | `docs/relatorios/fases/RELATORIO_FASE_7_NAVEGADOR_REAL_ANTIRREPETICAO.md` | rolagem vertical funciona sem overflow horizontal |
 | Tablets | aprovado em regressão anterior | CSS específico e testes de wiring | manter verificação visual após mudanças de layout |
-| SEO | ampliado localmente; publicação e Search Console pendentes | `DEC-039`, `scripts/update-seo.mjs`, `tests/seo.test.mjs` | páginas estáticas com entidades, datas verificáveis, favicon e transparência; host canônico é sem `www`; propriedade correta do Search Console e 301 de `/index.html` dependem de ações externas após publicação |
+| SEO | publicado e Search Console canônico configurado | `DEC-039`, commit público `17aec8f`, `scripts/update-seo.mjs`, `tests/seo.test.mjs`, propriedade `https://entresabios.com/` | sitemap processado com 78 páginas; página inicial e `/sobre/` enviadas à fila prioritária; `www` redireciona com 301, mas `/index.html` ainda responde 200 porque o GitHub Pages não oferece redirecionamento por caminho |
 | Contratos canônicos | aprovado | `tests/canonical-contracts.test.mjs` | sentimentos, versões, loader e enums do mestre devem permanecer sincronizados |
 | Replay de diagnóstico emocional | concluído | `tests/diagnostic-replay.test.mjs` | reproduz localmente sessões JSON v1 sem participar da seleção em produção |
 | Laboratório da mistura emocional | concluído | `scripts/emotional-lab-lib.mjs`, `tests/emotional-lab.test.mjs` | modo local/exportável; métricas não participam do ranking; limites aguardam calibração na Fase 10 |
@@ -131,6 +131,7 @@ Estados admitidos: `não iniciado`, `auditado`, `em andamento`, `parcial`, `conc
 | Arquivos legados em `js/data/quotes/` e correlatos | auditado | classificar/arquivar; não editar como fonte publicada |
 | Fonte canônica entre `tales.js` e páginas estáticas | provisória conforme `DEC-032` | `js/data/tales.js` é a fonte editorial provisória; sincronizar manualmente apenas as páginas do lote aprovado até existir gerador próprio |
 | Sincronização entre GitHub Pages e domínio principal | concluída operacionalmente | `entresabios.com` usa a branch pública `codex/github-pages-publicacao`; manter o pacote gerado pela allowlist como único fluxo de deploy |
+| Redirecionamento canônico de `/index.html` | pendente de infraestrutura | o domínio usa DNS da Hostinger e conteúdo servido pelo GitHub Pages; a URL responde 200 e não pode receber 301 por `.htaccess` ou DNS. Exige camada de proxy/hospedagem e autorização própria para mudar a infraestrutura |
 
 ## Arquivos locais protegidos nesta linha de trabalho
 
