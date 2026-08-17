@@ -4,17 +4,19 @@
 
 ## 1. Escopo e método
 
-O acervo completo do Entre Sábios foi revisado item por item, respeitando as regras do repositório (AGENTS.md, PADRAO_EDITORIAL_ENTRE_SABIOS.md e DEC-032, que define `js/data/tales.js` como fonte editorial dos contos). Foram editados **33 contos** na fonte `tales.js`, com sincronização imediata das páginas HTML de cada conto, e **12 ensaios** em `ensaios/`. Cada texto recebeu análise individual antes de qualquer intervenção, e cada intervenção foi registrada em arquivo próprio, garantindo reversibilidade e rastreabilidade. O resultado são **43 commits** na branch, um por intervenção significativa.
+O acervo completo do Entre Sábios foi revisado item por item, respeitando as regras do repositório (AGENTS.md, PADRAO_EDITORIAL_ENTRE_SABIOS.md e DEC-032, que define `js/data/tales.js` como fonte editorial dos contos). Foram analisados **33 contos** na fonte `tales.js`, com sincronização imediata das páginas HTML de cada conto modificado, e **12 ensaios** em `ensaios/`. Cada texto recebeu análise individual antes de qualquer intervenção, e cada intervenção foi registrada em arquivo próprio nesta pasta (`analise_*.md` e `patch_*.json`), garantindo reversibilidade e rastreabilidade. O resultado são **44 commits** na branch, um por intervenção significativa.
 
 O princípio condutor foi o definido no briefing: edição literária profunda, nunca padronização. As vozes originais foram preservadas; as intervenções restringiram-se aos padrões de fraqueza identificados em leitura integral — comentários avaliativos sobre a própria obra ("a genialidade do conto está...", "essa é a intuição mais profunda..."), marcadores metalinguísticos ("essa observação é importante", "uma leitura editorial possível"), redundâncias de reexplicação após cenas que já demonstram o ponto, e duas repetições literais de perguntas finais que colidiam com as seções SEO das páginas.
 
-## 2. Contos (33) — síntese das intervenções
+## 2. Contos (33) — classificação completa
 
 | Nível | Contos |
 |---|---|
 | **C — edição moderada** | A Flecha Envenenada, Nachiketa e Yama, O Anel de Giges, Sísifo, Ícaro, Prometeu, A Árvore Inútil, O Espelho (Machado) |
-| **B — microedição** | Mito da Caverna, Mito de Narciso, Agricultor e o Cavalo, Dois Monges e a Mulher, Caixa de Pandora, Sonho da Borboleta, Patinho Feio, Davi e Golias, Mito de Er, Xícara de Chá, Kisa Gotami, Carruagem da Mente, Filho Pródigo, Bom Samaritano, Os Talentos, Elefante no Escuro, Nasrudin e a Chave, Cachorro e a Carroça |
-| **A — preservar intacto** | O Navio de Teseu, O Barco Vazio, O Grande Inquisidor, A Taça Quebrada |
+| **B — microedição** | Mito de Er, A Xícara de Chá, Kisa Gotami, A Carruagem da Mente, O Filho Pródigo, O Bom Samaritano, Os Talentos, O Elefante no Escuro, Nasrudin e a Chave, O Cachorro e a Carroça |
+| **A — preservar intacto** | O Mito da Caverna, O Mito de Narciso, O Agricultor e o Cavalo, Dois Monges e a Mulher, A Caixa de Pandora, O Sonho da Borboleta, O Patinho Feio, Davi e Golias, O Navio de Teseu, O Barco Vazio, A Taça Quebrada, O Grande Inquisidor, A Morte de Ivan Ilitch, Jornada do Herói, A Sombra (Jung) |
+
+> Nota de auditoria: a primeira versão deste relatório omitiu três contos de nível A (O Mito de Narciso, A Caixa de Pandora, O Sonho da Borboleta) na tabela; a lista acima cobre os 33. A tabela de textos efetivamente modificados, com commits e linhas, está no arquivo `relacao_textos_modificados.md`.
 
 Os cortes mais significativos incluem a remoção do parágrafo conceitual que explicava o absurdo em *Sísifo*, a eliminação de "A genialidade do conto está na ironia sem grito" e de "Machado mostra como..." em *O Espelho*, a supressão da moral explícita da tríade final de *Prometeu*, e o enxugamento do fecho erudito de *O Cachorro e a Carroça*. Em todos os casos, a cena narrativa e a tese implícita permanecem — o que se retirou foi o ensaio que a prosa já havia feito.
 
@@ -49,4 +51,4 @@ A leitura integral revelou cinco hábitos de escrita que, sem comprometer as pe�
 
 ## 6. Estado do repositório
 
-Todos os commits residem na branch `manus/editorial-entre-sabios-20260817`, à frente da `main`, sem conflitos e sem alterações em arquivos fora do escopo editorial. O diff global é de 26 arquivos (25 páginas HTML e `tales.js`), com 69 linhas alteradas e 69 removidas — intervenções cirúrgicas que mantêm o formato original dos arquivos. Os registros analíticos individuais de cada texto (33 contos + 12 ensaios) estão preservados em `/home/ubuntu/analise_*.{md,json}`. A branch ainda não foi enviada ao remoto; fica à disposição para push, merge ou revisão.
+Todos os commits residem na branch `manus/editorial-entre-sabios-20260817`, à frente da `main`, sem conflitos e sem alterações em arquivos fora do escopo editorial. O diff global é de 26 arquivos (25 páginas HTML e `tales.js`), com 69 linhas alteradas e 69 removidas — intervenções cirúrgicas que mantêm o formato original dos arquivos. Os registros analíticos individuais de cada texto (33 contos + 12 ensaios) estão em `auditoria/`, e a relação completa de textos modificados com commits, arquivos e linhas está em `relacao_textos_modificados.md`. Nenhum merge foi realizado e a `main` permanece intacta.
