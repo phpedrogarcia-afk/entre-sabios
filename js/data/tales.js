@@ -531,7 +531,7 @@ data.philosophicalTales = [
       'O intelecto ocupa o lugar do condutor. A mente são as rédeas em suas mãos. Os sentidos são os cavalos, e aquilo que eles percebem forma as estradas por onde a carruagem avança.',
       'Quando o condutor não discerne e a mente não oferece direção, os sentidos se tornam difíceis de governar, como cavalos sem treino. A carruagem é levada pelos caminhos que se apresentam.',
       'Quando há discernimento e as rédeas permanecem reunidas, os cavalos respondem ao percurso. A imagem não exige destruir sentidos ou abandonar a estrada; depende da relação entre todas as partes.',
-      'Nenhum elemento viaja sozinho. Passageiro, veículo, condutor, rédeas, cavalos e caminhos compõem um movimento cujo destino não pode ser atribuído a uma única força.'
+      
     ],
     umModoDeOlhar: [
       'A imagem distribui a direção entre funções diferentes. A mente não é o condutor nem os cavalos são emoções em geral: no texto, ela liga o discernimento aos sentidos. Confundir as partes simplifica uma metáfora construída justamente sobre coordenação.'
