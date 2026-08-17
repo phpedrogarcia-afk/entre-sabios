@@ -505,9 +505,9 @@ data.philosophicalTales = [
       'Justamente por isso, permaneceu viva. Árvores retas e úteis eram cortadas, transformadas, consumidas por finalidades alheias. A árvore considerada inútil continuava crescendo. Seus galhos ofereciam sombra, seu corpo abrigava descanso, sua presença criava um espaço onde viajantes podiam parar. Aquilo que não servia ao mercado da madeira servia à vida de outro modo.',
       'A história não elogia incapacidade nem romantiza abandono. Ela questiona um critério estreito de valor. Se algo não serve a uma função imediata, isso não significa que não tenha sentido. Pode apenas escapar ao olhar de quem só reconhece valor quando consegue usar, vender, cortar ou controlar.',
       'A árvore não precisa convencer os carpinteiros. Ela simplesmente permanece. Sua existência larga demais para as ferramentas humanas torna-se abrigo justamente porque não foi reduzida a material. Aquilo que parecia defeito — ser torta, irregular, difícil de aproveitar — tornou-se condição de sobrevivência.',
-      'Há uma ironia calma nessa imagem: o que o mundo chama de inútil talvez esteja apenas protegido de certas formas de exploração. Nem toda vida precisa ser convertida em produto para justificar sua presença.',
+      'O que o mundo chama de inútil talvez esteja apenas protegido de certas formas de exploração. Nem toda vida precisa ser convertida em produto para justificar sua presença.',
       'Quem descansa sob sua sombra talvez receba algo que nenhuma tábua poderia oferecer.',
-      'Zhuangzi transforma a árvore em uma defesa da existência que não precisa justificar tudo em termos de produtividade. Às vezes, sobreviver é possível justamente porque não fomos transformados em ferramenta. A sombra que oferecemos talvez não apareça nas métricas de utilidade, mas ainda assim pode ser real.'
+      'A sombra que oferecemos talvez não apareça nas métricas de utilidade, mas ainda assim pode ser real.'
     ],
     umModoDeOlhar: [
       'Esta adaptação reúne imagens próximas de Zhuangzi: a árvore que o carpinteiro descarta e a madeira tortuosa que não se presta aos usos comuns. A inutilidade não vira uma essência superior; é uma relação entre a forma da árvore e os projetos de quem pretende cortá-la.'
