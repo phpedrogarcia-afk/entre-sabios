@@ -428,7 +428,7 @@ data.philosophicalTales = [
     texto: [
       'Um estudioso procurou um mestre zen para receber ensinamentos. Chegou trazendo perguntas, mas também muitas respostas prontas. Enquanto o mestre o recebia, o visitante falava sobre o que já havia lido, as ideias que dominava, os caminhos espirituais que conhecia e as conclusões a que tinha chegado. Cada silêncio parecia para ele uma oportunidade de acrescentar mais alguma certeza.',
       'O mestre ouviu sem pressa. Em vez de discutir, preparou chá. Colocou a xícara diante do visitante e começou a servir. O líquido subiu até a borda, mas o mestre continuou despejando. O chá transbordou, escorreu pelo lado da xícara e começou a se espalhar pela mesa.',
-      'O visitante, surpreso, interrompeu. Observou que a xícara já estava cheia, que não cabia mais nada ali. O gesto parecia absurdo: qualquer pessoa podia ver que continuar servindo apenas desperdiçaria o chá.',
+      'O visitante, surpreso, interrompeu. Observou que a xícara já estava cheia, que não cabia mais nada ali.',
       'O mestre pousou o bule. Disse que o visitante, como a xícara, estava cheio das próprias opiniões. Antes que algo novo pudesse entrar, seria preciso haver espaço.',
       'O estudioso olhou para o chá espalhado. Chegara preparado para anotar uma resposta; diante dele havia apenas a mesa molhada e a xícara que ele mesmo declarara impossível de encher.'
     ],
