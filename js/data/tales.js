@@ -600,10 +600,10 @@ data.philosophicalTales = [
     temas: ['potencial', 'responsabilidade', 'medo', 'ação', 'crescimento'],
     palavrasChave: ['talentos', 'potencial', 'responsabilidade', 'medo', 'ação'],
     texto: [
-      'Na parábola dos Talentos, um senhor parte em viagem e confia seus bens a servos diferentes. A cada um entrega uma quantidade conforme sua capacidade. Não se trata apenas de dinheiro na história; trata-se de confiança, responsabilidade e possibilidade de ação durante a ausência do senhor.',
+      'Na parábola dos Talentos, um senhor parte em viagem e confia seus bens a servos diferentes. A cada um entrega uma quantidade conforme sua capacidade.',
       'Alguns servos recebem o que lhes foi entregue e fazem aquilo crescer. Trabalham, arriscam, movimentam os recursos. Quando o senhor retorna, apresentam não apenas conservação, mas desenvolvimento. Aquilo que receberam não ficou congelado no medo de perda.',
       'Outro servo, porém, age de modo diferente. Recebe um talento e o enterra. Seu raciocínio parece prudente: ao esconder, não perde; ao não tocar, não erra; ao não arriscar, evita culpa. Mas sua segurança é estéril. O talento permanece intacto e inútil, protegido de tal maneira que nunca encontrou vida. Ele não destruiu o que recebeu; ainda assim, deixou que aquilo atravessasse o tempo sem produzir presença no mundo.',
-      'Quando o senhor retorna, o problema não é apenas a quantidade final. O problema é a relação do servo com aquilo que recebeu. Ele viveu como se responsabilidade fosse ameaça pura. Em vez de responder à confiança com movimento, respondeu com imobilidade. O medo de falhar tornou-se uma falha mais profunda.',
+      'O problema não é apenas a quantidade final. O problema é a relação do servo com aquilo que recebeu. Em vez de responder à confiança com movimento, respondeu com imobilidade. O medo de falhar tornou-se uma falha mais profunda.',
       'O servo devolve a moeda e explica que teve medo: conhecia o senhor como homem severo, que colhia onde não havia semeado. Por isso escondera no chão o que recebera.',
       'O senhor usa as próprias palavras do servo contra ele. Diz que, se o julgava tão exigente, poderia ao menos ter confiado o dinheiro aos banqueiros. Manda retirar dele o talento e entregá-lo ao servo que tem dez.',
       'A história termina com uma sentença dura: o servo é lançado para fora. O dinheiro enterrado volta à circulação; o medo que o preservou não o protege do acerto de contas.'
