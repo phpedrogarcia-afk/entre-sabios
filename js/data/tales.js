@@ -628,9 +628,9 @@ data.philosophicalTales = [
     texto: [
       'Na história conhecida pelo sufismo e presente em Rumi, um elefante é colocado em um espaço escuro. As pessoas entram para conhecê-lo, mas não conseguem vê-lo por inteiro. Sem luz, cada uma toca apenas uma parte do animal e tenta compreender o todo a partir desse contato limitado.',
       'Quem toca a tromba acredita ter encontrado algo parecido com uma serpente. Quem toca a perna imagina uma coluna. Quem alcança a orelha pensa em um leque. Quem encosta no dorso percebe uma superfície ampla. Cada pessoa sai com convicção, pois sua experiência foi real. O problema é que foi incompleta.',
-      'A discussão começa quando cada parte se apresenta como totalidade. Ninguém está simplesmente mentindo. Cada um tocou alguma coisa verdadeira. Mas a verdade parcial, quando perde humildade, transforma-se em erro orgulhoso. O escuro não impede apenas a visão; impede também a percepção do limite de cada experiência. A convicção nasce rápido quando a pessoa confunde intensidade com amplitude.',
+      'A discussão começa quando cada parte se apresenta como totalidade. Ninguém está simplesmente mentindo. Cada um tocou alguma coisa verdadeira. O escuro não impede apenas a visão; impede também a percepção do limite de cada experiência. A convicção nasce rápido quando a pessoa confunde intensidade com amplitude.',
       'Se houvesse luz, as diferenças poderiam encontrar lugar. A tromba, a perna, a orelha e o dorso seriam reconhecidos como partes de um mesmo animal. Mas, no escuro, cada fragmento compete para ocupar o lugar do todo. A falta de luz torna as pessoas mais certas justamente quando deveriam ser mais cuidadosas.',
-      'As descrições se chocaram: calha, leque, pilar, trono. Cada mão trazia evidência para sua certeza, e nenhuma conseguia oferecer às demais a parte que havia tocado.',
+      'As descrições se chocaram: serpente, coluna, leque, superfície. Cada mão trazia evidência para sua certeza, e nenhuma conseguia oferecer às demais a parte que havia tocado.',
       'Rumi encerra a imagem dizendo que uma única vela teria resolvido a disputa. O elefante não mudaria com a luz; mudaria a possibilidade de reunir as partes.'
     ],
     umModoDeOlhar: [
