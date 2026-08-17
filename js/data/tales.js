@@ -678,7 +678,7 @@ data.philosophicalTales = [
       'Um fragmento da tradição estoica compara a vida a um cachorro amarrado a uma carroça em movimento. A corda permite certa distância, mas não entrega ao animal o rumo do veículo.',
       'Se acompanha a carroça, o cachorro corre por vontade própria ao longo do trajeto que também lhe é imposto. Seu movimento e o movimento do veículo coincidem enquanto a corda permanece frouxa.',
       'Se decide resistir, a carroça não para por causa disso. A mesma ligação que antes permitia acompanhar o passo passa a arrastá-lo.',
-      'A imagem termina nesse contraste severo. Em ambos os casos há necessidade; em apenas um deles, segundo o fragmento, a ação voluntária se junta ao curso que não foi escolhido.'
+      'Em ambos os casos há necessidade. Em apenas um deles a vontade acompanha o trajeto.'
     ],
     umModoDeOlhar: [
       'O fragmento tenta conciliar destino e vontade: o cachorro não escolhe a direção geral, mas pode acompanhar o que ocorrerá de qualquer modo. Essa imagem não decide quais acontecimentos são de fato inevitáveis, questão indispensável antes de aplicá-la a uma situação humana.'
