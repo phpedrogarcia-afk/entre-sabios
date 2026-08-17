@@ -17,7 +17,7 @@ data.philosophicalTales = [
       'A flecha entrou abaixo do ombro e derrubou o homem. Quando seus parentes chegaram, encontraram-no com uma das mãos apertada contra a haste. A ponta estava coberta de veneno. Chamaram um cirurgião, que se ajoelhou ao lado dele e abriu o estojo de instrumentos.',
       '— Não toque — disse o ferido. — Primeiro quero saber quem atirou.',
       'O cirurgião pediu que ele respirasse devagar. O homem insistiu. Queria o nome e o clã do arqueiro, sua altura, a cor de sua pele, a aldeia de onde viera. Queria saber de que madeira era o arco, de que fibra a corda fora trançada e que ave cedera as penas presas à haste.',
-      'Um parente correu até a estrada. Outro interrogou quem trabalhava nos campos. Voltaram com versões, não com respostas. Enquanto discutiam se o disparo viera do bosque ou da colina, o braço do homem começou a perder a força.',
+      'Um parente correu até a estrada. Outro interrogou quem trabalhava nos campos. Voltaram com versões, não com respostas. Enquanto isso, o braço do homem começou a perder a força.',
       'O cirurgião tornou a estender a mão. Ainda havia tempo para retirar a flecha; talvez houvesse tempo para procurar o arqueiro depois. O ferido, porém, pediu mais uma certeza: queria saber a composição exata do veneno antes que qualquer lâmina tocasse sua pele.',
       'Ninguém naquela casa conhecia todas as respostas. O estojo permaneceu aberto no chão. Entre os instrumentos imóveis, a sombra da flecha avançava sobre o corpo do homem.'
     ],
