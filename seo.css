@@ -48,6 +48,24 @@ html[data-theme="night"] body.essays-page > .seo-container {
   background: rgba(251, 247, 238, 0.82);
 }
 
+body.seo-page .seo-topbar .brand-title,
+body.seo-page .seo-topbar .brand-subtitle {
+  color: var(--ink);
+}
+
+html[data-theme="night"] .seo-topbar {
+  background: rgba(7, 27, 25, 0.88);
+}
+
+html[data-theme="night"] .seo-topbar .seo-home-link {
+  background: rgba(7, 29, 26, 0.72);
+}
+
+html[data-theme="night"] .seo-topbar .seo-home-link:hover,
+html[data-theme="night"] .seo-topbar .seo-home-link:focus-visible {
+  background: rgba(25, 55, 47, 0.9);
+}
+
 .seo-home-link {
   border: 1px solid var(--stroke);
   border-radius: 999px;
@@ -150,6 +168,10 @@ html[data-theme="night"] body.essays-page > .seo-container {
 .seo-card p {
   color: rgba(42, 35, 26, 0.78);
   font-size: 17px;
+}
+
+html[data-theme="night"] .seo-article p a:not(.seo-button):not(.seo-pill) {
+  color: #d8bf81;
 }
 
 .seo-meta {
@@ -613,3 +635,4 @@ html[data-theme="night"] .essay-page .seo-cta .seo-button:focus-visible {
     opacity: 0.48;
   }
 }
+
