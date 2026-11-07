@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://entresabios.com/</loc>
-    <lastmod>2026-08-09</lastmod>
+    <lastmod>2026-08-13</lastmod>
   </url>
   <url>
     <loc>https://entresabios.com/contos/a-sombra-jung/</loc>
@@ -34,11 +34,15 @@
   </url>
   <url>
     <loc>https://entresabios.com/contos/caixa-de-pandora/</loc>
-    <lastmod>2026-08-09</lastmod>
+    <lastmod>2026-08-13</lastmod>
   </url>
   <url>
     <loc>https://entresabios.com/contos/carruagem-da-mente/</loc>
     <lastmod>2026-08-09</lastmod>
+  </url>
+  <url>
+    <loc>https://entresabios.com/contos/cigarra-e-a-formiga/</loc>
+    <lastmod>2026-08-13</lastmod>
   </url>
   <url>
     <loc>https://entresabios.com/contos/davi-e-golias/</loc>
@@ -78,7 +82,7 @@
   </url>
   <url>
     <loc>https://entresabios.com/contos/mito-da-caverna/</loc>
-    <lastmod>2026-08-09</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <image:image>
       <image:loc>https://entresabios.com/assets/contos/alegoria-da-caverna-piloto.webp</image:loc>
       <image:caption>Ilustração editorial da Alegoria da Caverna de Platão.</image:caption>
@@ -94,7 +98,7 @@
   </url>
   <url>
     <loc>https://entresabios.com/contos/morte-de-ivan-ilitch/</loc>
-    <lastmod>2026-08-09</lastmod>
+    <lastmod>2026-08-13</lastmod>
   </url>
   <url>
     <loc>https://entresabios.com/contos/nachiketa-e-yama/</loc>
@@ -113,6 +117,10 @@
     <lastmod>2026-08-09</lastmod>
   </url>
   <url>
+    <loc>https://entresabios.com/contos/onde-estamos-verdadeiramente/</loc>
+    <lastmod>2026-08-13</lastmod>
+  </url>
+  <url>
     <loc>https://entresabios.com/contos/os-talentos/</loc>
     <lastmod>2026-08-09</lastmod>
   </url>
@@ -123,6 +131,10 @@
   <url>
     <loc>https://entresabios.com/contos/prometeu/</loc>
     <lastmod>2026-08-09</lastmod>
+  </url>
+  <url>
+    <loc>https://entresabios.com/contos/serpente-e-o-campones/</loc>
+    <lastmod>2026-08-13</lastmod>
   </url>
   <url>
     <loc>https://entresabios.com/contos/sisifo/</loc>

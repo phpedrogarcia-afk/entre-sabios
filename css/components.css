@@ -42,6 +42,32 @@
   gap: 9px;
 }
 
+/* Reserva a altura do conjunto antes da montagem por JS.
+   Sem isso, a inserção dos 14 cartões desloca a coluna inteira e produz CLS alto
+   no celular. A regra só vale enquanto a grade está vazia (:empty ignora comentários)
+   e deixa de valer assim que a interface real é montada. */
+.feelings-grid:empty {
+  min-height: 378px;
+}
+
+@media (max-width: 1099px) {
+  .feelings-grid:empty {
+    min-height: 446px;
+  }
+}
+
+@media (max-width: 380px) {
+  .feelings-grid:empty {
+    min-height: 434px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1366px) and (hover: none) and (pointer: coarse) {
+  .feelings-grid:empty {
+    min-height: 266px;
+  }
+}
+
 .feeling {
   position: relative;
   min-width: 0;

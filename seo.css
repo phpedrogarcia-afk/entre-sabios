@@ -542,6 +542,55 @@ html[data-theme="night"] .essay-page h2 {
   color: var(--night-text-primary);
 }
 
+/* Contraste das páginas editoriais estáticas no modo Floresta Noturna. */
+html[data-theme="night"] .seo-article > h1,
+html[data-theme="night"] .seo-article > .seo-lead,
+html[data-theme="night"] .seo-article p,
+html[data-theme="night"] .seo-article h2 {
+  color: var(--night-text-primary);
+}
+
+html[data-theme="night"] .seo-article .seo-meta,
+html[data-theme="night"] .seo-article .seo-breadcrumb {
+  color: var(--night-text-reading);
+}
+
+html[data-theme="night"] .seo-article .seo-question {
+  border-left-color: var(--night-border-lit);
+  color: var(--night-text-primary) !important;
+}
+
+html[data-theme="night"] .seo-article .seo-meta a {
+  color: var(--night-text-primary);
+  text-decoration-color: var(--night-border-lit);
+}
+
+html[data-theme="night"] .seo-article .seo-pill,
+html[data-theme="night"] .seo-article .seo-tags span {
+  border-color: var(--night-border);
+  background: rgba(7, 29, 26, 0.72);
+  color: var(--night-text-primary);
+}
+
+html[data-theme="night"] .seo-article .seo-cta {
+  border-color: var(--night-border);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(93, 132, 99, 0.18), transparent 46%),
+    rgba(7, 29, 26, 0.74);
+}
+
+html[data-theme="night"] .seo-article .seo-button {
+  border-color: var(--night-border-lit);
+  background: rgba(84, 122, 89, 0.3);
+  color: var(--night-text-primary);
+}
+
+html[data-theme="night"] .seo-article .seo-button:hover,
+html[data-theme="night"] .seo-article .seo-button:focus-visible {
+  background: rgba(84, 122, 89, 0.46);
+  color: var(--night-text-primary);
+}
+
 html[data-theme="night"] body.essays-page .seo-cta,
 html[data-theme="night"] .essay-page .seo-cta {
   border-color: var(--night-border);

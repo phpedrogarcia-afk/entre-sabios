@@ -45,6 +45,7 @@
         }
       })();
     </script>
+    <link rel="preload" as="image" href="assets/environment/landscape-day.webp" fetchpriority="high" />
     <link rel="stylesheet" href="css/base.css?v=20260809-seo-library-1" />
   <link rel="stylesheet" href="css/layout.css?v=20260809-seo-library-1" />
   <link rel="stylesheet" href="css/components.css?v=20260809-seo-library-1" />
@@ -216,7 +217,7 @@
         </div>
       </a>
       <div class="header-moon" aria-hidden="true">
-        <img src="assets/moon-night-transparent-v2.png" alt="" width="1536" height="1024" decoding="async" />
+        <img src="assets/moon-night-transparent-v2.png" alt="" width="1536" height="1024" decoding="async" loading="lazy" />
       </div>
       <div class="daily-strip" aria-label="Frase do dia">
         <div class="daily-track">
@@ -282,9 +283,7 @@
           </div>
         </div>
 
-        <div class="feelings-grid" id="feelingsGrid" aria-label="Sentimentos">
-          <!-- Itens gerados via JS -->
-        </div>
+        <div class="feelings-grid" id="feelingsGrid" aria-label="Sentimentos"></div>
         <div id="primaryFeelingControl" class="primary-feeling-control" hidden>
           <div class="primary-feeling-summary">
             <div>Sentimento principal: <strong id="primaryFeelingLabel">—</strong></div>
@@ -605,7 +604,7 @@
     <script src="js/data/emotional-syntheses.js?v=20260714-2"></script>
     <script src="js/data/books.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/share-themes.js?v=20260710-1"></script>
-    <script src="js/data/tales.js?v=tales-dd2a973435f0"></script>
+    <script src="js/data/tales.js?v=tales-5bba504e66b4"></script>
     <script src="js/data/emotional-taxonomy.js?v=20260712-10"></script>
     <script src="js/data/editorial-explanations.js?v=20260718-cache-fix-1"></script>
     <script src="js/data/editorial-guidance.js?v=20260718-cache-fix-1"></script>
@@ -623,7 +622,7 @@
     <script src="js/features/feedback.js?v=20260713-4"></script>
     <script src="js/features/favorites.js?v=20260809-saved-tales-1"></script>
     <script src="js/features/sharing.js?v=20260728-share-4x5-1"></script>
-    <script src="js/features/tales.js?v=tales-dd2a973435f0"></script>
+    <script src="js/features/tales.js?v=tales-5bba504e66b4"></script>
     <script src="js/ui/feelings-ui.js?v=20260808-atmosphere-icons-ticker-1"></script>
     <script src="js/ui/daily-ui.js?v=20260808-atmosphere-icons-ticker-1"></script>
     <script src="js/ui/reflection-ui.js?v=20260714-1"></script>

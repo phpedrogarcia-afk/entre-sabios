@@ -836,5 +836,93 @@ data.philosophicalTales = [
     ],
     perguntaParaLevar: 'Que traço do retrato merece ser examinado também pelo verso, sem decidir antes o que ele significa?',
   },
+  {
+    id: 'cigarra-e-a-formiga',
+    titulo: 'A Cigarra e a Formiga',
+    origem: 'Adaptação editorial livre da fábula atribuída a Esopo, “A Cigarra e as Formigas” (Perry 373)',
+    tradicao: 'Fábula greco-latina',
+    tempoLeitura: 4,
+    sentimentosRelacionados: ['insegurança', 'medo', 'tristeza', 'solidão'],
+    temas: ['trabalho', 'necessidade', 'julgamento', 'arte', 'responsabilidade'],
+    palavrasChave: ['cigarra', 'formiga', 'fábula', 'trabalho', 'inverno'],
+    texto: [
+      'O verão começou pelo som. Antes que o sol alcançasse o alto das oliveiras, a cigarra já fazia vibrar o campo. Seu canto atravessava o caminho, entrava pelas janelas abertas e acompanhava os trabalhadores que amarravam feixes sob o calor.',
+      'Perto dali, uma formiga passava o dia entre a plantação e o formigueiro. Escolhia sementes secas, desviava das que começavam a apodrecer e carregava cada grão por uma galeria estreita. Quando encontrava uma fresta, interrompia a fila para reforçar a parede. Sabia que o inverno não chegava de uma vez: primeiro diminuía a luz, depois endurecia o chão, por fim escondia quase todo alimento.',
+      'Durante semanas, as duas se viram sem realmente se encontrar. A formiga ouvia a música como quem ouve água desperdiçada. A cigarra observava a fila desaparecer debaixo da terra e pensava que ninguém poderia viver contando apenas o que faltaria amanhã.',
+      'Numa tarde, a formiga deixou cair um grão junto à árvore e perguntou se a cigarra não pretendia guardar coisa alguma. A cantora interrompeu o som por um instante. Disse que o verão era curto e que aquela era a única estação em que suas asas conseguiam sustentar o canto. Depois tornou a cantar. A formiga recuperou o grão e seguiu caminho.',
+      'A mudança veio numa madrugada. O vento arrancou folhas ainda verdes, e três dias de chuva transformaram a terra em uma massa escura. Quando o céu abriu, já não havia calor suficiente para secar as sementes caídas. O campo perdeu as vozes humanas. Os galhos ficaram imóveis.',
+      'A cigarra procurou sob pedras, cascas e raízes. Encontrou restos úmidos que mal podia comer. Com o passar dos dias, o corpo ficou leve demais e o silêncio, que no verão parecia impossível, ocupou toda a planície.',
+      'Ao anoitecer, ela chegou à entrada do formigueiro. Havia barro novo nas paredes e marcas de muitos carregamentos. Bateu uma vez. Nenhuma resposta. Bateu novamente e pediu alguns grãos, apenas o bastante para atravessar os dias mais frios.',
+      'A formiga apareceu na abertura. Atrás dela, as galerias guardavam o resultado de meses de trabalho, mas também muitas bocas que dependeriam daquela reserva. Perguntou o que a cigarra fizera enquanto o alimento ainda cobria o campo.',
+      '— Cantei — respondeu a cigarra. Não disse que seu canto valia um celeiro. Também não fingiu ter trabalhado como a outra. Lembrou apenas as tardes em que a música atravessara a plantação e marcara o ritmo das mãos cansadas.',
+      'A formiga olhou para os depósitos e depois para a noite. Conhecia a resposta antiga que costumava encerrar aquela história: quem cantou no verão, que dançasse no inverno. Dessa vez, porém, as palavras não saíram depressa. Ela trouxe uma pequena medida de grãos e avisou que aquilo alcançaria o dia seguinte, não a primavera inteira.',
+      'A cigarra recebeu a porção sem transformá-la em promessa. A entrada se fechou, deixando do lado de fora o vento e a pergunta que voltaria com o próximo bater à porta. Dentro do formigueiro havia alimento contado. No campo, ainda restava uma voz que precisava descobrir se chegaria até outra estação.'
+    ],
+    umModoDeOlhar: [
+      'A fábula costuma distribuir com rapidez os papéis de prudência e imprudência. Nesta adaptação, a reserva da formiga continua necessária e a fome da cigarra continua real, mas o encontro deixa de caber numa sentença. Trabalho, arte e cuidado coletivo possuem valores diferentes; nenhum deles produz sozinho uma resposta suficiente para quem bate à porta.'
+    ],
+    oQueTalvezEstejaPedindoParaSerVisto: [
+      'A necessidade de alguém não prova que todas as suas escolhas foram sábias, assim como ter se preparado não encerra a responsabilidade diante de quem ficou exposto. Entre negar tudo e prometer sustento ilimitado existe um território difícil de medida, limite e reconhecimento.'
+    ],
+    perguntaParaLevar: 'O que muda quando uma necessidade concreta chega à porta de uma regra que parecia simples?',
+  },
+  {
+    id: 'onde-estamos-verdadeiramente',
+    titulo: 'Onde Estamos Verdadeiramente',
+    origem: 'Adaptação editorial de uma parábola narrada por Sri Ramakrishna em The Gospel of Sri Ramakrishna, capítulo 28',
+    tradicao: 'Tradição bengali do século XIX',
+    tempoLeitura: 3,
+    sentimentosRelacionados: ['culpa', 'confusão', 'autoconhecimento', 'insegurança'],
+    temas: ['intenção', 'atenção', 'desejo', 'julgamento', 'contradição'],
+    palavrasChave: ['ramakrishna', 'intenção', 'pensamento', 'julgamento', 'presença'],
+    texto: [
+      'Os dois amigos chegaram à cidade quando os lampiões começavam a ser acesos. Tinham caminhado juntos desde a aldeia e pretendiam voltar antes do amanhecer. Na praça, porém, ouviram dois convites diferentes.',
+      'De um lado, um grupo entrava numa casa para escutar a leitura do Bhagavata, acompanhada por comentários sobre devoção e sabedoria. Do outro, música e risos escapavam de uma casa de prazeres. Um dos amigos apontou para a leitura. O outro preferiu seguir o som da festa.',
+      'O primeiro tirou as sandálias e sentou-se perto do recitador. O salão estava cheio, o texto era belo e todos pareciam atentos. Ainda assim, sua mente atravessava a parede. Imaginava a comida, a música e a companhia que o amigo desfrutava. Cada novo verso lhe parecia mais comprido que o anterior. Olhava ao redor e se irritava com a serenidade dos outros.',
+      'Na outra casa, o segundo amigo encontrou exatamente o que procurara: mesas servidas, instrumentos, conversa e movimento. Pouco depois, porém, um trecho da recitação chegou pela janela aberta. Ele reconheceu a cadência das palavras e pensou no companheiro sentado entre pessoas devotas. A festa continuava diante dele, mas sua atenção havia deixado a sala.',
+      'Um censurava a escolha do amigo enquanto desejava ocupá-la. O outro lamentava a própria decisão enquanto imaginava o recolhimento que recusara. Nenhum sabia que era invejado pelo homem que julgava estar em melhor lugar.',
+      'A parábola atravessa então a fronteira da morte sem explicar como os dois morreram. Depois daquela noite, mensageiros vieram buscá-los. O homem encontrado junto ao livro sagrado acreditou que seria conduzido para cima. Quando o levaram na direção oposta, protestou e apontou o lugar onde estivera sentado.',
+      'Os mensageiros responderam que seu corpo permanecera junto à leitura, mas seu desejo fizera morada na outra casa. Ele ouvira palavras sobre sabedoria enquanto alimentava desprezo, comparação e ressentimento.',
+      'O amigo que estivera na festa também se espantou. Julgava não merecer o caminho luminoso que se abria. Disseram-lhe que, em meio ao ruído, sua atenção se voltara com sinceridade para aquilo que havia recusado. O endereço visível contava apenas uma parte da noite.',
+      'Ao amanhecer, quem passasse pela cidade encontraria duas casas fechadas. Uma guardava o livro e as esteiras; a outra, taças e instrumentos. Nenhuma fachada revelava onde os dois amigos haviam permanecido durante as horas em que mais pensaram um no outro.'
+    ],
+    umModoDeOlhar: [
+      'A parábola usa um julgamento sobrenatural para inverter o valor das aparências. Sua força não depende de tomar esse destino como descrição literal: o contraste mostra como lugar, reputação e presença interior podem divergir. Também evita concluir que qualquer pensamento isolado defina uma pessoa inteira.'
+    ],
+    oQueTalvezEstejaPedindoParaSerVisto: [
+      'A atenção pode abandonar o ambiente sem que o corpo se mova. Às vezes isso revela desejo, arrependimento ou conflito; outras vezes, apenas cansaço e dispersão. Perceber a distância entre presença e intenção oferece uma informação, não uma sentença moral definitiva.'
+    ],
+    perguntaParaLevar: 'Em que momento recente sua atenção esteve num lugar diferente daquele que os outros podiam ver?',
+  },
+  {
+    id: 'serpente-e-o-campones',
+    titulo: 'A Serpente e o Camponês',
+    origem: 'Adaptação editorial de “The Serpent and the Peasant”, em Georgian Folk Tales, de Marjory Wardrop (1894)',
+    tradicao: 'Conto popular georgiano',
+    tempoLeitura: 3,
+    sentimentosRelacionados: ['raiva', 'culpa', 'confusão', 'insegurança'],
+    temas: ['ambiente', 'conduta', 'traição', 'violência', 'responsabilidade'],
+    palavrasChave: ['serpente', 'camponês', 'rei', 'sonhos', 'reino'],
+    texto: [
+      'O rei despertou antes do amanhecer com a imagem de uma raposa suspensa pela cauda. Mandou tocar os sinos do palácio e anunciou que recompensaria quem explicasse o sonho. Os conselheiros discutiram até o salão ficar quente, mas nenhuma interpretação satisfez o soberano.',
+      'A notícia chegou a um camponês pobre que trabalhava perto de uma encosta pedregosa. Ele não sabia interpretar sonhos e mal possuía roupa adequada para entrar no palácio. Enquanto pensava na recompensa, ouviu uma serpente entre as pedras.',
+      '— Posso lhe dar a resposta — disse ela. — Se dividir comigo o que receber.',
+      'O camponês prometeu metade. Diante do rei, explicou que a raposa anunciava um tempo de engano: a mentira circularia pelo reino, e pessoas próximas esconderiam umas das outras o que faziam. O soberano reconheceu sinais daquela desconfiança em sua corte e entregou ao visitante uma bolsa pesada.',
+      'No caminho de volta, o camponês contou as moedas muitas vezes. Quando alcançou a encosta, mudou de direção e levou tudo para casa. Durante alguns dias, evitou passar perto das pedras. Dizia a si mesmo que a serpente não poderia usar dinheiro e que uma resposta tão curta não valia metade da recompensa.',
+      'Algum tempo depois, o rei sonhou com uma espada desembainhada sobre o reino. O camponês tornou a procurar a serpente. Pediu perdão depressa, fez nova promessa e recebeu a interpretação: aproximava-se um período de violência, no qual qualquer desacordo buscaria uma lâmina. O rei gostou da resposta e pagou ainda mais.',
+      'Ao voltar, o camponês encontrou a serpente esperando. Em vez de dividir as moedas, sacou a espada que ganhara no palácio e golpeou as pedras. A lâmina não matou o animal, mas cortou parte de sua cauda. A serpente desapareceu na fenda, deixando uma linha escura no chão.',
+      'O terceiro sonho veio quando o reino estava exausto de conflitos. O rei viu um rebanho de ovelhas espalhado em paz pelo campo. Nenhum conselheiro soube dizer por que aquela imagem simples o comovia. O camponês, envergonhado, voltou à encosta e chamou muitas vezes até ouvir a voz ferida da serpente.',
+      'Ela lhe disse que o sonho anunciava conciliação. O camponês levou a resposta ao rei, recebeu a recompensa e regressou com todas as moedas. Colocou no chão a parte daquele dia, somou o que devia pelas ocasiões anteriores e confessou tanto o roubo quanto o golpe.',
+      'A serpente examinou as duas pilhas. Disse que, no tempo da raposa, o camponês agira com a fraude que tomava o reino; no tempo da espada, escolhera a violência que encontrava em toda parte; agora, entre ovelhas, procurava reparar o dano. O homem ouviu a explicação com alívio e vergonha.',
+      'As moedas permaneceram entre os dois. A mudança do reino ajudava a compreender suas escolhas, mas a cauda ferida continuava diante dele. Antes de recolher sua parte, a serpente perguntou o que faria quando a próxima atmosfera chegasse e nenhum sonho o avisasse de seu nome.'
+    ],
+    umModoDeOlhar: [
+      'O conto desloca a explicação dos sonhos para o comportamento de quem os interpreta. O camponês acompanha a fraude, a violência e a conciliação que circulam no reino. Essa influência torna sua mudança compreensível, mas a cicatriz da serpente impede que o ambiente funcione como absolvição completa.'
+    ],
+    oQueTalvezEstejaPedindoParaSerVisto: [
+      'Ambientes oferecem palavras, permissões e gestos que podem entrar na conduta antes de serem percebidos. Reconhecer essa participação coletiva amplia a responsabilidade: permite observar tanto o que foi recebido do entorno quanto o momento em que cada pessoa o repetiu.'
+    ],
+    perguntaParaLevar: 'Que comportamento do ambiente ao seu redor começa a parecer normal apenas porque se tornou frequente?',
+  },
 ];
 })(typeof window !== 'undefined' ? window : globalThis);
